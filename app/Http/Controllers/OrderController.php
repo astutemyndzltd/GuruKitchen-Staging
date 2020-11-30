@@ -136,11 +136,13 @@ class OrderController extends Controller
     {
         $this->orderRepository->pushCriteria(new OrdersOfUserCriteria(auth()->id()));
         $order = $this->orderRepository->findWithoutFail($id);
+
+
         if (empty($order)) {
             Flash::error(__('lang.not_found', ['operator' => __('lang.order')]));
-
             return redirect(route('orders.index'));
         }
+
         $subtotal = 0;
 
         foreach ($order->foodOrders as $foodOrder) {
@@ -154,6 +156,51 @@ class OrderController extends Controller
         $taxAmount = $total * $order['tax'] / 100;
         $total += $taxAmount;
         $foodOrderDataTable->id = $id;
+
+
+        /*********** ADDING NECESSARY DATA FOR RECEIPT ********/
+        
+        $orderDetails = [];
+        $orderDetails['id'] = $order->id;
+        $orderDetails['hint'] = $order->hint;
+        $orderDetails['delivery_address'] = $order->deliveryAddress ? $order->deliveryAddress->address : null;
+		$orderDetails['subtotal'] = $subtotal;
+		$orderDetails['tax'] = $taxAmount;
+		$orderDetails['delivery_fee'] = $order['delivery_fee'];
+		$orderDetails['total'] = $total;
+		$orderDetails['restaurant_name'] = $order->foodOrders[0]->food->restaurant->name;
+		$orderDetails['driver_name'] = $order->driver ? $order->driver->name : null;
+		$orderDetails['customer_name'] = $order->user->name;
+		$orderDetails['customer_phone'] = $order->user->custom_fields['phone'] ? $order->user->custom_fields['phone']['view'] : null;
+		$foodCategories = [];
+		
+		foreach ($order->foodOrders as $foodOrder) {
+			$food = $foodOrder->food;
+			$category = $food->category;
+			
+			if(!array_key_exists($category->id, $foodCategories)) {
+				$foodCategories[$category->id] = ['name' => $category->name, 'foods' => [] ];
+			}
+				
+			$foodStrict = ['name' => $food->name, 'price' => $foodOrder->price, 'quantity' => $foodOrder->quantity, 'extras'=> []];
+											
+			for($i=0; $i<count($foodOrder->extras); $i++) 
+			{
+				$name = $foodOrder->extras[$i]->name;
+				$price = $foodOrder->extras[$i]->price;
+				$extra = ['name' => $name, 'price' => $price];
+				array_push($foodStrict['extras'], $extra);
+			}
+			
+			array_push($foodCategories[$category->id]['foods'], $foodStrict);	
+			
+		}
+		
+		$orderDetails['food_categories'] = array_values($foodCategories);
+						
+        //file_put_contents('order.txt', json_encode($orderDetails)); 
+        
+        /*****************************************************/
 
         return $foodOrderDataTable->render('orders.show', ["order" => $order, "total" => $total, "subtotal" => $subtotal,"taxAmount" => $taxAmount]);
     }
