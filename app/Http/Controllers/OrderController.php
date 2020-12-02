@@ -165,13 +165,16 @@ class OrderController extends Controller
         $orderDetails['hint'] = $order->hint;
         $orderDetails['delivery_address'] = $order->deliveryAddress ? $order->deliveryAddress->address : null;
 		$orderDetails['subtotal'] = $subtotal;
-		$orderDetails['tax'] = $taxAmount;
+		$orderDetails['tax'] = $order['tax'];
+		$orderDetails['tax_amount'] = $taxAmount;
 		$orderDetails['delivery_fee'] = $order['delivery_fee'];
 		$orderDetails['total'] = $total;
 		$orderDetails['restaurant_name'] = $order->foodOrders[0]->food->restaurant->name;
 		$orderDetails['driver_name'] = $order->driver ? $order->driver->name : null;
 		$orderDetails['customer_name'] = $order->user->name;
 		$orderDetails['customer_phone'] = $order->user->custom_fields['phone'] ? $order->user->custom_fields['phone']['view'] : null;
+		$orderDetails['payment_method'] = $order->payment->method;
+		
 		$foodCategories = [];
 		
 		foreach ($order->foodOrders as $foodOrder) {
@@ -198,11 +201,11 @@ class OrderController extends Controller
 		
 		$orderDetails['food_categories'] = array_values($foodCategories);
 						
-        //file_put_contents('order.txt', json_encode($orderDetails)); 
+        //file_put_contents('order.txt', json_encode($order->payment)); 
         
         /*****************************************************/
 
-        return $foodOrderDataTable->render('orders.show', ["order" => $order, "total" => $total, "subtotal" => $subtotal,"taxAmount" => $taxAmount]);
+        return $foodOrderDataTable->render('orders.show', ["order" => $order, "total" => $total, "subtotal" => $subtotal,"taxAmount" => $taxAmount, "orderDetails" => $orderDetails]);
     }
 
     /**

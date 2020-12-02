@@ -52,7 +52,7 @@
             </tr>
             <tr>
               <th class="text-right">{{trans('lang.order_delivery_fee')}}</th>
-              <td>{!! getPrice($order['delivery_fee'])!!}</td>
+              <td>{!! getPrice($order['delivery_fee']) !!}</td>
             </tr>
             <tr>
               <th class="text-right">{{trans('lang.order_tax')}} ({!!$order->tax!!}%) </th>
@@ -80,10 +80,17 @@
 </div>
 @endsection
 
+@section('receipt')
+	@include('orders.receipt')
+@endsection
+
 @push('scripts')
-  <script type="text/javascript">
-    $("#printOrder").on("click",function () {
-      window.print();
-    });
+  <script type="text/javascript">	  
+    $("#printOrder").on("click", () => window.print()); 
   </script>
+@endpush
+
+@push('styles')
+	<link rel="stylesheet" href="{{asset('css/all.css')}}">
+	<link rel="stylesheet" href="{{asset('css/receipt.css')}}">
 @endpush

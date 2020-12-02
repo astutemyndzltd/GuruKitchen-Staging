@@ -29,18 +29,25 @@
 
 @stack('css_lib')
 <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('dist/css/adminlte.css')}}">
-    <link rel="stylesheet" href="{{asset('plugins/bootstrap-sweetalert/sweetalert.css')}}">
-    {{--<!-- Bootstrap -->--}}
-    {{--<link rel="stylesheet" href="{{asset('plugins/bootstrap/css/bootstrap.min.css')}}">--}}
+<link rel="stylesheet" href="{{asset('dist/css/adminlte.css')}}">
+<link rel="stylesheet" href="{{asset('plugins/bootstrap-sweetalert/sweetalert.css')}}">
+{{--<!-- Bootstrap -->--}}
+{{--<link rel="stylesheet" href="{{asset('plugins/bootstrap/css/bootstrap.min.css')}}">--}}
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/custom.css')}}">
-    <link rel="stylesheet" href="{{asset('css/'.setting("theme_color","primary").'.css')}}">
-    @yield('css_custom')
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+{{-- <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600" rel="stylesheet"> --}}
+<link rel="stylesheet" href="{{asset('css/custom.css')}}">
+<link rel="stylesheet" href="{{asset('css/'.setting("theme_color","primary").'.css')}}">
+@yield('css_custom')
+@stack('styles')		
+	
 </head>
 
 <body style="height: 100%; background-color: #f9f9f9;" class="hold-transition sidebar-mini {{setting('theme_color')}}">
+
+
+	
 @if(auth()->check())
     <div class="wrapper">
         <!-- Main Header -->
@@ -161,6 +168,7 @@
 
     @endrole
 
+	@yield('receipt')
 
     <!-- jQuery -->
     <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
@@ -177,7 +185,7 @@
     <script src="{{asset('https://www.gstatic.com/firebasejs/7.2.0/firebase-app.js')}}"></script>
 
     <script src="{{asset('https://www.gstatic.com/firebasejs/7.2.0/firebase-messaging.js')}}"></script>
-
+	<script src="{{asset('js/alert.js')}}"></script>
     <script type="text/javascript">@include('vendor.notifications.init_firebase')</script>
 
     <script type="text/javascript">
@@ -202,7 +210,8 @@
                         icon: payload.data.icon,
                         image:  payload.data.image
                     };
-                    var notification = new Notification(notificationTitle,notificationOptions);
+                    let notification = new Notification(notificationTitle, notificationOptions);
+					playAlert('eventually');
                 });
             });
 
@@ -263,7 +272,6 @@
     {{--<script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>--}}
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('dist/js/demo.js')}}"></script>
-
     <script src="{{asset('js/scripts.js')}}"></script>
     @stack('scripts')
 </body>

@@ -6,7 +6,7 @@
     <div class="form-group row ">
         {!! Form::label('user_id', trans("lang.order_user_id"),['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
-            {!! Form::select('user_id', $user, null, ['class' => 'select2 form-control']) !!}
+            {!! Form::select('user_id', $user, null, ['class' => 'select2 form-control', 'disabled' => true]) !!}
             <div class="form-text text-muted">{{ trans("lang.order_user_id_help") }}</div>
         </div>
     </div>

@@ -63,6 +63,7 @@ class NewOrder extends Notification
             'click_action' => "FLUTTER_NOTIFICATION_CLICK",
             'id' => '1',
             'status' => 'done',
+			'sound' => 'default'
         ];
         $message->content($notification)->data($notification)->priority(FcmMessage::PRIORITY_HIGH);
 

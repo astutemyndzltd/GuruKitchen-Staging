@@ -84,6 +84,15 @@ function getPrice($price = 0)
     }
 }
 
+function getPriceOnly($price = 0) 
+{
+	if (setting('currency_right', false) != false) {
+        return number_format((float)$price, 2, '.', '') . setting('default_currency');
+    } else {
+        return setting('default_currency') . number_format((float)$price, 2, '.', ' ');
+    }
+}
+
 /**
  * generate boolean column for datatable
  * @param $column
