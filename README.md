@@ -1,4 +1,4 @@
-# Food Delivery Flutter + PHP Laravel Admin Panel
+# GuruKitchen Web Portal For Admin & Restaurant Managers
 
 ## Important Links
  [Server Requirements](https://support.smartersvision.com/help-center/articles/3/4/3/introduction).
