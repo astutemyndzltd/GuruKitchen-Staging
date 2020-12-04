@@ -133,7 +133,7 @@ class OrderAPIController extends Controller
     {
         $payment = $request->only('payment');
         if (isset($payment['payment']) && $payment['payment']['method']) {
-            if ($payment['payment']['method'] == "Credit Card (Stripe Gateway)") {
+            if ($payment['payment']['method'] == "Credit Card") {
                 return $this->stripPayment($request);
             } else {
                 return $this->cashPayment($request);
@@ -167,11 +167,11 @@ class OrderAPIController extends Controller
             if ($stripeToken->created > 0) {
                 if (empty($input['delivery_address_id'])) {
                     $order = $this->orderRepository->create(
-                        $request->only('user_id', 'order_status_id', 'tax', 'hint')
+                        $request->only('user_id', 'order_status_id', 'tax', 'hint', 'order_type')
                     );
                 } else {
                     $order = $this->orderRepository->create(
-                        $request->only('user_id', 'order_status_id', 'tax', 'delivery_address_id', 'delivery_fee', 'hint')
+                        $request->only('user_id', 'order_status_id', 'tax', 'delivery_address_id', 'delivery_fee', 'hint', 'order_type')
                     );
                 }
                 foreach ($input['foods'] as $foodOrder) {
@@ -211,9 +211,11 @@ class OrderAPIController extends Controller
         $input = $request->all();
         $amount = 0;
         try {
+
             $order = $this->orderRepository->create(
-                $request->only('user_id', 'order_status_id', 'tax', 'delivery_address_id', 'delivery_fee', 'hint')
+                $request->only('user_id', 'order_status_id', 'tax', 'delivery_address_id', 'delivery_fee', 'hint', 'order_type')
             );
+
             foreach ($input['foods'] as $foodOrder) {
                 $foodOrder['order_id'] = $order->id;
                 $amount += $foodOrder['price'] * $foodOrder['quantity'];
