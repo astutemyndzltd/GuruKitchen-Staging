@@ -70,7 +70,7 @@
     </div>
 
 
-    {!! Form::label('hint', 'Type', ['class' => 'col-4 control-label']) !!}
+    {!! Form::label('order_type', 'Order Type', ['class' => 'col-4 control-label']) !!}
     <div class="col-8">
         <p>{!! $order->order_type !!}</p>
     </div>
