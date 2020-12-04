@@ -163,6 +163,7 @@ class OrderController extends Controller
         $orderDetails = [];
         $orderDetails['id'] = $order->id;
         $orderDetails['hint'] = $order->hint;
+        $orderDetails['order_type'] = $order->order_type;
         $orderDetails['delivery_address'] = $order->deliveryAddress ? $order->deliveryAddress->address : null;
 		$orderDetails['subtotal'] = $subtotal;
 		$orderDetails['tax'] = $order['tax'];

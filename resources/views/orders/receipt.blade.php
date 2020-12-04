@@ -29,6 +29,13 @@
         <i class="fal fa-map-marker-alt"></i>
         <span>{{ $orderDetails['delivery_address'] }}</span>
     </div>
+    @endif
+    
+    @if($orderDetails['order_type'] != null)
+	<div id="delivery-address" class="intro-row">
+        <i class="fal fa-truck-couch"></i>
+        <span>{{ $orderDetails['order_type'] }}</span>
+    </div>
 	@endif
 	
 	@if($orderDetails['payment_method'] != null)
