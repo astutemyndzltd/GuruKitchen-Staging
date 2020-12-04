@@ -69,12 +69,18 @@
         @endif
     </div>
 
-    {!! Form::label('restaurant_address', trans('lang.restaurant_address'), ['class' => 'col-4 control-label']) !!}
+
+    {!! Form::label('hint', 'Type', ['class' => 'col-4 control-label']) !!}
+    <div class="col-8">
+        <p>{!! $order->order_type !!}</p>
+    </div>
+
+    {{-- {!! Form::label('restaurant_address', trans('lang.restaurant_address'), ['class' => 'col-4 control-label']) !!}
     <div class="col-8">
         @if(isset($order->foodOrders[0]))
             <p>{!! $order->foodOrders[0]->food->restaurant->address !!}</p>
         @endif
-    </div>
+    </div>  --}}
 
     {!! Form::label('restaurant_phone', trans('lang.restaurant_phone'), ['class' => 'col-4 control-label']) !!}
     <div class="col-8">
@@ -93,14 +99,9 @@
 
     </div>
 
-    {!! Form::label('hint', 'Hint:', ['class' => 'col-4 control-label']) !!}
+    {!! Form::label('hint', 'Hint', ['class' => 'col-4 control-label']) !!}
     <div class="col-8">
         <p>{!! $order->hint !!}</p>
-    </div>
-
-    {!! Form::label('hint', 'Type', ['class' => 'col-4 control-label']) !!}
-    <div class="col-8">
-        <p>{!! $order->order_type !!}</p>
     </div>
 
 </div>
