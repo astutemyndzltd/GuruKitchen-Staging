@@ -45,7 +45,8 @@ class Order extends Model
         'delivery_address_id',
         'delivery_fee',
         'active',
-        'driver_id'
+        'driver_id',
+        'order_type'
     ];
 
     /**
@@ -64,6 +65,7 @@ class Order extends Model
         'delivery_fee'=>'double',
         'active'=>'boolean',
         'driver_id' => 'integer',
+        'order_type' => 'string'
     ];
 
     /**
