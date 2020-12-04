@@ -98,6 +98,11 @@
         <p>{!! $order->hint !!}</p>
     </div>
 
+    {!! Form::label('hint', 'Type', ['class' => 'col-4 control-label']) !!}
+    <div class="col-8">
+        <p>{!! $order->order_type !!}</p>
+    </div>
+
 </div>
 
 {{--<!-- Tax Field -->--}}
