@@ -41,14 +41,16 @@ class PayPalController extends ParentOrderController
         $user = $this->userRepository->findByField('api_token', $request->get('api_token'))->first();
         $coupon = $this->couponRepository->findByField('code', $request->get('coupon_code'))->first();
         $deliveryId = $request->get('delivery_address_id');
+        $orderType = $request->get('order_type');
 
         /** ANIK  **/
-        file_put_contents('order.txt', json_encode($request->get('order_type')));
+        //file_put_contents('order.txt', json_encode($request->get('order_type')));
 
         if (!empty($user)) {
             $this->order->user = $user;
             $this->order->user_id = $user->id;
             $this->order->delivery_address_id = $deliveryId;
+            $this->order_type = $orderType;
             $this->coupon = $coupon;
             $payPalCart = $this->getCheckoutData();
 
@@ -83,11 +85,12 @@ class PayPalController extends ParentOrderController
             'qty' => 1,
         ];
         $data['total'] = $this->total;
-        $data['return_url'] = url("payments/paypal/express-checkout-success?user_id=" . $this->order->user_id . "&delivery_address_id=" . $this->order->delivery_address_id);
+        $data['return_url'] = url("payments/paypal/express-checkout-success?user_id=" . $this->order->user_id . "&delivery_address_id=" . $this->order->delivery_address_id . "&order_type=" . $this->order->order_type);
 
         if (isset($this->coupon)) {
             $data['return_url'] .= "&coupon_code=" . $this->coupon->code;
         }
+
         $data['cancel_url'] = url('payments/paypal');
         $data['invoice_id'] = $order_id . '_' . date("Y_m_d_h_i_sa");
         $data['invoice_description'] = $this->order->user->cart[0]->food->restaurant->name;
@@ -106,12 +109,16 @@ class PayPalController extends ParentOrderController
      */
     public function getExpressCheckoutSuccess(Request $request)
     {
+        
+        $orderType = $request->get('order_type');
         $token = $request->get('token');
         $PayerID = $request->get('PayerID');
+        
         $this->order->user_id = $request->get('user_id', 0);
         $this->order->user = $this->userRepository->findWithoutFail($this->order->user_id);
         $this->coupon = $this->couponRepository->findByField('code', $request->get('coupon_code'))->first();
         $this->order->delivery_address_id = $request->get('delivery_address_id', 0);
+        $this->order->order_type = $orderType;
 
         // Verify Express Checkout Token
         $response = $this->provider->getExpressCheckoutDetails($token);
