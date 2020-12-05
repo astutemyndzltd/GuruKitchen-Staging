@@ -41,12 +41,17 @@ class PayPalController extends ParentOrderController
         $user = $this->userRepository->findByField('api_token', $request->get('api_token'))->first();
         $coupon = $this->couponRepository->findByField('code', $request->get('coupon_code'))->first();
         $deliveryId = $request->get('delivery_address_id');
+
+        /** ANIK  **/
+        file_put_contents('order.txt', json_encode($request->get('order_type')));
+
         if (!empty($user)) {
             $this->order->user = $user;
             $this->order->user_id = $user->id;
             $this->order->delivery_address_id = $deliveryId;
             $this->coupon = $coupon;
             $payPalCart = $this->getCheckoutData();
+
             try {
                 $response = $this->provider->setExpressCheckout($payPalCart);
                 if (!empty($response['paypal_link'])) {
