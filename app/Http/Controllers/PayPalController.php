@@ -50,7 +50,7 @@ class PayPalController extends ParentOrderController
             $this->order->user = $user;
             $this->order->user_id = $user->id;
             $this->order->delivery_address_id = $deliveryId;
-            $this->order_type = $orderType;
+            $this->order->order_type = $orderType;
             $this->coupon = $coupon;
             $payPalCart = $this->getCheckoutData();
 
@@ -113,7 +113,7 @@ class PayPalController extends ParentOrderController
         $orderType = $request->get('order_type');
         $token = $request->get('token');
         $PayerID = $request->get('PayerID');
-        
+
         $this->order->user_id = $request->get('user_id', 0);
         $this->order->user = $this->userRepository->findWithoutFail($this->order->user_id);
         $this->coupon = $this->couponRepository->findByField('code', $request->get('coupon_code'))->first();
