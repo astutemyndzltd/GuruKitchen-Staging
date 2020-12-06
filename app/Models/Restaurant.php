@@ -70,6 +70,7 @@ class Restaurant extends Model implements HasMedia
         'closed',
         'information',
         'active',
+        'min_order_amount'
     ];
 
     /**
@@ -93,7 +94,8 @@ class Restaurant extends Model implements HasMedia
         'available_for_delivery'=>'boolean',
         'closed'=>'boolean',
         'information' => 'string',
-        'active' =>'boolean'
+        'active' =>'boolean',
+        'min_order_amount' => 'double'
     ];
 
     /**

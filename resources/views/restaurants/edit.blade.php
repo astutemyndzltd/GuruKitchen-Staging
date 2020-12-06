@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @push('css_lib')
 <!-- iCheck -->
 <link rel="stylesheet" href="{{asset('plugins/iCheck/flat/blue.css')}}">
@@ -9,6 +10,7 @@
 {{--dropzone--}}
 <link rel="stylesheet" href="{{asset('plugins/dropzone/bootstrap.min.css')}}">
 @endpush
+
 @section('content')
 <!-- Content Header (Page header) -->
 <div class="content-header">
