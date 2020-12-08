@@ -67,7 +67,7 @@ class Food extends Model implements HasMedia
         'package_items_count',
         'unit',
         'featured',
-        'deliverable',
+        'out_of_stock',
         'restaurant_id',
         'category_id'
     ];
@@ -87,7 +87,7 @@ class Food extends Model implements HasMedia
         'package_items_count' => 'integer',
         'unit' => 'string',
         'featured' => 'boolean',
-        'deliverable' => 'boolean',
+        'out_of_stock' => 'boolean',
         'restaurant_id' => 'integer',
         'category_id' => 'integer'
     ];

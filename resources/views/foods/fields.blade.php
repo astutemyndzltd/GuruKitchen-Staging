@@ -160,13 +160,13 @@
         </div>
     </div>
 
-    <!-- 'Boolean deliverable Field' -->
+    <!-- 'Boolean Out-of-Stock Field' -->
     <div class="form-group row ">
-        {!! Form::label('deliverable', trans("lang.food_deliverable"),['class' => 'col-3 control-label text-right']) !!}
+        {!! Form::label('out_of_stock', 'Out of Stock',['class' => 'col-3 control-label text-right']) !!}
         <div class="checkbox icheck">
             <label class="col-9 ml-2 form-check-inline">
-                {!! Form::hidden('deliverable', 0) !!}
-                {!! Form::checkbox('deliverable', 1, null) !!}
+                {!! Form::hidden('out_of_stock', 1) !!}
+                {!! Form::checkbox('out_of_stock', 0, null) !!}
             </label>
         </div>
     </div>

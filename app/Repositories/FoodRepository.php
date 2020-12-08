@@ -35,7 +35,8 @@ class FoodRepository extends BaseRepository implements CacheableInterface
         'unit',
         'featured',
         'restaurant_id',
-        'category_id'
+        'category_id',
+        'out_of_stock'
     ];
 
     /**
