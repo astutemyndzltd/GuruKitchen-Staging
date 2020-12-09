@@ -177,7 +177,8 @@ class OrderController extends Controller
 		$orderDetails['driver_name'] = $order->driver ? $order->driver->name : null;
 		$orderDetails['customer_name'] = $order->user->name;
 		$orderDetails['customer_phone'] = $order->user->custom_fields['phone'] ? $order->user->custom_fields['phone']['view'] : null;
-		$orderDetails['payment_method'] = $order->payment->method;
+        $orderDetails['payment_method'] = $order->payment->method;
+        $orderDetails['order_note'] = $order->note;
 		
 		$foodCategories = [];
 		

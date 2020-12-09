@@ -58,6 +58,14 @@
         <span>{{ $orderDetails['driver_name'] }}</span>
     </div>
 	@endif
+
+    @if($orderDetails['order_note'] != '')
+	<div id="order-note" class="intro-row">
+        <i class="fal fa-clipboard"></i>
+   		<span>{{ $orderDetails['order_note'] }}</span>
+    </div>
+	@endif
+
     
     <div class="marker"></div>
 
