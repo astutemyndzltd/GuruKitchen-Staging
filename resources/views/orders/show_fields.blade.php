@@ -106,10 +106,10 @@
 
 </div>
 
-<div class="form-group row col-md-8 col-sm12">
-{!! Form::label('note', 'Customer Note', ['class' => 'col-4 control-label']) !!}
-    <div class="col-8">
-      <p>{!! $order->note !!}</p>
+<div class="form-group row col-md-12 col-sm12">
+{!! Form::label('note', 'Customer Note', ['class' => 'col-2 control-label']) !!}
+    <div class="col-9">
+      <p style="text-align:justify;">{!! $order->note !!}</p>
     </div>
 </div>
 
