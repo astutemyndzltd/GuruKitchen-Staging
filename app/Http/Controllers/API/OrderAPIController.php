@@ -167,11 +167,11 @@ class OrderAPIController extends Controller
             if ($stripeToken->created > 0) {
                 if (empty($input['delivery_address_id'])) {
                     $order = $this->orderRepository->create(
-                        $request->only('user_id', 'order_status_id', 'tax', 'hint', 'order_type')
+                        $request->only('user_id', 'order_status_id', 'tax', 'hint', 'order_type', 'note')
                     );
                 } else {
                     $order = $this->orderRepository->create(
-                        $request->only('user_id', 'order_status_id', 'tax', 'delivery_address_id', 'delivery_fee', 'hint', 'order_type')
+                        $request->only('user_id', 'order_status_id', 'tax', 'delivery_address_id', 'delivery_fee', 'hint', 'order_type', 'note')
                     );
                 }
                 foreach ($input['foods'] as $foodOrder) {

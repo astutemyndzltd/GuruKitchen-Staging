@@ -91,10 +91,12 @@ class OrderController extends Controller
         $orderStatus = $this->orderStatusRepository->pluck('status', 'id');
 
         $hasCustomField = in_array($this->orderRepository->model(), setting('custom_field_models', []));
+
         if ($hasCustomField) {
             $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->orderRepository->model());
             $html = generateCustomField($customFields);
         }
+
         return view('orders.create')->with("customFields", isset($html) ? $html : false)->with("user", $user)->with("driver", $driver)->with("orderStatus", $orderStatus);
     }
 
@@ -109,6 +111,7 @@ class OrderController extends Controller
     {
         $input = $request->all();
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->orderRepository->model());
+
         try {
             $order = $this->orderRepository->create($input);
             $order->customFieldsValues()->createMany(getCustomFieldsValues($customFields, $request));
@@ -221,9 +224,9 @@ class OrderController extends Controller
     {
         $this->orderRepository->pushCriteria(new OrdersOfUserCriteria(auth()->id()));
         $order = $this->orderRepository->findWithoutFail($id);
+
         if (empty($order)) {
             Flash::error(__('lang.not_found', ['operator' => __('lang.order')]));
-
             return redirect(route('orders.index'));
         }
 
@@ -238,6 +241,7 @@ class OrderController extends Controller
         $customFieldsValues = $order->customFieldsValues()->with('customField')->get();
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->orderRepository->model());
         $hasCustomField = in_array($this->orderRepository->model(), setting('custom_field_models', []));
+
         if ($hasCustomField) {
             $html = generateCustomField($customFields, $customFieldsValues);
         }
@@ -258,24 +262,29 @@ class OrderController extends Controller
     {
         $this->orderRepository->pushCriteria(new OrdersOfUserCriteria(auth()->id()));
         $oldOrder = $this->orderRepository->findWithoutFail($id);
+
         if (empty($oldOrder)) {
             Flash::error(__('lang.not_found', ['operator' => __('lang.order')]));
             return redirect(route('orders.index'));
         }
+
         $oldStatus = $oldOrder->payment->status;
         $input = $request->all();
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->orderRepository->model());
+
         try {
 
             $order = $this->orderRepository->update($input, $id);
 
             if (setting('enable_notifications', false)) {
+
                 if (isset($input['order_status_id']) && $input['order_status_id'] != $oldOrder->order_status_id) {
                     Notification::send([$order->user], new StatusChangedOrder($order));
                 }
 
                 if (isset($input['driver_id']) && ($input['driver_id'] != $oldOrder['driver_id'])) {
                     $driver = $this->userRepository->findWithoutFail($input['driver_id']);
+                    
                     if (!empty($driver)) {
                         Notification::send([$driver], new AssignedOrder($order));
                     }

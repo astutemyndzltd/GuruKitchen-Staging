@@ -34,8 +34,6 @@ class Order extends Model
 
     public $table = 'orders';
     
-
-
     public $fillable = [
         'user_id',
         'order_status_id',
@@ -46,7 +44,8 @@ class Order extends Model
         'delivery_fee',
         'active',
         'driver_id',
-        'order_type'
+        'order_type',
+        'note'
     ];
 
     /**
@@ -65,7 +64,8 @@ class Order extends Model
         'delivery_fee'=>'double',
         'active'=>'boolean',
         'driver_id' => 'integer',
-        'order_type' => 'string'
+        'order_type' => 'string',
+        'note' => 'string'
     ];
 
     /**
