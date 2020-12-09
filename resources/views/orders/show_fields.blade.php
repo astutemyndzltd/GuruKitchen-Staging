@@ -106,6 +106,14 @@
 
 </div>
 
+<div class="form-group row col-md-8 col-sm12">
+{!! Form::label('note', 'Customer Note', ['class' => 'col-4 control-label']) !!}
+    <div class="col-8">
+      <p>{!! $order->note !!}</p>
+    </div>
+</div>
+
+
 {{--<!-- Tax Field -->--}}
 {{--<div class="form-group row col-md-6 col-sm-12">--}}
 {{--  {!! Form::label('tax', 'Tax:', ['class' => 'col-4 control-label']) !!}--}}
