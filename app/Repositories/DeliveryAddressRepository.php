@@ -24,6 +24,7 @@ class DeliveryAddressRepository extends BaseRepository
         'address',
         'latitude',
         'longitude',
+        'place_id',
         'is_default',
         'user_id'
     ];

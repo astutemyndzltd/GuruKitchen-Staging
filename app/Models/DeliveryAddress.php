@@ -29,6 +29,7 @@ class DeliveryAddress extends Model
         'address',
         'latitude',
         'longitude',
+        'place_id',
         'is_default',
         'user_id'
     ];
@@ -43,6 +44,7 @@ class DeliveryAddress extends Model
         'address' => 'string',
         'latitude' => 'double',
         'longitude' => 'double',
+        'place_id' => 'string',
         'is_default' => 'boolean',
         'user_id' => 'integer'
     ];
