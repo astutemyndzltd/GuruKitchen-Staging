@@ -131,6 +131,12 @@ class OrderAPIController extends Controller
      */
     public function store(Request $request)
     {
+        $requestData = $request->all();
+		
+		if ($requestData['note'] == null) {
+			$request->merge(['note' => '']);
+		}
+            
         $payment = $request->only('payment');
         if (isset($payment['payment']) && $payment['payment']['method']) {
             if ($payment['payment']['method'] == "Credit Card") {
