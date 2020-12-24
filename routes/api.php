@@ -42,6 +42,7 @@ Route::post('send_reset_link_email', 'API\UserAPIController@sendResetLinkEmail')
 Route::get('user', 'API\UserAPIController@user');
 Route::get('logout', 'API\UserAPIController@logout');
 Route::get('settings', 'API\UserAPIController@settings');
+Route::get('restaurants/nearby', 'API\RestaurantAPIController@nearby');
 
 Route::resource('cuisines', 'API\CuisineAPIController');
 Route::resource('categories', 'API\CategoryAPIController');
@@ -83,8 +84,6 @@ Route::middleware('auth:api')->group(function () {
         });
     });
     Route::post('users/{id}', 'API\UserAPIController@update');
-
-    Route::get('restaurants/nearby', 'API\RestaurantAPIController@nearby');
 
     Route::resource('order_statuses', 'API\OrderStatusAPIController');
 
