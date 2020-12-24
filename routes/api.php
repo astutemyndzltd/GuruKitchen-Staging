@@ -84,6 +84,8 @@ Route::middleware('auth:api')->group(function () {
     });
     Route::post('users/{id}', 'API\UserAPIController@update');
 
+    Route::get('restaurants/nearby', 'API\RestaurantAPIController@nearby');
+
     Route::resource('order_statuses', 'API\OrderStatusAPIController');
 
     Route::get('payments/byMonth', 'API\PaymentAPIController@byMonth')->name('payments.byMonth');
