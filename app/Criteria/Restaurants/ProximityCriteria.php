@@ -51,14 +51,9 @@ class ProximityCriteria implements CriteriaInterface
             $myLat = $this->request->get('myLat');
             $myLon = $this->request->get('myLon');
 
-            $subQuery = $model->selectRaw("*, (get_distance(latitude, longitude, $myLat, $myLon) / 1000) as distance_km");
-
-            $query = DB::table(DB::raw("({$subQuery->toSql()}) as rest"))
-                    ->mergeBindings($subQuery->getQuery())
-                    ->whereRaw('distance_km <= delivery_range')
-                    ->orderBy('distance_km');
-
-            return $query;
+            return $model->selectRaw("*,(get_distance(latitude, longitude, $myLat, $myLon) / 1000) distance_km")
+                  ->havingRaw("distance_km <= delivery_range")
+                  ->orderBy("distance_km");
 
         }
 
