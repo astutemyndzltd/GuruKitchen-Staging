@@ -58,7 +58,7 @@
         <div class="col-9">
             {!! Form::number('delivery_range', null,  ['class' => 'form-control', 'step'=>'any','placeholder'=>  trans("lang.restaurant_delivery_range_placeholder")]) !!}
             <div class="form-text text-muted">
-                {{ trans("lang.restaurant_delivery_range_help") }}
+                {{ trans("lang.restaurant_delivery_range_help") . " in km" }}
             </div>
         </div>
     </div>
