@@ -263,7 +263,7 @@
                 </div>
             </div>
 
-            <div class="control">Add Hours</div>
+            <a href="#">Add Hours</a>
 
         </div>
 
