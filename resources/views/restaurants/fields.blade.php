@@ -301,6 +301,39 @@
 
         </div>
 
+        <div class="weekday form-group row">
+        
+            <div class="checkbox icheck">
+                <label class="col-9 ml-2 form-check-inline">
+                    {!! Form::hidden('wednesday', 0) !!}
+                    {!! Form::checkbox('wednesday', 1, null, [ 'id' => 'monday']) !!}
+                </label>
+            </div>
+
+            {!! Form::label('wednesday', 'Wednesday', ['class' => 'col-2 control-label']) !!}
+
+            <div class="timings">
+                <div class="timing">
+                    <input type="text" readonly class="start" placeholder="Start time">
+                    <input type="text" readonly class="end" placeholder="End time">                  
+                    <button type="button">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>                    
+                </div>
+
+                <div class="timing">
+                    <input type="text" readonly class="start" placeholder="Start time">
+                    <input type="text" readonly class="end" placeholder="End time">                  
+                    <button type="button">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+
+            <a href="#" class="add-hrs">+ Add Hours</a>
+
+        </div>
+
     </div>
 </div>
 
