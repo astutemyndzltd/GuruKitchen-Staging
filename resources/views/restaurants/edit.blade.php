@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.css')}}">
 {{--dropzone--}}
 <link rel="stylesheet" href="{{asset('plugins/dropzone/bootstrap.min.css')}}">
-{{-preorder-}}
+{{--preorder--}}
 <link rel="stylesheet" href="{{asset('css/preorder.css')}}">
 @endpush
 
