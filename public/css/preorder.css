@@ -2,6 +2,10 @@ div.preorder-main>p {
     margin-top: -46px;
 }
 
+div.preorder-container {
+    width: 55%;
+}
+
 div.preorder-container input[type=text] {
     padding-left: 10px;
     width: 160px;
@@ -21,5 +25,10 @@ div.weekday {
 }
 
 div.timing {
-    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+a.add-hrs { 
+    font-size: 15px;
+    margin-left: 15px;
 }
