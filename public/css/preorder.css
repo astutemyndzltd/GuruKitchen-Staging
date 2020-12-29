@@ -39,8 +39,9 @@ div.timing {
     margin-bottom: 10px !important;
 }
 
-button.add-hrs {
-    background-color: green;
+a.add-hrs {
+    margin-left: 15px;
+    padding-top: 5px;
 }
 
 div.preorder-container button {
