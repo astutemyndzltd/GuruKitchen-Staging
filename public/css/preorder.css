@@ -7,3 +7,19 @@ div.preorder-container input[type=text] {
     width: 160px;
     margin-right: 5px;
 }
+
+div.weekday>label {
+    padding-top: 2px !important;
+}
+
+div.weekday div.checkbox.icheck {
+    padding-top: 5px !important;
+}
+
+div.weekday {
+    padding-left: 7px !important;
+}
+
+div.timing {
+    margin-top: 8px !important;
+}
