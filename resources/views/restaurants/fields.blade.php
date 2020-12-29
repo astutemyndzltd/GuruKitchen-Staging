@@ -246,12 +246,12 @@
         
             <div class="checkbox icheck">
                 <label class="col-9 ml-2 form-check-inline">
-                    {!! Form::hidden('Monday', 0) !!}
-                    {!! Form::checkbox('Monday', 1, null) !!}
+                    {!! Form::hidden('monday', 0) !!}
+                    {!! Form::checkbox('monday', 1, null) !!}
                 </label>
             </div>
 
-            {!! Form::label('Monday', trans("lang.restaurant_active"),['class' => 'col-3 control-label text-right']) !!}
+            {!! Form::label('monday', 'monday'), ['class' => 'col-2 control-label']) !!}
 
             <div class="timings">
                 <div>
@@ -260,25 +260,11 @@
                     <button>Delete<button>
                 </div>
             </div>
+
             <div class="control">Add Hours</div>
+
         </div>
-        <div class="weekday">
-            <input type="checkbox">
-            <div>Monday</div>
-            <div class="timings">
-                <div>
-                    <input type="text" readonly class="start">
-                    <input type="text" readonly class="end">
-                    <button>Delete<button>
-                </div>
-                <div>
-                    <input type="text" readonly class="start">
-                    <input type="text" readonly class="end">
-                    <button>Delete<button>
-                </div>
-            </div>
-            <div class="control">Add Hours</div>
-        </div>            
+                       
     </div>
 </div>
 
