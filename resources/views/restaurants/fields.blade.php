@@ -235,6 +235,54 @@
 
 </div>
 
+<!-- pre-order -->
+<div class="col-12 custom-field-container preorder-main">
+
+    <h5 class="col-12 pb-4">Set your opening hours</h5>
+    <p class="col-12">Select each day you're open</p>
+
+    <div class="preorder-container">
+        <div class="weekday form-group row">
+        
+            <div class="checkbox icheck">
+                <label class="col-9 ml-2 form-check-inline">
+                    {!! Form::hidden('Monday', 0) !!}
+                    {!! Form::checkbox('Monday', 1, null) !!}
+                </label>
+            </div>
+
+            {!! Form::label('Monday', trans("lang.restaurant_active"),['class' => 'col-3 control-label text-right']) !!}
+
+            <div class="timings">
+                <div>
+                    <input type="text" readonly class="start">
+                    <input type="text" readonly class="end">
+                    <button>Delete<button>
+                </div>
+            </div>
+            <div class="control">Add Hours</div>
+        </div>
+        <div class="weekday">
+            <input type="checkbox">
+            <div>Monday</div>
+            <div class="timings">
+                <div>
+                    <input type="text" readonly class="start">
+                    <input type="text" readonly class="end">
+                    <button>Delete<button>
+                </div>
+                <div>
+                    <input type="text" readonly class="start">
+                    <input type="text" readonly class="end">
+                    <button>Delete<button>
+                </div>
+            </div>
+            <div class="control">Add Hours</div>
+        </div>            
+    </div>
+</div>
+
+
 @hasrole('admin')
 <div class="col-12 custom-field-container">
     <h5 class="col-12 pb-4">{!! trans('lang.admin_area') !!}</h5>
@@ -272,46 +320,6 @@
     </div>
 </div>
 @endhasrole
-
-<!-- pre-order -->
-<div class="col-12 custom-field-container">
-
-    <h5 class="col-12 pb-4">Set your opening hours</h5>
-    <p>Select each day you're open.</p>
-
-    <div class="preorder-container">
-        <div class="weekday">
-            <input type="checkbox">
-            <div>Monday</div>
-            <div class="timings">
-                <div>
-                    <input type="text" readonly class="start">
-                    <input type="text" readonly class="end">
-                    <button>Delete<button>
-                </div>
-            </div>
-            <div class="control">Add Hours</div>
-        </div>
-        <div class="weekday">
-            <input type="checkbox">
-            <div>Monday</div>
-            <div class="timings">
-                <div>
-                    <input type="text" readonly class="start">
-                    <input type="text" readonly class="end">
-                    <button>Delete<button>
-                </div>
-                <div>
-                    <input type="text" readonly class="start">
-                    <input type="text" readonly class="end">
-                    <button>Delete<button>
-                </div>
-            </div>
-            <div class="control">Add Hours</div>
-        </div>            
-    </div>
-
-</div>
 
 @if($customFields)
     <div class="clearfix"></div>
