@@ -2,3 +2,8 @@ div.preorder-main>p {
     margin-top: -46px;
 }
 
+div.preorder-container input[type=text] {
+    padding-left: 10px;
+    width: 160px;
+    margin-right: 5px;
+}

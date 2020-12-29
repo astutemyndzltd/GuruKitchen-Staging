@@ -257,9 +257,11 @@
 
             <div class="timings">
                 <div>
-                    <input type="text" readonly class="start">
-                    <input type="text" readonly class="end">                  
-                    <button type="button">Delete<button>
+                    <input type="text" readonly class="start" placeholder="Start time">
+                    <input type="text" readonly class="end" placeholder="End time">                  
+                    <button type="button">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
                 </div>
             </div>
 
