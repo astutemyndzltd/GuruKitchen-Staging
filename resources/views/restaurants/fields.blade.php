@@ -147,7 +147,7 @@
         <div class="checkbox icheck">
             <label class="col-9 ml-2 form-check-inline">
                 {!! Form::hidden('available_for_delivery', 0) !!}
-                {!! Form::checkbox('available_for_delivery', 1, null, ['id' => 'monday' )) !!}
+                {!! Form::checkbox('available_for_delivery', 1, null) !!}
             </label>
         </div>
     </div>
@@ -247,7 +247,7 @@
             <div class="checkbox icheck">
                 <label class="col-9 ml-2 form-check-inline">
                     {!! Form::hidden('monday', 0) !!}
-                    {!! Form::checkbox('monday', 1, null) !!}
+                    {!! Form::checkbox('monday', 1, null, ['id' => 'monday']) !!}
                 </label>
             </div>
 
