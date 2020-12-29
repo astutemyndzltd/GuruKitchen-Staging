@@ -3,7 +3,7 @@ div.preorder-main>p {
 }
 
 div.preorder-container {
-    width: 55%;
+    width: 75%;
     margin-top: 25px;
     margin-bottom: 45px;
 }
@@ -39,10 +39,8 @@ div.timing {
     margin-bottom: 10px !important;
 }
 
-a.add-hrs {
-    font-size: 15px;
-    margin-left: 15px;
-    padding-top: 5px;
+button.add-hrs {
+    background-color: green;
 }
 
 div.preorder-container button {
