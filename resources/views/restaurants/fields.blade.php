@@ -239,7 +239,7 @@
 <!-- pre-order -->
 <div class="col-12 custom-field-container preorder-main">
 
-    <h5 class="col-12 pb-4">Set your opening hours</h5>
+    <h5 class="col-12 pb-4">Set Your Opening Hours</h5>
     <p class="col-12">Select each day you're open</p>
 
     <div class="preorder-container">
@@ -272,7 +272,7 @@
                 </div>
             </div>
 
-            <a href="#" class="add-hrs">Add Hours</a>
+            <a href="#" class="add-hrs">Add hours</a>
 
         </div>
 
@@ -297,7 +297,7 @@
                 </div>
             </div>
 
-            <a href="#" class="add-hrs">Add Hours</a>
+            <a href="#" class="add-hrs">Add hours</a>
 
         </div>
 
@@ -330,7 +330,7 @@
                 </div>
             </div>
 
-            <a href="#" class="add-hrs">Add Hours</a>
+            <a href="#" class="add-hrs">Add hours</a>
 
         </div>
 
