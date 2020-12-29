@@ -246,15 +246,7 @@
     <div class="preorder-container">
         <div class="weekday form-group row">
 
-            <label class="col-2 control-label hover">
-                <div class="checkbox icheck">
-                    <label class="col-9 ml-2 form-check-inline">
-                        {!! Form::hidden('monday', 0) !!}
-                        {!! Form::checkbox('monday', 1, null) !!}
-                    </label>
-                </div>
-                Monday
-            </label>
+            
 
 
             <div class="timings">
