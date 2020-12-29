@@ -244,15 +244,16 @@
     <div class="preorder-container">
         <div class="weekday form-group row">
         
+            {!! Form::label('monday', 'Monday', ['class' => 'col-2 control-label']) !!}
+
             <div class="checkbox icheck">
                 <label class="col-9 ml-2 form-check-inline">
                     {!! Form::hidden('monday', 0) !!}
-                    {!! Form::checkbox('monday', 1, null, array('id'=>'monday')) !!}
+                    {!! Form::checkbox('monday', 1, null) !!}
                 </label>
             </div>
 
-            {!! Form::label('monday', 'Monday', ['class' => 'col-2 control-label']) !!}
-
+            
             <div class="timings">
                 <div>
                     <input type="text" readonly class="start">
