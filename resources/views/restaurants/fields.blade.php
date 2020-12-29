@@ -272,7 +272,7 @@
                 </div>
             </div>
 
-            <a href="#" class="add-hrs">Add hours</a>
+            <a href="#" class="add-hrs">+ Add hours</a>
 
         </div>
 
@@ -297,7 +297,7 @@
                 </div>
             </div>
 
-            <a href="#" class="add-hrs">Add hours</a>
+            <a href="#" class="add-hrs">+ Add hours</a>
 
         </div>
 
@@ -330,7 +330,7 @@
                 </div>
             </div>
 
-            <a href="#" class="add-hrs">Add hours</a>
+            <a href="#" class="add-hrs">+ Add hours</a>
 
         </div>
 
