@@ -247,7 +247,7 @@
             <div class="checkbox icheck">
                 <label class="col-9 ml-2 form-check-inline">
                     {!! Form::hidden('monday', 0) !!}
-                    {!! Form::checkbox('monday', 1, null) !!}
+                    {!! Form::checkbox('monday', 1, null, array('id'=>'monday')) !!}
                 </label>
             </div>
 
