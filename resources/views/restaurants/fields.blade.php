@@ -256,10 +256,10 @@
 
 
             <div class="timings">
-                <div>
-                    <input type="text" readonly class="start">
-                    <input type="text" readonly class="end">
-                    <button>Delete<button>
+                <div>                   
+                    {!! Form::text('start-time', null, ['class' => 'form-control','placeholder'=> 'Start time']) !!}
+                    {!! Form::text('end-time', null, ['class' => 'form-control','placeholder'=> 'End time']) !!}
+                    <button type="button">Delete<button>
                 </div>
             </div>
 
