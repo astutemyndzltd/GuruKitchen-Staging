@@ -251,7 +251,7 @@
                 </label>
             </div>
 
-            {!! Form::label('monday', 'monday'), ['class' => 'col-2 control-label']) !!}
+            {!! Form::label('monday', 'Monday', ['class' => 'col-2 control-label']) !!}
 
             <div class="timings">
                 <div>
