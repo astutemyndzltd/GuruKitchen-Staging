@@ -28,7 +28,15 @@ div.timing {
     margin-bottom: 8px !important;
 }
 
-a.add-hrs { 
+a.add-hrs {
     font-size: 15px;
     margin-left: 15px;
+    padding-top: 5px;
+}
+
+div.preorder-container button {
+    background: red;
+    color: white;
+    border: 2px solid red;
+    border-radius: 4px;
 }
