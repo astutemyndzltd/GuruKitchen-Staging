@@ -260,6 +260,14 @@
                     <input type="text" readonly class="end" placeholder="End time">                  
                     <button type="button">
                         <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>                    
+                </div>
+
+                <div class="timing">
+                    <input type="text" readonly class="start" placeholder="Start time">
+                    <input type="text" readonly class="end" placeholder="End time">                  
+                    <button type="button">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>

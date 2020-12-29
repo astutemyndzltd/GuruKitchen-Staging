@@ -4,6 +4,8 @@ div.preorder-main>p {
 
 div.preorder-container {
     width: 55%;
+    margin-top: 25px;
+    margin-bottom: 45px;
 }
 
 div.preorder-container input[type=text] {
