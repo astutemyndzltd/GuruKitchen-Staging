@@ -273,6 +273,46 @@
 </div>
 @endhasrole
 
+<!-- pre-order -->
+<div class="col-12 custom-field-container">
+
+    <h5 class="col-12 pb-4">Set your opening hours</h5>
+    <p>Select each day you're open.</p>
+
+    <div class="preorder-container">
+        <div class="weekday">
+            <input type="checkbox">
+            <div>Monday</div>
+            <div class="timings">
+                <div>
+                    <input type="text" readonly class="start">
+                    <input type="text" readonly class="end">
+                    <button>Delete<button>
+                </div>
+            </div>
+            <div class="control">Add Hours</div>
+        </div>
+        <div class="weekday">
+            <input type="checkbox">
+            <div>Monday</div>
+            <div class="timings">
+                <div>
+                    <input type="text" readonly class="start">
+                    <input type="text" readonly class="end">
+                    <button>Delete<button>
+                </div>
+                <div>
+                    <input type="text" readonly class="start">
+                    <input type="text" readonly class="end">
+                    <button>Delete<button>
+                </div>
+            </div>
+            <div class="control">Add Hours</div>
+        </div>            
+    </div>
+
+</div>
+
 @if($customFields)
     <div class="clearfix"></div>
     <div class="col-12 custom-field-container">
@@ -280,6 +320,8 @@
         {!! $customFields !!}
     </div>
 @endif
+
+
 <!-- Submit Field -->
 <div class="form-group col-12 text-right">
     <button type="submit" class="btn btn-{{setting('theme_color')}}"><i class="fa fa-save"></i> {{trans('lang.save')}} {{trans('lang.restaurant')}}</button>
