@@ -185,7 +185,7 @@
             addRemoveLinks: true,
             maxFiles: 1,
             init: function() {
-                @if(isset($restaurant) && $restaurant - > hasMedia('image'))
+                @if(isset($restaurant) && $restaurant->hasMedia('image'))
                 dzInit(this, var15671147011688676454ble, '{!! url($restaurant->getFirstMediaUrl('
                     image ','
                     thumb ')) !!}')
