@@ -172,7 +172,7 @@
     @prepend('scripts')
     <script type="text/javascript">
         var var15671147011688676454ble = '';
-        @if(isset($restaurant) && $restaurant - > hasMedia('image'))
+        @if(isset($restaurant) && $restaurant-> hasMedia('image'))
         var15671147011688676454ble = {
             name: "{!! $restaurant->getFirstMedia('image')->name !!}",
             size: "{!! $restaurant->getFirstMedia('image')->size !!}",
