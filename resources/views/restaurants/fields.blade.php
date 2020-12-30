@@ -260,13 +260,15 @@
                 @if($restaurant->opening_times == null || $restaurant->opening_times[$day] == null)
                     <span>Closed all day</span>
                 @else
-                    <div class="timing">
-                        <input type="text" readonly class="start" placeholder="Start time">
-                        <input type="text" readonly class="end" placeholder="End time">
-                        <button type="button">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </button>
-                    </div>
+                    @foreach($restaurant->opening_times[$day] as $timeSpan)
+                        <div class="timing">
+                            <input type="text" readonly class="start" placeholder="Start time" value="{{!! $timeSpan['opens_at'] !!}}">
+                            <input type="text" readonly class="end" placeholder="End time" value="{{!! $timeSpan['closes_at'] !!}">
+                            <button type="button">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    @endforeach
                 @endif
             </div>
 
