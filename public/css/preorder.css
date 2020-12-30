@@ -40,9 +40,15 @@ div.timing {
     margin-bottom: 10px !important;
 }
 
+div.timings {
+    width: 374px;
+    min-height: 35px;
+    line-height: 26px;
+}
+
 a.add-hrs {
     margin-left: 25px;
-    padding-top: 5px;
+    padding-top: 2px;
     font-weight: 600;
 }
 

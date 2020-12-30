@@ -168,52 +168,54 @@
             </div>
         </div>
     </div>
-    
+
     @prepend('scripts')
-        <script type="text/javascript">
-            var var15671147011688676454ble = '';
-            @if(isset($restaurant) && $restaurant->hasMedia('image'))
-                var15671147011688676454ble = {
-                name: "{!! $restaurant->getFirstMedia('image')->name !!}",
-                size: "{!! $restaurant->getFirstMedia('image')->size !!}",
-                type: "{!! $restaurant->getFirstMedia('image')->mime_type !!}",
-                collection_name: "{!! $restaurant->getFirstMedia('image')->collection_name !!}"
-            };
-                    @endif
-            var dz_var15671147011688676454ble = $(".dropzone.image").dropzone({
-                    url: "{!!url('uploads/store')!!}",
-                    addRemoveLinks: true,
-                    maxFiles: 1,
-                    init: function () {
-                        @if(isset($restaurant) && $restaurant->hasMedia('image'))
-                        dzInit(this, var15671147011688676454ble, '{!! url($restaurant->getFirstMediaUrl('image','thumb')) !!}')
-                        @endif
-                    },
-                    accept: function (file, done) {
-                        dzAccept(file, done, this.element, "{!!config('medialibrary.icons_folder')!!}");
-                    },
-                    sending: function (file, xhr, formData) {
-                        dzSending(this, file, formData, '{!! csrf_token() !!}');
-                    },
-                    maxfilesexceeded: function (file) {
-                        dz_var15671147011688676454ble[0].mockFile = '';
-                        dzMaxfile(this, file);
-                    },
-                    complete: function (file) {
-                        dzComplete(this, file, var15671147011688676454ble, dz_var15671147011688676454ble[0].mockFile);
-                        dz_var15671147011688676454ble[0].mockFile = file;
-                    },
-                    removedfile: function (file) {
-                        dzRemoveFile(
-                            file, var15671147011688676454ble, '{!! url("restaurants/remove-media") !!}',
-                            'image', '{!! isset($restaurant) ? $restaurant->id : 0 !!}', '{!! url("uplaods/clear") !!}', '{!! csrf_token() !!}'
-                        );
-                    }
-                });
-            dz_var15671147011688676454ble[0].mockFile = var15671147011688676454ble;
-            dropzoneFields['image'] = dz_var15671147011688676454ble;
-        </script>
-@endprepend
+    <script type="text/javascript">
+        var var15671147011688676454ble = '';
+        @if(isset($restaurant) && $restaurant - > hasMedia('image'))
+        var15671147011688676454ble = {
+            name: "{!! $restaurant->getFirstMedia('image')->name !!}",
+            size: "{!! $restaurant->getFirstMedia('image')->size !!}",
+            type: "{!! $restaurant->getFirstMedia('image')->mime_type !!}",
+            collection_name: "{!! $restaurant->getFirstMedia('image')->collection_name !!}"
+        };
+        @endif
+        var dz_var15671147011688676454ble = $(".dropzone.image").dropzone({
+            url: "{!!url('uploads/store')!!}",
+            addRemoveLinks: true,
+            maxFiles: 1,
+            init: function() {
+                @if(isset($restaurant) && $restaurant - > hasMedia('image'))
+                dzInit(this, var15671147011688676454ble, '{!! url($restaurant->getFirstMediaUrl('
+                    image ','
+                    thumb ')) !!}')
+                @endif
+            },
+            accept: function(file, done) {
+                dzAccept(file, done, this.element, "{!!config('medialibrary.icons_folder')!!}");
+            },
+            sending: function(file, xhr, formData) {
+                dzSending(this, file, formData, '{!! csrf_token() !!}');
+            },
+            maxfilesexceeded: function(file) {
+                dz_var15671147011688676454ble[0].mockFile = '';
+                dzMaxfile(this, file);
+            },
+            complete: function(file) {
+                dzComplete(this, file, var15671147011688676454ble, dz_var15671147011688676454ble[0].mockFile);
+                dz_var15671147011688676454ble[0].mockFile = file;
+            },
+            removedfile: function(file) {
+                dzRemoveFile(
+                    file, var15671147011688676454ble, '{!! url("restaurants/remove-media") !!}',
+                    'image', '{!! isset($restaurant) ? $restaurant->id : 0 !!}', '{!! url("uplaods/clear") !!}', '{!! csrf_token() !!}'
+                );
+            }
+        });
+        dz_var15671147011688676454ble[0].mockFile = var15671147011688676454ble;
+        dropzoneFields['image'] = dz_var15671147011688676454ble;
+    </script>
+    @endprepend
 
     <!-- Description Field -->
     <div class="form-group row ">
@@ -239,101 +241,38 @@
 <!-- pre-order -->
 <div class="col-12 custom-field-container preorder-main">
 
+    <?php $weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']; ?>
+
     <h5 class="col-12 pb-4">Set Your Opening Hours</h5>
     <p class="col-12">Select each day you're open</p>
 
     <div class="preorder-container">
+        @foreach ($days as $day)
         <div class="weekday form-group row">
-        
+
             <div class="checkbox icheck">
                 <label class="col-9 ml-2 form-check-inline">
-                    {!! Form::hidden('monday', 0) !!}
-                    {!! Form::checkbox('monday', 1, null, [ 'id' => 'monday']) !!}
+                    {!!-- Form::hidden('monday', 0) --!!}
+                    {!! Form::checkbox($day, 1, null, [ 'id' => $day]) !!}
                 </label>
             </div>
 
-            {!! Form::label('monday', 'Monday', ['class' => 'col-2 control-label']) !!}
+            {!! Form::label($day, ucfirst($da), ['class' => 'col-2 control-label']) !!}
 
             <div class="timings">
                 <div class="timing">
                     <input type="text" readonly class="start" placeholder="Start time">
-                    <input type="text" readonly class="end" placeholder="End time">                  
-                    <button type="button">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </button>                    
-                </div>
-
-                <div class="timing">
-                    <input type="text" readonly class="start" placeholder="Start time">
-                    <input type="text" readonly class="end" placeholder="End time">                  
+                    <input type="text" readonly class="end" placeholder="End time">
                     <button type="button">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
 
-            <a href="#" class="add-hrs">+ Add hours</a>
+            <a href="#" class="add-hrs">+ Add Hours</a>
 
         </div>
-
-        <div class="weekday form-group row">
-        
-            <div class="checkbox icheck">
-                <label class="col-9 ml-2 form-check-inline">
-                    {!! Form::hidden('tuesday', 0) !!}
-                    {!! Form::checkbox('tuesday', 1, null, [ 'id' => 'monday']) !!}
-                </label>
-            </div>
-
-            {!! Form::label('tuesday', 'Tuesday', ['class' => 'col-2 control-label']) !!}
-
-            <div class="timings">
-                <div class="timing">
-                    <input type="text" readonly class="start" placeholder="Start time">
-                    <input type="text" readonly class="end" placeholder="End time">                  
-                    <button type="button">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </div>
-
-            <a href="#" class="add-hrs">+ Add hours</a>
-
-        </div>
-
-        <div class="weekday form-group row">
-        
-            <div class="checkbox icheck">
-                <label class="col-9 ml-2 form-check-inline">
-                    {!! Form::hidden('wednesday', 0) !!}
-                    {!! Form::checkbox('wednesday', 1, null, [ 'id' => 'monday']) !!}
-                </label>
-            </div>
-
-            {!! Form::label('wednesday', 'Wednesday', ['class' => 'col-2 control-label']) !!}
-
-            <div class="timings">
-                <div class="timing">
-                    <input type="text" readonly class="start" placeholder="Start time">
-                    <input type="text" readonly class="end" placeholder="End time">                  
-                    <button type="button">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </button>                    
-                </div>
-
-                <div class="timing">
-                    <input type="text" readonly class="start" placeholder="Start time">
-                    <input type="text" readonly class="end" placeholder="End time">                  
-                    <button type="button">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </div>
-
-            <a href="#" class="add-hrs">+ Add hours</a>
-
-        </div>
-
+        @endforeach
     </div>
 </div>
 
