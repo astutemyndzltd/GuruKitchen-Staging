@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.css')}}">
 {{--dropzone--}}
 <link rel="stylesheet" href="{{asset('plugins/dropzone/bootstrap.min.css')}}">
+{{--preorder--}}
+<link rel="stylesheet" href="{{asset('css/preorder.css')}}">
 @endpush
 @section('content')
 <!-- Content Header (Page header) -->

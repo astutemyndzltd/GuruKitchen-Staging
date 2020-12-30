@@ -257,13 +257,17 @@
             {!! Form::label($day, ucfirst($day), ['class' => 'col-2 control-label']) !!}
 
             <div class="timings">
-                <div class="timing">
-                    <input type="text" readonly class="start" placeholder="Start time">
-                    <input type="text" readonly class="end" placeholder="End time">
-                    <button type="button">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </button>
-                </div>
+                @if($restaurant->opening_times == null || $restaurant->opening_times[$day] == null)
+                    <span>Closed all day</span>
+                @else
+                    <div class="timing">
+                        <input type="text" readonly class="start" placeholder="Start time">
+                        <input type="text" readonly class="end" placeholder="End time">
+                        <button type="button">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                @endif
             </div>
 
             <a href="#" class="add-hrs">+ Add Hours</a>
