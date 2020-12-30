@@ -262,8 +262,8 @@
                 @else
                     @foreach($restaurant->opening_times[$day] as $timeSpan)
                         <div class="timing">
-                            <input type="text" readonly class="start" placeholder="Start time" value="{{!! $timeSpan['opens_at'] !!}}">
-                            <input type="text" readonly class="end" placeholder="End time" value="{{!! $timeSpan['closes_at'] !!}">
+                            <input type="text" readonly class="start" placeholder="Start time" value="{!! $timeSpan['opens_at'] !!}">
+                            <input type="text" readonly class="end" placeholder="End time" value="{!! $timeSpan['closes_at'] !!}">
                             <button type="button">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
