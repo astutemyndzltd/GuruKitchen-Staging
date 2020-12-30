@@ -172,7 +172,7 @@
     @prepend('scripts')
     <script type="text/javascript">
         var var15671147011688676454ble = '';
-        @if(isset($restaurant) && $restaurant-> hasMedia('image'))
+        @if(isset($restaurant) && $restaurant->hasMedia('image'))
         var15671147011688676454ble = {
             name: "{!! $restaurant->getFirstMedia('image')->name !!}",
             size: "{!! $restaurant->getFirstMedia('image')->size !!}",
@@ -251,8 +251,7 @@
         <div class="weekday form-group row">
 
             <div class="checkbox icheck">
-                <label class="col-9 ml-2 form-check-inline">
-                    {!!-- Form::hidden('monday', 0) --!!}
+                <label class="col-9 ml-2 form-check-inline">                 
                     {!! Form::checkbox($day, 1, null, [ 'id' => $day]) !!}
                 </label>
             </div>
