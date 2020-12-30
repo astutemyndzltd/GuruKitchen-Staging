@@ -247,7 +247,7 @@
     <p class="col-12">Select each day you're open</p>
 
     <div class="preorder-container">
-        @foreach ($days as $day)
+        @foreach ($weekdays as $day)
         <div class="weekday form-group row">
 
             <div class="checkbox icheck">
