@@ -250,7 +250,7 @@
 
             <div class="checkbox icheck">
                 <label class="col-9 ml-2 form-check-inline">
-                    <?php $dayChecked = ($restaurant->opening_times == null || $restaurant->opening_times[$day] == null); ?>                 
+                    <?php $dayChecked = !($restaurant->opening_times == null || $restaurant->opening_times[$day] == null); ?>                 
                     {!! Form::checkbox($day, 1, $dayChecked, [ 'id' => $day]) !!}
                 </label>
             </div>
