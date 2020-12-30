@@ -249,8 +249,9 @@
         <div class="weekday form-group row">
 
             <div class="checkbox icheck">
-                <label class="col-9 ml-2 form-check-inline">                 
-                    {!! Form::checkbox($day, 1, null, [ 'id' => $day]) !!}
+                <label class="col-9 ml-2 form-check-inline">
+                    <?php $dayChecked = ($restaurant->opening_times == null || $restaurant->opening_times[$day] == null); ?>                 
+                    {!! Form::checkbox($day, 1, $dayChecked, [ 'id' => $day]) !!}
                 </label>
             </div>
 
