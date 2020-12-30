@@ -256,7 +256,7 @@
                 </label>
             </div>
 
-            {!! Form::label($day, ucfirst($da), ['class' => 'col-2 control-label']) !!}
+            {!! Form::label($day, ucfirst($day), ['class' => 'col-2 control-label']) !!}
 
             <div class="timings">
                 <div class="timing">
