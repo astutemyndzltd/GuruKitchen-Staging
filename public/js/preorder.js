@@ -59,7 +59,10 @@ for (let divWeekday of divWeekdays) {
         $(cbxDay).iCheck('uncheck');
     });
 
-    $(aAddHours).on('click', () => addHours(divTimings, state[day]));
+    $(aAddHours).on('click', () => {
+        if(state[day] == null) state[day] = [];
+        addHours(divTimings, state[day])
+    });
 
 }
 
