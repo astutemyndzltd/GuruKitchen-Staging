@@ -32,6 +32,8 @@ for (let divWeekday of divWeekdays) {
                 $(divTiming).remove();
                 state[day].splice(i, 1);
 
+                console.log(state[day]);
+
                 if (state[day].length == 0) {
                     $(divTimings).trigger('childless');
                 }
@@ -61,7 +63,7 @@ for (let divWeekday of divWeekdays) {
 
     $(aAddHours).on('click', () => {
         if (state[day] == null) state[day] = [];
-        addHours(divTimings, state[day])
+        addHours(divTimings, state[day]);
     });
 
     window.state = state;
