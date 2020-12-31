@@ -28,7 +28,8 @@ for (let divWeekday of divWeekdays) {
             let startTime = txtStartTime.value;
             let endTime = txtEndTime.value;
 
-            //$(txtStartTime).mdtimepicker();
+            $(txtStartTime).mdtimepicker({ format: 'h:mm tt' });
+            $(txtEndTime).mdtimepicker({ format: 'h:mm tt' });
             //$(txtStartTime).mdtimepicker('setValue', startTime);
             //$(txtEndTime).mdtimepicker();
             //$(txtEndTime).mdtimepicker('setValue', startTime);
