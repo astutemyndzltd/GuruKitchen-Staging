@@ -25,8 +25,8 @@ for (let divWeekday of divWeekdays) {
             let txtEndTime = divTiming.children[1];
             let btnRemoveTiming = divTiming.children[2];
 
-            $(txtStartTime).mdtimepicker();
-            $(txtEndTime).mdtimepicker();
+            $(txtStartTime).mdtimepicker({ value: txtStartTime.value });
+            $(txtEndTime).mdtimepicker({ value: txtEndTime.value });
 
             state[day].push({ opens_at: txtStartTime.value, closes_at: txtEndTime.value });
         }
