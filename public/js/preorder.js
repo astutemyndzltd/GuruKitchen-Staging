@@ -44,6 +44,8 @@ for (let divWeekday of divWeekdays) {
 
     cbxDay.onchange = () => {
 
+        console.log(cbxDay);
+
         if (cbxDay.checked) {
             state[day] = [];
             divTimings.innerHTML = '';
