@@ -1,4 +1,4 @@
-let preorderContainer = document.querySelector('#preorder-container');
+let preorderContainer = document.querySelector('div.preorder-container');
 let divWeekdays = Array.prototype.slice.call(preorderContainer.children);
 
 let state = {};
