@@ -28,13 +28,65 @@ for (let divWeekday of divWeekdays) {
             $(txtStartTime).mdtimepicker();
             $(txtEndTime).mdtimepicker();
 
+            btnRemoveTiming[0].onclick = () => {
+                $(divTiming).remove();
+                state[day].splice(i, 1);
+
+                if (state[day].length == 0) {
+                    state[day] == null;
+                }
+            };
 
             state[day].push({ opens_at: txtStartTime.value, closes_at: txtEndTime.value });
         }
 
     }
 
+    cbxDay.onchange = () => {
+
+        if (cbxDay.checked) {
+            state[day] = [];
+            divTimings.innerHTML = '';
+            addHours(divTimings, state[day]);
+        }
+        else {
+            $(divTimings).trigger('childless');
+        }
+    };
+
+    $(divTimings).on('childless', () => {
+        state[day] = null;
+        divTimings.innerHTML = `<span>Closed all day</span>`;
+    });
+
 }
 
+function addHours(divTimings, slots) {
+
+    let index = slots.push({ opens_at: '10:00 AM', closes_at: '10:00 PM' });
+
+    let $divTiming = $('<div class="timing"></div>');
+    let $txtStartTime = $(`<input type="text" readonly class="start" placeholder="Start time" value='10:00 AM'`);
+    let $txtEndTime = $(`<input type="text" readonly class="start" placeholder="Start time" value='10:00 PM'`);
+    let $btnRemove = $(`<button type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>`);
+
+    $divTiming.appendTo(divTimings);
+    $divTiming.append($txtStartTime).append($txtEndTime);
+    $divTiming.append($btnRemove);
+
+    $txtStartTime.mdtimepicker();
+    $txtEndTime.mdtimepicker();
+
+    $btnRemove[0].onclick = () => {
+        slots.splice(index, 1);
+        $divTiming.remove();
+
+        if (slots.length == 0) {
+            $(divTimings).trigger('childless');
+        }
+
+    };
+
+}
 
 console.log(state);
