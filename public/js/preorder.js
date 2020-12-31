@@ -42,35 +42,24 @@ for (let divWeekday of divWeekdays) {
 
     }
 
-    function cbxDay_ifChecked() {
+    $(cbxDay).on('ifChecked', () => {
         state[day] = [];
         divTimings.innerHTML = '';
         addHours(divTimings, state[day]);
-    }
+    });
 
-    function cbxDay_ifUnchecked() {
+    $(cbxDay).on('ifUnchecked', () => {
         state[day] = null;
         divTimings.innerHTML = `<span>Closed all day</span>`;
-    }
+    });
 
-    function divTimings_childless() {
-        state[day] = null;
-        divTimings.innerHTML = `<span>Closed all day</span>`;
-        $(cbxDay).iCheck('uncheck');
-    }
-
-    function aAddHours_click() {
-        addHours(divTimings, state[day]);
-    }
-
-    $(cbxDay).on('ifChecked', cbxDay_ifChecked);
-    $(cbxDay).on('ifUnchecked', cbxDay_ifUnchecked);
     $(divTimings).on('childless', () => {
         state[day] = null;
         divTimings.innerHTML = `<span>Closed all day</span>`;
         $(cbxDay).iCheck('uncheck');
     });
-    $(aAddHours).on('click', aAddHours_click);
+
+    $(aAddHours).on('click', () => addHours(divTimings, state[day]));
 
 }
 
