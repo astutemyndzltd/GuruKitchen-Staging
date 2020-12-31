@@ -32,7 +32,7 @@ for (let divWeekday of divWeekdays) {
                 $(divTiming).remove();
                 state[day].splice(i, 1);
 
-                console.log(state[day]);
+                console.log(i);
 
                 if (state[day].length == 0) {
                     $(divTimings).trigger('childless');
