@@ -42,10 +42,8 @@ for (let divWeekday of divWeekdays) {
 
     }
 
-    /*cbxDay.onchange = () => {
-
-        console.log(cbxDay);
-
+    cbxDay.onclick = () => {
+    
         if (cbxDay.checked) {
             state[day] = [];
             divTimings.innerHTML = '';
@@ -55,7 +53,8 @@ for (let divWeekday of divWeekdays) {
             state[day] = null;
             divTimings.innerHTML = `<span>Closed all day</span>`;
         }
-    };*/
+        
+    };
 
     $(divTimings).on('childless', () => {
         state[day] = null;
