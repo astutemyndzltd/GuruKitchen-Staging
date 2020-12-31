@@ -52,6 +52,7 @@ a.add-hrs {
     margin-left: 25px;
     padding-top: 2px;
     font-weight: 600;
+    cursor: pointer;
 }
 
 div.preorder-container button {
@@ -62,6 +63,7 @@ div.preorder-container button {
     height: 35px;
     width: 35px;
     outline: 0;
+    cursor: pointer;
 }
 
 .mdtp__wrapper {
