@@ -33,7 +33,7 @@ for (let divWeekday of divWeekdays) {
             $(txtEndTime).mdtimepicker();
             $(txtEndTime).mdtimepicker('setValue', endTime);
 
-            state[day].push({ opens_at: txtStartTime.value, closes_at: txtEndTime.value });
+            state[day].push({ opens_at: startTime, closes_at: endTime });
         }
 
     }
