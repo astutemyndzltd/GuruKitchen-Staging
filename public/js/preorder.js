@@ -10,9 +10,9 @@ for (let divWeekday of divWeekdays) {
     let divTimings = divWeekday.querySelector('div.timings');
     let aAddHours = divWeekday.querySelector('a.add-hrs');
 
-    console.log(lblDay);
+    let day = lblDay.getAttribute('for');
 
-    state[lblDay.for] = cbxDay.checked ? [] : null;
+    state[day] = cbxDay.checked ? [] : null;
 
     for (let i = 0; i < divTimings.children.length; i++) {
 
@@ -25,7 +25,7 @@ for (let divWeekday of divWeekdays) {
             let txtEndTime = divTiming.children[1];
             let btnRemoveTiming = divTiming.children[2];
 
-            state[lblDay.for].push({ opens_at: txtStartTime.value, closes_at: txtEndTime.value });
+            state[day].push({ opens_at: txtStartTime.value, closes_at: txtEndTime.value });
         }
 
     }
