@@ -25,14 +25,15 @@ for (let divWeekday of divWeekdays) {
             let txtEndTime = divTiming.children[1];
             let btnRemoveTiming = divTiming.children[2];
 
+            let slot = { opens_at: txtStartTime.value, closes_at: txtEndTime.value };
+            state[day].push(slot);
+
             $(txtStartTime).mdtimepicker();
             $(txtEndTime).mdtimepicker();
 
             btnRemoveTiming.onclick = () => {
                 $(divTiming).remove();
-                state[day].splice(i, 1);
-
-                console.log(i);
+                state[day].splice(state[day].indexOf(slot), 1);
 
                 if (state[day].length == 0) {
                     $(divTimings).trigger('childless');
@@ -72,7 +73,8 @@ for (let divWeekday of divWeekdays) {
 
 function addHours(divTimings, slots) {
 
-    let index = slots.push({ opens_at: '10:00 AM', closes_at: '10:00 PM' });
+    let slot = { opens_at: '10:00 AM', closes_at: '10:00 PM' };
+    slots.push(slot);
 
     let $divTiming = $('<div class="timing"></div>');
     let $txtStartTime = $(`<input type="text" readonly class="start" placeholder="Start time" value="10:00 AM">`);
@@ -86,15 +88,13 @@ function addHours(divTimings, slots) {
     $txtStartTime.mdtimepicker();
     $txtEndTime.mdtimepicker();
 
-    function btnRemove_Click() {
-        slots.splice(index, 1);
+    $btnRemove[0].onclick = () => {
+        slots.splice(slots.indexOf(slot), 1);
         $divTiming.remove();
 
         if (slots.length == 0) {
             $(divTimings).trigger('childless');
         }
-    }
-
-    $btnRemove[0].onclick = btnRemove_Click;
+    };
 
 }
