@@ -9,6 +9,9 @@
 <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.css')}}">
 {{--dropzone--}}
 <link rel="stylesheet" href="{{asset('plugins/dropzone/bootstrap.min.css')}}">
+{{--timepicker--}}
+<link rel="stylesheet" href="{{asset('plugins/timepicker-jquery/mdtimepicker.min.css')}}">
+<link rel="stylesheet" href="{{asset('plugins/timepicker-jquery/mdtimepicker-theme.css')}}">
 {{--preorder--}}
 <link rel="stylesheet" href="{{asset('css/preorder.css')}}">
 @endpush
@@ -81,6 +84,8 @@
     Dropzone.autoDiscover = false;
     var dropzoneFields = [];
 </script>
+{{--timepicker--}}
+<script src="{{asset('plugins/timepicker-jquery/mdtimepicker.min.js')}}"></script>
 {{--preorder--}}
 <script src="{{asset('js/preorder.js')}}"></script>
 @endpush
