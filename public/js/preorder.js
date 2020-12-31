@@ -39,8 +39,6 @@ for (let divWeekday of divWeekdays) {
                     $(divTimings).trigger('childless');
                 }
             };
-
-            state[day].push({ opens_at: txtStartTime.value, closes_at: txtEndTime.value });
         }
 
     }
