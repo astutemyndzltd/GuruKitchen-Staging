@@ -42,11 +42,16 @@ for (let divWeekday of divWeekdays) {
 
     }
 
-    $(cbxDay).on('ifClicked', function() {
+    $(cbxDay).on('ifChecked', function() {
 
         console.log(cbxDay.checked);
 
 
+    });
+
+    $(cbxDay).on('ifUnchecked', function() {
+
+        console.log(cbxDay.checked);
     });
 
 
