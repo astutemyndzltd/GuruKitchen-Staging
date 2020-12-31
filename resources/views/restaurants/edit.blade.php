@@ -81,4 +81,6 @@
     Dropzone.autoDiscover = false;
     var dropzoneFields = [];
 </script>
+{{--preorder--}}
+<script src="{{asset('js/preorder.js')}}"></script>
 @endpush
