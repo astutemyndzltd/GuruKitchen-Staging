@@ -60,7 +60,7 @@ for (let divWeekday of divWeekdays) {
     });
 
     $(aAddHours).on('click', () => {
-        if(state[day] == null) state[day] = [];
+        if (state[day] == null) state[day] = [];
         addHours(divTimings, state[day])
     });
 
