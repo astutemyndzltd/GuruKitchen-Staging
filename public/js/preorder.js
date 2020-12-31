@@ -50,13 +50,15 @@ for (let divWeekday of divWeekdays) {
             addHours(divTimings, state[day]);
         }
         else {
-            $(divTimings).trigger('childless');
+            state[day] = null;
+            divTimings.innerHTML = `<span>Closed all day</span>`;
         }
     };
 
     $(divTimings).on('childless', () => {
         state[day] = null;
         divTimings.innerHTML = `<span>Closed all day</span>`;
+        cbxDay.checked = false;
     });
 
 }
