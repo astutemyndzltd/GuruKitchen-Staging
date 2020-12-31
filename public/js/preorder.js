@@ -64,6 +64,8 @@ for (let divWeekday of divWeekdays) {
         addHours(divTimings, state[day])
     });
 
+    window.state = state;
+
 }
 
 function addHours(divTimings, slots) {
