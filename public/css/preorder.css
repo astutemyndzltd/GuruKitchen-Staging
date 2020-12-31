@@ -38,6 +38,8 @@ div.weekday {
 
 div.timing {
     margin-bottom: 10px !important;
+    display: flex;
+    justify-content: space-between;
 }
 
 div.timings {
