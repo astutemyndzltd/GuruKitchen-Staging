@@ -36,4 +36,5 @@ for (let divWeekday of divWeekdays) {
 
 }
 
+
 console.log(state);
