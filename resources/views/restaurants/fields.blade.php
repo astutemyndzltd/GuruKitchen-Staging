@@ -143,25 +143,30 @@
 
     <!-- 'Boolean available_for_delivery Field' -->
     <div class="form-group row ">
-        <div>
-            {!! Form::label('available_for_delivery', trans("lang.restaurant_available_for_delivery"),['class' => 'col-3 control-label text-right']) !!}
+
+    {!! Form::label('available_for_delivery', trans("lang.restaurant_available_for_delivery"),['class' => 'col-3 control-label text-right']) !!}
             <div class="checkbox icheck">
                 <label class="col-9 ml-2 form-check-inline">
                     {!! Form::hidden('available_for_delivery', 0) !!}
                     {!! Form::checkbox('available_for_delivery', 1, null) !!}
                 </label>
-            </div>
+            </div>    
+
+
+{{-- 
+        <div>
+            
         </div>
 
         <div>
-            {!! Form::label('available_for_preorder', 'Available for preorder',['class' => 'col-3 control-label text-right']) !!}
+            {!! Form::label('available_for_preorder', 'Available for preorder', ['class' => 'col-3 control-label text-right']) !!}
             <div class="checkbox icheck">
                 <label class="col-9 ml-2 form-check-inline">
                     {!! Form::hidden('available_for_preorder', 0) !!}
                     {!! Form::checkbox('available_for_preorder', 1, null) !!}
                 </label>
             </div>
-        </div>
+        </div> --}}
 
     </div>
 
