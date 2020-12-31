@@ -67,7 +67,7 @@ function addHours(divTimings, slots) {
 
     let $divTiming = $('<div class="timing"></div>');
     let $txtStartTime = $(`<input type="text" readonly class="start" placeholder="Start time" value='10:00 AM' />`);
-    let $txtEndTime = $(`<input type="text" readonly class="start" placeholder="Start time" value='10:00 PM' />`);
+    let $txtEndTime = $(`<input type="text" readonly class="end" placeholder="End Time" value='10:00 PM' />`);
     let $btnRemove = $(`<button type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>`);
 
     $divTiming.appendTo(divTimings);
