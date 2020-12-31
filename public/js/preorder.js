@@ -28,7 +28,7 @@ for (let divWeekday of divWeekdays) {
             $(txtStartTime).mdtimepicker();
             $(txtEndTime).mdtimepicker();
 
-            btnRemoveTiming[0].onclick = () => {
+            btnRemoveTiming.onclick = () => {
                 $(divTiming).remove();
                 state[day].splice(i, 1);
 
