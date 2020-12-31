@@ -42,7 +42,7 @@ for (let divWeekday of divWeekdays) {
 
     }
 
-    cbxDay.onchange = () => {
+    /*cbxDay.onchange = () => {
 
         console.log(cbxDay);
 
@@ -55,7 +55,7 @@ for (let divWeekday of divWeekdays) {
             state[day] = null;
             divTimings.innerHTML = `<span>Closed all day</span>`;
         }
-    };
+    };*/
 
     $(divTimings).on('childless', () => {
         state[day] = null;
