@@ -20,12 +20,14 @@ for (let divWeekday of divWeekdays) {
             let span = divTimings.children[0];
         }
         else {
-            let divTiming = divTimings.children[0];
-            let txtStartTime = divTiming.children[0];
-            let txtEndTime = divTiming.children[1];
-            let btnRemoveTiming = divTiming.children[2];
+            for (let i = 0; i < divTimings.children.length; i++) {
+                let divTiming = divTimings.children[i];
+                let txtStartTime = divTiming.children[0];
+                let txtEndTime = divTiming.children[1];
+                let btnRemoveTiming = divTiming.children[2];
 
-            state[day].push({ opens_at: txtStartTime.value, closes_at: txtEndTime.value });
+                state[day].push({ opens_at: txtStartTime.value, closes_at: txtEndTime.value });
+            }
         }
 
     }
