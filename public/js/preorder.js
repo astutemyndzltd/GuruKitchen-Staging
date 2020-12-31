@@ -61,6 +61,7 @@ for (let divWeekday of divWeekdays) {
         state[day] = null;
         divTimings.innerHTML = `<span>Closed all day</span>`;
         cbxDay.checked = false;
+        console.log(cbxDay.checked);
     });
 
 }
@@ -81,7 +82,8 @@ function addHours(divTimings, slots) {
     $txtStartTime.mdtimepicker();
     $txtEndTime.mdtimepicker();
 
-    $btnRemove[0].onclick = () => {
+    $btnRemove[0].onclick = function() {
+
         slots.splice(index, 1);
         $divTiming.remove();
 
