@@ -44,7 +44,7 @@ for (let divWeekday of divWeekdays) {
 
     cbxDay.onclick = () => {
     
-        if (cbxDay.checked) {
+        /*if (cbxDay.checked) {
             state[day] = [];
             divTimings.innerHTML = '';
             addHours(divTimings, state[day]);
@@ -52,8 +52,9 @@ for (let divWeekday of divWeekdays) {
         else {
             state[day] = null;
             divTimings.innerHTML = `<span>Closed all day</span>`;
-        }
-        
+        }*/
+        console.log('my name is anik');
+
     };
 
     $(divTimings).on('childless', () => {
@@ -92,5 +93,3 @@ function addHours(divTimings, slots) {
     };
 
 }
-
-console.log(state);
