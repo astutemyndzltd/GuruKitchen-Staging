@@ -61,6 +61,7 @@ for (let divWeekday of divWeekdays) {
     });
 
     $(aAddHours).on('click', () => {
+        if (!cbxDay.checked) return;
         if (state[day] == null) state[day] = [];
         addHours(divTimings, state[day]);
     });
