@@ -234,6 +234,16 @@
         </div>
     </div>
 
+    <div class="form-group row ">
+        {!! Form::label('available_for_preorder', 'Available for preorder',['class' => 'col-3 control-label text-right']) !!}
+        <div class="checkbox icheck">
+            <label class="col-9 ml-2 form-check-inline">
+                {!! Form::hidden('available_for_preorder', 0) !!}
+                {!! Form::checkbox('available_for_preorder', 1, null) !!}
+            </label>
+        </div>
+    </div>
+
 </div>
 
 <!-- pre-order -->
