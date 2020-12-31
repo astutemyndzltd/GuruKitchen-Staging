@@ -65,7 +65,11 @@ for (let divWeekday of divWeekdays) {
 
     $(cbxDay).on('ifChecked', cbxDay_ifChecked);
     $(cbxDay).on('ifUnchecked', cbxDay_ifUnchecked);
-    $(divTimings).on('childless', divTimings_childless);
+    $(divTimings).on('childless', () => {
+        state[day] = null;
+        divTimings.innerHTML = `<span>Closed all day</span>`;
+        $(cbxDay).iCheck('uncheck');
+    });
     $(aAddHours).on('click', aAddHours_click);
 
 }
