@@ -44,7 +44,7 @@ for (let divWeekday of divWeekdays) {
 
     $(cbxDay).on('ifClicked', function() {
 
-        let isChecked = 
+        console.log(cbxDay.checked);
 
 
     });
