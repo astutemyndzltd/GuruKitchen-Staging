@@ -10,6 +10,8 @@ for (let divWeekday of divWeekdays) {
     let divTimings = divWeekday.querySelector('div.timings');
     let aAddHours = divWeekday.querySelector('a.add-hrs');
 
+    console.log(lblDay);
+
     state[lblDay.for] = cbxDay.checked ? [] : null;
 
     for (let i = 0; i < divTimings.children.length; i++) {
