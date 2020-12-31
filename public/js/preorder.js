@@ -42,22 +42,31 @@ for (let divWeekday of divWeekdays) {
 
     }
 
-    $(cbxDay).on('ifChecked', () => {
+    function cbxDay_ifChecked() {
         state[day] = [];
         divTimings.innerHTML = '';
         addHours(divTimings, state[day]);
-    });
+    }
 
-    $(cbxDay).on('ifUnchecked', () => {
+    function cbxDay_ifUnchecked() {
         state[day] = null;
         divTimings.innerHTML = `<span>Closed all day</span>`;
-    });
+    }
 
-    $(divTimings).on('childless', () => {
+    function divTimings_childless() {
         state[day] = null;
         divTimings.innerHTML = `<span>Closed all day</span>`;
         $(cbxDay).iCheck('uncheck');
-    });
+    }
+
+    function aAddHours_click() {
+        addHours(divTimings, state[day]);
+    }
+
+    $(cbxDay).on('ifChecked', cbxDay_ifChecked);
+    $(cbxDay).on('ifUnchecked', cbxDay_ifUnchecked);
+    $(divTimings).on('childless', divTimings_childless);
+    $(aAddHours).on('click', aAddHours_click);
 
 }
 
@@ -77,15 +86,15 @@ function addHours(divTimings, slots) {
     $txtStartTime.mdtimepicker();
     $txtEndTime.mdtimepicker();
 
-    $btnRemove[0].onclick = function () {
-
+    function btnRemove_Click() {
         slots.splice(index, 1);
         $divTiming.remove();
 
         if (slots.length == 0) {
             $(divTimings).trigger('childless');
         }
+    }
 
-    };
+    $btnRemove[0].onclick = btnRemove_Click;
 
 }
