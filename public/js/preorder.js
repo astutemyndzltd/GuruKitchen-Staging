@@ -14,7 +14,7 @@ for (let divWeekday of divWeekdays) {
 
     for (let i = 0; i < divTimings.children.length; i++) {
 
-        if (divTimings[0].constructor.name === 'HTMLSpanElement') {
+        if (divTimings.children[0].constructor.name === 'HTMLSpanElement') {
             let span = divTimings.children[0];
         }
         else {
