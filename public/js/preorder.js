@@ -42,6 +42,14 @@ for (let divWeekday of divWeekdays) {
 
     }
 
+    $(cbxDay).on('ifClicked', function() {
+
+        let isChecked = 
+
+
+    });
+
+
     cbxDay.onclick = () => {
     
         /*if (cbxDay.checked) {
@@ -53,7 +61,7 @@ for (let divWeekday of divWeekdays) {
             state[day] = null;
             divTimings.innerHTML = `<span>Closed all day</span>`;
         }*/
-        console.log('my name is anik');
+        console.log(cbxDay.checked);
 
     };
 
