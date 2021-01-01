@@ -102,5 +102,5 @@ function addHours(divTimings, slots) {
 
 }
 
-$(btnSaveRestaurant).on('click', (e) => { e.preventDefault(); console.log($.param(state)) });
+$(btnSaveRestaurant).on('click', () => $(hdnOpeningTimes).val($.param(state)));
 
