@@ -102,5 +102,5 @@ function addHours(divTimings, slots) {
 
 }
 
-$(btnSaveRestaurant).on('click', () => $(hdnOpeningTimes).val($.param(state)));
+$(btnSaveRestaurant).on('click', () => $(hdnOpeningTimes).val(JSON.stringify(state)));
 
