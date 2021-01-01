@@ -217,6 +217,8 @@ class RestaurantController extends Controller
      */
     public function update($id, UpdateRestaurantRequest $request)
     {
+        $request->merge(['opening_times' => json_decode($request->input('opening_times'))]);
+        
         $this->restaurantRepository->pushCriteria(new RestaurantsOfUserCriteria(auth()->id()));
         $oldRestaurant = $this->restaurantRepository->findWithoutFail($id);
 
