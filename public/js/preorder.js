@@ -1,5 +1,7 @@
 let preorderContainer = document.querySelector('div.preorder-container');
 let divWeekdays = Array.prototype.slice.call(preorderContainer.children);
+let btnSaveRestaurant = document.querySelector('button#save-restaurant');
+let hdnOpeningTimes = document.querySelector('#opening_times');
 
 let state = {};
 
@@ -100,4 +102,5 @@ function addHours(divTimings, slots) {
 
 }
 
-window.state = state;
+$(btnSaveRestaurant).on('click', (e) => { e.preventDefault(); console.log($.param(state)) });
+
