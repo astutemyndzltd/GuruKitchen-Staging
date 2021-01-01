@@ -26,7 +26,11 @@ for (let divWeekday of divWeekdays) {
             let slot = { opens_at: txtStartTime.value, closes_at: txtEndTime.value };
             state[day].push(slot);
 
-            $([txtStartTime, txtEndTime]).mdtimepicker();
+            let $txtStartTimePicker = $(txtStartTime).mdtimepicker();
+            let $txtEndTimePicker = $(txtEndTime).mdtimepicker();
+
+            $txtStartTimePicker.on('timechanged', e => slot.opens_at = e.value);
+            $txtEndTimePicker.on('timechanged', e => slot.closes_at = e.value);
 
             btnRemoveTiming.onclick = () => {
                 $(divTiming).remove();
@@ -79,8 +83,11 @@ function addHours(divTimings, slots) {
     $divTiming.append($txtStartTime).append($txtEndTime);
     $divTiming.append($btnRemove);
 
-    $txtStartTime.mdtimepicker();
-    $txtEndTime.mdtimepicker();
+    let $txtStartTimePicker = $txtStartTime.mdtimepicker();
+    let $txtEndTimePicker = $txtEndTime.mdtimepicker();
+
+    $txtStartTimePicker.on('timechanged', e => slot.opens_at = e.value);
+    $txtEndTimePicker.on('timechanged', e => slot.closes_at = e.value);
 
     $btnRemove[0].onclick = () => {
         slots.splice(slots.indexOf(slot), 1);
