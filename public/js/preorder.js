@@ -16,10 +16,8 @@ for (let divWeekday of divWeekdays) {
 
     for (let i = 0; i < divTimings.children.length; i++) {
 
-        if (divTimings.children[0].constructor.name === 'HTMLSpanElement') {
-            let span = divTimings.children[0];
-        }
-        else {
+        if (divTimings.children[0].constructor.name !== 'HTMLSpanElement') {
+
             let divTiming = divTimings.children[i];
             let txtStartTime = divTiming.children[0];
             let txtEndTime = divTiming.children[1];
@@ -28,8 +26,7 @@ for (let divWeekday of divWeekdays) {
             let slot = { opens_at: txtStartTime.value, closes_at: txtEndTime.value };
             state[day].push(slot);
 
-            $(txtStartTime).mdtimepicker();
-            $(txtEndTime).mdtimepicker();
+            $([txtStartTime, txtEndTime]).mdtimepicker();
 
             btnRemoveTiming.onclick = () => {
                 $(divTiming).remove();
@@ -66,8 +63,6 @@ for (let divWeekday of divWeekdays) {
         addHours(divTimings, state[day]);
     });
 
-    window.state = state;
-
 }
 
 function addHours(divTimings, slots) {
@@ -97,3 +92,5 @@ function addHours(divTimings, slots) {
     };
 
 }
+
+window.state = state;
