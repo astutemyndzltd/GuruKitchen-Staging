@@ -61,7 +61,7 @@
 
             <tr>
               <th class="text-right">{{trans('lang.order_total')}}</th>
-              <td>{!!getPrice($total)!!}</td>
+              <td>{!! getPrice($total) !!}</td>
             </tr>
             </tbody></table>
         </div>
