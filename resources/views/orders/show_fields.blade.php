@@ -115,7 +115,7 @@
 
 @if($order->preorder_info != null || $order->preorder_info != '')
   <!-- Pre-Order data -->
-  <div class="form-group row col-md-12 col-sm12">
+  <div class="form-group row col-md-8 col-sm-12">
     {!! Form::label('preorder_info', 'Pre-Order', ['class' => 'col-2 control-label']) !!}
     <div class="col-9">
       <p style="text-align:justify;">by {!! $order->preorder_info !!}</p>
