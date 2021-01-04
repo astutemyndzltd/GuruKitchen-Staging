@@ -40,8 +40,8 @@
 
     @if($orderDetails['preorder_info'] != null)
 	<div id="preorder-info" class="intro-row">
-        <i class="fal fa-tags"></i>
-        <span>Pre-Order | {{ $orderDetails['preorder_info'] }}</span>
+        <i class="fal fa-tag"></i>
+        <span>Pre-Order, {{ $orderDetails['preorder_info'] }}</span>
     </div>
 	@endif
 	
