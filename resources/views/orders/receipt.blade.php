@@ -37,6 +37,13 @@
         <span>{{ $orderDetails['order_type'] }}</span>
     </div>
 	@endif
+
+    @if($orderDetails['preorder_info'] != null)
+	<div id="preorder-info" class="intro-row">
+        <i class="fal fa-tags"></i>
+        <span>{{ $orderDetails['preorder_info'] }}</span>
+    </div>
+	@endif
 	
 	@if($orderDetails['payment_method'] != null)
 	<div id="delivery-address" class="intro-row">

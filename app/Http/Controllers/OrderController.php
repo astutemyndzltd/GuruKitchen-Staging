@@ -179,6 +179,7 @@ class OrderController extends Controller
 		$orderDetails['customer_phone'] = $order->user->custom_fields['phone'] ? $order->user->custom_fields['phone']['view'] : null;
         $orderDetails['payment_method'] = $order->payment->method;
         $orderDetails['order_note'] = $order->note;
+        $orderDetails['preorder_info'] = $order->preorder_info;
 		
 		$foodCategories = [];
 		
