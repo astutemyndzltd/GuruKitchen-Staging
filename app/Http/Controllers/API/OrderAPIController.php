@@ -156,6 +156,7 @@ class OrderAPIController extends Controller
     {
         $input = $request->all();
         $amount = 0;
+        
         try {
             $user = $this->userRepository->findWithoutFail($input['user_id']);
             if (empty($user)) {
@@ -173,11 +174,11 @@ class OrderAPIController extends Controller
             if ($stripeToken->created > 0) {
                 if (empty($input['delivery_address_id'])) {
                     $order = $this->orderRepository->create(
-                        $request->only('user_id', 'order_status_id', 'tax', 'hint', 'order_type', 'note')
+                        $request->only('user_id', 'order_status_id', 'tax', 'hint', 'order_type', 'note', 'preorder_info')
                     );
                 } else {
                     $order = $this->orderRepository->create(
-                        $request->only('user_id', 'order_status_id', 'tax', 'delivery_address_id', 'delivery_fee', 'hint', 'order_type', 'note')
+                        $request->only('user_id', 'order_status_id', 'tax', 'delivery_address_id', 'delivery_fee', 'hint', 'order_type', 'note', 'preorder_info')
                     );
                 }
                 foreach ($input['foods'] as $foodOrder) {

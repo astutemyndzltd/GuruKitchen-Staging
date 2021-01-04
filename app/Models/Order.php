@@ -45,7 +45,8 @@ class Order extends Model
         'active',
         'driver_id',
         'order_type',
-        'note'
+        'note',
+        'preorder_info'
     ];
 
     /**
@@ -65,7 +66,8 @@ class Order extends Model
         'active'=>'boolean',
         'driver_id' => 'integer',
         'order_type' => 'string',
-        'note' => 'string'
+        'note' => 'string',
+        'preorder_info' => 'string'
     ];
 
     /**

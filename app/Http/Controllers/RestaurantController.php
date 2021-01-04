@@ -226,8 +226,10 @@ class RestaurantController extends Controller
             Flash::error('Restaurant not found');
             return redirect(route('restaurants.index'));
         }
+
         $input = $request->all();
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->restaurantRepository->model());
+        
         try {
 
             $restaurant = $this->restaurantRepository->update($input, $id);

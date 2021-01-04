@@ -94,3 +94,13 @@
   </div>
 </div>
 
+@if($order->preorder_info != null || $order->preorder_info != '')
+  <!-- Pre-Order data -->
+  <div class="form-group row col-6">
+    {!! Form::label('updated_at', 'Pre-Order', ['class' => 'col-3 control-label text-right']) !!}
+    <div class="col-9">
+      <p>by {!! $restaurant->preorder_info !!}</p>
+    </div>
+  </div> 
+@endif
+
