@@ -118,7 +118,7 @@
   <div class="form-group row col-md-8 col-sm-12">
     {!! Form::label('preorder_info', 'Pre-Order', ['class' => 'col-2 control-label']) !!}
     <div class="col-9">
-      <p style="text-align:justify;">by {!! $order->preorder_info !!}</p>
+      <p style="text-align:justify;">Expected by {!! $order->preorder_info !!}</p>
     </div>
   </div>
 
