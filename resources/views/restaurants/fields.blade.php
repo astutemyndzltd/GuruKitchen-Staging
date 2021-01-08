@@ -261,7 +261,10 @@
     <h5 class="col-12 pb-4">Set Your Opening Hours</h5>
     <p class="col-12">Select each day you're open</p>
 
-    <?php $oldOpeningTimes = (null !== old('opening_times')) ? json_decode(old('opening_times')) : null ?>
+    <?php $oldOpeningTimes = old('opening_times') != null ? json_decode(old('opening_times')) : null; ?>
+
+
+    <input type="hidden" value="{{ $oldOpeningTimes }}" > 
 
     <div class="preorder-container">
         @foreach ($weekdays as $day)
