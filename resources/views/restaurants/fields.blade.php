@@ -278,7 +278,7 @@
                 @if(!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null || old('opening_times') == null )
                     <span>Closed all day</span>
                 @else
-                    <?php $spans = isset($restaurant) ? $restaurant->opening_times[$day] : json_encode(old('opening_times'))[$day];  ?>
+                    <?php $spans = isset($restaurant) ? $restaurant->opening_times[$day] : json_decode(old('opening_times'))[$day];  ?>
                     @foreach($spans as $timeSpan)
                         <div class="timing">
                             <input type="text" readonly class="start" placeholder="Start time" value="{!! $timeSpan['opens_at'] !!}">
