@@ -264,7 +264,7 @@
     <div class="preorder-container">
         @foreach ($weekdays as $day)
         <div class="weekday form-group row">
-
+            
             <div class="checkbox icheck">
                 <label class="col-9 ml-2 form-check-inline">
                     <?php $dayChecked = !(!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null); ?>                 
@@ -275,10 +275,11 @@
             {!! Form::label($day, ucfirst($day), ['class' => 'col-2 control-label']) !!}
 
             <div class="timings">
-                @if(!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null)
+                @if(!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null || old('opening_times') == null )
                     <span>Closed all day</span>
                 @else
-                    @foreach($restaurant->opening_times[$day] as $timeSpan)
+                    <?php $spans = isset($restaurant) ? $restaurant->opening_times[$day] : json_encode(old('opening_times'))[$day];  ?>
+                    @foreach($spans as $timeSpan)
                         <div class="timing">
                             <input type="text" readonly class="start" placeholder="Start time" value="{!! $timeSpan['opens_at'] !!}">
                             <input type="text" readonly class="end" placeholder="End time" value="{!! $timeSpan['closes_at'] !!}">

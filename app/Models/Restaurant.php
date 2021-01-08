@@ -112,6 +112,7 @@ class Restaurant extends Model implements HasMedia
         'longitude' => 'required|numeric',
         'latitude' => 'required|numeric',
         'admin_commission' => 'required|numeric|min:0',
+        'min_order_amount' => 'required|numeric'
     ];
 
     /**

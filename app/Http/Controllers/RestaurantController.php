@@ -102,10 +102,12 @@ class RestaurantController extends Controller
         $driversSelected = [];
         $cuisinesSelected = [];
         $hasCustomField = in_array($this->restaurantRepository->model(), setting('custom_field_models', []));
+
         if ($hasCustomField) {
             $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->restaurantRepository->model());
             $html = generateCustomField($customFields);
         }
+
         return view('restaurants.create')->with("customFields", isset($html) ? $html : false)->with("user", $user)->with("drivers", $drivers)->with("usersSelected", $usersSelected)->with("driversSelected", $driversSelected)->with('cuisine', $cuisine)->with('cuisinesSelected', $cuisinesSelected);
     }
 
@@ -130,7 +132,9 @@ class RestaurantController extends Controller
         if (auth()->user()->hasRole(['manager', 'client'])) {
             $input['users'] = [auth()->id()];
         }
+
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->restaurantRepository->model());
+        
         try {
             $restaurant = $this->restaurantRepository->create($input);
             $restaurant->customFieldsValues()->createMany(getCustomFieldsValues($customFields, $request));
