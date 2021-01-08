@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Rules;
+
 use Illuminate\Contracts\Validation\Rule;
 
 class OpeningTimesRule implements Rule
@@ -12,7 +13,6 @@ class OpeningTimesRule implements Rule
      */
     public function __construct()
     {
-        
     }
 
     /**
@@ -24,7 +24,30 @@ class OpeningTimesRule implements Rule
      */
     public function passes($attribute, $value)
     {
-       return false;
+        $openingHours = json_decode($value, true);
+        $weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+        foreach ($weekdays as $day) {
+            if ($openingHours[$day] != null) {
+
+                $slots = $openingHours[$day];
+                $lastSlotClosesAt = null;
+
+                foreach ($slots as $slot) {
+                    $opensAt = strtotime($slot['opens_at']);
+                    $closesAt = strtotime($slot['closes_at']);
+
+                    if (($lastSlotClosesAt != null && $lastSlotClosesAt >= $opensAt) || ($opensAt >= $closesAt)) {
+                        return false;
+                    }
+
+                    $lastSlotClosesAt = $closesAt;
+                }
+            }
+        }
+
+
+        return true;
     }
 
     /**
@@ -34,6 +57,6 @@ class OpeningTimesRule implements Rule
      */
     public function message()
     {
-        return 'set opening hours properly';
+        return 'Set opening hours properly';
     }
 }
