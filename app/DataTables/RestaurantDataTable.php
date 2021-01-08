@@ -149,6 +149,10 @@ class RestaurantDataTable extends DataTable
 
             ],
             [
+                'data' => 'available_for_preorder',
+                'title' => 'Available for preorder'
+            ],
+            [
                 'data' => 'closed',
                 'title' => trans('lang.restaurant_closed'),
 
@@ -162,7 +166,7 @@ class RestaurantDataTable extends DataTable
                 'data' => 'updated_at',
                 'title' => trans('lang.restaurant_updated_at'),
                 'searchable' => false,
-            ]
+            ],
         ];
 
         $hasCustomField = in_array(Restaurant::class, setting('custom_field_models', []));

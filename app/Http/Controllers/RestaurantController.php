@@ -168,7 +168,6 @@ class RestaurantController extends Controller
 
         if (empty($restaurant)) {
             Flash::error('Restaurant not found');
-
             return redirect(route('restaurants.index'));
         }
 
