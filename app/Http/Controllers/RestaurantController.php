@@ -26,6 +26,7 @@ use App\Repositories\CuisineRepository;
 use App\Repositories\RestaurantRepository;
 use App\Repositories\UploadRepository;
 use App\Repositories\UserRepository;
+use App\Rules\OpeningTimesRule;
 use Flash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -120,6 +121,8 @@ class RestaurantController extends Controller
      */
     public function store(CreateRestaurantRequest $request)
     {
+        $request->validate(['opening_times' => new OpeningTimesRule]);
+        
         $request->merge(['opening_times' => json_decode($request->input('opening_times'))]);
 
         if($request->exists('min_order_amount') && $request->input('min_order_amount') == null)
@@ -228,6 +231,8 @@ class RestaurantController extends Controller
      */
     public function update($id, UpdateRestaurantRequest $request)
     {
+        $request->validate(['opening_times' => new OpeningTimesRule]);
+        
         $request->merge(['opening_times' => json_decode($request->input('opening_times'))]);
 
         if($request->exists('min_order_amount') && $request->input('min_order_amount') == null)
