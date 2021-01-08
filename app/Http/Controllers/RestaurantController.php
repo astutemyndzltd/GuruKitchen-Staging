@@ -118,6 +118,8 @@ class RestaurantController extends Controller
      */
     public function store(CreateRestaurantRequest $request)
     {
+        $request->merge(['opening_times' => json_decode($request->input('opening_times'))]);
+        
         $input = $request->all();
         if (auth()->user()->hasRole(['manager', 'client'])) {
             $input['users'] = [auth()->id()];
