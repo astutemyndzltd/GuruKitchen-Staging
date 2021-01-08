@@ -272,7 +272,7 @@
             
             <div class="checkbox icheck">
                 <label class="col-9 ml-2 form-check-inline">
-                    <?php $dayChecked = !(!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null || $oldOpeningTimes == null || $oldOpeningTimes[$day] == null); ?>                 
+                    <?php $dayChecked = !((!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null) && ($oldOpeningTimes == null || $oldOpeningTimes[$day] == null)); ?>                 
                     {!! Form::checkbox($day, 1, $dayChecked, [ 'id' => $day]) !!}
                 </label>
             </div>
@@ -280,12 +280,10 @@
             {!! Form::label($day, ucfirst($day), ['class' => 'col-2 control-label']) !!}
 
             <div class="timings">
-                @if(!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null)
-                    <span>Closed all day</span>
-                @elseif($oldOpeningTimes == null || $oldOpeningTimes[$day] == null)
+                @if((!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null) && ($oldOpeningTimes == null || $oldOpeningTimes[$day] == null))
                     <span>Closed all day</span>
                 @else
-                    <?php $spans = /*$restaurant !== null ? $restaurant->opening_times[$day] : */$oldOpeningTimes[$day]; ?>
+                    <?php $spans = $restaurant !== null ? $restaurant->opening_times[$day] : $oldOpeningTimes[$day]; ?>
                     @foreach($spans as $timeSpan)
                         <div class="timing">
                             <input type="text" readonly class="start" placeholder="Start time" value="{!! $timeSpan['opens_at'] !!}">
