@@ -34,7 +34,7 @@
     <div class="form-group row ">
         {!! Form::label('min_order_amount', 'Minimum Order Amount', ['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
-            {!! Form::number('min_order_amount', null, ['class' => 'form-control','step'=>'any','placeholder'=> 'Edit the minimum order amount']) !!}
+            {!! Form::number('min_order_amount', 0, ['class' => 'form-control','step'=>'any','placeholder'=> 'Edit the minimum order amount']) !!}
             <div class="form-text text-muted">
                 Enter the minimum order amount for this restaurant
             </div>
