@@ -119,8 +119,14 @@ class RestaurantController extends Controller
     public function store(CreateRestaurantRequest $request)
     {
         $request->merge(['opening_times' => json_decode($request->input('opening_times'))]);
+
+        if($request->input['min_order_amount'] == null)
+        {
+            $request->merge(['min_order_amount' => 0]);
+        }
         
         $input = $request->all();
+
         if (auth()->user()->hasRole(['manager', 'client'])) {
             $input['users'] = [auth()->id()];
         }
@@ -220,6 +226,11 @@ class RestaurantController extends Controller
     public function update($id, UpdateRestaurantRequest $request)
     {
         $request->merge(['opening_times' => json_decode($request->input('opening_times'))]);
+
+        if($request->input['min_order_amount'] == null)
+        {
+            $request->merge(['min_order_amount' => 0]);
+        }
         
         $this->restaurantRepository->pushCriteria(new RestaurantsOfUserCriteria(auth()->id()));
         $oldRestaurant = $this->restaurantRepository->findWithoutFail($id);
