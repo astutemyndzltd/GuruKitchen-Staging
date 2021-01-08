@@ -261,8 +261,7 @@
     <h5 class="col-12 pb-4">Set Your Opening Hours</h5>
     <p class="col-12">Select each day you're open</p>
 
-    <?php $open_times = old('opening_times') ?>
-    <input type="hidden" value="{{ $open_times }}" >
+    <?php $oldOpeningTimes = isset(old('opening_times')) ? json_decode(old('opening_times')) : null ?>
 
     <div class="preorder-container">
         @foreach ($weekdays as $day)
@@ -270,7 +269,7 @@
             
             <div class="checkbox icheck">
                 <label class="col-9 ml-2 form-check-inline">
-                    <?php $dayChecked = !(!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null); ?>                 
+                    <?php $dayChecked = !(!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null || $oldOpeningTimes == null || $oldOpeningTimes[$day] == null); ?>                 
                     {!! Form::checkbox($day, 1, $dayChecked, [ 'id' => $day]) !!}
                 </label>
             </div>
@@ -278,10 +277,11 @@
             {!! Form::label($day, ucfirst($day), ['class' => 'col-2 control-label']) !!}
 
             <div class="timings">
-                @if(!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null)
+                @if(!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null || $oldOpeningTimes == null || $oldOpeningTimes[$day] == null)
                     <span>Closed all day</span>
                 @else
-                    @foreach($restaurant->opening_times[$day] as $timeSpan)
+                    <?php $spans = isset($oldOpeningTimes) ? $oldOpeningTimes[$day] : $restaurant->opening_times[$day] ?>
+                    @foreach($spans as $timeSpan)
                         <div class="timing">
                             <input type="text" readonly class="start" placeholder="Start time" value="{!! $timeSpan['opens_at'] !!}">
                             <input type="text" readonly class="end" placeholder="End time" value="{!! $timeSpan['closes_at'] !!}">
