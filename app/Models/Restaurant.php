@@ -9,6 +9,7 @@
 
 namespace App\Models;
 
+use App\Rules\OpeningTimesRule;
 use Eloquent as Model;
 use Illuminate\Support\Facades\DB;
 use Spatie\Image\Manipulations;
@@ -112,7 +113,8 @@ class Restaurant extends Model implements HasMedia
         'longitude' => 'required|numeric',
         'latitude' => 'required|numeric',
         'admin_commission' => 'required|numeric|min:0',
-        'min_order_amount' => 'required|numeric'
+        'min_order_amount' => 'required|numeric',
+        'opening_times' => new OpeningTimesRule
     ];
 
     /**
@@ -126,6 +128,8 @@ class Restaurant extends Model implements HasMedia
         'delivery_fee' => 'nullable|numeric|min:0',
         'longitude' => 'required|numeric',
         'latitude' => 'required|numeric',
+        'min_order_amount' => 'required|numeric',
+        'opening_times' => new OpeningTimesRule
     ];
 
     /**
@@ -136,8 +140,7 @@ class Restaurant extends Model implements HasMedia
     protected $appends = [
         'custom_fields',
         'has_media',
-        'rate'
-        
+        'rate'      
     ];
 
     /**
