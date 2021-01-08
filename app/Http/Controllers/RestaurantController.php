@@ -120,7 +120,7 @@ class RestaurantController extends Controller
     {
         $request->merge(['opening_times' => json_decode($request->input('opening_times'))]);
 
-        if($request->input['min_order_amount'] == null)
+        if($request->has('min_order_amount') && $request->input['min_order_amount'] == null)
         {
             $request->merge(['min_order_amount' => 0]);
         }
@@ -227,7 +227,7 @@ class RestaurantController extends Controller
     {
         $request->merge(['opening_times' => json_decode($request->input('opening_times'))]);
 
-        if($request->input['min_order_amount'] == null)
+        if($request->has('min_order_amount') && $request->input['min_order_amount'] == null)
         {
             $request->merge(['min_order_amount' => 0]);
         }
