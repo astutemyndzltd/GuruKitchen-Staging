@@ -264,7 +264,7 @@
     <?php $oldOpeningTimes = old('opening_times') != null ? json_decode(old('opening_times')) : null; ?>
 
 
-    <input type="hidden" value="{{ $oldOpeningTimes ?? 0 }}" > 
+    <input type="hidden" value="{{ json_encode($oldOpeningTimes) }}" > 
 
     <div class="preorder-container">
         @foreach ($weekdays as $day)
@@ -283,7 +283,7 @@
                 @if(!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null || $oldOpeningTimes == null || $oldOpeningTimes[$day] == null)
                     <span>Closed all day</span>
                 @else
-                    <?php $spans = isset($oldOpeningTimes) ? $oldOpeningTimes[$day] : $restaurant->opening_times[$day] ?>
+                    <?php $spans = $restaurant->opening_times[$day]; ?>
                     @foreach($spans as $timeSpan)
                         <div class="timing">
                             <input type="text" readonly class="start" placeholder="Start time" value="{!! $timeSpan['opens_at'] !!}">
