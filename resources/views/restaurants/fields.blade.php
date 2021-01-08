@@ -261,7 +261,8 @@
     <h5 class="col-12 pb-4">Set Your Opening Hours</h5>
     <p class="col-12">Select each day you're open</p>
 
-    <input type="hidden" value="{{ old('opening_times') }}" >
+    <?php $open_times = old('opening_times') ?>
+    <input type="hidden" value="{{ $open_times }}" >
 
     <div class="preorder-container">
         @foreach ($weekdays as $day)
