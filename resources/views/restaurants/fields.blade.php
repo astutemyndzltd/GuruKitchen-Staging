@@ -272,7 +272,11 @@
             
             <div class="checkbox icheck">
                 <label class="col-9 ml-2 form-check-inline">
-                    <?php $dayChecked = !((!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null) && ($oldOpeningTimes == null || $oldOpeningTimes[$day] == null)); ?>                 
+                    <?php
+                        $resInactive = !isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null;
+                        $oldOpenTimesInactive = $oldOpeningTimes == null || $oldOpeningTimes[$day] == null;
+                        $dayChecked = !($resInactive && $oldOpenTimesInactive);
+                    ?>              
                     {!! Form::checkbox($day, 1, $dayChecked, [ 'id' => $day]) !!}
                 </label>
             </div>
@@ -280,7 +284,7 @@
             {!! Form::label($day, ucfirst($day), ['class' => 'col-2 control-label']) !!}
 
             <div class="timings">
-                @if((!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null) && ($oldOpeningTimes == null || $oldOpeningTimes[$day] == null))
+                @if($resInactive && $oldOpenTimesInactive)
                     <span>Closed all day</span>
                 @else
                     <?php $spans = isset($restaurant) ? $restaurant->opening_times[$day] : $oldOpeningTimes[$day]; ?>
