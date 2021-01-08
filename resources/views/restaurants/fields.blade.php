@@ -261,6 +261,8 @@
     <h5 class="col-12 pb-4">Set Your Opening Hours</h5>
     <p class="col-12">Select each day you're open</p>
 
+    <input type="hidden" value="{{ old('opening_times') }}" >
+
     <div class="preorder-container">
         @foreach ($weekdays as $day)
         <div class="weekday form-group row">
@@ -275,11 +277,10 @@
             {!! Form::label($day, ucfirst($day), ['class' => 'col-2 control-label']) !!}
 
             <div class="timings">
-                @if(!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null || old('opening_times') == null )
+                @if(!isset($restaurant) || $restaurant->opening_times == null || $restaurant->opening_times[$day] == null)
                     <span>Closed all day</span>
                 @else
-                    <?php $spans = isset($restaurant) ? $restaurant->opening_times[$day] : json_decode(old('opening_times'))[$day];  ?>
-                    @foreach($spans as $timeSpan)
+                    @foreach($restaurant->opening_times[$day] as $timeSpan)
                         <div class="timing">
                             <input type="text" readonly class="start" placeholder="Start time" value="{!! $timeSpan['opens_at'] !!}">
                             <input type="text" readonly class="end" placeholder="End time" value="{!! $timeSpan['closes_at'] !!}">
