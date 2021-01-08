@@ -264,7 +264,7 @@
     <?php $oldOpeningTimes = old('opening_times') != null ? json_decode(old('opening_times')) : null; ?>
 
 
-    <input type="hidden" value="{{ $oldOpeningTimes }}" > 
+    <input type="hidden" value="{{ $oldOpeningTimes ?? 0 }}" > 
 
     <div class="preorder-container">
         @foreach ($weekdays as $day)
