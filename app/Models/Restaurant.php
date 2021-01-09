@@ -113,8 +113,8 @@ class Restaurant extends Model implements HasMedia
         'latitude' => 'required|numeric',
         'admin_commission' => 'required|numeric|min:0',
         'min_order_amount' => 'required|numeric',
-        'phone' => 'required|regex:/((\+44(\s\(0\)\s|\s0\s|\s)?)|0)7\d{3}(\s)?\d{6}/|min:10',
-        'mobile' => 'required|regex:/((\+44(\s\(0\)\s|\s0\s|\s)?)|0)7\d{3}(\s)?\d{6}/|min:10'
+        'phone' => 'required|phone|min:10',
+        'mobile' => 'required|phone|min:10'
     ];
 
     /**
@@ -129,8 +129,8 @@ class Restaurant extends Model implements HasMedia
         'longitude' => 'required|numeric',
         'latitude' => 'required|numeric',
         'min_order_amount' => 'required|numeric',
-        'phone' => 'required|regex:/((\+44(\s\(0\)\s|\s0\s|\s)?)|0)7\d{3}(\s)?\d{6}/|min:10',
-        'mobile' => 'required|regex:/((\+44(\s\(0\)\s|\s0\s|\s)?)|0)7\d{3}(\s)?\d{6}/|min:10'
+        'phone' => 'required|phone|min:10',
+        'mobile' => 'required|phone|min:10'
     ];
 
     /**
