@@ -113,8 +113,8 @@ class Restaurant extends Model implements HasMedia
         'latitude' => 'required|numeric',
         'admin_commission' => 'required|numeric|min:0',
         'min_order_amount' => 'required|numeric',
-        'phone' => 'required|regex:/^\d{3}-\d{3}-\d{4}$/|size:10',
-        'mobile' => 'required|regex:/^\d{3}-\d{3}-\d{4}$/|size:10'
+        'phone' => 'required|regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/|min:10',
+        'mobile' => 'required|regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/|min:10'
     ];
 
     /**
@@ -129,8 +129,8 @@ class Restaurant extends Model implements HasMedia
         'longitude' => 'required|numeric',
         'latitude' => 'required|numeric',
         'min_order_amount' => 'required|numeric',
-        'phone' => 'required|regex:/^\d{3}-\d{3}-\d{4}$/|min:10',
-        'mobile' => 'required|regex:/^\d{3}-\d{3}-\d{4}$/|min:10'
+        'phone' => 'required|regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/|min:10',
+        'mobile' => 'required|regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/|min:10'
     ];
 
     /**
