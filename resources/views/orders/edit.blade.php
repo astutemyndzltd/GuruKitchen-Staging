@@ -76,5 +76,6 @@
 <script type="text/javascript">
     Dropzone.autoDiscover = false;
     var dropzoneFields = [];
+    $(window).on('load', () => $('#user_id').select2("enable", false));
 </script>
 @endpush
