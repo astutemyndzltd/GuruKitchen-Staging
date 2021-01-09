@@ -72,7 +72,7 @@ class MixedCriteria implements CriteriaInterface
         if ($this->request->has(['myLon', 'myLat'])) {
             $myLat = $this->request->get('myLat');
             $myLon = $this->request->get('myLon');
-            $model->selectRaw("*,(get_distance(latitude, longitude, $myLat, $myLon) / 1000) distance_km")
+            return $model->selectRaw("*,(get_distance(latitude, longitude, $myLat, $myLon) / 1000) distance_km")
             ->whereRaw(join(' and ', $whereClause))
             ->havingRaw("distance_km <= delivery_range")
             ->orderBy("distance_km");
