@@ -287,7 +287,7 @@
                 @if($resInactive && $oldOpenTimesInactive)
                     <span>Closed all day</span>
                 @else
-                    <?php $spans = isset($restaurant) ? $restaurant->opening_times[$day] : $oldOpeningTimes[$day]; ?>
+                    <?php $spans = isset($oldOpeningTimes) ? $oldOpeningTimes[$day] : $restaurant->opening_times[$day]; ?>
                     @foreach($spans as $timeSpan)
                         <div class="timing">
                             <input type="text" readonly class="start" placeholder="Start time" value="{!! $timeSpan['opens_at'] !!}">
