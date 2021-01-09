@@ -78,7 +78,7 @@ class MixedCriteria implements CriteriaInterface
             $model = $model->havingRaw("distance_km <= delivery_range")->orderBy("distance_km");
         }
 
-        file_put_contents('order.txt', $model->toSql());
+        //file_put_contents('order.txt', $model->toSql());
 
         return $model;
     }
