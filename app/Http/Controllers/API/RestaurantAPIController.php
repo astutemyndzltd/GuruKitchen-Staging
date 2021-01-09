@@ -59,7 +59,7 @@ class RestaurantAPIController extends Controller
     {
         try {
             $this->restaurantRepository->pushCriteria(new MixedCriteria($request));
-            $restaurants = $this->restaurantRepository->all();
+            //$restaurants = $this->restaurantRepository->all();
         } catch (RepositoryException $e) {
             return $this->sendError($e->getMessage());
         }
