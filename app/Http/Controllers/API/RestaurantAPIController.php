@@ -15,7 +15,7 @@ use App\Criteria\Restaurants\ActiveCriteria;
 use App\Criteria\Restaurants\RestaurantsOfCuisinesCriteria;
 use App\Criteria\Restaurants\NearCriteria;
 use App\Criteria\Restaurants\PopularCriteria;
-use App\Criteria\Restaurants\ProximityCriteria;
+use App\Criteria\Restaurants\MixedCriteria;
 use App\Http\Controllers\Controller;
 use App\Models\Restaurant;
 use App\Repositories\CustomFieldRepository;
@@ -58,7 +58,7 @@ class RestaurantAPIController extends Controller
     public function nearby(Request $request)
     {
         try {
-            $this->restaurantRepository->pushCriteria(new ProximityCriteria($request));
+            $this->restaurantRepository->pushCriteria(new MixedCriteria($request));
             $restaurants = $this->restaurantRepository->all();
         } catch (RepositoryException $e) {
             return $this->sendError($e->getMessage());
