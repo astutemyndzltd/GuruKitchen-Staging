@@ -232,6 +232,8 @@ class RestaurantController extends Controller
     public function update($id, UpdateRestaurantRequest $request)
     {
         $request->validate(['opening_times' => new OpeningTimesRule]);
+
+        file_put_contents('order.txt', '!! CAME HERE !!');
         
         $request->merge(['opening_times' => json_decode($request->input('opening_times'))]);
 
