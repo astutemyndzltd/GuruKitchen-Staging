@@ -47,20 +47,14 @@ class MixedCriteria implements CriteriaInterface
     public function apply($model, RepositoryInterface $repository)
     {
 
-        if ($this->request->has(['myLon', 'myLat'])) {
-
-            $myLat = $this->request->get('myLat');
-            $myLon = $this->request->get('myLon');
-            $model->selectRaw("*,(get_distance(latitude, longitude, $myLat, $myLon) / 1000) distance_km");
-        }
-
+        $whereClause = [];
 
         if ($this->request->has('cuisines')) {
 
             $cuisines = $this->request->get('cuisines');
 
             if (!in_array('0', $cuisines)) {
-                $model->whereRaw("id in (select distinct restaurant_id from restaurant_cuisines where cuisine_id in (" . join(",", $cuisines) . "))");
+                array_push($whereClause, "id in (select distinct restaurant_id from restaurant_cuisines where cuisine_id in (" . join(",", $cuisines) . "))");
             }
         }
 
@@ -69,18 +63,20 @@ class MixedCriteria implements CriteriaInterface
             $categories = $this->request->get('categories');
 
             if (!in_array('0', $categories)) {
-                $model->whereRaw("id in (select distinct restaurant_id from foods where category_id in (" . join(",", $categories) . "))");
+                array_push($whereClause, "id in (select distinct restaurant_id from foods where category_id in (" . join(",", $categories) . "))");
             }
         }
 
-        $model->whereRaw("active = 1");
+        array_push($whereClause, "active = 1");
 
         if ($this->request->has(['myLon', 'myLat'])) {
-            $model->havingRaw("distance_km <= delivery_range");
-            $model->orderBy("distance_km");
+            $myLat = $this->request->get('myLat');
+            $myLon = $this->request->get('myLon');
+            $model->selectRaw("*,(get_distance(latitude, longitude, $myLat, $myLon) / 1000) distance_km")
+            ->whereRaw(join(' and ', $whereClause))
+            ->havingRaw("distance_km <= delivery_range")
+            ->orderBy("distance_km");
         }
-
-        file_put_contents('order.txt', $model->toSql());
 
         return $model;
     }

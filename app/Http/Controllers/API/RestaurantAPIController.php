@@ -58,8 +58,8 @@ class RestaurantAPIController extends Controller
     public function nearby(Request $request)
     {
         try {
-            $restaurants = $this->restaurantRepository->pushCriteria(new MixedCriteria($request));
-            //$restaurants = $this->restaurantRepository->all();
+            $this->restaurantRepository->pushCriteria(new MixedCriteria($request));
+            $restaurants = $this->restaurantRepository->all();
         } catch (RepositoryException $e) {
             return $this->sendError($e->getMessage());
         }
