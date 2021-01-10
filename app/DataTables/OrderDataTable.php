@@ -53,9 +53,9 @@ class OrderDataTable extends DataTable
            /* ->editColumn('payment.status', function ($order) {
                 return getPayment($order->payment,'status');
             })*/
-            ->editColumn('active', function ($food) {
+            /*->editColumn('active', function ($food) {
                 return getBooleanColumn($food, 'active');
-            })
+            })*/
             ->addColumn('action', 'orders.datatables_actions')
             ->rawColumns(array_merge($columns, ['action']));
 
@@ -121,11 +121,11 @@ class OrderDataTable extends DataTable
                 'name' => 'preorder_info',
                 'title' => 'Pre-Order'
             ],
-            [
+            /*[
                 'data' => 'active',
                 'title' => trans('lang.order_active'),
 
-            ],
+            ],*/
             [
                 'data' => 'updated_at',
                 'title' => trans('lang.order_updated_at'),

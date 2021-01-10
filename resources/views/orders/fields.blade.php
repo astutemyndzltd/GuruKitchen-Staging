@@ -64,7 +64,10 @@
     </div> --}}
 
     <!-- 'Boolean active Field' -->
-    <div class="form-group row ">
+
+    <input type="hidden" value="{{ $order->active }}" name="active">
+
+    {{-- <div class="form-group row ">
         {!! Form::label('active', trans("lang.order_active"),['class' => 'col-3 control-label text-right']) !!}
         <div class="checkbox icheck">
             <label class="col-9 ml-2 form-check-inline">
@@ -72,7 +75,7 @@
                 {!! Form::checkbox('active', 1, null) !!}
             </label>
         </div>
-    </div>
+    </div> --}}
 
 </div>
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
