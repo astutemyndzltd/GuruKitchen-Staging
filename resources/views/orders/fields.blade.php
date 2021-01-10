@@ -6,7 +6,7 @@
     <input type="hidden" value="{{ json_encode($order) }}" id="anik">
 
     <div class="form-group row">
-        {!! Form::label('id', trans('lang.order_id'), ['class' => 'col-3 control-label']) !!}
+        {!! Form::label('id', trans('lang.order_id'), ['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
             <p>#{!! $order->id !!}</p>
         </div>
