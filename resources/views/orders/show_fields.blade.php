@@ -35,16 +35,14 @@
     <p>{!! $order->orderStatus->status  !!}</p>
   </div>
 
-  <?php 
-  /*{!! Form::label('active', trans('lang.order_active'), ['class' => 'col-4 control-label']) !!}
-  <div class="col-8">
-  @if($order->active)
-    <p><span class='badge badge-success'> {{trans('lang.yes')}}</span></p>
-    @else
-    <p><span class='badge badge-danger'>{{trans('lang.order_canceled')}}</span></p>
-    @endif*/
-  ?>
-
+    {!! Form::label('active', trans('lang.order_active'), ['class' => 'col-4 control-label']) !!}
+    <div class="col-8">
+    @if($order->active)
+      <p><span class='badge badge-success'> {{trans('lang.yes')}}</span></p>
+      @else
+      <p><span class='badge badge-danger'>{{trans('lang.order_canceled')}}</span></p>
+      @endif
+      
   </div>
 
     {!! Form::label('payment_method', trans('lang.payment_method'), ['class' => 'col-4 control-label']) !!}
