@@ -98,15 +98,16 @@
     @endif
   </div>
 
+ @if($order->order_type != 'Pickup')
   {!! Form::label('driver', trans('lang.driver'), ['class' => 'col-4 control-label']) !!}
-  <div class="col-8">
-    @if(isset($order->driver))
-    <p>{!! $order->driver->name !!}</p>
-    @else
-    <p>{{trans('lang.order_driver_not_assigned')}}</p>
-    @endif
-
-  </div>
+    <div class="col-8">
+      @if(isset($order->driver))
+      <p>{!! $order->driver->name !!}</p>
+      @else
+      <p>{{trans('lang.order_driver_not_assigned')}}</p>
+      @endif
+    </div>
+ @endif
 
   {!! Form::label('hint', 'Hint', ['class' => 'col-4 control-label']) !!}
   <div class="col-8">
