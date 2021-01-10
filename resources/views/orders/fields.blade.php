@@ -5,9 +5,11 @@
 
     <input type="hidden" value="{{ json_encode($order) }}" id="anik">
 
-    {!! Form::label('id', trans('lang.order_id'), ['class' => 'col-4 control-label']) !!}
-    <div class="col-8">
-        <p>#{!! $order->id !!}</p>
+    <div class="form-group row">
+        {!! Form::label('id', trans('lang.order_id'), ['class' => 'col-3 control-label']) !!}
+        <div class="col-9">
+            <p>#{!! $order->id !!}</p>
+        </div>
     </div>
 
     <!-- User Id Field -->
