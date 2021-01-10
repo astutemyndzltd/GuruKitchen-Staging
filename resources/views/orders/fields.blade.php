@@ -5,6 +5,11 @@
 
     <input type="hidden" value="{{ json_encode($order) }}" id="anik">
 
+    {!! Form::label('id', trans('lang.order_id'), ['class' => 'col-4 control-label']) !!}
+    <div class="col-8">
+        <p>#{!! $order->id !!}</p>
+    </div>
+
     <!-- User Id Field -->
     {{-- <div class="form-group row ">
         {!! Form::label('user_id', trans("lang.order_user_id"),['class' => 'col-3 control-label text-right']) !!}
@@ -15,14 +20,16 @@
         </div>
     </div> --}}
 
-    <!-- Driver Id Field -->
-    <div class="form-group row ">
-        {!! Form::label('driver_id', trans("lang.order_driver_id"),['class' => 'col-3 control-label text-right']) !!}
-        <div class="col-9">
-            {!! Form::select('driver_id', $driver, null, ['data-empty'=>trans("lang.order_driver_id_placeholder"),'class' => 'select2 not-required form-control']) !!}
-            <div class="form-text text-muted">{{ trans("lang.order_driver_id_help") }}</div>
+    @if($order->order_type !== 'Pickup')
+        <!-- Driver Id Field -->
+        <div class="form-group row ">
+            {!! Form::label('driver_id', trans("lang.order_driver_id"),['class' => 'col-3 control-label text-right']) !!}
+            <div class="col-9">
+                {!! Form::select('driver_id', $driver, null, ['data-empty'=>trans("lang.order_driver_id_placeholder"),'class' => 'select2 not-required form-control']) !!}
+                <div class="form-text text-muted">{{ trans("lang.order_driver_id_help") }}</div>
+            </div>
         </div>
-    </div>
+    @endif
 
     <!-- Order Status Id Field -->
     <div class="form-group row ">
@@ -93,7 +100,7 @@
             <div class="form-text text-muted">{{ trans("lang.order_hint_help") }}</div>
         </div>
     </div>
-    
+
 </div>
 @if($customFields)
     <div class="clearfix"></div>
