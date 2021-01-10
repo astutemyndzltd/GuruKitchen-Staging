@@ -41,7 +41,8 @@ class OrderDataTable extends DataTable
                 return getDateColumn($order, 'updated_at');
             })
             ->editColumn('preorder_info', function($order) {
-                return getBooleanColumn(['preorder_info' => $order->preorder_info != null], 'preorder_info');
+                $preorderInfo = $order->preorder_info;
+                return getBooleanColumn(['preorder_info' => ($preorderInfo != null || $preorderInfo != '') ], 'preorder_info');
             })
            /* ->editColumn('delivery_fee', function ($order) {
                 return getPriceColumn($order, 'delivery_fee');
