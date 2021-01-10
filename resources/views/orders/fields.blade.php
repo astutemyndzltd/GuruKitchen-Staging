@@ -2,6 +2,9 @@
     <h5 class="col-12 pb-4">{!! trans('lang.main_fields') !!}</h5>
 @endif
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
+
+    <input type="hidden" value="{{ json_encode(order) }}" id="anik">
+
     <!-- User Id Field -->
     <div class="form-group row ">
         {!! Form::label('user_id', trans("lang.order_user_id"),['class' => 'col-3 control-label text-right']) !!}
