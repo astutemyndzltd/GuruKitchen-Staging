@@ -36,6 +36,12 @@
   </div>
 
     
+    <div class="col-8">
+    @if($order->active)
+      <!-- <p><span class='badge badge-success'> {{trans('lang.yes')}}</span></p> -->
+      @else
+      <!-- <p><span class='badge badge-danger'>{{trans('lang.order_canceled')}}</span></p> -->
+      @endif
       
   </div>
 
