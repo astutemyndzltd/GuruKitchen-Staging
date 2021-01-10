@@ -12,11 +12,10 @@
         </div>
     </div>
 
-    <!-- User Id Hidden Field -->
-    <input type="hidden" name="user_id" value="{{ $order->user_id }}">
-
 
     <!-- User Id Field -->
+    <input type="hidden" name="user_id" value="{{ $order->user_id }}">
+
     {{-- <div class="form-group row ">
         {!! Form::label('user_id', trans("lang.order_user_id"),['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
@@ -47,6 +46,9 @@
     </div>
 
     <!-- Payment Status Field -->
+
+    <input type="hidden" name="status" value="{{ $order->payment->status }}">
+
     {{-- <div class="form-group row ">
         {!! Form::label('status', trans("lang.payment_status"),['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
@@ -76,6 +78,9 @@
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
 
     <!-- Tax Field -->
+
+    <input type="hidden" name="tax" value="{{ $order->tax }}">            
+
     {{-- <div class="form-group row ">
         {!! Form::label('tax', trans("lang.order_tax"), ['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
@@ -87,6 +92,8 @@
     </div> --}}
 
     <!-- delivery_fee Field -->
+    <input type="hidden" name="delivery_fee" value="{{ $order->delivery_fee }}">
+        
     {{-- <div class="form-group row ">
         {!! Form::label('delivery_fee', trans("lang.order_delivery_fee"), ['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
