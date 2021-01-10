@@ -12,6 +12,10 @@
         </div>
     </div>
 
+    <!-- User Id Hidden Field -->
+    <input type="hidden" name="user_id" value="{{ $order->user_id }}">
+
+
     <!-- User Id Field -->
     {{-- <div class="form-group row ">
         {!! Form::label('user_id', trans("lang.order_user_id"),['class' => 'col-3 control-label text-right']) !!}
