@@ -40,15 +40,18 @@ class OrderDataTable extends DataTable
             ->editColumn('updated_at', function ($order) {
                 return getDateColumn($order, 'updated_at');
             })
-            ->editColumn('delivery_fee', function ($order) {
+            ->editColumn('preorder_info', function($order) {
+                return getBooleanColumn(['preorder_info' => $order->preorder_info != null], 'preorder_info');
+            })
+           /* ->editColumn('delivery_fee', function ($order) {
                 return getPriceColumn($order, 'delivery_fee');
-            })
-            ->editColumn('tax', function ($order) {
+            })*/
+           /* ->editColumn('tax', function ($order) {
                 return $order->tax . "%";
-            })
-            ->editColumn('payment.status', function ($order) {
+            })*/
+           /* ->editColumn('payment.status', function ($order) {
                 return getPayment($order->payment,'status');
-            })
+            })*/
             ->editColumn('active', function ($food) {
                 return getBooleanColumn($food, 'active');
             })
@@ -83,29 +86,39 @@ class OrderDataTable extends DataTable
                 'title' => trans('lang.order_order_status_id'),
 
             ],
-            [
+            /*[
                 'data' => 'tax',
                 'title' => trans('lang.order_tax'),
                 'searchable' => false,
 
-            ],
-            [
+            ],*/
+            /*[
                 'data' => 'delivery_fee',
                 'title' => trans('lang.order_delivery_fee'),
                 'searchable' => false,
 
-            ],
-            [
+            ],*/
+            /*[
                 'data' => 'payment.status',
                 'name' => 'payment.status',
                 'title' => trans('lang.payment_status'),
 
-            ],
-            [
+            ],*/
+            /*[
                 'data' => 'payment.method',
                 'name' => 'payment.method',
                 'title' => trans('lang.payment_method'),
 
+            ],*/
+            [
+                'data' => 'order_type',
+                'name' => 'order_type',
+                'title' => 'Type'
+            ],
+            [
+                'data' => 'preorder_info',
+                'name' => 'preorder_info',
+                'title' => 'Pre-Order'
             ],
             [
                 'data' => 'active',
