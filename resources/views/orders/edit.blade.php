@@ -76,7 +76,7 @@
 <script type="text/javascript">
   Dropzone.autoDiscover = false;
   var dropzoneFields = [];
-  $(window).on('load', () => $('#user_id').select2("enable", false));
-  $('button.btn.btn-primary').on('click', () => $('#hdnUserId').val($('#user_id').val()));
+  //$(window).on('load', () => $('#user_id').select2("enable", false));
+  //$('button.btn.btn-primary').on('click', () => $('#hdnUserId').val($('#user_id').val()));
 </script>
 @endpush
