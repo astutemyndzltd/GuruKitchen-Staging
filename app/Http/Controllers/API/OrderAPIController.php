@@ -188,7 +188,7 @@ class OrderAPIController extends Controller
                 }
                 $amount += $order->delivery_fee;
                 $amountWithTax = $amount + ($amount * $order->tax / 100);
-                $charge = $user->charge((int)($amountWithTax * 100), ['source' => $stripeToken]);
+                $charge = $user->charge((int)($amountWithTax * 100), ['source' => $stripeToken, 'metadata' => ['order-id' => $order->id]]);
                 $payment = $this->paymentRepository->create([
                     "user_id" => $input['user_id'],
                     "description" => trans("lang.payment_order_done"),
@@ -270,9 +270,11 @@ class OrderAPIController extends Controller
 
         try {
             $order = $this->orderRepository->update($input, $id);
+
             if (isset($input['order_status_id']) && $input['order_status_id'] == 5 && !empty($order)) {
                 $this->paymentRepository->update(['status' => 'Paid'], $order['payment_id']);
             }
+
             event(new OrderChangedEvent($oldStatus, $order));
 
             if (setting('enable_notifications', false)) {
