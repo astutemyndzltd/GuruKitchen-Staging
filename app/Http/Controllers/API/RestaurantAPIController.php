@@ -124,7 +124,7 @@ class RestaurantAPIController extends Controller
             return $this->sendError('Restaurant not found');
         }
 
-        file_put_contents('order.txt', json_encode($restaurant->toArray()));
+        //file_put_contents('order.txt', json_encode($restaurant->toArray()));
 
         return $this->sendResponse($restaurant->toArray(), 'Restaurant retrieved successfully');
     }
