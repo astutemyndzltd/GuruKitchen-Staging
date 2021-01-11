@@ -57,7 +57,7 @@ class NearCriteria implements CriteriaInterface
                 POW(69.1 * ($myLon - longitude) * COS(latitude / 57.3), 2)) AS distance, SQRT(
                 POW(69.1 * (latitude - $areaLat), 2) +
                 POW(69.1 * ($areaLon - longitude) * COS(latitude / 57.3), 2))  AS area"), "restaurants.*")*/
-                return $model->select(DB::raw("get_distance(latitude, longitude, $myLat, $myLon) as distance"), "restaurants.*")
+                return $model->select(DB::raw("get_distance(latitude, longitude, $myLat, $myLon) AS distance"), "restaurants.*")
                 ->orderBy('closed')
                 ->orderBy('area');
         } else {
