@@ -53,13 +53,14 @@ class MixedCriteria implements CriteriaInterface
             $model = $model->selectRaw("*,(get_distance(latitude, longitude, $myLat, $myLon) / 1000) distance_km");
         }
 
+        $whereClauses = [];
 
         if ($this->request->has('cuisines')) {
 
             $cuisines = $this->request->get('cuisines');
 
             if (!in_array('0', $cuisines)) {
-                $model = $model->whereRaw("id in (select distinct restaurant_id from restaurant_cuisines where cuisine_id in (" . join(",", $cuisines) . "))");
+                array_push($whereClauses, "id in (select distinct restaurant_id from restaurant_cuisines where cuisine_id in (" . join(",", $cuisines) . "))");
             }
         }
 
@@ -68,8 +69,13 @@ class MixedCriteria implements CriteriaInterface
             $categories = $this->request->get('categories');
 
             if (!in_array('0', $categories)) {
-                $model = $model->whereRaw("id in (select distinct restaurant_id from foods where category_id in (" . join(",", $categories) . "))");
+                array_push($whereClauses, "id in (select distinct restaurant_id from foods where category_id in (" . join(",", $categories) . "))");
             }
+        }
+
+
+        if(count($whereClauses) > 0) {
+            $model = $model->whereRaw('('. join(' or ', $whereClauses) . ')');
         }
 
         $model = $model->whereRaw("active = 1");
@@ -78,7 +84,7 @@ class MixedCriteria implements CriteriaInterface
             $model = $model->havingRaw("distance_km <= delivery_range")->orderBy("distance_km");
         }
 
-        //file_put_contents('order.txt', $model->toSql());
+        file_put_contents('order.txt', $model->toSql());
 
         return $model;
     }
