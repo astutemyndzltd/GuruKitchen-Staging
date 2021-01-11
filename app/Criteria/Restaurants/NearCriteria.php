@@ -52,11 +52,12 @@ class NearCriteria implements CriteriaInterface
             $areaLat = $this->request->get('areaLat');
             $areaLon = $this->request->get('areaLon');
 
-            return $model->select(DB::raw("SQRT(
+            /*return $model->select(DB::raw("SQRT(
                 POW(69.1 * (latitude - $myLat), 2) +
                 POW(69.1 * ($myLon - longitude) * COS(latitude / 57.3), 2)) AS distance, SQRT(
                 POW(69.1 * (latitude - $areaLat), 2) +
-                POW(69.1 * ($areaLon - longitude) * COS(latitude / 57.3), 2))  AS area"), "restaurants.*")
+                POW(69.1 * ($areaLon - longitude) * COS(latitude / 57.3), 2))  AS area"), "restaurants.*")*/
+                return $model->select(DB::raw("get_distance(latitude, longitude, $myLat, $myLon) as distance"))
                 ->orderBy('closed')
                 ->orderBy('area');
         } else {
