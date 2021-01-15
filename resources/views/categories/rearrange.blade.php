@@ -57,7 +57,7 @@
           <ul id="categories">
             @foreach($categories as $category)
             <li id="{{ $category->id }}">
-              <img src="{{ $category->image }}" alt="image-name">
+              <img src="{{ $category->getFirstMediaUrl('image') }}" alt="image-name">
               <p>{{ $category->name }}</p>
             </li>
             @endforeach
