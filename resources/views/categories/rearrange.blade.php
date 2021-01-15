@@ -51,15 +51,15 @@
       </ul>
     </div>
     <div class="card-body">
-      {!! Form::open(['route' => 'categories/store-rearranged']) !!}
-      <div class="row">
-        <ul id="categories">
-          @foreach($categories as $category)
-          <li id="{{ $category->id }}">{{ $category->name }}</li>
-          @endforeach
-        </ul>
-      </div>
-      {!! Form::close() !!}
+      <form action="/categories-rearranged" method="post">
+        <div class="row">
+          <ul id="categories">
+            @foreach($categories as $category)
+            <li id="{{ $category->id }}">{{ $category->name }}</li>
+            @endforeach
+          </ul>
+        </div>
+      </form>
       <div class="clearfix"></div>
     </div>
   </div>
