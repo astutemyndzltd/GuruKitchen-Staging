@@ -44,7 +44,7 @@ class CategoryController extends Controller
      */
     public function rearrange()
     {
-        return 'hello';
+        return view('categories.rearrange');
     }
 
 
