@@ -17,6 +17,11 @@
 |
 */
 
+Route::get('categories/sort', 'CategoryController@showSorted')->name('categories.sort');
+Route::post('categories/store-sorted', 'CategoryController@storeSorted')->name('categories.store-sorted');
+
+
+
 Route::get('login/{service}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{service}/callback', 'Auth\LoginController@handleProviderCallback');
 Auth::routes();
@@ -92,8 +97,7 @@ Route::middleware('auth')->group(function () {
         'show'
     ]);
     
-    Route::get('categories/sort', 'CategoryController@showSorted')->name('categories.sort');
-    Route::post('categories/store-sorted', 'CategoryController@storeSorted')->name('categories.store-sorted');
+ 
     Route::post('categories/remove-media', 'CategoryController@removeMedia');
     Route::resource('categories', 'CategoryController')->except([
         'show'
