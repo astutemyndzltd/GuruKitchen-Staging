@@ -44,7 +44,8 @@ class CategoryController extends Controller
      */
     public function rearrange()
     {
-        return view('categories.rearrange');
+        $categories = $this->categoryRepository->orderBy('priority_index')->get();
+        return view('categories.rearrange')->with('categories', $categories);
     }
 
 
