@@ -224,7 +224,7 @@ class CategoryController extends Controller
      * 
      * @return Response
      */
-    public function sort() {
+    public function srt() {
         return view('categories.sort');
     }
 
