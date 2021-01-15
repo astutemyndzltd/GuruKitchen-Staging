@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.css')}}">
 {{--dropzone--}}
 <link rel="stylesheet" href="{{asset('plugins/dropzone/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('plugins/jQueryUI/jquery-ui.min.css')}}">
 @endpush
 @section('content')
 <!-- Content Header (Page header) -->
@@ -75,6 +76,8 @@
 <script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
 {{--dropzone--}}
 <script src="{{asset('plugins/dropzone/dropzone.js')}}"></script>
+<script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('plugins/jQueryUI/jquery-ui.min.js')}}"></script>
 <script type="text/javascript">
     Dropzone.autoDiscover = false;
     var dropzoneFields = [];
