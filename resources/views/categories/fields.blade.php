@@ -38,6 +38,20 @@
     </div>
   </div>
 </div>
+
+<!-- Priority Index Field -->
+<div class="form-group row ">
+  {!! Form::label('priority_index', 'Priority Index', ['class' => 'col-3 control-label text-right']) !!}
+  <div class="col-9">
+    {!! Form::text('priority_index', null,  ['class' => 'form-control','placeholder'=>  'Insert Priority Index')]) !!}
+    <div class="form-text text-muted">
+      Element with higher priority will be shown before an element with lower priority
+    </div>
+  </div>
+</div>
+
+
+
 @prepend('scripts')
 <script type="text/javascript">
     var var15866134771240834480ble = '';

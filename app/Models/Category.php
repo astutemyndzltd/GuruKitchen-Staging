@@ -37,7 +37,8 @@ class Category extends Model implements HasMedia
 
     public $fillable = [
         'name',
-        'description'
+        'description',
+        'priority_index'
     ];
 
     /**
@@ -48,7 +49,8 @@ class Category extends Model implements HasMedia
     protected $casts = [
         'name' => 'string',
         'description' => 'string',
-        'image' => 'string'
+        'image' => 'string',
+        'priority_index' => 'integer'
     ];
 
     /**
