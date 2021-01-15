@@ -45,6 +45,9 @@
         <li class="nav-item">
           <a class="nav-link active" href="{!! url()->current() !!}"><i class="fa fa-plus mr-2"></i>{{trans('lang.category_create')}}</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{!! route('categories.sort') !!}"><i class="fa fa-sort-numeric-asc mr-2"></i>Rearrange Categories</a>
+        </li>
       </ul>
     </div>
     <div class="card-body">
