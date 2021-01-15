@@ -43,7 +43,7 @@
         </li>
         @endcan
         <li class="nav-item">
-          <a class="nav-link" href="{!! url()->current() !!}"><i class="fa fa-plus mr-2"></i>{{trans('lang.category_create')}}</a>
+          <a class="nav-link" href="{!! route('categories.create') !!}"><i class="fa fa-plus mr-2"></i>{{trans('lang.category_create')}}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="/categories/rearrange"><i class="fa fa-sort-numeric-asc mr-2"></i>Rearrange Categories</a>
