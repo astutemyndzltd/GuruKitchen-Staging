@@ -41,7 +41,7 @@
 
 <!-- Priority Index Field -->
 <div class="form-group row ">
-  {!! Form::label('priority_index', 'Priority Index', ['class' => 'col-3 control-label text-right']) !!}
+  {!! Form::label('priority_index', 'Priority Index', ['class' => 'col-3 control-label text-right', 'style' => 'padding-left:50px']) !!}
   <div class="col-9">
     {!! Form::text('priority_index', null,  ['class' => 'form-control','placeholder'=> 'Insert Priority Index' ]) !!}
     <div class="form-text text-muted">
