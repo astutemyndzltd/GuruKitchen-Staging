@@ -51,7 +51,7 @@
       </ul>
     </div>
     <div class="card-body">
-      {!! Form::open(['route' => '/categories/store-rearranged']) !!}
+      {!! Form::open(['route' => 'categories/store-rearranged']) !!}
       <div class="row">
         <ul id="categories">
           @foreach($categories as $category)
