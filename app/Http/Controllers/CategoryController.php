@@ -44,7 +44,7 @@ class CategoryController extends Controller
      */
     public function showSorted()
     {
-        return view('categories.sort');
+        return 'hello';
     }
 
     /**
