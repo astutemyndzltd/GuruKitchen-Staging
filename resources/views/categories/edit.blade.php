@@ -48,7 +48,7 @@
         </li>
         @endcan
         <li class="nav-item">
-          <a class="nav-link" href="{!! route('categories.sort') !!}"><i class="fa fa-sort-numeric-asc mr-2"></i>Rearrange Categories</a>
+          <a class="nav-link" href="/categories/rearrange"><i class="fa fa-sort-numeric-asc mr-2"></i>Rearrange Categories</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="{!! url()->current() !!}"><i class="fa fa-pencil mr-2"></i>{{trans('lang.category_edit')}}</a>

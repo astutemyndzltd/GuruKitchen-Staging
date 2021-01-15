@@ -36,7 +36,7 @@
         </li>
         @endcan
         <li class="nav-item">
-          <a class="nav-link" href="{!! route('categories.sort') !!}"><i class="fa fa-sort-numeric-asc mr-2"></i>Rearrange Categories</a>
+          <a class="nav-link" href="/categories/rearrange"><i class="fa fa-sort-numeric-asc mr-2"></i>Rearrange Categories</a>
         </li>
         @include('layouts.right_toolbar', compact('dataTable'))
       </ul>
