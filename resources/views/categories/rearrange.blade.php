@@ -82,4 +82,9 @@
     Dropzone.autoDiscover = false;
     var dropzoneFields = [];
 </script>
+<script type="text/javascript">
+  $(window).on('load', function() {
+    $('#categories').sortable();
+  });
+</script>
 @endpush
