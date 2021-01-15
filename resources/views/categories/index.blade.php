@@ -35,6 +35,9 @@
           <a class="nav-link" href="{!! route('categories.create') !!}"><i class="fa fa-plus mr-2"></i>{{trans('lang.category_create')}}</a>
         </li>
         @endcan
+        <li class="nav-item">
+          <a class="nav-link" href="{!! route('categories.sort') !!}"><i class="fa fa-plus mr-2"></i>Rearrange Categories</a>
+        </li>
         @include('layouts.right_toolbar', compact('dataTable'))
       </ul>
     </div>

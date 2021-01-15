@@ -55,8 +55,6 @@ class CategoryController extends Controller
      */
     public function create()
     {
-
-
         $hasCustomField = in_array($this->categoryRepository->model(), setting('custom_field_models', []));
         if ($hasCustomField) {
             $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->categoryRepository->model());
@@ -219,4 +217,14 @@ class CategoryController extends Controller
             Log::error($e->getMessage());
         }
     }
+
+
+    public function sort() {
+        return view('categories.sort');
+    }
+
+    public function storeSorted() {
+        return view('');
+    }
+
 }
