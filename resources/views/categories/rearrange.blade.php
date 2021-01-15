@@ -56,7 +56,10 @@
         <div class="row">
           <ul id="categories">
             @foreach($categories as $category)
-            <li id="{{ $category->id }}">{{ $category->name }}</li>
+            <li id="{{ $category->id }}">
+              <img src="{{ $category->getFirstMediaUrl() }}" alt="image-name">
+              <p>{{ $category->name }}</p>
+            </li>
             @endforeach
           </ul>
         </div>
