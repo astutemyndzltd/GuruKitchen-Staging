@@ -38,6 +38,16 @@ class CategoryController extends Controller
     }
 
     /**
+     * Display a listing of the Category in sorted manners
+     *
+     * @return Response
+     */
+    public function showSorted()
+    {
+        return view('categories.sort');
+    }
+
+    /**
      * Display a listing of the Category.
      *
      * @param CategoryDataTable $categoryDataTable
@@ -216,20 +226,6 @@ class CategoryController extends Controller
         } catch (\Exception $e) {
             Log::error($e->getMessage());
         }
-    }
-
-
-    /**
-     * display all categories in sorted order
-     * 
-     * @return Response
-     */
-    public function srt() {
-        return view('categories.sort');
-    }
-
-    public function storeSorted() {
-        return view('');
     }
 
 }

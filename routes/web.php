@@ -93,7 +93,7 @@ Route::middleware('auth')->group(function () {
     ]);
 
     Route::post('categories/remove-media', 'CategoryController@removeMedia');
-    Route::get('categories/sort', 'CategoryController@sort')->name('categories.sort');
+    Route::get('categories/sort', 'CategoryController@showSorted')->name('categories.sort');
     Route::post('categories/store-sorted', 'CategoryController@storeSorted')->name('categories.store-sorted');
     Route::resource('categories', 'CategoryController')->except([
         'show'
