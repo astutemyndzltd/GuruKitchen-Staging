@@ -17,8 +17,8 @@
 |
 */
 
-Route::get('categories/rearrange', 'CategoryController@showSorted')->name('categories.rearrange');
-Route::post('categories/store-rerranged', 'CategoryController@storeSorted');
+Route::get('categories/rearrange', 'CategoryController@rearrange');
+Route::post('categories/store-rerranged', 'CategoryController@storeRearranged');
 
 
 

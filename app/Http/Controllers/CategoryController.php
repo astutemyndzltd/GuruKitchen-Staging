@@ -42,9 +42,20 @@ class CategoryController extends Controller
      *
      * @return Response
      */
-    public function showSorted()
+    public function rearrange()
     {
         return 'hello';
+    }
+
+
+    /**
+     * store sorted categories
+     *
+     * @return Response
+     */
+    public function storeRearranged() 
+    {
+
     }
 
     /**
