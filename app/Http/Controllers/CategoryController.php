@@ -219,6 +219,11 @@ class CategoryController extends Controller
     }
 
 
+    /**
+     * display all categories in sorted order
+     * 
+     * @return Response
+     */
     public function sort() {
         return view('categories.sort');
     }
