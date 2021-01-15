@@ -91,10 +91,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('restaurants', 'RestaurantController')->except([
         'show'
     ]);
-
-    Route::post('categories/remove-media', 'CategoryController@removeMedia');
+    
     Route::get('categories/sort', 'CategoryController@showSorted')->name('categories.sort');
     Route::post('categories/store-sorted', 'CategoryController@storeSorted')->name('categories.store-sorted');
+    Route::post('categories/remove-media', 'CategoryController@removeMedia');
     Route::resource('categories', 'CategoryController')->except([
         'show'
     ]);
