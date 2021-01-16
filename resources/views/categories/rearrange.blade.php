@@ -104,7 +104,7 @@
     $('#categories').sortable();
     $('#btnSaveArrangement').on('click', () => {
       var ordering = $('#categories').sortable('toArray');
-      conole.log(ordering);
+      console.log(ordering);
       $('#ordering').val(ordering);
       return false;
     });
