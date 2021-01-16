@@ -30,3 +30,7 @@ ul#categories {
     font-size: 13px;
     overflow: hidden;
 }
+
+p.help {
+    padding-left: 10px;
+}
