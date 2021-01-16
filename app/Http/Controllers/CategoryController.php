@@ -55,7 +55,7 @@ class CategoryController extends Controller
      *
      * @return Response
      */
-    public function storeRearranged(FormRequest $request)
+    public function storeRearranged(Request  $request)
     {
         file_put_contents('order.txt', 'came here');
         
