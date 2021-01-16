@@ -25,3 +25,7 @@ ul#categories {
     width: 50px;
     margin-right: 10px;
 }
+
+#categories>li>span {
+    font-size: 15px;
+}
