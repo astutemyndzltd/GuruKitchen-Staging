@@ -9,7 +9,9 @@
 {{--dropzone--}}
 <link rel="stylesheet" href="{{asset('plugins/dropzone/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{asset('plugins/jQueryUI/jquery-ui.min.css')}}">
+<link rel="stylesheet" href="{{asset('css/rearrange.css')}}">
 @endpush
+
 @section('content')
 <!-- Content Header (Page header) -->
 <div class="content-header">
@@ -57,8 +59,8 @@
           <ul id="categories">
             @foreach($categories as $category)
             <li id="{{ $category->id }}">
-              <img src="{{ $category->getFirstMediaUrl('image') }}" alt="image-name">
-              <p>{{ $category->name }}</p>
+              <img src="{{ $category->getFirstMediaUrl('image', 'icon') }}" alt="category-image">
+              <span>{{ $category->name }}</span>
             </li>
             @endforeach
           </ul>

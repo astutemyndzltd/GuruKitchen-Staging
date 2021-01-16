@@ -1,0 +1,20 @@
+ul#categories {
+    list-style-type: none;
+}
+
+
+#categories > li {
+    display: flex;
+    align-items: center;
+    width: 240px;
+    margin: 10px 0px;
+    background-color: rgb(234, 234, 234);
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+#categories > li >img {
+    height: 50px;
+    width: 50px;
+    margin-right: 10px;
+}
