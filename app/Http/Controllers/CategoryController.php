@@ -73,7 +73,7 @@ class CategoryController extends Controller
             Flash::error($e->getMessage());
         }
 
-        Flash::success(__('lang.saved_successfully', ['operator' => __('lang.category')]));
+        Flash::success(__('lang.saved_successfully', ['operator' => __('Arrangements ')]));
 
         return redirect(route('categories.index'));
     }
