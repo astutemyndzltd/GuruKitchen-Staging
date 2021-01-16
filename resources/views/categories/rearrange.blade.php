@@ -54,7 +54,6 @@
       </ul>
     </div>
     <div class="card-body">
-      <p class="help">Drag and drop to rearrange categories in any desired order</p>
       <form action="/categories-rearranged" method="post">
         <div class="row">
           <ul id="categories" style="height:{{  (ceil(count($categories) / 4) * 52) + 5   }}px;">
