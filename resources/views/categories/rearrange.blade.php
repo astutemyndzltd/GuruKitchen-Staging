@@ -105,7 +105,7 @@
     $('#btnSaveArrangement').on('click', () => {
       var ordering = $('#categories').sortable('toArray');
       console.log(ordering);
-      $('#ordering').val(ordering);
+      $('#ordering').val(JSON.stringify(ordering));
       return false;
     });
   });
