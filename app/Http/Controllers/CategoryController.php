@@ -57,9 +57,9 @@ class CategoryController extends Controller
      */
     public function storeRearranged(Request  $request)
     {
-        file_put_contents('order.txt', 'came here');
+        //file_put_contents('order.txt', 'came here');
         
-        /*try {
+        try {
             $ordering = json_decode($request->get('ordering'));
             DB::beginTransaction();
 
@@ -74,7 +74,7 @@ class CategoryController extends Controller
 
         Flash::success(__('lang.saved_successfully', ['operator' => __('lang.category')]));
 
-        return redirect(route('categories.index'));*/
+        return redirect(route('categories.index'));
     }
 
     /**
