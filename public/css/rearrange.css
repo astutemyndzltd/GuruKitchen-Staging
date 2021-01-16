@@ -4,7 +4,6 @@ ul#categories {
     flex-wrap: wrap;
     width: 700px;
     height: 725px;
-    background-color: aquamarine;
     align-items: center;
     padding: 0;
 }
