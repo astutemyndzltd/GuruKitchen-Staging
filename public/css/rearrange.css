@@ -14,7 +14,7 @@ ul#categories {
     display: flex;
     align-items: center;
     width: 240px;
-    margin: 10px 0px;
+    margin-top: 10px;
     background-color: rgb(234, 234, 234);
     overflow: hidden;
     border-radius: 4px;
