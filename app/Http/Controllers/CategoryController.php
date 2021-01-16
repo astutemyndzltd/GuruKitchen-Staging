@@ -59,7 +59,7 @@ class CategoryController extends Controller
     {
         file_put_contents('order.txt', 'came here');
         
-        try {
+        /*try {
             $ordering = json_decode($request->get('ordering'));
             DB::beginTransaction();
 
@@ -74,7 +74,7 @@ class CategoryController extends Controller
 
         Flash::success(__('lang.saved_successfully', ['operator' => __('lang.category')]));
 
-        return redirect(route('categories.index'));
+        return redirect(route('categories.index'));*/
     }
 
     /**
