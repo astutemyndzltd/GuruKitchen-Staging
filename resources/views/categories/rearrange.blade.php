@@ -72,7 +72,7 @@
           </ul>
         </div>
         <div class="form-group col-12 text-right">
-          <span class="tips">Drag and drop to rearrange items in any desired order</span>
+          <span class="tips"><i>Drag and drop to rearrange items in any desired order</i></span>
           <button type="submit" class="btn btn-{{setting('theme_color')}}" ><i class="fa fa-save"></i> {{trans('lang.save')}} Arrangement</button>
           <a href="{!! route('categories.index') !!}" class="btn btn-default"><i class="fa fa-undo"></i> {{trans('lang.cancel')}}</a>
         </div>
