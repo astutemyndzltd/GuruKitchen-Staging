@@ -55,6 +55,7 @@
     </div>
     <div class="card-body">
       <form action="/categories/store-rearranged" method="post">
+        @csrf
         <div class="row">
           <ul id="categories" style="height:{{  (ceil(count($categories) / 4) * 52) + 5   }}px;">
             @foreach($categories as $category)
