@@ -9,6 +9,7 @@ use App\Repositories\CategoryRepository;
 use App\Repositories\CustomFieldRepository;
 use App\Repositories\UploadRepository;
 use Flash;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
@@ -54,8 +55,26 @@ class CategoryController extends Controller
      *
      * @return Response
      */
-    public function storeRearranged() 
+    public function storeRearranged(FormRequest $request)
     {
+        try {
+            $ordering = json_decode($request->get('ordering'));
+            DB::beginTransaction();
+
+            for ($i = 0; $i < count($ordering); $i++) 
+            {
+                $this->categoryRepository->where('id', '=', $ordering[$i])->update(['priority_index' => $i]);
+            }
+
+            DB::commit();
+        }
+        catch (Exception $e) {
+            Flash::error($e->getMessage());
+        }
+
+        Flash::success(__('lang.saved_successfully', ['operator' => __('lang.category')]));
+
+        return redirect(route('categories.index'));
 
     }
 
@@ -176,8 +195,10 @@ class CategoryController extends Controller
             Flash::error('Category not found');
             return redirect(route('categories.index'));
         }
+        
         $input = $request->all();
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->categoryRepository->model());
+        
         try {
             $category = $this->categoryRepository->update($input, $id);
 
@@ -239,5 +260,4 @@ class CategoryController extends Controller
             Log::error($e->getMessage());
         }
     }
-
 }
