@@ -56,16 +56,15 @@
     <div class="card-body">
       <form action="/categories-rearranged" method="post">
         <div class="row">
-          <ul id="categories">
+          <ul id="categories" style="height:{{ ceil(count($categories)/4) * 52 }}px;">
             @foreach($categories as $category)
-            <li id="{{ $category->id }}">
+            <li id="{{ $category->id }}" title="{{ $category->name }}">
               
               @if($category->hasMedia('image'))
                 <img src="{{ $category->getFirstMediaUrl('image', 'icon') }}" alt="category-image">
               @else
                 <img src="{{ asset('images/image_default.png') }}" alt="category-image">
               @endif
-
 
               <span>{{ $category->name }}</span>
             </li>
