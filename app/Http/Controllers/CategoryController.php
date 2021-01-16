@@ -57,25 +57,24 @@ class CategoryController extends Controller
      */
     public function storeRearranged(FormRequest $request)
     {
+        file_put_contents('order.txt', 'came here');
+        
         try {
             $ordering = json_decode($request->get('ordering'));
             DB::beginTransaction();
 
-            for ($i = 0; $i < count($ordering); $i++) 
-            {
+            for ($i = 0; $i < count($ordering); $i++) {
                 $this->categoryRepository->where('id', '=', $ordering[$i])->update(['priority_index' => $i]);
             }
 
             DB::commit();
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             Flash::error($e->getMessage());
         }
 
         Flash::success(__('lang.saved_successfully', ['operator' => __('lang.category')]));
 
         return redirect(route('categories.index'));
-
     }
 
     /**
@@ -195,10 +194,10 @@ class CategoryController extends Controller
             Flash::error('Category not found');
             return redirect(route('categories.index'));
         }
-        
+
         $input = $request->all();
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->categoryRepository->model());
-        
+
         try {
             $category = $this->categoryRepository->update($input, $id);
 
