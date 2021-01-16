@@ -59,7 +59,14 @@
           <ul id="categories">
             @foreach($categories as $category)
             <li id="{{ $category->id }}">
-              <img src="{{ $category->getFirstMediaUrl('image', 'icon') }}" alt="category-image">
+              
+              @if($category->hasMedia('image'))
+                <img src="{{ $category->getFirstMediaUrl('image', 'icon') }}" alt="category-image">
+              @else
+                <img src="{{ asset('images/image_default.png') }}" alt="category-image">
+              @endif
+
+
               <span>{{ $category->name }}</span>
             </li>
             @endforeach
