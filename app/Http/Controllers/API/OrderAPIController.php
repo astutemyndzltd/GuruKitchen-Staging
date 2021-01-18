@@ -134,13 +134,12 @@ class OrderAPIController extends Controller
         
         $requestData = $request->all();
 
-        file_put_contents('order.txt', json_encode($requestData));
-
         if ($requestData['note'] == null) {
             $request->merge(['note' => '']);
         }
 
         $payment = $request->only('payment');
+
         if (isset($payment['payment']) && $payment['payment']['method']) {
             if ($payment['payment']['method'] == "Credit Card") {
                 return $this->stripePaymentNew($request);
@@ -148,6 +147,7 @@ class OrderAPIController extends Controller
                 return $this->cashPayment($request);
             }
         }
+        
     }
 
     private function stripePaymentNew(Request $request)
@@ -155,8 +155,6 @@ class OrderAPIController extends Controller
         $paymentIntent = null;
         $paymentMethodId = $request->get('payment_method_id');
         $paymentIntentId = $request->get('payment_intent_id');
-
-        file_put_contents('order.txt', 'loco loco');
 
         if ($paymentMethodId != null) {
             $paymentIntent = \Stripe\PaymentIntent::create([
