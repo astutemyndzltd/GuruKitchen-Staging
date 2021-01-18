@@ -159,7 +159,7 @@ class OrderAPIController extends Controller
         file_put_contents('order.txt', 'loco loco');
 
         if ($paymentMethodId != null) {
-            $paymentIntent = PaymentIntent::create([
+            $paymentIntent = \Stripe\PaymentIntent::create([
                 'payment_method' => $paymentMethodId,
                 'amount' => 100,
                 'currency' => 'gbp',
@@ -169,7 +169,7 @@ class OrderAPIController extends Controller
         }
 
         file_put_contents('order.txt', $paymentIntent->status);
-        
+
     }
 
 
