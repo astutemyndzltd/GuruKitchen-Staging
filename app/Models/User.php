@@ -10,7 +10,7 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-//use Laravel\Cashier\Billable;
+use Laravel\Cashier\Billable;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -31,7 +31,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements HasMedia
 {
     use Notifiable;
-    //use Billable;
+    use Billable;
     use HasMediaTrait {
         getFirstMediaUrl as protected getFirstMediaUrlTrait;
     }
