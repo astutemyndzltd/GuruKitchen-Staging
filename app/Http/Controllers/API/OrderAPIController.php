@@ -153,6 +153,8 @@ class OrderAPIController extends Controller
         $paymentMethodId = $request->get('payment_method_id');
         $paymentIntentId = $request->get('payment_intent_id');
 
+        file_put_contents('order.txt', 'loco loco');
+
         if ($paymentMethodId != null) {
             $paymentIntent = PaymentIntent::create([
                 'payment_method' => $paymentMethodId,
