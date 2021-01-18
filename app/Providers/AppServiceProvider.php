@@ -59,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
             config(['services.stripe.secret' => setting('stripe_secret')]);
             Stripe::setApiKey(setting('stripe_key'));
             Stripe::setClientId(setting('stripe_secret'));
-            Cashier::useCurrency(Str::lower(setting('default_currency_code', 'USD')), setting('default_currency', '$'));
+            //Cashier::useCurrency(Str::lower(setting('default_currency_code', 'USD')), setting('default_currency', '$'));
 
             config(['services.razorpay.key' => setting('razorpay_key')]);
             config(['services.razorpay.secret' => setting('razorpay_secret')]);
