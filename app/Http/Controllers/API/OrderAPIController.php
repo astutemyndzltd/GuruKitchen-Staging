@@ -156,7 +156,7 @@ class OrderAPIController extends Controller
         $paymentIntentId = $request->get('payment_intent_id');
 
         if ($paymentMethodId != null) {
-            $paymentIntent = PaymentIntent::create([
+            $paymentIntent = \Stripe\PaymentIntent::create([
                 'payment_method' => $paymentMethodId,
                 'amount' => 100,
                 'currency' => 'gbp',
