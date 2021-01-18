@@ -30,7 +30,9 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Exceptions\RepositoryException;
 use Prettus\Validator\Exceptions\ValidatorException;
-use Stripe\Token;
+use Illuminate\Support\Facades\Config;
+use Cartalyst\Stripe\Stripe;
+//use Stripe\Token;
 
 /**
  * Class OrderController
@@ -140,19 +142,24 @@ class OrderAPIController extends Controller
         $payment = $request->only('payment');
         if (isset($payment['payment']) && $payment['payment']['method']) {
             if ($payment['payment']['method'] == "Credit Card") {
-                return $this->stripPayment($request);
+                return $this->stripPaymentNew($request);
             } else {
                 return $this->cashPayment($request);
-
             }
         }
+    }
+
+
+    private function stripePaymentNew(Request $request) 
+    {
+        $stripe = Stripe::make(Config::get('services.stripe.secret'));
     }
 
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse|mixed
      */
-    private function stripPayment(Request $request)
+    /*private function stripPayment(Request $request)
     {
         $input = $request->all();
         $amount = 0;
@@ -207,7 +214,7 @@ class OrderAPIController extends Controller
         }
 
         return $this->sendResponse($order->toArray(), __('lang.saved_successfully', ['operator' => __('lang.order')]));
-    }
+    }*/
 
     /**
      * @param Request $request
