@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File name: OrderAPIController.php
  * Last modified: 2020.06.11 at 16:10:52
@@ -31,6 +32,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Exceptions\RepositoryException;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Stripe\Token;
+use Stripe;
 
 /**
  * Class OrderController
@@ -118,8 +120,6 @@ class OrderAPIController extends Controller
         }
 
         return $this->sendResponse($order->toArray(), 'Order retrieved successfully');
-
-
     }
 
     /**
@@ -132,22 +132,40 @@ class OrderAPIController extends Controller
     public function store(Request $request)
     {
         $requestData = $request->all();
-		
-		if ($requestData['note'] == null) {
-			$request->merge(['note' => '']);
-		}
-            
+
+        if ($requestData['note'] == null) {
+            $request->merge(['note' => '']);
+        }
+
         $payment = $request->only('payment');
         if (isset($payment['payment']) && $payment['payment']['method']) {
             if ($payment['payment']['method'] == "Credit Card") {
-                return null;
-                //return $this->stripPayment($request);
+                return $this->stripePaymentNew($request);
             } else {
                 return $this->cashPayment($request);
-
             }
         }
     }
+
+    private function stripePaymentNew(Request $request)
+    {
+        $paymentIntent = null;
+        $paymentMethodId = $request->get('payment_method_id');
+        $paymentIntentId = $request->get('payment_intent_id');
+
+        if ($paymentMethodId != null) {
+            $paymentIntent = PaymentIntent::create([
+                'payment_method' => $paymentMethodId,
+                'amount' => 100,
+                'currency' => 'gbp',
+                'confirmation_method' => 'manual',
+                'confirm' => true,
+            ]);
+        }
+
+        file_put_contents('order.txt', $paymentIntent->status);
+    }
+
 
     /**
      * @param Request $request
@@ -157,7 +175,7 @@ class OrderAPIController extends Controller
     {
         $input = $request->all();
         $amount = 0;
-        
+
         try {
             $user = $this->userRepository->findWithoutFail($input['user_id']);
             if (empty($user)) {
@@ -244,7 +262,6 @@ class OrderAPIController extends Controller
             $this->cartRepository->deleteWhere(['user_id' => $order->user_id]);
 
             Notification::send($order->foodOrders[0]->food->restaurant->users, new NewOrder($order));
-
         } catch (ValidatorException $e) {
             return $this->sendError($e->getMessage());
         }
@@ -290,12 +307,10 @@ class OrderAPIController extends Controller
                     }
                 }
             }
-
         } catch (ValidatorException $e) {
             return $this->sendError($e->getMessage());
         }
 
         return $this->sendResponse($order->toArray(), __('lang.saved_successfully', ['operator' => __('lang.order')]));
     }
-
 }
