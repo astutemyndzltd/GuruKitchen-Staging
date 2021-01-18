@@ -31,7 +31,6 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Exceptions\RepositoryException;
 use Prettus\Validator\Exceptions\ValidatorException;
-use Stripe\Token;
 use Stripe;
 
 /**
@@ -157,7 +156,7 @@ class OrderAPIController extends Controller
         $paymentIntentId = $request->get('payment_intent_id');
 
         if ($paymentMethodId != null) {
-            $paymentIntent = \Stripe\PaymentIntent::create([
+            $paymentIntent = PaymentIntent::create([
                 'payment_method' => $paymentMethodId,
                 'amount' => 100,
                 'currency' => 'gbp',
