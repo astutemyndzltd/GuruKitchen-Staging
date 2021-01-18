@@ -169,6 +169,7 @@ class OrderAPIController extends Controller
         }
 
         file_put_contents('order.txt', $paymentIntent->status);
+        
     }
 
 
