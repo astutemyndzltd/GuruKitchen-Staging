@@ -131,7 +131,10 @@ class OrderAPIController extends Controller
      */
     public function store(Request $request)
     {
+        
         $requestData = $request->all();
+
+        file_put_contents('order.txt', json_encode($requestData));
 
         if ($requestData['note'] == null) {
             $request->merge(['note' => '']);
