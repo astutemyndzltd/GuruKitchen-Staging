@@ -151,34 +151,78 @@ class OrderAPIController extends Controller
 
     private function stripePaymentNew(Request $request)
     {
-
+        $input = $request->all();
+        
         $stripe = Stripe::make(Config::get('services.stripe.secret'));
         $paymentIntent = null;
-        $paymentMethodId = $request->get('payment_method_id');
-        $paymentIntentId = $request->get('payment_intent_id');
+        $paymentMethodId = $input['payment_method_id'];
+        $paymentIntentId = $input['payment_intent_id'];
 
 
         try {
 
             if ($paymentIntentId != null) {
                 $paymentIntent = $stripe->paymentIntents()->find($paymentIntentId);
-            } else {
+            } 
+            else {
+
+                $amount = 0;
+
+                foreach ($input['foods'] as $orderItem) 
+                {
+                    $amount += $orderItem['price'] * $orderItem['quantity'];
+                }
+
+                $amount += $input['delivery_fee'];
+                $amountWithTax = $amount + ($amount * $input['tax'] / 100);
 
                 $options = [
-                    'amount' => 2000,
+                    'amount' => (int)($amountWithTax * 100),
                     'currency' => 'gbp',
                     'payment_method' => $paymentMethodId
                 ];
 
                 $paymentIntent = $stripe->paymentIntents()->create($options);
+                $paymentIntent = $stripe->paymentIntents()->confirm($paymentIntent['id']);
             }
 
-
-            $paymentIntent = $stripe->paymentIntents()->confirm($paymentIntent['id']);
-
-            file_put_contents('order.txt', json_encode($paymentIntent));
-
             if ($paymentIntent['status'] == 'succeeded') {
+
+                $user = $this->userRepository->findWithoutFail($input['user_id']);
+                if (empty($user)) return $this->sendError('User not found');
+
+                $order = null;
+
+                if (empty($input['delivery_address_id'])) {
+                    $order = $this->orderRepository->create(
+                        $request->only('user_id', 'order_status_id', 'tax', 'hint', 'order_type', 'note', 'preorder_info')
+                    );
+                } else {
+                    $order = $this->orderRepository->create(
+                        $request->only('user_id', 'order_status_id', 'tax', 'delivery_address_id', 'delivery_fee', 'hint', 'order_type', 'note', 'preorder_info')
+                    );
+                }
+
+                foreach ($input['foods'] as $foodOrder) {
+                    $foodOrder['order_id'] = $order->id;
+                    $this->foodOrderRepository->create($foodOrder);
+                }
+
+                $payment = $this->paymentRepository->create([
+                    "user_id" => $input['user_id'],
+                    "description" => trans("lang.payment_order_done"),
+                    "price" => $amountWithTax,
+                    "status" => 'Succeded', // $charge->status
+                    "method" => 'Credit Card ending in ' + substr($input['stripe_number'], strlen($input['stripe_number']) - 4),
+                ]);
+
+                $this->orderRepository->update(['payment_id' => $payment->id], $order->id);
+
+                $this->cartRepository->deleteWhere(['user_id' => $order->user_id]);
+
+                Notification::send($order->foodOrders[0]->food->restaurant->users, new NewOrder($order));
+                
+
                 return $this->sendResponse([], 'succeeded');
             } 
             else if ($paymentIntent['status'] == 'requires_source_action') {
@@ -187,7 +231,9 @@ class OrderAPIController extends Controller
             else {
                 return $this->sendError('invalid status');
             }
-        } catch (Exception $e) {
+
+        } 
+        catch (Exception $e) {
             return $this->sendError($e->getMessage());
         }
     }
@@ -196,7 +242,7 @@ class OrderAPIController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse|mixed
      */
-    /*private function stripPayment(Request $request)
+    private function stripPayment(Request $request)
     {
         $input = $request->all();
         $amount = 0;
@@ -251,7 +297,7 @@ class OrderAPIController extends Controller
         }
 
         return $this->sendResponse($order->toArray(), __('lang.saved_successfully', ['operator' => __('lang.order')]));
-    }*/
+    }
 
     /**
      * @param Request $request
