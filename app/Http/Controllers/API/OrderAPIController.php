@@ -183,7 +183,7 @@ class OrderAPIController extends Controller
             {
                 return $this->sendResponse([], 'succeeded');
             }
-            else if($paymentIntent['status'] == 'requires_action') 
+            else if($paymentIntent['status'] == 'requires_source_action') 
             {
                 return $this->sendResponse(['client_secret' => $paymentIntent->client_secret], 'requires action');
             }
