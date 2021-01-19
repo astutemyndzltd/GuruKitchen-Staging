@@ -151,13 +151,16 @@ class OrderAPIController extends Controller
 
     private function stripePaymentNew(Request $request)
     {
-        $stripe = Stripe::make(Config::get('services.stripe.secret'));
+        return $this->sendError('invalid status');
+        
+        /*$stripe = Stripe::make(Config::get('services.stripe.secret'));
         $paymentIntent = null;
         $paymentMethodId = $request->get('payment_method_id');
         $paymentIntentId = $request->get('payment_intent_id');
 
 
         try {
+
             if ($paymentIntentId != null) {
                 $paymentIntent = $stripe->paymentIntents()->find($paymentIntentId);
             } 
@@ -191,7 +194,7 @@ class OrderAPIController extends Controller
         catch(Exception $e) 
         {
             return $this->sendError($e->getMessage());
-        }
+        }*/
     }
 
     /**
