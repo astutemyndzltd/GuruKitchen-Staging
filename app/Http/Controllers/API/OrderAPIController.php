@@ -184,9 +184,8 @@ class OrderAPIController extends Controller
         }
         else 
         {
-            return $this->sendResponse([], 'invalid status');
+            return $this->sendError('invalid status');
         }
-
     }
 
     /**
