@@ -93,7 +93,9 @@ Route::middleware('auth:api')->group(function () {
     Route::get('favorites/exist', 'API\FavoriteAPIController@exist');
     Route::resource('favorites', 'API\FavoriteAPIController');
 
-    Route::resource('orders', 'API\OrderAPIController');
+    Route::group(['middleware' => ['web']], function () {
+        Route::resource('orders', 'API\OrderAPIController');
+    });
 
     Route::resource('food_orders', 'API\FoodOrderAPIController');
 
