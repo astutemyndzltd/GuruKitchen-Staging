@@ -149,7 +149,9 @@ Route::middleware('auth')->group(function () {
         'show'
     ]);
 
-    Route::resource('orders', 'OrderController');
+    Route::group(['middleware' => ['web']], function () {
+        Route::resource('orders', 'OrderController');// your routes here
+    });
 
     Route::resource('notifications', 'NotificationController')->except([
         'create', 'store', 'update', 'edit',
