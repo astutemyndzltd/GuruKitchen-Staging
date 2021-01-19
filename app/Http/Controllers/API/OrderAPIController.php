@@ -161,26 +161,14 @@ class OrderAPIController extends Controller
 
 
         try {
-
+                   
             if ($paymentIntentId != null) {
                 $paymentIntent = $stripe->paymentIntents()->find($paymentIntentId);
             } 
             else {
 
-                $amount = 0;
-
-                foreach ($input['foods'] as $orderItem) 
-                {
-                    $amount += $orderItem['price'] * $orderItem['quantity'];
-                }
-
-                $amount += $input['delivery_fee'];
-                $amountWithTax = $amount + ($amount * $input['tax'] / 100);
-
-                session('amount', $amountWithTax);
-
                 $options = [
-                    'amount' => (int)($amountWithTax * 100),
+                    'amount' => (int)($input['order_amount'] * 100),
                     'currency' => 'gbp',
                     'payment_method' => $paymentMethodId
                 ];
@@ -211,12 +199,11 @@ class OrderAPIController extends Controller
                     $this->foodOrderRepository->create($foodOrder);
                 }
                 
-                file_put_contents('order.txt', session('amount'));
 
                 $payment = $this->paymentRepository->create([
                     "user_id" => $input['user_id'],
                     "description" => trans("lang.payment_order_done"),
-                    "price" => floatval(session('amount')),
+                    "price" => $input['order_amount'],
                     "status" => 'Succeded', // $charge->status
                     "method" => 'Credit Card, ending in ' + substr($input['stripe_number'], strlen($input['stripe_number']) - 4),
                 ]);
