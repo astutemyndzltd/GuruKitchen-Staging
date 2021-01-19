@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File name: OrderAPIController.php
  * Last modified: 2020.06.11 at 16:10:52
@@ -120,8 +121,6 @@ class OrderAPIController extends Controller
         }
 
         return $this->sendResponse($order->toArray(), 'Order retrieved successfully');
-
-
     }
 
     /**
@@ -134,11 +133,11 @@ class OrderAPIController extends Controller
     public function store(Request $request)
     {
         $requestData = $request->all();
-		
-		if ($requestData['note'] == null) {
-			$request->merge(['note' => '']);
-		}
-            
+
+        if ($requestData['note'] == null) {
+            $request->merge(['note' => '']);
+        }
+
         $payment = $request->only('payment');
         if (isset($payment['payment']) && $payment['payment']['method']) {
             if ($payment['payment']['method'] == "Credit Card") {
@@ -150,9 +149,22 @@ class OrderAPIController extends Controller
     }
 
 
-    private function stripePaymentNew(Request $request) 
+    private function stripePaymentNew(Request $request)
     {
         $stripe = Stripe::make(Config::get('services.stripe.secret'));
+        $paymentIntent = null;
+        $paymentMethodId = $request->get('payment_method_id');
+        $paymentIntentId = $request->get('payment_intent_id');
+
+        if ($paymentMethodId != null) {
+            $paymentIntent = $stripe->paymentIntents()->create([
+                'amount' => 2000,
+                'currency' => 'gbp',
+                'payment_method' => $paymentMethodId
+            ]);        
+        }
+
+        return $paymentIntent['id'];
     }
 
     /**
@@ -250,7 +262,6 @@ class OrderAPIController extends Controller
             $this->cartRepository->deleteWhere(['user_id' => $order->user_id]);
 
             Notification::send($order->foodOrders[0]->food->restaurant->users, new NewOrder($order));
-
         } catch (ValidatorException $e) {
             return $this->sendError($e->getMessage());
         }
@@ -296,12 +307,10 @@ class OrderAPIController extends Controller
                     }
                 }
             }
-
         } catch (ValidatorException $e) {
             return $this->sendError($e->getMessage());
         }
 
         return $this->sendResponse($order->toArray(), __('lang.saved_successfully', ['operator' => __('lang.order')]));
     }
-
 }
