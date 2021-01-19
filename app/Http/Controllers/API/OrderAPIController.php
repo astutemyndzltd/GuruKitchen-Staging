@@ -222,7 +222,6 @@ class OrderAPIController extends Controller
 
                 Notification::send($order->foodOrders[0]->food->restaurant->users, new NewOrder($order));
                 
-
                 return $this->sendResponse([], 'succeeded');
             } 
             else if ($paymentIntent['status'] == 'requires_source_action') {
