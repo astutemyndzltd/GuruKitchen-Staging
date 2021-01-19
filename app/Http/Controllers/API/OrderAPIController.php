@@ -176,6 +176,8 @@ class OrderAPIController extends Controller
     
     
             $paymentIntent = $stripe->paymentIntents()->confirm($paymentIntent['id']);
+
+            file_put_contents('order.txt', $paymentIntent);
     
             if($paymentIntent['status'] == 'succeeded') 
             {
