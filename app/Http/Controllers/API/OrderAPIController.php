@@ -155,9 +155,9 @@ class OrderAPIController extends Controller
         $input = $request->all();
         
         $stripe = Stripe::make(Config::get('services.stripe.secret'));
-        $paymentIntent = null;
         $paymentMethodId = isset($input['payment_method_id']) ? $input['payment_method_id'] : null;
         $paymentIntentId = isset($input['payment_intent_id']) ? $input['payment_intent_id'] : null;
+        $paymentIntent = null;
 
 
         try {
