@@ -168,7 +168,7 @@ class OrderAPIController extends Controller
             else {
 
                 $options = [
-                    'amount' => (int)($input['order_amount'] * 100),
+                'amount' => (/*$input['order_amount']*/100.37582),
                     'currency' => 'gbp',
                     'payment_method' => $paymentMethodId
                 ];
@@ -205,7 +205,7 @@ class OrderAPIController extends Controller
                     "description" => trans("lang.payment_order_done"),
                     "price" => $input['order_amount'],
                     "status" => 'Succeded', // $charge->status
-                    "method" => 'Credit Card, ending in ' . substr($input['stripe_number'], strlen($input['stripe_number']) - 4),
+                    "method" => 'Credit Card ' . substr($input['stripe_number'], strlen($input['stripe_number']) - 4),
                 ]);
 
                
