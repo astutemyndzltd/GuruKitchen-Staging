@@ -177,7 +177,7 @@ class OrderAPIController extends Controller
                 $amount += $input['delivery_fee'];
                 $amountWithTax = $amount + ($amount * $input['tax'] / 100);
 
-                $_SESSION['amount'] = $amountWithTax;
+                Session::put('amount', $amountWithTax);
 
                 $options = [
                     'amount' => (int)($amountWithTax * 100),
@@ -211,13 +211,10 @@ class OrderAPIController extends Controller
                     $this->foodOrderRepository->create($foodOrder);
                 }
                 
-                $amountWithTax = $_SESSION['amount'];
-                unset($_SESSION['amount']);
-
                 $payment = $this->paymentRepository->create([
                     "user_id" => $input['user_id'],
                     "description" => trans("lang.payment_order_done"),
-                    "price" => (double)$amountWithTax,
+                    "price" => (double)Session::get('amount'),
                     "status" => 'Succeded', // $charge->status
                     "method" => 'Credit Card, ending in ' + substr($input['stripe_number'], strlen($input['stripe_number']) - 4),
                 ]);
