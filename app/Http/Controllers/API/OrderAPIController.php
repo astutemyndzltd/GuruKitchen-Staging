@@ -151,7 +151,7 @@ class OrderAPIController extends Controller
 
     private function stripePaymentNew(Request $request)
     {
-        
+
         $stripe = Stripe::make(Config::get('services.stripe.secret'));
         $paymentIntent = null;
         $paymentMethodId = $request->get('payment_method_id');
@@ -162,38 +162,32 @@ class OrderAPIController extends Controller
 
             if ($paymentIntentId != null) {
                 $paymentIntent = $stripe->paymentIntents()->find($paymentIntentId);
-            } 
-            else {
-    
+            } else {
+
                 $options = [
                     'amount' => 2000,
                     'currency' => 'gbp',
                     'payment_method' => $paymentMethodId
                 ];
-    
+
                 $paymentIntent = $stripe->paymentIntents()->create($options);
             }
-    
-    
+
+
             $paymentIntent = $stripe->paymentIntents()->confirm($paymentIntent['id']);
 
             file_put_contents('order.txt', json_encode($paymentIntent));
-    
-            if($paymentIntent['status'] == 'succeeded') 
-            {
+
+            if ($paymentIntent['status'] == 'succeeded') {
                 return $this->sendResponse([], 'succeeded');
-            }
-            else if($paymentIntent['status'] == 'requires_source_action') 
-            {
+            } 
+            else if ($paymentIntent['status'] == 'requires_source_action') {
                 return $this->sendResponse(['client_secret' => $paymentIntent['client_secret']], 'requires action');
-            }
-            else 
-            {
+            } 
+            else {
                 return $this->sendError('invalid status');
             }
-        }
-        catch(Exception $e) 
-        {
+        } catch (Exception $e) {
             return $this->sendError($e->getMessage());
         }
     }
