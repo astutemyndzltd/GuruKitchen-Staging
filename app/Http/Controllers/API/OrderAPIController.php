@@ -205,7 +205,7 @@ class OrderAPIController extends Controller
                     "description" => trans("lang.payment_order_done"),
                     "price" => $input['order_amount'],
                     "status" => 'Succeded', // $charge->status
-                    "method" => 'Credit Card, ending in ' + substr($input['stripe_number'], strlen($input['stripe_number']) - 4),
+                    "method" => 'Credit Card, ending in ' . substr($input['stripe_number'], strlen($input['stripe_number']) - 4),
                 ]);
 
                
