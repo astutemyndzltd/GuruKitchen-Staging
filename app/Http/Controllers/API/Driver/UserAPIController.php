@@ -149,13 +149,13 @@ class UserAPIController extends Controller
                 'distance_unit' => '',
                 'stripe_key' => ''
             ]
-        );*/
+        );
 
         if (!$settings) {
             return $this->sendError('Settings not found', 401);
-        }
+        }*/
 
-        return $this->sendResponse($settings, 'Settings retrieved successfully');
+        return $this->sendResponse('hello', 'Settings retrieved successfully');
     }
 
     /**
