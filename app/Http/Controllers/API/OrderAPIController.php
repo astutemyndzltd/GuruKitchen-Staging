@@ -172,11 +172,21 @@ class OrderAPIController extends Controller
         }
 
 
-        //$paymentIntent = $stripe->paymentIntents()->confirm($paymentIntent->id);
+        $paymentIntent = $stripe->paymentIntents()->confirm($paymentIntent->id);
 
-        file_put_contents('order.txt', json_encode($paymentIntent));
+        if($paymentIntent->status == 'succeeded') 
+        {
+            return $this->sendResponse([], 'succeeded');
+        }
+        else if($paymentIntent->status == 'requires_action') 
+        {
+            return $this->sendResponse(['client_secret' => $paymentIntent->client_secret], 'requires action');
+        }
+        else 
+        {
+            return $this->sendResponse([], 'invalid status');
+        }
 
-        return $paymentIntent;
     }
 
     /**
