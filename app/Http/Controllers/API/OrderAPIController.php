@@ -168,7 +168,7 @@ class OrderAPIController extends Controller
             else {
 
                 $options = [
-                'amount' => (/*$input['order_amount']*/100.37582),
+                    'amount' => $input['order_amount'],
                     'currency' => 'gbp',
                     'payment_method' => $paymentMethodId
                 ];
@@ -212,6 +212,8 @@ class OrderAPIController extends Controller
                 $this->orderRepository->update(['payment_id' => $payment->id], $order->id);
 
                 $this->cartRepository->deleteWhere(['user_id' => $order->user_id]);
+
+                $stripe->paymentIntents()->update($paymentIntent['id'], ['metadata' => [ 'Order Id' => $order->id ]]);
 
                 Notification::send($order->foodOrders[0]->food->restaurant->users, new NewOrder($order));
                 
