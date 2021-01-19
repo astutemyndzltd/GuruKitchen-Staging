@@ -176,6 +176,8 @@ class OrderAPIController extends Controller
                 $amount += $input['delivery_fee'];
                 $amountWithTax = $amount + ($amount * $input['tax'] / 100);
 
+                $request->session()->put('amount', $amountWithTax);
+
                 $options = [
                     'amount' => (int)($amountWithTax * 100),
                     'currency' => 'gbp',
@@ -207,14 +209,18 @@ class OrderAPIController extends Controller
                     $foodOrder['order_id'] = $order->id;
                     $this->foodOrderRepository->create($foodOrder);
                 }
+                
+                $amountWithTax = $request->session()->pull('amount');
 
                 $payment = $this->paymentRepository->create([
                     "user_id" => $input['user_id'],
                     "description" => trans("lang.payment_order_done"),
                     "price" => $amountWithTax,
                     "status" => 'Succeded', // $charge->status
-                    "method" => 'Credit Card ending in ' + substr($input['stripe_number'], strlen($input['stripe_number']) - 4),
+                    "method" => 'Credit Card, ending in ' + substr($input['stripe_number'], strlen($input['stripe_number']) - 4),
                 ]);
+
+               
 
                 $this->orderRepository->update(['payment_id' => $payment->id], $order->id);
 
@@ -222,7 +228,7 @@ class OrderAPIController extends Controller
 
                 Notification::send($order->foodOrders[0]->food->restaurant->users, new NewOrder($order));
                 
-                return $this->sendResponse([], 'succeeded');
+                return $this->sendResponse($order->toArray(), 'succeeded');
             } 
             else if ($paymentIntent['status'] == 'requires_source_action') {
                 return $this->sendResponse(['client_secret' => $paymentIntent['client_secret']], 'requires action');
@@ -241,7 +247,7 @@ class OrderAPIController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse|mixed
      */
-    private function stripPayment(Request $request)
+    /*private function stripPayment(Request $request)
     {
         $input = $request->all();
         $amount = 0;
@@ -296,7 +302,8 @@ class OrderAPIController extends Controller
         }
 
         return $this->sendResponse($order->toArray(), __('lang.saved_successfully', ['operator' => __('lang.order')]));
-    }
+    }*/
+
 
     /**
      * @param Request $request
