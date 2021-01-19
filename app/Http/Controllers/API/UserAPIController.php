@@ -161,6 +161,7 @@ class UserAPIController extends Controller
                 'home_section_10'=> '',
                 'home_section_11'=> '',
                 'home_section_12'=> '',
+                'stripe_key' => ''
             ]
         );
 
