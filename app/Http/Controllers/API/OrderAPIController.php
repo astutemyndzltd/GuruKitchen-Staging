@@ -156,15 +156,26 @@ class OrderAPIController extends Controller
         $paymentMethodId = $request->get('payment_method_id');
         $paymentIntentId = $request->get('payment_intent_id');
 
-        if ($paymentMethodId != null) {
-            $paymentIntent = $stripe->paymentIntents()->create([
+
+        if ($paymentIntentId != null) {
+            $paymentIntent = $stripe->paymentIntents()->find($paymentIntentId);
+        } 
+        else {
+
+            $options = [
                 'amount' => 2000,
                 'currency' => 'gbp',
                 'payment_method' => $paymentMethodId
-            ]);        
+            ];
+
+            $paymentIntent = $stripe->paymentIntents()->create($options);
         }
 
-        return $paymentIntent['id'];
+
+        $paymentIntent = $stripe->paymentIntents()->confirm($paymentIntent->id);
+
+
+        return $paymentIntent->id;
     }
 
     /**
