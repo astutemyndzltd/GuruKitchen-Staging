@@ -217,13 +217,12 @@ class OrderAPIController extends Controller
                 $payment = $this->paymentRepository->create([
                     "user_id" => $input['user_id'],
                     "description" => trans("lang.payment_order_done"),
-                    "price" => $amountWithTax,
+                    "price" => (double)$amountWithTax,
                     "status" => 'Succeded', // $charge->status
                     "method" => 'Credit Card, ending in ' + substr($input['stripe_number'], strlen($input['stripe_number']) - 4),
                 ]);
 
                
-
                 $this->orderRepository->update(['payment_id' => $payment->id], $order->id);
 
                 $this->cartRepository->deleteWhere(['user_id' => $order->user_id]);
