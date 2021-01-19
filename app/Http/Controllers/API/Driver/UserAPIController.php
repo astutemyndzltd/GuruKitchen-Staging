@@ -153,9 +153,9 @@ class UserAPIController extends Controller
 
         if (!$settings) {
             return $this->sendError('Settings not found', 401);
-        }*/
+        }
 
-        return $this->sendResponse('hello', 'Settings retrieved successfully');
+        return $this->sendResponse('hello', 'Settings retrieved successfully');*/
     }
 
     /**
