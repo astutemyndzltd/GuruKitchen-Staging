@@ -157,34 +157,40 @@ class OrderAPIController extends Controller
         $paymentIntentId = $request->get('payment_intent_id');
 
 
-        if ($paymentIntentId != null) {
-            $paymentIntent = $stripe->paymentIntents()->find($paymentIntentId);
-        } 
-        else {
-
-            $options = [
-                'amount' => 2000,
-                'currency' => 'gbp',
-                'payment_method' => $paymentMethodId
-            ];
-
-            $paymentIntent = $stripe->paymentIntents()->create($options);
+        try {
+            if ($paymentIntentId != null) {
+                $paymentIntent = $stripe->paymentIntents()->find($paymentIntentId);
+            } 
+            else {
+    
+                $options = [
+                    'amount' => 2000,
+                    'currency' => 'gbp',
+                    'payment_method' => $paymentMethodId
+                ];
+    
+                $paymentIntent = $stripe->paymentIntents()->create($options);
+            }
+    
+    
+            $paymentIntent = $stripe->paymentIntents()->confirm($paymentIntent->id);
+    
+            if($paymentIntent->status == 'succeeded') 
+            {
+                return $this->sendResponse([], 'succeeded');
+            }
+            else if($paymentIntent->status == 'requires_action') 
+            {
+                return $this->sendResponse(['client_secret' => $paymentIntent->client_secret], 'requires action');
+            }
+            else 
+            {
+                return $this->sendError('invalid status');
+            }
         }
-
-
-        $paymentIntent = $stripe->paymentIntents()->confirm($paymentIntent->id);
-
-        if($paymentIntent->status == 'succeeded') 
+        catch(Exception $e) 
         {
-            return $this->sendResponse([], 'succeeded');
-        }
-        else if($paymentIntent->status == 'requires_action') 
-        {
-            return $this->sendResponse(['client_secret' => $paymentIntent->client_secret], 'requires action');
-        }
-        else 
-        {
-            return $this->sendError('invalid status');
+            return $this->sendError($e->getMessage());
         }
     }
 
