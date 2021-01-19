@@ -123,7 +123,7 @@ class UserAPIController extends Controller
     function settings(Request $request)
     {
         $settings = setting()->all();
-        $settings = array_intersect_key($settings,
+        /*$settings = array_intersect_key($settings,
             [
                 'default_tax' => '',
                 'default_currency' => '',
@@ -149,7 +149,7 @@ class UserAPIController extends Controller
                 'distance_unit' => '',
                 'stripe_key' => ''
             ]
-        );
+        );*/
 
         if (!$settings) {
             return $this->sendError('Settings not found', 401);
