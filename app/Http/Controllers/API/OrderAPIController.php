@@ -214,7 +214,7 @@ class OrderAPIController extends Controller
                 $payment = $this->paymentRepository->create([
                     "user_id" => $input['user_id'],
                     "description" => trans("lang.payment_order_done"),
-                    "price" => (double)session('amount'),
+                    "price" => floatval(session('amount')),
                     "status" => 'Succeded', // $charge->status
                     "method" => 'Credit Card, ending in ' + substr($input['stripe_number'], strlen($input['stripe_number']) - 4),
                 ]);
