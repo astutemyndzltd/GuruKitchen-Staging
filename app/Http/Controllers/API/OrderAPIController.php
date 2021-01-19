@@ -65,6 +65,7 @@ class OrderAPIController extends Controller
      */
     public function __construct(OrderRepository $orderRepo, FoodOrderRepository $foodOrderRepository, CartRepository $cartRepo, PaymentRepository $paymentRepo, NotificationRepository $notificationRepo, UserRepository $userRepository)
     {
+        session_start();
         $this->orderRepository = $orderRepo;
         $this->foodOrderRepository = $foodOrderRepository;
         $this->cartRepository = $cartRepo;
@@ -176,7 +177,7 @@ class OrderAPIController extends Controller
                 $amount += $input['delivery_fee'];
                 $amountWithTax = $amount + ($amount * $input['tax'] / 100);
 
-                $request->session()->put('amount', $amountWithTax);
+                $_SESSION['amount'] = $amountWithTax;
 
                 $options = [
                     'amount' => (int)($amountWithTax * 100),
@@ -210,7 +211,8 @@ class OrderAPIController extends Controller
                     $this->foodOrderRepository->create($foodOrder);
                 }
                 
-                $amountWithTax = $request->session()->pull('amount');
+                $amountWithTax = $_SESSION['amount'];
+                unset($_SESSION['amount']);
 
                 $payment = $this->paymentRepository->create([
                     "user_id" => $input['user_id'],
