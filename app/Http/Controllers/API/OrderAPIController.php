@@ -172,10 +172,10 @@ class OrderAPIController extends Controller
         }
 
 
-        $paymentIntent = $stripe->paymentIntents()->confirm($paymentIntent->id);
+        //$paymentIntent = $stripe->paymentIntents()->confirm($paymentIntent->id);
 
 
-        return $paymentIntent->id;
+        return json_encode($paymentIntent);
     }
 
     /**
