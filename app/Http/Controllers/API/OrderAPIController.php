@@ -33,6 +33,7 @@ use Prettus\Repository\Exceptions\RepositoryException;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Config;
 use Cartalyst\Stripe\Stripe;
+use Session;
 //use Stripe\Token;
 
 /**
@@ -157,7 +158,7 @@ class OrderAPIController extends Controller
         $stripe = Stripe::make(Config::get('services.stripe.secret'));
         $paymentMethodId = isset($input['payment_method_id']) ? $input['payment_method_id'] : null;
         $paymentIntentId = isset($input['payment_intent_id']) ? $input['payment_intent_id'] : null;
-        $paymentIntent = null;
+        $paymentIntent = null; $amount = 0;
 
 
         try {
@@ -167,8 +168,17 @@ class OrderAPIController extends Controller
             } 
             else {
 
+                foreach ($input['foods'] as $foodOrder) {
+                    $amount += $foodOrder['price'] * $foodOrder['quantity'];
+                }
+
+                $amount += $order->delivery_fee;
+                $amountWithTax = $amount + ($amount * $order->tax / 100);
+
+                Session::put('amount', $amountWithTax);
+
                 $options = [
-                    'amount' => $input['order_amount'],
+                    'amount' => $amountWithTax * 100,
                     'currency' => 'gbp',
                     'payment_method' => $paymentMethodId
                 ];
@@ -199,11 +209,12 @@ class OrderAPIController extends Controller
                     $this->foodOrderRepository->create($foodOrder);
                 }
                 
+                $amountWithTax = Session::get('amount');
 
                 $payment = $this->paymentRepository->create([
                     "user_id" => $input['user_id'],
                     "description" => trans("lang.payment_order_done"),
-                    "price" => $input['order_amount'],
+                    "price" => $amountWithTax,
                     "status" => 'Succeded', 
                     "method" => $input['card_brand'] . ' ' . substr($input['stripe_number'], strlen($input['stripe_number']) - 4),
                 ]);
