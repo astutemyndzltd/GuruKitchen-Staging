@@ -33,7 +33,6 @@ use Prettus\Repository\Exceptions\RepositoryException;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Config;
 use Cartalyst\Stripe\Stripe;
-use Session;
 //use Stripe\Token;
 
 /**
@@ -159,6 +158,7 @@ class OrderAPIController extends Controller
         $paymentMethodId = isset($input['payment_method_id']) ? $input['payment_method_id'] : null;
         $paymentIntentId = isset($input['payment_intent_id']) ? $input['payment_intent_id'] : null;
         $paymentIntent = null;
+
 
         try {
                    
