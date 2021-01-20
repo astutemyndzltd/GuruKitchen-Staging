@@ -227,7 +227,7 @@ class OrderAPIController extends Controller
 
         } 
         catch (Exception $e) {
-            return $this->sendError($e->getMessage());
+            return $this->sendError('invalid status');
         }
     }
 
