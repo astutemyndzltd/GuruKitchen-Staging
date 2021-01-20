@@ -207,7 +207,6 @@ class OrderAPIController extends Controller
                     "status" => 'Succeded', 
                     "method" => $input['card_brand'] . ' ' . substr($input['stripe_number'], strlen($input['stripe_number']) - 4),
                 ]);
-
                
                 $this->orderRepository->update(['payment_id' => $payment->id], $order->id);
 
