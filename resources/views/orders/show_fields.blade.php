@@ -53,7 +53,7 @@
   @if($order->active)
   @endif
 
-  {!! Form::label('payment_method', trans('lang.payment_method'), ['class' => 'col-4 control-label']) !!}
+  {!! Form::label('payment_method', 'Card', ['class' => 'col-4 control-label']) !!}
   <div class="col-8">
     <p>{!! isset($order->payment) ? $order->payment->method : '' !!}</p>
   </div>
