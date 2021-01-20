@@ -158,7 +158,7 @@ class OrderAPIController extends Controller
         $stripe = Stripe::make(Config::get('services.stripe.secret'));
         $paymentMethodId = isset($input['payment_method_id']) ? $input['payment_method_id'] : null;
         $paymentIntentId = isset($input['payment_intent_id']) ? $input['payment_intent_id'] : null;
-        $paymentIntent = null; $amount = 0;
+        $paymentIntent = null; 
 
 
         try {
@@ -168,12 +168,14 @@ class OrderAPIController extends Controller
             } 
             else {
 
+                $amount = 0;
+
                 foreach ($input['foods'] as $foodOrder) {
                     $amount += $foodOrder['price'] * $foodOrder['quantity'];
                 }
 
-                $amount += $order->delivery_fee;
-                $amountWithTax = $amount + ($amount * $order->tax / 100);
+                $amount += $input['delivery_fee'];
+                $amountWithTax = $amount + ($amount * $input['tax'] / 100);
 
                 Session::put('amount', $amountWithTax);
 
