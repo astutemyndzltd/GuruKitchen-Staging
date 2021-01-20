@@ -196,10 +196,13 @@ class OrderAPIController extends Controller
 
                 foreach ($input['foods'] as $foodOrder) {
                     $foodOrder['order_id'] = $order->id;
-                    $this->foodOrderRepository->create($foodOrder);
+                    $fd = $this->foodOrderRepository->create($foodOrder);
+
+                    foreach($foodOrder['extras'] as $extra) {
+                        $fd->extras()->create(['price' => $extra['price'], 'extra_id' => $extra['id'] ]);
+                    }
                 }
                 
-
                 $payment = $this->paymentRepository->create([
                     "user_id" => $input['user_id'],
                     "description" => trans("lang.payment_order_done"),
