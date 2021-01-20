@@ -158,8 +158,7 @@ class OrderAPIController extends Controller
         $stripe = Stripe::make(Config::get('services.stripe.secret'));
         $paymentMethodId = isset($input['payment_method_id']) ? $input['payment_method_id'] : null;
         $paymentIntentId = isset($input['payment_intent_id']) ? $input['payment_intent_id'] : null;
-        $paymentIntent = null; 
-
+        $paymentIntent = null;
 
         try {
                    
@@ -168,17 +167,8 @@ class OrderAPIController extends Controller
             } 
             else {
 
-                $amount = 0;
-
-                foreach ($input['foods'] as $foodOrder) {
-                    $amount += $foodOrder['price'] * $foodOrder['quantity'];
-                }
-
-                $amount += $input['delivery_fee'];
-                $amountWithTax = $amount + ($amount * $input['tax'] / 100);
-
                 $options = [
-                    'amount' => $amountWithTax,
+                    'amount' => $input['order_amount'],
                     'currency' => 'gbp',
                     'payment_method' => $paymentMethodId
                 ];
@@ -209,10 +199,11 @@ class OrderAPIController extends Controller
                     $this->foodOrderRepository->create($foodOrder);
                 }
                 
+
                 $payment = $this->paymentRepository->create([
                     "user_id" => $input['user_id'],
                     "description" => trans("lang.payment_order_done"),
-                    "price" => $paymentIntent['amount'],
+                    "price" => $input['order_amount'],
                     "status" => 'Succeded', 
                     "method" => $input['card_brand'] . ' ' . substr($input['stripe_number'], strlen($input['stripe_number']) - 4),
                 ]);
