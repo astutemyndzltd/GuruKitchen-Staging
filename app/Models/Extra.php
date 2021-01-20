@@ -160,5 +160,9 @@ class Extra extends Model implements HasMedia
         return $this->belongsTo(\App\Models\ExtraGroup::class, 'extra_group_id', 'id');
     }
 
+    public function foodOrders() 
+    {
+        return $this->hasMany(\App\Models\FoodOrderExtra::class);
+    }
 
 }

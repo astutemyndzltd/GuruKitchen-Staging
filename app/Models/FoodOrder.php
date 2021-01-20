@@ -28,8 +28,6 @@ class FoodOrder extends Model
 
     public $table = 'food_orders';
     
-
-
     public $fillable = [
         'price',
         'quantity',
@@ -101,7 +99,12 @@ class FoodOrder extends Model
      **/
     public function extras()
     {
-        return $this->belongsToMany(\App\Models\Extra::class, 'food_order_extras');
+        return $this->hasMany(\App\Models\Extra::class, 'food_order_extras');
+    }
+
+    public function orderExtras() 
+    {
+        return $this->hasMany(\App\Models\FoodOrderExtra::class);
     }
 
     /**
