@@ -104,7 +104,7 @@ class FoodOrder extends Model
 
     public function extras() 
     {
-        return $this->hasMany(\App\Models\FoodOrderExtra::class);
+        return $this->hasMany(\App\Models\FoodOrderExtra::class, 'food_order_id', 'id');
     }
 
     /**
