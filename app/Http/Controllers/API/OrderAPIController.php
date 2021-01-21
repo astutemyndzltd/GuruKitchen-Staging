@@ -93,7 +93,7 @@ class OrderAPIController extends Controller
         }
         $orders = $this->orderRepository->all();
 
-        file_put_contents('order.txt', $orders->toArray());
+        file_put_contents('order.txt', json_encode($orders->toArray()));
 
         return $this->sendResponse($orders->toArray(), 'Orders retrieved successfully');
     }
