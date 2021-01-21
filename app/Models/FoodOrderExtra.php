@@ -14,6 +14,7 @@ class FoodOrderExtra extends Model
 {
 
     public $table = 'food_order_extras';
+    public $timestamps = false;
     
 
     public $fillable = [
