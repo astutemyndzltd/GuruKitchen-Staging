@@ -101,7 +101,7 @@ class FoodOrder extends Model
 
     public function extras() 
     {
-        return $this->belongsToMany(\App\Models\Extra::class, 'food_order_extras', 'food_order_id', 'extra_id')->select('extra.*, pivot.price');
+        return $this->belongsToMany(\App\Models\Extra::class, 'food_order_extras', 'food_order_id', 'extra_id')->select(['id', 'name', 'food_order_extras.price']);
     }
 
     /**
