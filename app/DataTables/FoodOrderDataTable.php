@@ -38,10 +38,10 @@ class FoodOrderDataTable extends DataTable
                 return getDateColumn($food_order, 'updated_at');
             })
             ->editColumn('extras', function ($foodOrder) {
-                return getArrayColumn($foodOrder->extras->details, 'name');
+                return getArrayColumn($foodOrder->extrasWithDetails, 'name');
             })
             ->editColumn('price', function ($foodOrder) {
-                foreach ($foodOrder->extras as $extra) {
+                foreach ($foodOrder->orderExtras as $extra) {
                     $foodOrder['price'] += $extra->price;
                 }
                 return getPriceColumn($foodOrder);

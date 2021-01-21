@@ -97,14 +97,19 @@ class FoodOrder extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      **/
-    /*public function extras()
+    public function extras()
     {
         return $this->hasMany(\App\Models\Extra::class, 'food_order_extras');
-    }*/
+    }
 
-    public function extras() 
+    public function orderExtras() 
     {
         return $this->hasMany(\App\Models\FoodOrderExtra::class, 'food_order_id', 'id');
+    }
+
+    public function extrasWithDetails() 
+    {
+        return $this->belongsToMany(\App\Models\Extra::class, 'food_order_extras', 'food_order_id', 'extra_id');
     }
 
     /**

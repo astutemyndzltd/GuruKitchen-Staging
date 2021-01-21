@@ -35,8 +35,4 @@ class FoodOrderExtra extends Model
         $this->belongsTo(\App\Models\FoodOrder::class, 'food_order_id', 'id');
     }
     
-    public function details() 
-    {
-        $this->belongsTo(\App\Models\Extra::class, 'extra_id', 'id');
-    }
 }
