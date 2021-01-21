@@ -109,7 +109,7 @@ class FoodOrder extends Model
 
     public function extrasWithDetails() 
     {
-        return $this->belongsToMany(\App\Models\Extra::class, 'food_order_extras', 'food_order_id', 'extra_id');
+        return $this->belongsToMany(\App\Models\Extra::class);
     }
 
     /**
