@@ -94,14 +94,6 @@ class FoodOrder extends Model
         return $this->belongsTo(\App\Models\Food::class, 'food_id', 'id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     **/
-   /* public function extras()
-    {
-        return $this->hasMany(\App\Models\Extra::class, 'food_order_extras');
-    }*/
-
     public function orderExtras() 
     {
         return $this->hasMany(\App\Models\FoodOrderExtra::class, 'food_order_id', 'id');
@@ -109,7 +101,7 @@ class FoodOrder extends Model
 
     public function extras() 
     {
-        return $this->belongsToMany(\App\Models\Extra::class, 'food_order_extras', 'food_order_id', 'extra_id');
+        return $this->belongsToMany(\App\Models\Extra::class, 'food_order_extras', 'food_order_id', 'extra_id')->select('extra.*, pivot.price');
     }
 
     /**

@@ -65,7 +65,6 @@ class OrderAPIController extends Controller
      */
     public function __construct(OrderRepository $orderRepo, FoodOrderRepository $foodOrderRepository, CartRepository $cartRepo, PaymentRepository $paymentRepo, NotificationRepository $notificationRepo, UserRepository $userRepository)
     {
-        session_start();
         $this->orderRepository = $orderRepo;
         $this->foodOrderRepository = $foodOrderRepository;
         $this->cartRepository = $cartRepo;
@@ -91,9 +90,8 @@ class OrderAPIController extends Controller
         } catch (RepositoryException $e) {
             return $this->sendError($e->getMessage());
         }
-        $orders = $this->orderRepository->all();
 
-        file_put_contents('order.txt', json_encode($orders->toArray()));
+        $orders = $this->orderRepository->all();
 
         return $this->sendResponse($orders->toArray(), 'Orders retrieved successfully');
     }
