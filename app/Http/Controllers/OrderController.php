@@ -149,7 +149,7 @@ class OrderController extends Controller
         $subtotal = 0;
 
         foreach ($order->foodOrders as $foodOrder) {
-            foreach ($foodOrder->extras as $extra) {
+            foreach ($foodOrder->orderExtras as $extra) {
                 $foodOrder->price += $extra->price;
             }
             $subtotal += $foodOrder->price * $foodOrder->quantity;
