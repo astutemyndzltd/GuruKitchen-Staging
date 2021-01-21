@@ -195,12 +195,14 @@ class OrderAPIController extends Controller
                 }
 
                 foreach ($input['foods'] as $foodOrder) {
+                    $extras = $foodOrder['extras'];
+                    unset($foodOrder['extras']);
                     $foodOrder['order_id'] = $order->id;
                     $fd = $this->foodOrderRepository->create($foodOrder);
 
-                    /*foreach($foodOrder['extras'] as $extra) {
-                        $fd->extras()->save(['price' => $extra['price'], 'extra_id' => $extra['id'] ]);
-                    }*/
+                    foreach($extras as $extra) {
+                        $fd->extras()->create(['price' => $extra['price'], 'extra_id' => $extra['id'] ]);
+                    }
                 }
                 
                 $payment = $this->paymentRepository->create([
