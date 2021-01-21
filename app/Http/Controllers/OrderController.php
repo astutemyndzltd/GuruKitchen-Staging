@@ -157,7 +157,7 @@ class OrderController extends Controller
 
         $total = $subtotal + $order['delivery_fee'];
         $taxAmount = $total * $order['tax'] / 100;
-        $total += round($taxAmount,2);
+        $total += round($taxAmount, 2, PHP_ROUND_HALF_DOWN);
         $foodOrderDataTable->id = $id;
 
 
