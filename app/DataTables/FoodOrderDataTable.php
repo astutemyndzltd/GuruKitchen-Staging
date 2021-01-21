@@ -41,9 +41,11 @@ class FoodOrderDataTable extends DataTable
                 return getArrayColumn($foodOrder->extras, 'name');
             })
             ->editColumn('price', function ($foodOrder) {
-                foreach ($foodOrder->extras as $extra) {
+                
+                foreach ($foodOrder->orderExtras as $extra) {
                     $foodOrder['price'] += $extra->price;
                 }
+
                 return getPriceColumn($foodOrder);
             })
             ->rawColumns(array_merge($columns));
