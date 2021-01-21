@@ -93,6 +93,8 @@ class OrderAPIController extends Controller
         }
         $orders = $this->orderRepository->all();
 
+        file_put_contents('order.txt', $orders->toArray());
+
         return $this->sendResponse($orders->toArray(), 'Orders retrieved successfully');
     }
 
@@ -195,7 +197,7 @@ class OrderAPIController extends Controller
                 }
 
                 foreach ($input['foods'] as $foodOrder) {
-                    
+
                     $extras = $foodOrder['extras'];
                     unset($foodOrder['extras']);
                     $foodOrder['order_id'] = $order->id;
