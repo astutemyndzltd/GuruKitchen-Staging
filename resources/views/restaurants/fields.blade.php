@@ -64,7 +64,7 @@
     </div>
 
     <!-- default_tax Field -->
-    <div class="form-group row ">
+    {{-- <div class="form-group row ">
         {!! Form::label('default_tax', trans("lang.restaurant_default_tax"), ['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
             {!! Form::number('default_tax', null, ['class' => 'form-control', 'step'=>'any','placeholder'=> trans("lang.restaurant_default_tax_placeholder")]) !!}
@@ -72,7 +72,9 @@
                 {{ trans("lang.restaurant_default_tax_help") }}
             </div>
         </div>
-    </div>
+    </div> --}}
+
+    <input type="hidden" name="default_tax" value="0">
 
     @endhasanyrole
 
