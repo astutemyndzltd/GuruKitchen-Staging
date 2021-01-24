@@ -46,6 +46,7 @@
         <div class="col-5 offset-7">
           <div class="table-responsive table-light">
             <table class="table">
+            
               <tbody>
                 <tr>
                   <th class="text-right">{{trans('lang.order_subtotal')}}</th>
