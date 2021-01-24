@@ -117,10 +117,10 @@
         <span>{{ getPriceOnly($orderDetails['delivery_fee']) }}</span>
     </div>
 
-    <div id="tax" class="outro-row">
+    {{-- <div id="tax" class="outro-row">
         <span>Tax ({{ $orderDetails['tax'] }}%)</span>
         <span>{{ getPriceOnly($orderDetails['tax_amount']) }}</span>
-    </div>
+    </div> --}}
 
     <div class="marker"></div>
 

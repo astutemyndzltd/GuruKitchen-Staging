@@ -55,10 +55,10 @@
                   <th class="text-right">{{trans('lang.order_delivery_fee')}}</th>
                   <td>{!! getPrice($order['delivery_fee']) !!}</td>
                 </tr>
-                <tr>
+                {{-- <tr>
                   <th class="text-right">{{trans('lang.order_tax')}} ({!!$order->tax!!}%) </th>
                   <td>{!! getPrice($taxAmount)!!}</td>
-                </tr>
+                </tr> --}}
 
                 <tr>
                   <th class="text-right">{{trans('lang.order_total')}}</th>
