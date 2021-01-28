@@ -3,7 +3,7 @@
 @endif
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
 
-    <input type="hidden" value="{{ json_encode($order) }}" id="anik">
+    
 
     <div class="form-group row">
         {!! Form::label('id', trans('lang.order_id'), ['class' => 'col-3 control-label text-right']) !!}

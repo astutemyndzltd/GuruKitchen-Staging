@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Response;
 use Prettus\Validator\Exceptions\ValidatorException;
+use stdClass;
 
 class OrderController extends Controller
 {
@@ -239,6 +240,30 @@ class OrderController extends Controller
         $driver = $this->userRepository->getByCriteria(new DriversOfRestaurantCriteria($restaurant))->pluck('name', 'id');
         $orderStatus = $this->orderStatusRepository->pluck('status', 'id');
 
+        /***** newly added ******/
+        $allOrderStatus = $orderStatus;
+        $orderStatus = new stdClass();
+
+        foreach ($allOrderStatus as $id => $status) {
+
+            if ($id == $order->orderStatus->id) {
+
+                $orderStatus->$id = $status;
+
+                if ($id != 5) {
+                    $next = $allOrderStatus[++$id];
+
+                    if ($id == 4 && $order->order_type == 'Pickup') {
+                        $next = $allOrderStatus[++$id];
+                    }
+
+                    $orderStatus->$id = $next;
+                    break;
+                }
+            }    
+        }
+        
+        /***** newly added ******/
 
         $customFieldsValues = $order->customFieldsValues()->with('customField')->get();
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->orderRepository->model());
