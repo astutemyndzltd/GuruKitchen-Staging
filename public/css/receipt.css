@@ -61,6 +61,7 @@
 #receipt #order-id {
     text-align: center;
     margin-top: 0px;
+    margin-bottom: 15px;
 }
 
 #receipt .intro-row {
