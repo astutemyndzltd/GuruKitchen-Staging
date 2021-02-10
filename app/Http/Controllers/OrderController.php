@@ -305,6 +305,8 @@ class OrderController extends Controller
 
             if (setting('enable_notifications', false)) {
 
+                $order = $order->fresh();
+
                 if (isset($input['order_status_id']) && $input['order_status_id'] != $oldOrder->order_status_id) {
                     Notification::send([$order->user], new StatusChangedOrder($order));
                 }
@@ -316,7 +318,18 @@ class OrderController extends Controller
                         Notification::send([$driver], new AssignedOrder($order));
                     }
                 }
+
+                if ($order['order_type'] == 'Delivery' && $order['driver_id'] == $oldOrder['driver_id'] && $order['order_status_id'] != $oldOrder['order_status_id']) {
+                    
+                    $driver = $this->userRepository->findWithoutFail($input['driver_id']);
+
+                    if (!empty($driver)) {
+                        Notification::send([$driver], new StatusChangedOrderDriver($order));
+                    }
+                }
             }
+
+
 
             $this->paymentRepository->update([
                 "status" => $input['status'],

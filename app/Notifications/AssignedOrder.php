@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\Order;
+use App\Models\OrderStatusDetails;
 use Benwilkins\FCM\FcmMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -24,7 +25,6 @@ class AssignedOrder extends Notification
      */
     public function __construct(Order $order)
     {
-        //
         $this->order = $order;
     }
 
@@ -56,19 +56,24 @@ class AssignedOrder extends Notification
     public function toFcm($notifiable)
     {
         $message = new FcmMessage();
+
         $notification = [
-            'title' => "Order #" . $this->order->id . " of " . $this->order->user->name ." has been assigned to you",
-            'text'         => $this->order->foodOrders[0]->food->restaurant->name,
+            'title' => "A new order has been assigned to you",
+            'text' => $this->order->foodOrders[0]->food->restaurant->name,
             'image' => $this->order->foodOrders[0]->food->restaurant->getFirstMediaUrl('image', 'thumb'),
             'icon' => $this->order->foodOrders[0]->food->restaurant->getFirstMediaUrl('image', 'thumb'),
 			'sound' => 'default'
         ];
+
         $data = [
             'click_action' => "FLUTTER_NOTIFICATION_CLICK",
+            'sound' => 'default',
             'id' => '1',
             'status' => 'done',
             'message' => $notification,
+            'order_status_id' => $this->order->order_status_id
         ];
+
         $message->content($notification)->data($data)->priority(FcmMessage::PRIORITY_HIGH);
 
         return $message;

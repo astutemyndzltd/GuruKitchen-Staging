@@ -1,11 +1,4 @@
 <?php
-/**
- * File name: StatusChangedOrder.php
- * Last modified: 2020.04.30 at 08:21:09
- * Author: SmarterVision - https://codecanyon.net/user/smartervision
- * Copyright (c) 2020
- *
- */
 
 namespace App\Notifications;
 
@@ -16,14 +9,15 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class StatusChangedOrder extends Notification
+class StatusChangedOrderDriver extends Notification
 {
     use Queueable;
+
     /**
      * @var Order
      */
     private $order;
-  
+
     /**
      * Create a new notification instance.
      *
@@ -31,7 +25,6 @@ class StatusChangedOrder extends Notification
      */
     public function __construct(Order $order)
     {
-        //
         $this->order = $order;
     }
 
@@ -65,19 +58,19 @@ class StatusChangedOrder extends Notification
         $message = new FcmMessage();
 
         $notification = [
-            'title' => trans('lang.notification_your_order', ['order_id' => $this->order->id, 'order_status' => $this->order->orderStatus->status]),
+            'title' => "Order status has been changed",
             'text' => $this->order->foodOrders[0]->food->restaurant->name,
             'image' => $this->order->foodOrders[0]->food->restaurant->getFirstMediaUrl('image', 'thumb'),
+            'icon' => $this->order->foodOrders[0]->food->restaurant->getFirstMediaUrl('image', 'thumb'),
 			'sound' => 'default'
         ];
 
         $data = [
             'click_action' => "FLUTTER_NOTIFICATION_CLICK",
             'sound' => 'default',
-            'id' => 'orders',
+            'id' => '1',
             'status' => 'done',
-            'message' => $notification,
-            'order_status_id' => $this->order->order_status_id
+            'message' => $notification
         ];
 
         $message->content($notification)->data($data)->priority(FcmMessage::PRIORITY_HIGH);
