@@ -140,6 +140,7 @@ class OrderAPIController extends Controller
         }
 
         $payment = $request->only('payment');
+        
         if (isset($payment['payment']) && $payment['payment']['method']) {
             if ($payment['payment']['method'] == "Credit Card") {
                 return $this->stripePaymentNew($request);

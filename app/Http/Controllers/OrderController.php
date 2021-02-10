@@ -113,7 +113,7 @@ class OrderController extends Controller
         $input = $request->all();
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->orderRepository->model());
 
-        try {
+        try { 
             $order = $this->orderRepository->create($input);
             $order->customFieldsValues()->createMany(getCustomFieldsValues($customFields, $request));
 
