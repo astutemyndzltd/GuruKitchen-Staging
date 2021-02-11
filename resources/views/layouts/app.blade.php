@@ -182,16 +182,22 @@
     <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="{{asset('https://www.gstatic.com/firebasejs/7.2.0/firebase-app.js')}}"></script>
+    <script src="{{asset('https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js')}}"></script>
 
-    <script src="{{asset('https://www.gstatic.com/firebasejs/7.2.0/firebase-messaging.js')}}"></script>
+    <script src="{{asset('https://www.gstatic.com/firebasejs/8.2.5/firebase-messaging.js')}}"></script>
 	<script src="{{asset('js/alert.js')}}"></script>
     <script type="text/javascript">@include('vendor.notifications.init_firebase')</script>
 
     <script type="text/javascript">
+
+        const broadcastChannel = new BroadcastChannel('message-channel');
         const messaging = firebase.messaging();
-        navigator.serviceWorker.register("{{url('firebase/sw-js')}}")
+
+        broadcastChannel.onmessage = () => playAlert('eventually');
+
+        navigator.serviceWorker.register("{{url('/sw-js')}}")
             .then((registration) => {
+                //console.log(registration);
                 messaging.useServiceWorker(registration);
                 messaging.requestPermission()
                     .then(function() {
@@ -202,6 +208,7 @@
                     .catch(function(err) {
                         console.log('Unable to get permission to notify.', err);
                     });
+
                 messaging.onMessage(function(payload) {
                     console.log("Message received. ", payload);
                     notificationTitle = payload.data.title;
@@ -213,6 +220,7 @@
                     let notification = new Notification(notificationTitle, notificationOptions);
 					playAlert('eventually');
                 });
+
             });
 
         function getRegToken(argument) {
