@@ -19,6 +19,7 @@ use App\Http\Requests\CreateOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Notifications\AssignedOrder;
 use App\Notifications\StatusChangedOrder;
+use App\Notifications\StatusChangedOrderDriver;
 use App\Repositories\CustomFieldRepository;
 use App\Repositories\NotificationRepository;
 use App\Repositories\OrderRepository;
@@ -331,9 +332,7 @@ class OrderController extends Controller
 
 
 
-            $this->paymentRepository->update([
-                "status" => $input['status'],
-            ], $order['payment_id']);
+            $this->paymentRepository->update(["status" => $input['status']], $order['payment_id']);
             //dd($input['status']);
 
             event(new OrderChangedEvent($oldStatus, $order));
