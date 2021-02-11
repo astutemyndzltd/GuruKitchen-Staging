@@ -35,7 +35,7 @@ Route::get('payments/paypal/express-checkout', 'PayPalController@getExpressCheck
 Route::get('payments/paypal/express-checkout-success', 'PayPalController@getExpressCheckoutSuccess');
 Route::get('payments/paypal', 'PayPalController@index')->name('paypal.index');
 
-Route::get('firebase/sw-js', 'AppSettingController@initFirebase');
+Route::get('/sw-js', 'AppSettingController@initFirebase');
 
 
 Route::get('storage/app/public/{id}/{conversion}/{filename?}', 'UploadController@storage');
