@@ -23,10 +23,10 @@
     @hasanyrole('admin|manager')
     <!-- Users Field -->
     <div class="form-group row ">
-        {!! Form::label('drivers[]', trans("lang.restaurant_drivers"),['class' => 'col-3 control-label text-right']) !!}
+        {!! Form::label('drivers[]', 'Delivery Drivers',['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
             {!! Form::select('drivers[]', $drivers, $driversSelected, ['class' => 'select2 form-control' , 'multiple'=>'multiple']) !!}
-            <div class="form-text text-muted">{{ trans("lang.restaurant_drivers_help") }}</div>
+            <div class="form-text text-muted">Select delivery drivers for this restaurant</div>
         </div>
     </div>
 
