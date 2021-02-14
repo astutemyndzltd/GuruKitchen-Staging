@@ -320,7 +320,7 @@ class OrderController extends Controller
                     }
                 }
 
-                if ($order['order_type'] == 'Delivery' && $order['driver_id'] == $oldOrder['driver_id'] && $order['order_status_id'] != $oldOrder['order_status_id']) {
+                if ($order['order_type'] == 'Delivery' && $order['driver_id'] == $oldOrder['driver_id'] && $order['order_status_id'] != $oldOrder['order_status_id'] && isset($order['driver_id'])) {
                     
                     $driver = $this->userRepository->findWithoutFail($input['driver_id']);
 
