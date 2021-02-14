@@ -30,8 +30,8 @@
         <div class="form-group row ">
             {!! Form::label('driver_id', 'Delivery Driver',['class' => 'col-3 control-label text-right']) !!}
             <div class="col-9">
-                {!! Form::select('driver_id', $driver, null, ['data-empty'=>trans("lang.order_driver_id_placeholder"),'class' => 'select2 not-required form-control']) !!}
-                <div class="form-text text-muted">{{ trans("lang.order_driver_id_help") }}</div>
+                {!! Form::select('driver_id', $driver, null, ['data-empty'=> 'Select Driver','class' => 'select2 not-required form-control']) !!}
+                <div class="form-text text-muted">{{ 'Select Delivery Driver' }}</div>
             </div>
         </div>
     @endif
