@@ -7,4 +7,10 @@
 @push('scripts_lib')
 @include('layouts.datatables_js')
 {!! $dataTable->scripts() !!}
+<script>
+ $(window).on('load', () => {
+   let dataTable = $('');
+   console.log('anik');
+ });
+</script>
 @endpush
