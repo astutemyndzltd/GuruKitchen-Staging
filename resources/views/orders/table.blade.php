@@ -12,8 +12,10 @@
 
     $('#dataTableBuilder thead tr').clone(true).appendTo('#dataTableBuilder thead');
 
+    const table = $('#dataTableBuilder').DataTable();
+
     $('#dataTableBuilder thead tr:eq(1) th').each( function (i) {
-        
+
         let title = $(this).text();
         $(this).html( '<input type="text" class="search-cell" placeholder="Search '+title+'" />' );
  
