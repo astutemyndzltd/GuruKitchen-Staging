@@ -18,10 +18,16 @@
     let $divForCheckbox = $('<div class="col-lg-4 col-xs-12"></div>');
     $divForCheckbox.insertBefore('#dataTableBuilder_wrapper div.ml-auto');
 
-    const $checkbox = $('<input type="checkbox">');
-    $checkbox.appendTo($divForCheckbox);
 
-    //$($checkbox).iCheck();
+    let html = `<label>
+                    <input type="checkbox" name="quux[1]" disabled>
+                    Show Live Orders
+                </label>`;
+
+
+    const $checkbox = $(html);
+    $checkbox.appendTo($divForCheckbox);
+    $checkbox.iCheck();
 
  });
 </script>
