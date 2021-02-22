@@ -11,6 +11,8 @@
 <script>
  $(window).on('load', () => {
 
+    console.log('my name is anik banerjee');
+
     const table = $('#dataTableBuilder').DataTable();
 
     let $divForCheckbox = $('<div class="col-lg-4 col-xs-12"></div>');
