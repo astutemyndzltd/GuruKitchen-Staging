@@ -28,9 +28,9 @@
         $(this).html( '<input type="text" class="search-cell" placeholder="Search" />' );
  
         $('input', this).on('keyup change', function () {
-            if (table.column(i).search() !== this.value) {
+            /*if (table.column(i).search() !== this.value) {
                 table.column(i).search(this.value).draw();
-            }
+            }*/
         });
 
     });
