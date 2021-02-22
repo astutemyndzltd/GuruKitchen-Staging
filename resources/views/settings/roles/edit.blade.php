@@ -44,5 +44,5 @@
     <!-- select2 -->
     <script src="{{asset('plugins/select2/select2.min.js')}}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
+    <script src="{{asset('plugins/summernote/summernote.js')}}"></script>
 @endpush
