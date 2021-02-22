@@ -20,8 +20,7 @@
 
 
     let html = `<label>
-                    <input type="checkbox" name="quux[1]" disabled>
-                    Show Live Orders
+                    <input type="checkbox"> Show Live Orders
                 </label>`;
 
 
