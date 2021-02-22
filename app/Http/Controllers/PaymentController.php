@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Prettus\Validator\Exceptions\ValidatorException;
 
-class PaymentController extends Controller
+class PaymentController extends Controller 
 {
     /** @var  PaymentRepository */
     private $paymentRepository;

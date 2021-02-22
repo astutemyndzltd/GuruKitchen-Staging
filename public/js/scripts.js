@@ -19,6 +19,7 @@ $(document).ready(function () {
     if ($('textarea').length > 0) {
         $('textarea').summernote({
             height: 200
+            // adding here
         });
     }
     if ($('.datepicker').length > 0) {
