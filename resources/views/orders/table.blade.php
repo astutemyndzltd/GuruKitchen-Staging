@@ -21,6 +21,7 @@
 
     let html = `<div class="icheckbox">
                     <input type="checkbox" id="checkbox">
+                    Show Live Orders
                 </div>`;
 
 
