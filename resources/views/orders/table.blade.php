@@ -25,7 +25,10 @@
 
     const $checkbox = $(html);
     $checkbox.appendTo($divForCheckbox);
-    $checkbox.iCheck();
+    $checkbox.iCheck({
+    checkboxClass: 'icheckbox_flat-red',
+    //radioClass: 'iradio_flat-red'
+     });
 
  });
 </script>
