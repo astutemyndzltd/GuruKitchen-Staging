@@ -13,8 +13,9 @@
     $('#dataTableBuilder thead tr').clone(true).appendTo('#dataTableBuilder thead');
 
     $('#dataTableBuilder thead tr:eq(1) th').each( function (i) {
-        var title = $(this).text();
-        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        
+        let title = $(this).text();
+        $(this).html( '<input type="text" class="search-cell" placeholder="Search '+title+'" />' );
  
         $( 'input', this ).on( 'keyup change', function () {
             if ( table.column(i).search() !== this.value ) {
@@ -25,7 +26,7 @@
             }
         });
     });
-    
+
     //let dataTable = $('#dataTableBuilder').DataTable();
     //console.log(dataTable);
  });
