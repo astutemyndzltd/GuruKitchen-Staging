@@ -31,6 +31,7 @@ class OrderDataTable extends DataTable
      */
     public function dataTable($query)
     {
+        $colors = ['', 'green', 'orange', 'orange', 'red', 'red'];
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
@@ -45,8 +46,9 @@ class OrderDataTable extends DataTable
                 return getBooleanColumn(['preorder_info' => ($preorderInfo != null || $preorderInfo != '') ], 'preorder_info');
             })
             ->editColumn('order_status.status', function($order) {
-                $colors = ['', 'green', 'orange', 'orange', 'red', 'red'];
-                return "<span style='color:$colors[$order->order_status_id]'>$order->orderStatus->status</span>";
+                
+                $color = $colors[$order->order_status_id];
+                return "<span style='color:$color;'>$order->orderStatus->status</span>";
             })
            /* ->editColumn('delivery_fee', function ($order) {
                 return getPriceColumn($order, 'delivery_fee');
