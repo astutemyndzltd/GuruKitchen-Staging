@@ -16,7 +16,7 @@
     $('#dataTableBuilder_wrapper div.row:eq(1)>div').append($divForCheckbox);
     
 
-    $('#dataTableBuilder thead tr').clone(true).appendTo('#dataTableBuilder thead');
+    /*$('#dataTableBuilder thead tr').clone(true).appendTo('#dataTableBuilder thead');
 
     $('#dataTableBuilder thead tr:eq(1) th').each(function (i) {
 
@@ -36,7 +36,7 @@
             }
         });
 
-    });
+    });*/
 
     //let dataTable = $('#dataTableBuilder').DataTable();
     //console.log(dataTable);
