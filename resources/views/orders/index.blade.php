@@ -49,5 +49,5 @@
 
 @push('css_lib')
   <link rel="stylesheet" href="{{asset('css/order-datatable.css')}}">
-@endsection
+@endpush
 
