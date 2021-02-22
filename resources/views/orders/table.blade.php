@@ -15,8 +15,8 @@
             "fnDrawCallback": function(oSettings) {
                 $('<span>anik</span>').prependTo($('#dataTableBuilder_wrapper'));
             }
-        });
     });
+    
 
     $('#dataTableBuilder thead tr').clone(true).appendTo('#dataTableBuilder thead');
 
