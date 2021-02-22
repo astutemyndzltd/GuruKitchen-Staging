@@ -19,12 +19,8 @@
     $divForCheckbox.insertBefore('#dataTableBuilder_wrapper div.ml-auto');
 
 
-    let html = `<div class="checkbox icheck">
-                <label class="col-9 ml-2 form-check-inline">
-                    <input name="available_for_delivery" type="hidden" value="0" id="available_for_delivery">
-                    <input checked="checked" name="available_for_delivery" type="checkbox" value="1" id="available_for_delivery">
-                </label>
-            </div>`;
+    let html = `<input type="checkbox">
+                <label>Show Live Orders</label>`;
 
 
     const $checkbox = $(html);
