@@ -48,7 +48,8 @@ class OrderDataTable extends DataTable
             ->editColumn('order_status.status', function($order) {
                 
                 $color = $colors[$order->order_status_id];
-                return "<span style='color:$color;'>$order->orderStatus->status</span>";
+                $status = $order->orderStatus->status;
+                return "<span style='color:$color;'>$status</span>";
             })
            /* ->editColumn('delivery_fee', function ($order) {
                 return getPriceColumn($order, 'delivery_fee');
