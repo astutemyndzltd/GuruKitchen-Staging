@@ -19,6 +19,8 @@
 
         let title = $(this).text();
 
+        if (title == 'Actions') return;
+
         $(this).attr('class', 'search-cell-header');
 
         $(this).html( '<input type="text" class="search-cell" placeholder="Search" />' );
