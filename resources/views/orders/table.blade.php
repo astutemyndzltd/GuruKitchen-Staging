@@ -9,8 +9,9 @@
 {!! $dataTable->scripts() !!}
 <script>
  $(window).on('load', () => {
-   let dataTable = $('#dataTableBuilder').DataTable();
-   console.log(dataTable);
+    $('#dataTableBuilder thead tr').clone(true).appendTo('#dataTableBuilder thead');
+    //let dataTable = $('#dataTableBuilder').DataTable();
+    //console.log(dataTable);
  });
 </script>
 @endpush
