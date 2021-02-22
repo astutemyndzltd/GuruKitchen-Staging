@@ -25,7 +25,9 @@ $(document).ready(function () {
                     e.preventDefault();
                     setTimeout(() => document.execCommand('insertText', false, bufferText), 10);
                 }*/
-                
+                onChange: function (content) {
+                    console.log(content);
+                }
             },
             codemirror: {
                 htmlMode: false
