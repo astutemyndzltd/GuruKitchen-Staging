@@ -15,7 +15,7 @@
 
     const table = $('#dataTableBuilder').DataTable();
 
-    $('#dataTableBuilder thead tr:eq(1)').removeClass('sorting');
+    $('#dataTableBuilder thead tr:eq(1)').attr('class', '');
 
     $('#dataTableBuilder thead tr:eq(1) th').each(function (i) {
 
