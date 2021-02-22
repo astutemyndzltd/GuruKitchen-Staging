@@ -19,7 +19,10 @@
 
         let title = $(this).text();
 
-        if (title == 'Actions') return;
+        if (title == 'Actions') {
+            $(this).html('');
+            return;
+        }
 
         $(this).attr('class', 'search-cell-header');
 
