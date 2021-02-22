@@ -31,7 +31,7 @@ class OrderDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        $colors = ['', 'green', 'orange', 'orange', 'red', 'red'];
+       
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
@@ -47,6 +47,7 @@ class OrderDataTable extends DataTable
             })
             ->editColumn('order_status.status', function($order) {
                 
+                $colors = ['', 'green', 'orange', 'orange', 'red', 'red'];
                 $color = $colors[$order->order_status_id];
                 $status = $order->orderStatus->status;
                 return "<span style='color:$color;'>$status</span>";
