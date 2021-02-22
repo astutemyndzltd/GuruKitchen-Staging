@@ -15,11 +15,11 @@
 
     const table = $('#dataTableBuilder').DataTable();
 
-    $('#dataTableBuilder thead tr:eq(1)').attr('class', '');
-
     $('#dataTableBuilder thead tr:eq(1) th').each(function (i) {
 
         let title = $(this).text();
+
+        $(this).attr('class', '');
 
         $(this).html( '<input type="text" class="search-cell" placeholder="Search" />' );
  
