@@ -11,7 +11,7 @@
 <script>
  $(window).on('load', () => {
 
-    $('#dataTableBuilder thead tr').clone(true).appendTo('#dataTableBuilder thead');*/
+    $('#dataTableBuilder thead tr').clone(true).appendTo('#dataTableBuilder thead');
 
     const table = $('#dataTableBuilder').DataTable();
 
