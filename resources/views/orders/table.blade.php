@@ -12,7 +12,7 @@
  $(window).on('load', () => {
 
     const table = $('#dataTableBuilder').DataTable();
-    let $divForCheckbox = $('<div class"col-lg-4 col-xs-12"></div>');
+    let $divForCheckbox = $('<div class="col-lg-4 col-xs-12"></div>');
     $divForCheckbox.insertAfter('#dataTableBuilder_wrapper>div.row>div');
 
  });
