@@ -33,13 +33,11 @@
 
   {!! Form::label('order_status_id', trans('lang.order_status_status'), ['class' => 'col-4 control-label']) !!}
 
-  <?php 
-    $colors = ['', 'green', 'orange', 'orange', 'red', 'red'];
-    $statusId = $order->order_status_id;
-  ?>
+  <?php $colors = ['', 'green', 'orange', 'orange', 'red', 'red'];
+        $statusId = $order->order_status_id; ?>
 
   <div class="col-8">
-    <p style="color:{{ $colors[$statusId] }}">{!! $order->orderStatus->status !!}</p>
+    <p style="color:{{ $colors[$statusId] }}"><b>{!! $order->orderStatus->status !!}</b></p>
   </div>
 
   <?php
