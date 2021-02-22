@@ -11,11 +11,16 @@
 <script>
  $(window).on('load', () => {
 
+    const table = $('#dataTableBuilder').DataTable({
+            "fnDrawCallback": function(oSettings) {
+                $('<span>anik</span>').prependTo($('#dataTableBuilder_wrapper'));
+            }
+        });
+    });
+
     $('#dataTableBuilder thead tr').clone(true).appendTo('#dataTableBuilder thead');
 
-    const table = $('#dataTableBuilder').DataTable();
-
-    $('#dataTableBuilder thead tr:eq(1) th').each(function (i) {
+    /*$('#dataTableBuilder thead tr:eq(1) th').each(function (i) {
 
         let title = $(this).text();
 
@@ -28,15 +33,17 @@
         $(this).html( '<input type="text" class="search-cell" placeholder="Search" />' );
  
         $('input', this).on('keyup change', function () {
-            /*if (table.column(i).search() !== this.value) {
+            if (table.column(i).search() !== this.value) {
                 table.column(i).search(this.value).draw();
-            }*/
+            }
         });
 
-    });
+    });*/
 
     //let dataTable = $('#dataTableBuilder').DataTable();
     //console.log(dataTable);
+
+
  });
 </script>
 @endpush
