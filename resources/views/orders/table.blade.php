@@ -16,7 +16,7 @@
     const table = $('#dataTableBuilder').DataTable();
 
     let $divForCheckbox = $('<div class="col-lg-4 col-xs-12"></div>');
-    $divForCheckbox.insertAfter('#dataTableBuilder_wrapper>div.row>div');
+    $divForCheckbox.insertBefore('#dataTableBuilder_wrapper div.ml-auto');
 
     const $checkbox = $('<input type="checkbox">');
     $checkbox.appendTo($divForCheckbox);
