@@ -20,17 +20,11 @@ $(document).ready(function () {
         $('textarea').summernote({
             height: 200,
             callbacks: {
-                /*onPaste: function (e) {
+                onPaste: function (e) {
                     var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
                     e.preventDefault();
                     setTimeout(() => document.execCommand('insertText', false, bufferText), 10);
-                }*/
-                onChange: function (content) {
-                    console.log(content);
                 }
-            },
-            codemirror: {
-                htmlMode: false
             }
             // adding here
         });
