@@ -18,7 +18,7 @@
     });
     
 
-    $('#dataTableBuilder thead tr').clone(true).appendTo('#dataTableBuilder thead');
+    //$('#dataTableBuilder thead tr').clone(true).appendTo('#dataTableBuilder thead');
 
     /*$('#dataTableBuilder thead tr:eq(1) th').each(function (i) {
 
