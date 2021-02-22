@@ -23,7 +23,7 @@ $(document).ready(function () {
                 onPaste: function (e) {
                     var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
                     e.preventDefault();
-                    setTimeout(() => document.execCommand('insertText', false, bufferText), 10);
+                    document.execCommand('insertText', false, bufferText);
                 }
             }
             // adding here
