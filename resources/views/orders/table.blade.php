@@ -26,7 +26,7 @@
 
     const $checkbox = $(html);
     $checkbox.appendTo($divForCheckbox);
-    //$checkbox.iCheck();
+    $checkbox.iCheck();
 
  });
 </script>
