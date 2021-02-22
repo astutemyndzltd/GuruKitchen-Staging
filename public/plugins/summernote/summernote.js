@@ -1609,7 +1609,7 @@ var dom = {
     /** @property {String} blank */
     blank: blankHTML,
     /** @property {String} emptyPara */
-    emptyPara: "" + blankHTML + "",
+    emptyPara: "<div>" + blankHTML + "</div>",
     makePredByNodeName: makePredByNodeName,
     isEditable: isEditable,
     isControlSizing: isControlSizing,
@@ -3960,6 +3960,7 @@ var Editor = /** @class */ (function () {
         // bind custom events
         this.$editable.on('keydown', function (event) {
             if (event.keyCode === key.code.ENTER) {
+                event.shiftKey = true;
                 _this.context.triggerEvent('enter', event);
             }
             _this.context.triggerEvent('keydown', event);
@@ -7167,7 +7168,7 @@ $$1.summernote = $$1.extend($$1.summernote, {
         },
         keyMap: {
             pc: {
-                'ENTER': 'insertParagraph',
+                //'ENTER': 'insertParagraph',
                 'CTRL+Z': 'undo',
                 'CTRL+Y': 'redo',
                 'TAB': 'tab',
@@ -7196,7 +7197,7 @@ $$1.summernote = $$1.extend($$1.summernote, {
                 'CTRL+K': 'linkDialog.show'
             },
             mac: {
-                'ENTER': 'insertParagraph',
+                //'ENTER': 'insertParagraph',
                 'CMD+Z': 'undo',
                 'CMD+SHIFT+Z': 'redo',
                 'TAB': 'tab',
