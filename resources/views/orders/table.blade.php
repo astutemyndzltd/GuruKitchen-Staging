@@ -11,11 +11,9 @@
 <script>
  $(window).on('load', () => {
 
-    const table = $('#dataTableBuilder').DataTable({
-            "fnDrawCallback": function(oSettings) {
-                $('<span>anik</span>').prependTo($('#dataTableBuilder_wrapper'));
-            }
-    });
+    const table = $('#dataTableBuilder').DataTable();
+
+    $('#dataTableBuilder_wrapper').append('<div>Anik</div>');
     
 
     //$('#dataTableBuilder thead tr').clone(true).appendTo('#dataTableBuilder thead');
