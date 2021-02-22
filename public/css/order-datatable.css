@@ -2,3 +2,8 @@
     width: inherit !important;
     font-size: 13px;
 }
+
+.search-cell-header {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
