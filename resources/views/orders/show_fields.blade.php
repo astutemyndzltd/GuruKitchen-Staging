@@ -39,7 +39,7 @@
   ?>
 
   <div class="col-8">
-    <p style="color:red;">{!! $order->orderStatus->status !!}</p>
+    <p style="color:{{ $statusId }}">{!! $order->orderStatus->status !!}</p>
   </div>
 
   <?php
