@@ -52,3 +52,6 @@
   <link rel="stylesheet" href="{{asset('css/order-datatable.css')}}">
 @endpush
 
+@push('scripts_lib')
+  <script src="{{ asset('plugins/iCheck/icheck.min.js') }}"></script>
+@endpush
