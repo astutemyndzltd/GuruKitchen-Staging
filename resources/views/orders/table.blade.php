@@ -9,8 +9,8 @@
 {!! $dataTable->scripts() !!}
 <script>
  $(window).on('load', () => {
-   let dataTable = $('');
-   console.log('anik');
+   let dataTable = $('#dataTableBuilder').DataTable();
+   console.log(dataTable);
  });
 </script>
 @endpush
