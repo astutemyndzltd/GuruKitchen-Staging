@@ -20,7 +20,7 @@
 
 
     let html = `<label>
-                    <input type="checkbox"> Show Live Orders
+                    <input type="checkbox" disabled>Show Live Orders
                 </label>`;
 
 
