@@ -30,11 +30,14 @@
 
 <!-- Order Status Id Field -->
 <div class="form-group row col-md-4 col-sm-12">
+
   {!! Form::label('order_status_id', trans('lang.order_status_status'), ['class' => 'col-4 control-label']) !!}
+
   <?php 
     $colors = ['', 'green', 'orange', 'orange', 'red', 'red'];
     $statusId = $order->order_status_id;
   ?>
+
   <div class="col-8">
     <p style="color:{{ $statusId }}">{!! $order->orderStatus->status !!}</p>
   </div>
