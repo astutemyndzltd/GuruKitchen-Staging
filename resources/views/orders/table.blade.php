@@ -19,7 +19,7 @@
     const $checkbox = $('<input type="checkbox">');
     $checkbox.appendTo($divForCheckbox);
 
-    $($checkbox).iCheck();
+    //$($checkbox).iCheck();
 
  });
 </script>
