@@ -22,7 +22,7 @@ class OrderDataTable extends DataTable
      * @var array
      */
     public static $customFields = [];
-    public static $colors = ['', 'green', 'orange', 'orange', 'red', 'red'];
+    public $colors = ['', 'green', 'orange', 'orange', 'red', 'red'];
 
     /**
      * Build DataTable class.
