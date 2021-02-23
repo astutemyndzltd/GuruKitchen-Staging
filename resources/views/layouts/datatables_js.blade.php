@@ -30,8 +30,6 @@
 
 <script type="text/javascript">
 
-    let ajaxDataHandler = () => {};
-
     function initICheck(){
         $('input[type="checkbox"].permission').on('ifCreated', function (event) {
             var checkbox = $(this);
@@ -82,7 +80,7 @@
 
     function renderButtons(tableId) {
 
-        var dtable = $("#" + tableId).DataTable({ ajax: { data: function(d) { console.log('anik banerjee'); }  } });
+        var dtable = $("#" + tableId).DataTable();
 
         $('a#refreshDatatable').on('click', function () {
             dtable.button('4').trigger();

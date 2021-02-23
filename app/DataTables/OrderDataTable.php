@@ -167,7 +167,9 @@ class OrderDataTable extends DataTable
     {
         if (auth()->user()->hasRole('admin')) {
             return $model->newQuery()->with("user")->with("orderStatus")->with('payment');
-        } else if (auth()->user()->hasRole('manager')) {
+        } 
+        else if (auth()->user()->hasRole('manager')) {
+
             return $model->newQuery()->with("user")->with("orderStatus")->with('payment')
                 ->join("food_orders", "orders.id", "=", "food_orders.order_id")
                 ->join("foods", "foods.id", "=", "food_orders.food_id")
@@ -175,17 +177,20 @@ class OrderDataTable extends DataTable
                 ->where('user_restaurants.user_id', auth()->id())
                 ->groupBy('orders.id')
                 ->select('orders.*');
-        } else if (auth()->user()->hasRole('client')) {
+        } 
+        else if (auth()->user()->hasRole('client')) {
             return $model->newQuery()->with("user")->with("orderStatus")->with('payment')
                 ->where('orders.user_id', auth()->id())
                 ->groupBy('orders.id')
                 ->select('orders.*');
-        } else if (auth()->user()->hasRole('driver')) {
+        } 
+        else if (auth()->user()->hasRole('driver')) {
             return $model->newQuery()->with("user")->with("orderStatus")->with('payment')
                 ->where('orders.driver_id', auth()->id())
                 ->groupBy('orders.id')
                 ->select('orders.*');
-        } else {
+        } 
+        else {
             return $model->newQuery()->with("user")->with("orderStatus")->with('payment');
         }
 

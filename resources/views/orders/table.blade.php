@@ -10,12 +10,7 @@
 
 <script>
  $(window).on('load', () => {
-
-    ajaxDataHandler = function(data) {
-        console.log(data);
-    };
-    
-    
+ 
     const $table = $('#dataTableBuilder').DataTable();
     let showLiveOrders = true;
 
