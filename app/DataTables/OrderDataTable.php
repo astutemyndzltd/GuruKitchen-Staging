@@ -205,7 +205,7 @@ class OrderDataTable extends DataTable
     {
         return $this->builder()
             ->columns($this->getColumns())
-            ->ajax(['data' => 'function(d) { d.key = "value"; }'])
+            ->ajax(['data' => 'function(d) { onReloadDt(d); }'])
             ->addAction(['title'=>trans('lang.actions'),'width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
             ->parameters(array_merge(
                 [
