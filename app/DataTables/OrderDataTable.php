@@ -165,7 +165,7 @@ class OrderDataTable extends DataTable
      */
     public function query(Order $model)
     {   
-        file_put_contents('order.txt', $this->showLiveOrders == true);
+        file_put_contents('order.txt', $this->showLiveOrders == 'true');
 
         $clause = $this->showLiveOrders == true ? 'orders.order_status_id < 5' : '';
 
