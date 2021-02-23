@@ -11,7 +11,7 @@
 <script>
  $(window).on('load', () => {
 
-    const $table = $('#dataTableBuilder').DataTable({ajax: { data: (d) => console.log(d) }});
+    const $table = $('#dataTableBuilder').DataTable({ajax: { data: (d) => console.log('anik') }});
     let showLiveOrders = true;
 
     let $divForCheckbox = $('<div class="col-lg-4 col-xs-12 live-order"></div>');
