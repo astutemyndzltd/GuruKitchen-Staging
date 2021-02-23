@@ -21,7 +21,7 @@
     const $checkbox = $(html).appendTo($divForCheckbox);
     $checkbox.iCheck({ checkboxClass: 'icheckbox_flat-blue' });
 
-    $checkbox.on('ifChecked', () => { showLiveOrders = true; $table.ajax.reload(); });
+    $checkbox.on('ifChecked', () => { showLiveOrders = true; $table.ajax.data(d => console.log('hello')).reload(); });
     $checkbox.on('ifUnchecked', () => { showLiveOrders = false; $table.ajax.reload(); });
 
     window.dt = $table;
