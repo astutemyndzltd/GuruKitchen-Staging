@@ -165,7 +165,7 @@ class OrderDataTable extends DataTable
      */
     public function query(Order $model)
     {   
-        
+        file_put_contents('order.txt', $this->showLiveOrders);
 
         if (auth()->user()->hasRole('admin')) {
             return $model->newQuery()->with("user")->with("orderStatus")->with('payment');
