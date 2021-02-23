@@ -6,6 +6,13 @@
 
 @push('scripts_lib')
 @include('layouts.datatables_js')
+
+<script>
+    function onReloadDt(data) {
+        console.log('my name is anik banerjee');
+    }
+</script>
+
 {!! $dataTable->scripts() !!}
 
 <script>
@@ -23,11 +30,6 @@
 
     $checkbox.on('ifChecked', () => { showLiveOrders = true; $table.ajax.reload(); });
     $checkbox.on('ifUnchecked', () => { showLiveOrders = false; $table.ajax.reload(); });
-
-    window.onReloadDt = function(d) {
-        console.log('my name is anik banerjee');
-    };
-
 
  });
 </script>

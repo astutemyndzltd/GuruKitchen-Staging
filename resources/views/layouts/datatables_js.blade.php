@@ -30,8 +30,6 @@
 
 <script type="text/javascript">
 
-    let onReloadDt = () => {}; 
-
     function initICheck(){
         $('input[type="checkbox"].permission').on('ifCreated', function (event) {
             var checkbox = $(this);
