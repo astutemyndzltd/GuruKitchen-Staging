@@ -165,22 +165,24 @@ class OrderDataTable extends DataTable
      */
     public function query(Order $model)
     {   
-
-        $clause = $this->showLiveOrders == 'true' ? 'orders.order_status_id < 5' : '';
-
+        
         if (auth()->user()->hasRole('admin')) {
-            return $model->newQuery()->with("user")->with("orderStatus")->with('payment')->whereRaw($clause);
+            $model = $model->newQuery()->with("user")->with("orderStatus")->with('payment');
+            if ($this->showLiveOrders == 'true') $model = $model->whereRaw('orders.order_status_id < 5');
+            return $model;
         } 
         else if (auth()->user()->hasRole('manager')) {
 
-            return $model->newQuery()->with("user")->with("orderStatus")->with('payment')
+            $model = $model->newQuery()->with("user")->with("orderStatus")->with('payment')
                 ->join("food_orders", "orders.id", "=", "food_orders.order_id")
                 ->join("foods", "foods.id", "=", "food_orders.food_id")
                 ->join("user_restaurants", "user_restaurants.restaurant_id", "=", "foods.restaurant_id")
-                ->where('user_restaurants.user_id', auth()->id())
-                ->whereRaw($clause)
-                ->groupBy('orders.id')
-                ->select('orders.*');
+                ->where('user_restaurants.user_id', auth()->id());
+                
+            if ($this->showLiveOrders == 'true') $model = $model->whereRaw('orders.order_status_id < 5');    
+            $model = $model->groupBy('orders.id')->select('orders.*');
+
+            return $model;
         } 
         else if (auth()->user()->hasRole('client')) {
             return $model->newQuery()->with("user")->with("orderStatus")->with('payment')
