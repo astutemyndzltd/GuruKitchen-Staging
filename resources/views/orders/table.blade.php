@@ -24,7 +24,9 @@
     $checkbox.on('ifChecked', () => { showLiveOrders = true; $table.ajax.reload(); });
     $checkbox.on('ifUnchecked', () => { showLiveOrders = false; $table.ajax.reload(); });
 
-    window.dt = $table;
+    window.onReloadDt = function(d) {
+        console.log('my name is anik banerjee');
+    };
 
 
  });
