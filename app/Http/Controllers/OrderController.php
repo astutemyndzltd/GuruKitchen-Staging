@@ -77,6 +77,7 @@ class OrderController extends Controller
      */
     public function index(OrderDataTable $orderDataTable, Request $request)
     {
+        file_put_contents('order.txt', $request->input('showLiveOrders'));
         return $orderDataTable->with(['showLiveOrders' => $request->input('showLiveOrders')])->render('orders.index');
     }
 
