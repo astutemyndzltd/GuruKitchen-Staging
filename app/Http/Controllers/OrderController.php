@@ -75,9 +75,9 @@ class OrderController extends Controller
      * @param OrderDataTable $orderDataTable
      * @return Response
      */
-    public function index(OrderDataTable $orderDataTable)
+    public function index(OrderDataTable $orderDataTable, Request $request)
     {
-        return $orderDataTable->render('orders.index');
+        return $orderDataTable->with(['showLiveOrders' => $request->input('showLiveOrders')])->render('orders.index');
     }
 
     /**
