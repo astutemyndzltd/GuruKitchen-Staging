@@ -20,8 +20,8 @@
     const $checkbox = $(html).appendTo($divForCheckbox);
     $checkbox.iCheck({ checkboxClass: 'icheckbox_flat-blue' });
 
-    $checkbox.on('ifChecked', () => alert('checked'));
-    $checkbox.on('ifUnchecked', () => alert('unchecked'));
+    $checkbox.on('ifChecked', (e) => alert(e.type));
+    $checkbox.on('ifUnchecked', (e) => alert(e.type));
 
  });
 </script>
