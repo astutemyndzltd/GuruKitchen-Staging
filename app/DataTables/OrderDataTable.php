@@ -164,7 +164,9 @@ class OrderDataTable extends DataTable
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Order $model)
-    {
+    {   
+        
+
         if (auth()->user()->hasRole('admin')) {
             return $model->newQuery()->with("user")->with("orderStatus")->with('payment');
         } 
