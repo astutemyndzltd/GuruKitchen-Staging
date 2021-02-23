@@ -7,3 +7,15 @@
     padding-right: 0px !important;
     padding-left: 0px !important;
 }
+
+.lbl-live-order {
+    font-weight: 500;
+}
+
+.live-order {
+    text-align: center;
+}
+
+.icheckbox_flat-blue {
+    margin-right: 10px;
+}
