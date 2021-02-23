@@ -168,7 +168,7 @@ class OrderDataTable extends DataTable
         //file_put_contents('order.txt', $this->showLiveOrders);
         //$model = null;
 
-        $clause = isset($this->showLiveOrders) && $this->showLiveOrders == true ? 'orders.order_status_id < 5' : '';
+        $clause = $this->showLiveOrders == true ? 'orders.order_status_id < 5' : '';
 
         file_put_contents('order.txt', $clause);
 
