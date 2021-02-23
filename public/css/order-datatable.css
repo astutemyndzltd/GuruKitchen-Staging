@@ -9,7 +9,7 @@
 }
 
 .lbl-live-order {
-    font-weight: 500;
+    font-weight: normal !important;
 }
 
 .live-order {
