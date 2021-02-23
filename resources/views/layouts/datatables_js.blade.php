@@ -82,6 +82,8 @@
 
     function renderButtons(tableId) {
 
+        console.log('came here before you');
+
         var dtable = $("#" + tableId).DataTable({ ajax: { data: (d) => console.log('anik banerjee')  } });
 
         $('a#refreshDatatable').on('click', function () {
