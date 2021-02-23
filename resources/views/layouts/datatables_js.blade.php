@@ -30,7 +30,7 @@
 
 <script type="text/javascript">
 
-    const ajaxDataHandler = () => {};
+    let ajaxDataHandler = () => {};
 
     function initICheck(){
         $('input[type="checkbox"].permission').on('ifCreated', function (event) {
