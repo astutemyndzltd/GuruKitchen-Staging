@@ -29,6 +29,9 @@
 {{--<script type="text/javascript" src="{{ asset('plugins/datatables/buttons.server-side.js') }}"></script>--}}
 
 <script type="text/javascript">
+
+    const ajaxDataHandler = () => {};
+
     function initICheck(){
         $('input[type="checkbox"].permission').on('ifCreated', function (event) {
             var checkbox = $(this);
@@ -79,7 +82,8 @@
 
     function renderButtons(tableId) {
 
-        var dtable = $("#" + tableId).DataTable();
+        var dtable = $("#" + tableId).DataTable({ ajax: { data: ajaxDataHandler } });
+
         $('a#refreshDatatable').on('click', function () {
             dtable.button('4').trigger();
         });
