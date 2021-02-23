@@ -13,6 +13,8 @@
 
     const table = $('#dataTableBuilder').DataTable();
 
+    window.dt = table;
+
     let $divForCheckbox = $('<div class="col-lg-4 col-xs-12 live-order"></div>');
     $divForCheckbox.insertBefore('#dataTableBuilder_wrapper div.ml-auto');
 
