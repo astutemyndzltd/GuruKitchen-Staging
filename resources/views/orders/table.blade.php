@@ -11,9 +11,8 @@
 <script>
  $(window).on('load', () => {
 
-    const table = $('#dataTableBuilder').DataTable();
-
-    window.dt = table;
+    const $table = $('#dataTableBuilder').DataTable();
+    let showLiveOrders = true;
 
     let $divForCheckbox = $('<div class="col-lg-4 col-xs-12 live-order"></div>');
     $divForCheckbox.insertBefore('#dataTableBuilder_wrapper div.ml-auto');
@@ -22,8 +21,14 @@
     const $checkbox = $(html).appendTo($divForCheckbox);
     $checkbox.iCheck({ checkboxClass: 'icheckbox_flat-blue' });
 
-    $checkbox.on('ifChecked', (e) => alert(e.type));
-    $checkbox.on('ifUnchecked', (e) => alert(e.type));
+    $checkbox.on('ifChecked', () => { showLiveOrders = true; $table.ajax.reload() });
+    $checkbox.on('ifUnchecked', () => { showLiveOrders = false; $tabe.ajax.reload() });
+
+    $table.DataTable({ajax: { data: (d) => d.showLive = showLiveOrders }});
+
+    window.dt = $table;
+
+
 
  });
 </script>
