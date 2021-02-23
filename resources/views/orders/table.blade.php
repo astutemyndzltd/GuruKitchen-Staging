@@ -8,9 +8,14 @@
 @include('layouts.datatables_js')
 
 <script>
+
+    let showLiveOrders = true;
+
     function onReloadDt(data) {
-        console.log('my name is anik banerjee');
+        data.showLiveOrders = showLiveOrders;
+        console.log(showLiveOrders);
     }
+
 </script>
 
 {!! $dataTable->scripts() !!}
@@ -19,7 +24,6 @@
  $(window).on('load', () => {
  
     const $table = $('#dataTableBuilder').DataTable();
-    let showLiveOrders = true;
 
     let $divForCheckbox = $('<div class="col-lg-4 col-xs-12 live-order"></div>');
     $divForCheckbox.insertBefore('#dataTableBuilder_wrapper div.ml-auto');
