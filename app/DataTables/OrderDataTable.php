@@ -165,10 +165,13 @@ class OrderDataTable extends DataTable
      */
     public function query(Order $model)
     {   
-        file_put_contents('order.txt', $this->showLiveOrders);
+        //file_put_contents('order.txt', $this->showLiveOrders);
+        //$model = null;
+
+        $clause = isset($this->showLiveOrders) ? 'order.order_status_id < 5' : '';
 
         if (auth()->user()->hasRole('admin')) {
-            return $model->newQuery()->with("user")->with("orderStatus")->with('payment');
+            return $model->newQuery()->with("user")->with("orderStatus")->with('payment')->whereRaw($clause);
         } 
         else if (auth()->user()->hasRole('manager')) {
 
@@ -177,6 +180,7 @@ class OrderDataTable extends DataTable
                 ->join("foods", "foods.id", "=", "food_orders.food_id")
                 ->join("user_restaurants", "user_restaurants.restaurant_id", "=", "foods.restaurant_id")
                 ->where('user_restaurants.user_id', auth()->id())
+                ->whereRaw($clause)
                 ->groupBy('orders.id')
                 ->select('orders.*');
         } 
