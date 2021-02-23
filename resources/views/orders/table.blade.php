@@ -22,7 +22,7 @@
     $checkbox.iCheck({ checkboxClass: 'icheckbox_flat-blue' });
 
     $checkbox.on('ifChecked', () => { showLiveOrders = true; $table.ajax.reload(); });
-    $checkbox.on('ifUnchecked', () => { showLiveOrders = false; $tabe.ajax.reload(); });
+    $checkbox.on('ifUnchecked', () => { showLiveOrders = false; $table.ajax.reload(); });
 
     window.dt = $table;
 
