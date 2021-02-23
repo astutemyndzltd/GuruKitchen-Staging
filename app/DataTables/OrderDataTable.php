@@ -165,14 +165,8 @@ class OrderDataTable extends DataTable
      */
     public function query(Order $model)
     {   
-        if ($this->showLiveOrders == 'true') {
-            file_put_contents('order.txt', 'anik');
-        }
-        else {
-            file_put_contents('order.txt', 'roger');
-        } 
 
-        $clause = $this->showLiveOrders == true ? 'orders.order_status_id < 5' : '';
+        $clause = $this->showLiveOrders == 'true' ? 'orders.order_status_id < 5' : '';
 
         if (auth()->user()->hasRole('admin')) {
             return $model->newQuery()->with("user")->with("orderStatus")->with('payment')->whereRaw($clause);
