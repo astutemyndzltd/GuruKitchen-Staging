@@ -13,7 +13,6 @@
 
     function onReloadDt(data) {
         data.showLiveOrders = showLiveOrders;
-        console.log(showLiveOrders);
     }
 
 </script>
@@ -21,6 +20,7 @@
 {!! $dataTable->scripts() !!}
 
 <script>
+
  $(window).on('load', () => {
  
     const $table = $('#dataTableBuilder').DataTable();
