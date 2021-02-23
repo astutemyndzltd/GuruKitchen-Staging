@@ -11,7 +11,7 @@
 <script>
  $(window).on('load', () => {
 
-    const $table = $('#dataTableBuilder').DataTable();
+    const $table = $('#dataTableBuilder').DataTable({ajax: { data: (d) => d.showLive = showLiveOrders }});
     let showLiveOrders = true;
 
     let $divForCheckbox = $('<div class="col-lg-4 col-xs-12 live-order"></div>');
@@ -23,8 +23,6 @@
 
     $checkbox.on('ifChecked', () => { showLiveOrders = true; $table.ajax.reload(); });
     $checkbox.on('ifUnchecked', () => { showLiveOrders = false; $tabe.ajax.reload(); });
-
-    $table.DataTable({ajax: { data: (d) => d.showLive = showLiveOrders }});
 
     window.dt = $table;
 
