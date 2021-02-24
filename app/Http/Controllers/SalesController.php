@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 
 class SalesController extends Controller 
 {   
