@@ -145,7 +145,7 @@
 
 <li class="nav-item">
     <a class="nav-link {{ Request::is('sales*') ? 'active' : '' }}" href="{!! route('sales.index') !!}">
-        <i class="nav-icon fa fa-file-chart-pie"></i><p>Sales</p>
+        <i class="nav-icon fa fa-file-text"></i><p>Sales</p>
     </a>
 </li>
 
