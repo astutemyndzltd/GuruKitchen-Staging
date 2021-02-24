@@ -192,7 +192,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('coupons', 'CouponController')->except([
         'show'
     ]);
-    Route::resource('sales', 'CouponController');
+    Route::resource('sales', 'SalesController');
     Route::post('slides/remove-media','SlideController@removeMedia');
     Route::resource('slides', 'SlideController')->except([
         'show'
