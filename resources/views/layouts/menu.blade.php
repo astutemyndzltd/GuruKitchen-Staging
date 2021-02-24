@@ -143,6 +143,11 @@
     </li>
 @endcan
 
+<li class="nav-item">
+    <a class="nav-link " href=""><i class="nav-icon fa fa-folder"></i><p>Sales</p></a>
+</li>
+
+
 @can('coupons.index')
     <li class="nav-item">
         <a class="nav-link {{ Request::is('coupons*') ? 'active' : '' }}" href="{!! route('coupons.index') !!}">@if($icons)<i class="nav-icon fa fa-ticket"></i>@endif<p>{{trans('lang.coupon_plural')}} <span class="right badge badge-danger">New</span></p></a>
