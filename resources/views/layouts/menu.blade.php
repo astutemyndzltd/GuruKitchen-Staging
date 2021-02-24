@@ -144,7 +144,9 @@
 @endcan
 
 <li class="nav-item">
-    <a class="nav-link " href=""><i class="nav-icon fa fa-folder"></i><p>Sales</p></a>
+    <a class="nav-link {{ Request::is('sales*') ? 'active' : '' }}" href="{!! route('coupons.index') !!}">
+        <i class="nav-icon fa fa-folder"></i><p>Sales</p>
+    </a>
 </li>
 
 
