@@ -20,8 +20,6 @@
 Route::get('categories/rearrange', 'CategoryController@rearrange');
 Route::post('categories/store-rearranged', 'CategoryController@storeRearranged');
 
-Route::resource('sales', 'OrderController');
-
 Route::get('login/{service}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{service}/callback', 'Auth\LoginController@handleProviderCallback');
 Auth::routes();
@@ -41,6 +39,8 @@ Route::get('/sw-js', 'AppSettingController@initFirebase');
 Route::get('storage/app/public/{id}/{conversion}/{filename?}', 'UploadController@storage');
 
 Route::middleware('auth')->group(function () {
+
+    Route::resource('sales', 'SalesController');
     
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     Route::get('/', 'DashboardController@index')->name('dashboard');
