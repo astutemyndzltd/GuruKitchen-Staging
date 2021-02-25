@@ -32,15 +32,9 @@ class SalesController extends Controller
         parent::__construct();
     }
 
-    /**
-     * Display a listing of the Coupon.
-     *
-     * @param CouponDataTable $couponDataTable
-     * @return Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        return "hello";
+        return $this->sendResponse(['hello' => 'world'], 'Orders retrieved successfully');
     }
 
 }
