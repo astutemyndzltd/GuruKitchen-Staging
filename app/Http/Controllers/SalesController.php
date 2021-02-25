@@ -25,42 +25,11 @@ use Prettus\Validator\Exceptions\ValidatorException;
 
 class SalesController extends Controller
 {
-    /** @var  CouponRepository */
-    private $couponRepository;
+ 
 
-    /**
-     * @var CustomFieldRepository
-     */
-    private $customFieldRepository;
-
-    /**
-     * @var FoodRepository
-     */
-    private $foodRepository;
-    /**
-     * @var RestaurantRepository
-     */
-    private $restaurantRepository;
-    /**
-     * @var CategoryRepository
-     */
-    private $categoryRepository;
-    /**
-     * @var DiscountableRepository
-     */
-    private $discountableRepository;
-
-    public function __construct(CouponRepository $couponRepo, CustomFieldRepository $customFieldRepo, FoodRepository $foodRepo
-        , RestaurantRepository $restaurantRepo
-        , CategoryRepository $categoryRepo , DiscountableRepository $discountableRepository)
+    public function __construct()
     {
         parent::__construct();
-        $this->couponRepository = $couponRepo;
-        $this->customFieldRepository = $customFieldRepo;
-        $this->foodRepository = $foodRepo;
-        $this->restaurantRepository = $restaurantRepo;
-        $this->categoryRepository = $categoryRepo;
-        $this->discountableRepository = $discountableRepository;
     }
 
     /**
@@ -69,9 +38,9 @@ class SalesController extends Controller
      * @param CouponDataTable $couponDataTable
      * @return Response
      */
-    public function index(CouponDataTable $couponDataTable)
+    public function index()
     {
-        return $couponDataTable->render('coupons.index');
+        return "hello";
     }
 
 }
