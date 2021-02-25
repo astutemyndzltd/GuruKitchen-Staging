@@ -29,6 +29,10 @@
                 @include('layouts.right_toolbar', compact('dataTable'))
              </ul>
         </div>
+        <div class="card-body">
+            @include('orders.table')
+            <div class="clearfix"></div>
+        </div>
     </div>
 </div>
 
