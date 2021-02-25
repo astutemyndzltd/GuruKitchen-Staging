@@ -8,6 +8,7 @@ use App\Criteria\Foods\FoodsOfUserCriteria;
 use App\Criteria\Restaurants\ActiveCriteria;
 use App\Criteria\Restaurants\RestaurantsOfUserCriteria;
 use App\DataTables\CouponDataTable;
+use App\DataTables\SalesDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateCouponRequest;
 use App\Http\Requests\UpdateCouponRequest;
