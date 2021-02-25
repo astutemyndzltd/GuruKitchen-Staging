@@ -12,8 +12,7 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{url('/dashboard')}}"><i class="fa fa-dashboard"></i> {{trans('lang.dashboard')}}</a></li>
-                    <li class="breadcrumb-item"><a href="{!! route('orders.index') !!}">{{trans('lang.order_plural')}}</a></li>
-                    <li class="breadcrumb-item active">{{trans('lang.order_table')}}</li>
+                    <li class="breadcrumb-item"><a href="{!! route('sales.index') !!}">Sales</a></li>
                 </ol>
             </div>
 
