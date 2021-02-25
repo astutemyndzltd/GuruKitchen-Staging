@@ -61,9 +61,7 @@
                 url: url,
                 data: {_token: "{{csrf_token()}}", roleId: roleId, permission: permission.permission}
             })
-                .done(function (msg) {
-
-                });
+            .done(function (msg) {});
 
         });
     }
