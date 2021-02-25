@@ -20,7 +20,7 @@
 Route::get('categories/rearrange', 'CategoryController@rearrange');
 Route::post('categories/store-rearranged', 'CategoryController@storeRearranged');
 
-
+Route::resource('sales', 'SalesController');
 
 Route::get('login/{service}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{service}/callback', 'Auth\LoginController@handleProviderCallback');
@@ -192,7 +192,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('coupons', 'CouponController')->except([
         'show'
     ]);
-    Route::resource('sales', 'SalesController');
     Route::post('slides/remove-media','SlideController@removeMedia');
     Route::resource('slides', 'SlideController')->except([
         'show'
