@@ -26,15 +26,14 @@ use Prettus\Validator\Exceptions\ValidatorException;
 class SalesController extends Controller
 {
  
-
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function index(Request $request)
+    public function index(SalesDataTable $salesDataTable)
     {
-        return $this->sendResponse(['hello' => 'world'], 'Orders retrieved successfully');
+        return $salesDataTable->render('sales.index');
     }
 
 }
