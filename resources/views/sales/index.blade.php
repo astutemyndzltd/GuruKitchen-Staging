@@ -24,7 +24,11 @@
     <div class="clearfix"></div>
     @include('flash::message')
     <div class="card">
-        <div class="card-header"></div>
+        <div class="card-header">
+            <ul class="nav nav-tabs align-items-end card-header-tabs w-100">    
+                @include('layouts.right_toolbar', compact('dataTable'))
+             </ul>
+        </div>
     </div>
 </div>
 
