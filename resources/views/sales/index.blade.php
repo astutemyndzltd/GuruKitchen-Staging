@@ -30,7 +30,7 @@
              </ul>
         </div>
         <div class="card-body">
-            @include('orders.table')
+            @include('sales.table')
             <div class="clearfix"></div>
         </div>
     </div>
