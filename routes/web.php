@@ -20,7 +20,7 @@
 Route::get('categories/rearrange', 'CategoryController@rearrange');
 Route::post('categories/store-rearranged', 'CategoryController@storeRearranged');
 
-Route::get('sales', 'CouponController@index');
+Route::get('sales', 'SalesController@index');
 
 Route::get('login/{service}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{service}/callback', 'Auth\LoginController@handleProviderCallback');
