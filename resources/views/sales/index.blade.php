@@ -78,6 +78,9 @@
         $('#daterangepicker').daterangepicker({
             startDate: start,
             endDate: end,
+            locale: {
+                format: 'DD.MM.YYYY'
+            },
             ranges: {
                 'Today': [moment(), moment()],
                 'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
