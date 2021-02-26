@@ -58,7 +58,7 @@ class SalesDataTable extends DataTable
 
     public function query(Order $model) 
     {
-        return $model->select("orders.*");
+        return  $model->newQuery()->with("user")->with("orderStatus")->with('payment')->select('orders.*');
     }
 
     public function html()
