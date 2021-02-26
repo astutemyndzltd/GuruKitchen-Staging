@@ -9,7 +9,9 @@
 
 namespace App\DataTables;
 
-
+use App\Models\Order;
+use Barryvdh\DomPDF\Facade as PDF;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
 
 class SalesDataTable extends DataTable 
@@ -58,7 +60,7 @@ class SalesDataTable extends DataTable
 
     public function query(Order $model) 
     {
-        return  $model->newQuery()->with("user")->with("orderStatus")->with('payment')->select('orders.*');
+        return $model->newQuery()->with("user")->with("orderStatus")->with('payment')->select('orders.*');
     }
 
     public function html()
