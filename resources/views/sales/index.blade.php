@@ -51,3 +51,7 @@
 </div>
 
 @endsection
+
+@push('css_lib')
+    <link rel="stylesheet" href="{{ asset('css/sales-datatable.css') }}">
+@endpush
