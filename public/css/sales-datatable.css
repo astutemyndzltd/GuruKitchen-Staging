@@ -1,5 +1,5 @@
 .statistics {
-    height: 150px;
+    height: 125px;
     background-color: #1e7eca;
     display: flex;
     border-radius: 0.25rem;
@@ -18,9 +18,9 @@
 }
 
 .chunk .capt {
-    font-size: 17px;
+    font-size: 15px;
 }
 
 .chunk .sub {
-    font-size: 28px;
+    font-size: 25px;
 }
