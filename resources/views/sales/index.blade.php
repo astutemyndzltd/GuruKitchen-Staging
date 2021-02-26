@@ -65,7 +65,7 @@
     <script type="text/javascript" src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script>
         $(window).on('load', () => {
-            const picker = $('#daterangepicker').daterangepicker({  opens: 'left' }, (start, end, label) => {
+            const picker = $('#daterangepicker').daterangepicker({  opens: 'right' }, (start, end, label) => {
                 console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
             }); 
         });
