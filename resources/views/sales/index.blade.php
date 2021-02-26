@@ -66,11 +66,13 @@
 <script type="text/javascript" src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 <script>
     $(window).on('load', () => {
-        let start = moment().subtract(29, 'days');
+
+        let start = moment();
         let end = moment();
 
         function cb(start, end) {
             $('#daterangepicker span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            console.log('hello world');
         }
 
         $('#daterangepicker').daterangepicker({
