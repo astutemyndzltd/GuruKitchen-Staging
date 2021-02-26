@@ -32,7 +32,7 @@
         <div class="card-body">
             <div class="daterange-choose">
                 <span>Select Date Range</span>  
-                <input type="text" name="daterange" id="daterangepicker" />
+                <input type="text" name="daterange" id="daterangepicker" readonly/>
             </div>
             <div class="statistics">
                 <div class="chunk">
@@ -71,8 +71,8 @@
         let end = moment();
 
         function cb(start, end) {
-            $('#daterangepicker span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-            console.log('hello world');
+            //$('#daterangepicker span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            //console.log('hello world');
         }
 
         $('#daterangepicker').daterangepicker({
