@@ -31,7 +31,8 @@
         </div>
         <div class="card-body">
             <div class="daterange-choose">
-                Select Date Range  <input type="text" name="daterange" id="daterangepicker" />
+                <span>Select Date Range</span>  
+                <input type="text" name="daterange" id="daterangepicker" />
             </div>
             <div class="statistics">
                 <div class="chunk">

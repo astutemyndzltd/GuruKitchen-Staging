@@ -29,3 +29,6 @@
 .daterange-choose {
     margin-bottom: 20px;
 }
+.daterange-choose span {
+    margin-right: 10px;
+}
