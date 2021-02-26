@@ -57,7 +57,7 @@
 
 @push('css_lib')
     <link rel="stylesheet" href="{{ asset('css/sales-datatable.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker-bs3.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker-bs3.css') }}">
 @endpush
 
 @push('scripts_lib')
