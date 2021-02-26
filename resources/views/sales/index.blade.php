@@ -61,8 +61,8 @@
 @endpush
 
 @push('scripts_lib')
-    <script type="text/javascript" src="{{ asset('plugins/moment.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('plugins/daterangepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/daterangepicker/moment.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script>
         $(window).on('load', () => {
             const picker = $('#daterangepicker').daterangepicker({  opens: 'left' }, (start, end, label) => {
