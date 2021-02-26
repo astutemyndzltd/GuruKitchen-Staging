@@ -1,0 +1,9 @@
+.statistics {
+    height: 150px;
+    background-color: #1e7eca;
+    display: flex;
+}
+
+.chunk {
+    flex: 1;
+}
