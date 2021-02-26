@@ -30,6 +30,9 @@
              </ul>
         </div>
         <div class="card-body">
+            <div>
+                <input type="text" name="daterange" id="daterangepicker"/>
+            </div>
             <div class="statistics">
                 <div class="chunk">
                     <div class="capt">Total Orders</div>
@@ -58,6 +61,14 @@
 @endpush
 
 @push('scripts_lib')
-    
+    <script type="text/javascript" src="{{ asset('plugins/moment.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/daterangepicker.js') }}"></script>
+    <script>
+        $(window).on('load', () => {
+            const picker = $('#daterangepicker').daterangepicker({  opens: 'left' }, (start, end, label) => {
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            }); 
+        });
+    </script>
 @endpush    
 
