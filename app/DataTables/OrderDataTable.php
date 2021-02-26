@@ -40,7 +40,7 @@ class OrderDataTable extends DataTable
                 return "#".$order->id;
             })
             ->editColumn('created_at', function ($order) {
-                return getDateColumn($order, 'updated_at');
+                return getDateColumn($order, 'created_at');
             })
             ->editColumn('preorder_info', function($order) {
                 $preorderInfo = $order->preorder_info;
