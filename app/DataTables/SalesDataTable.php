@@ -19,6 +19,9 @@ class SalesDataTable extends DataTable
     {
        
         $dataTable = new EloquentDataTable($query);
+        $columns = array_column($this->getColumns(), 'data');
+        $dataTable = $dataTable->addColumn('action', 'sales.datatables_actions')
+                    ->rawColumns(array_merge($columns, ['action']));
         return $dataTable;
     }
     
@@ -55,6 +58,7 @@ class SalesDataTable extends DataTable
     {
         return $this->builder()
             ->columns($this->getColumns())
+            ->ajax(['data' => 'function(d) { onReloadDt(d); }'])
             ->addAction(['title'=>trans('lang.actions'),'width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
             ->parameters(array_merge(
                 [
