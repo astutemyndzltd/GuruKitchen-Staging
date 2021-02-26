@@ -20,14 +20,7 @@ class SalesDataTable extends DataTable
        
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
-        $dataTable = $dataTable
-                    ->editColumn('id', function ($order) {
-                        return "#".$order->id;
-                    })
-                    ->editColumn('created_at', function ($order) {
-                        return getDateColumn($order, 'updated_at');
-                    })
-                    ->addColumn('action', 'sales.datatables_actions')
+        $dataTable = $dataTable->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
         return $dataTable;
     }
