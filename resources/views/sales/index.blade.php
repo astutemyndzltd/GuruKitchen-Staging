@@ -30,6 +30,20 @@
              </ul>
         </div>
         <div class="card-body">
+            <div class="statistics">
+                <div class="chunk">
+                    <div>Total Orders</div>
+                    <div>25</div>
+                </div>
+                <div class="chunk">
+                    <div>Gross Revenue</div>
+                    <div>£768.25</div>
+                </div>
+                <div class="chunk">
+                    <div>Average Order Value</div>
+                    <div>£25.68</div>
+                </div>
+            </div>
             @include('sales.table')
             <div class="clearfix"></div>
         </div>
