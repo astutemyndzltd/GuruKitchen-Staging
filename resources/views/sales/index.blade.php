@@ -25,13 +25,13 @@
     @include('flash::message')
     <div class="card">
         <div class="card-header">
-            <ul class="nav nav-tabs align-items-end card-header-tabs w-100">    
+            <ul class="nav nav-tabs align-items-end card-header-tabs w-100">
                 @include('layouts.right_toolbar', compact('dataTable'))
-             </ul>
+            </ul>
         </div>
         <div class="card-body">
             <div>
-                <input type="text" name="daterange" id="daterangepicker"/>
+                <input type="text" name="daterange" id="daterangepicker" />
             </div>
             <div class="statistics">
                 <div class="chunk">
@@ -56,19 +56,36 @@
 @endsection
 
 @push('css_lib')
-    <link rel="stylesheet" href="{{ asset('css/sales-datatable.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+<link rel="stylesheet" href="{{ asset('css/sales-datatable.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
 @endpush
 
 @push('scripts_lib')
-    <script type="text/javascript" src="{{ asset('plugins/daterangepicker/moment.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
-    <script>
-        $(window).on('load', () => {
-            const picker = $('#daterangepicker').daterangepicker({  opens: 'right' }, (start, end, label) => {
-                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-            }); 
-        });
-    </script>
-@endpush    
+<script type="text/javascript" src="{{ asset('plugins/daterangepicker/moment.js') }}"></script>
+<script type="text/javascript" src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+<script>
+    $(window).on('load', () => {
+        let start = moment().subtract(29, 'days');
+        let end = moment();
 
+        function cb(start, end) {
+            $('#daterangepicker span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+
+        $('#daterangepicker').daterangepicker({
+            startDate: start,
+            endDate: end,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, cb);
+
+        cb(start, end);
+    });
+</script>
+@endpush
