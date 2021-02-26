@@ -41,7 +41,7 @@ class SalesDataTable extends DataTable
             [
                 "data" => "id",
                 "name" => "id",
-                "title" => "Id"
+                "title" => "Order Id"
             ],
             [
                 "data" => "created_at",
