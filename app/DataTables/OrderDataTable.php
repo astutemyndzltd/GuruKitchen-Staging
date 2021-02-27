@@ -91,6 +91,7 @@ class OrderDataTable extends DataTable
                 'data' => 'address',
                 'name' => 'address',
                 'title' => 'Address',
+                'width' => '10%'
             ],
             /*[
                 'data' => 'user.name',
