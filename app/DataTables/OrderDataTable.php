@@ -39,9 +39,9 @@ class OrderDataTable extends DataTable
             ->editColumn('id', function ($order) {
                 return "#".$order->id;
             })
-            ->editColumn('delivery_address.address', function ($order) {
-                $address = $order->delivery_address->address;
-                return 'hello';
+            ->editColumn('address', function ($order) {
+                $address = isset($order->deliveryAddress) ? $order->deliveryAddress->address : 'NA';
+                return $address;
             })
             ->editColumn('created_at', function ($order) {
                 return getDateColumn($order, 'created_at');
@@ -88,8 +88,8 @@ class OrderDataTable extends DataTable
 
             ],
             [
-                'data' => 'delivery_address.address',
-                'name' => 'deliveryAddress.address',
+                'data' => 'address',
+                'name' => 'address',
                 'title' => 'Address',
             ],
             /*[
