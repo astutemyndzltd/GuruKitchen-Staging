@@ -41,7 +41,7 @@ class OrderDataTable extends DataTable
             })
             ->editColumn('delivery_address.address', function ($order) {
                 $address = $order->delivery_address->address;
-                return isset($address) ? $address : 'NA';
+                return 'hello';
             })
             ->editColumn('created_at', function ($order) {
                 return getDateColumn($order, 'created_at');
