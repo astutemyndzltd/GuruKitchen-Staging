@@ -20,8 +20,8 @@ class SalesDataTable extends DataTable
     public function dataTable($query)
     {
        
-        file_put_contents('order.txt', $query->toSql());
         $dataTable = new EloquentDataTable($query);
+        file_put_contents('order.txt', json_encode($dataTable));
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
                     ->editColumn('id', function ($order) {
