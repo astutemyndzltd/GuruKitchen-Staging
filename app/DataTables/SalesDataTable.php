@@ -11,6 +11,7 @@ namespace App\DataTables;
 
 use App\Models\Order;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Config;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
 
@@ -18,8 +19,7 @@ class SalesDataTable extends DataTable
 {
     
     public function dataTable($query)
-    {
-       
+    {        
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
@@ -30,13 +30,14 @@ class SalesDataTable extends DataTable
                         return getDateColumn($order, 'created_at');
                     })
                     ->editColumn('price', function ($order) {
-                        file_put_contents('order.txt', json_encode($order));
                         return getPriceColumn($order->payment, 'price');
                     })
                     ->editColumn('com_tax', function ($order) {
-                        //$price = $order->payment->price;
-                        //$commission = $price * admin->commision
-                        return '56';
+                        $price = $order->payment->price;
+                        $adminCommission = $order->foods[0]->restaurant->admin_commission;
+                        $commission = $price * $adminCommission / 100;
+                        $grossCommission = $commission + ($commission * Config::get('services.default_tax') / 100);                        
+                        return $grossCommission;
                     })    
                     ->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
