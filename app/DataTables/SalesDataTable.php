@@ -21,7 +21,6 @@ class SalesDataTable extends DataTable
     {
        
         $dataTable = new EloquentDataTable($query);
-        file_put_contents('order.txt', $query->toSql());
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
                     ->editColumn('id', function ($order) {
@@ -35,8 +34,7 @@ class SalesDataTable extends DataTable
                     })
                     ->editColumn('com_tax', function ($order) {
                         return '5';
-                    })
-                    
+                    })    
                     ->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
         return $dataTable;
@@ -87,7 +85,7 @@ class SalesDataTable extends DataTable
                 ->join("food_orders", "orders.id", "=", "food_orders.order_id")
                 ->join("foods", "foods.id", "=", "food_orders.food_id")
                 ->join("user_restaurants", "user_restaurants.restaurant_id", "=", "foods.restaurant_id")
-                ->where('user_restaurants.user_id', auth()->id());
+                ->whereRaw('user_restaurants.user_id = ' . auth()->id());
 
             $model = $model->whereRaw('orders.order_status_id = 5')->whereRaw("date(orders.created_at) between '$start' and '$end'");    
             $model = $model->groupBy('orders.id')->select('orders.*');
