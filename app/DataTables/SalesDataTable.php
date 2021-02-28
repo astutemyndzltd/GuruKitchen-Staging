@@ -33,7 +33,8 @@ class SalesDataTable extends DataTable
                         return getPriceColumn($order->payment, 'price');
                     })
                     ->editColumn('com_tax', function ($order) {
-                        return '5';
+                        $price = $order->payment->price;
+                        $commission = $price * admin->commision
                     })    
                     ->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
@@ -82,7 +83,7 @@ class SalesDataTable extends DataTable
              
         if (auth()->user()->hasRole('manager')) {
 
-            $model = $model->newQuery()->with("user")->with("orderStatus")->with('payment')
+            $model = $model->newQuery()->with("user")->with("orderStatus")->with('payment')->with('foods')
                 ->join("food_orders", "orders.id", "=", "food_orders.order_id")
                 ->join("foods", "foods.id", "=", "food_orders.food_id")
                 ->join("user_restaurants", "user_restaurants.restaurant_id", "=", "foods.restaurant_id")
