@@ -41,6 +41,6 @@
     width: 255px;
 }
 
-.daterangepicker.ltr.show-ranges.opensright.show-calendar {
+.daterangepicker.ltr.show-ranges {
     font-family: 'Poppins' !important;
 }
