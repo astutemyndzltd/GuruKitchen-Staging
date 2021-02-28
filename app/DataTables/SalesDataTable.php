@@ -29,10 +29,7 @@ class SalesDataTable extends DataTable
                     ->editColumn('created_at', function ($order) {
                         return getDateColumn($order, 'created_at');
                     })
-                    ->editColumn('price', function ($order) {
-                        //file_put_contents('order.txt', json_encode($order));
-                        return "£56" ;
-                    })
+                    
                     ->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
         return $dataTable;
