@@ -31,7 +31,7 @@ class SalesDataTable extends DataTable
                     })
                     ->editColumn('price', function ($order) {
                         file_put_contents('order.txt', json_encode($order));
-                        return '56';
+                        return $order->payment->price;
                     })
                     ->editColumn('com_tax', function ($order) {
                         return '5';
