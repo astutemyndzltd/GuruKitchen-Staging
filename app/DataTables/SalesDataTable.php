@@ -30,7 +30,7 @@ class SalesDataTable extends DataTable
                         return getDateColumn($order, 'created_at');
                     })
                     ->editColumn('price', function ($order) {
-                        return '56';
+                        return $order->payment()->price;
                     })
                     ->editColumn('com_tax', function ($order) {
                         return '5';
