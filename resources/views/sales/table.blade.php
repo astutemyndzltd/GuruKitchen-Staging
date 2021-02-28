@@ -10,8 +10,10 @@
     let start, end;
 
     function onReloadDt(data) {
-        console.log(start.format('YYYY MM DD'));
-        console.log(end.format('YYYY MM DD'));
+        if (start && end) {
+            console.log(start.format('YYYY MM DD'));
+            console.log(end.format('YYYY MM DD'));
+        }
     }
 
 </script>
@@ -36,6 +38,7 @@
         }, onDateRangeChange);
 
         function onDateRangeChange(s, e) {
+            console.log(s);
             start = s; end = e;
             $table.ajax.reload();
         }
