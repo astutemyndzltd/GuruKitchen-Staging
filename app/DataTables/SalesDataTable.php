@@ -19,7 +19,8 @@ class SalesDataTable extends DataTable
 {
     
     public function dataTable($query)
-    {        
+    {            
+        $payable = 0;
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
@@ -32,13 +33,20 @@ class SalesDataTable extends DataTable
                     ->editColumn('price', function ($order) {
                         return getPriceColumn($order->payment, 'price');
                     })
-                    ->editColumn('com_tax', function ($order) {
+                    ->editColumn('com_tax', function ($order) use(&$payable) {
                         $price = $order->payment->price;
                         $adminCommission = $order->foods[0]->restaurant->admin_commission;
                         $commission = $price * $adminCommission / 100;
-                        $grossCommission = $commission + ($commission * setting('default_tax', 0) / 100);                        
-                        return $grossCommission;
-                    })    
+                        $grossCommission = $commission + ($commission * setting('default_tax', 0) / 100);
+                        $payable = $price - $grossCommission;                        
+                        return getPriceColumn(['gross' => $grossCommission], 'gross');
+                    })
+                    ->editColumn('payable', function($order) use(&$payable) {
+                        return getPriceColumn(['payable' => $payable], 'payable');
+                    })
+                    ->editColumn('paid_out', function($order) {
+                        return getBooleanColumn($order, 'paid_out');
+                    })      
                     ->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
         return $dataTable;
@@ -66,8 +74,13 @@ class SalesDataTable extends DataTable
             [
                 "data" => "com_tax",
                 "name" => "com_tax",
-                "title" => "GuruKitchen Gross Commission",
+                "title" => "GuruKitchen Commission",
                 "width" => "20%"
+            ],
+            [
+                "data" => "payable",
+                "name" => "payable",
+                "title" => "Payable"
             ],
             [
                 "data" => "paid_out",
