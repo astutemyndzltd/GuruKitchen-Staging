@@ -21,7 +21,6 @@ class SalesDataTable extends DataTable
     {
        
         $dataTable = new EloquentDataTable($query);
-        file_put_contents('order.txt', auth()->id());
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
                     ->editColumn('id', function ($order) {
@@ -31,14 +30,12 @@ class SalesDataTable extends DataTable
                         return getDateColumn($order, 'created_at');
                     })
                     ->editColumn('price', function ($order) {
-                        return 'xxxx';
+                        return '56';
                     })
                     ->editColumn('com_tax', function ($order) {
-                        return 'xxxx';
+                        return '5';
                     })
-                    ->editColumn('paid_out', function ($order) {
-                        return 'xxxx';
-                    })
+                    
                     ->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
         return $dataTable;
