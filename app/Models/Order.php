@@ -46,7 +46,8 @@ class Order extends Model
         'driver_id',
         'order_type',
         'note',
-        'preorder_info'
+        'preorder_info',
+        'paid_out'
     ];
 
     /**
@@ -63,11 +64,12 @@ class Order extends Model
         'payment_id' => 'integer',
         'delivery_address_id' => 'integer',
         'delivery_fee'=>'double',
-        'active'=>'boolean',
+        'active' => 'boolean',
         'driver_id' => 'integer',
         'order_type' => 'string',
         'note' => 'string',
-        'preorder_info' => 'string'
+        'preorder_info' => 'string',
+        'paid_out' => 'boolean'
     ];
 
     /**

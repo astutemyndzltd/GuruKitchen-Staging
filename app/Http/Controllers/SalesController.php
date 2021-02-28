@@ -18,8 +18,7 @@ class SalesController extends Controller
     {
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
-        file_put_contents('order.txt', "start -> $startDate | end -> $endDate");
-        return $salesDataTable->render('sales.index');
+        return $salesDataTable->with(['startDate' => $startDate, 'endDate' => $endDate])->render('sales.index');
     }
 
 }

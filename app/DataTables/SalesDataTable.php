@@ -27,7 +27,7 @@ class SalesDataTable extends DataTable
                         return "#".$order->id;
                     })
                     ->editColumn('created_at', function ($order) {
-                        return getDateColumn($order, 'updated_at');
+                        return getDateColumn($order, 'created_at');
                     })
                     ->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
@@ -52,6 +52,16 @@ class SalesDataTable extends DataTable
                 "data" => "price",
                 "name" => "price",
                 "title" => "Price"
+            ],
+            [
+                "data" => "com_tax",
+                "name" => "com_tax",
+                "title" => "Commission + Tax"
+            ],
+            [
+                "data" => "paid_out",
+                "name" => "paid_out",
+                "title" => "Paid Out"
             ]
         ];
 
