@@ -11,9 +11,8 @@
 
     function onReloadDt(data) {
         if (start && end) {
-            console.log('welcome to the jungle');
-            console.log(start.format('YYYY MM DD'));
-            console.log(end.format('YYYY MM DD'));
+            data.startDate = start.format('YYYY MM DD');
+            data.endDate = end.format('YYYY MM DD');
         }
     }
 
