@@ -62,7 +62,8 @@ class SalesDataTable extends DataTable
             [
                 "data" => "com_tax",
                 "name" => "com_tax",
-                "title" => "GuruKitchen Commission"
+                "title" => "GuruKitchen Gross Commission",
+                "width" => "20%"
             ],
             [
                 "data" => "paid_out",
