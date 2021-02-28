@@ -36,7 +36,7 @@ class SalesDataTable extends DataTable
                         $price = $order->payment->price;
                         $adminCommission = $order->foods[0]->restaurant->admin_commission;
                         $commission = $price * $adminCommission / 100;
-                        $grossCommission = $commission + ($commission * Config::get('services.default_tax') / 100);                        
+                        $grossCommission = $commission + ($commission * setting('default_tax', 0) / 100);                        
                         return $grossCommission;
                     })    
                     ->addColumn('action', 'sales.datatables_actions')
