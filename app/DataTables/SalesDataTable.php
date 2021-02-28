@@ -21,7 +21,6 @@ class SalesDataTable extends DataTable
     {
        
         $dataTable = new EloquentDataTable($query);
-        file_put_contents('order.txt', json_encode($query));
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
                     ->editColumn('id', function ($order) {
