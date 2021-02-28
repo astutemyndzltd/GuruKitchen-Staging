@@ -20,7 +20,6 @@ class SalesDataTable extends DataTable
     
     public function dataTable($query)
     {            
-        $payable = 0;
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
@@ -122,4 +121,5 @@ class SalesDataTable extends DataTable
     {
         return 'salesdatatable_' . time();
     }
+
 }
