@@ -10,7 +10,8 @@
     let start, end;
 
     function onReloadDt(data) {
-        //console.log(start.)
+        console.log(start.format('YYYY MM DD'));
+        console.log(end.format('YYYY MM DD'));
     }
 
 </script>
