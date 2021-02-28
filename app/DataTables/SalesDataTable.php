@@ -35,7 +35,8 @@ class SalesDataTable extends DataTable
                     })
                     ->editColumn('com_tax', function ($order) {
                         //$price = $order->payment->price;
-                        $commission = $price * admin->commision
+                        //$commission = $price * admin->commision
+                        return '56';
                     })    
                     ->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
