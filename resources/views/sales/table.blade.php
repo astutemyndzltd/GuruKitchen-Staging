@@ -11,7 +11,7 @@
     let end = moment();
 
     function onReloadDt(data) {
-        console.log(start.)
+        //console.log(start.)
     }
 
 </script>
