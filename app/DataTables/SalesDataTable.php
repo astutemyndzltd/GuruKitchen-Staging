@@ -85,7 +85,7 @@ class SalesDataTable extends DataTable
                 ->join("food_orders", "orders.id", "=", "food_orders.order_id")
                 ->join("foods", "foods.id", "=", "food_orders.food_id")
                 ->join("user_restaurants", "user_restaurants.restaurant_id", "=", "foods.restaurant_id")
-                ->whereRaw('user_restaurants.user_id = ' . auth()->id());
+                ->where('user_restaurants.user_id', auth()->id());
 
             $model = $model->whereRaw('orders.order_status_id = 5')->whereRaw("date(orders.created_at) between '$start' and '$end'");    
             $model = $model->groupBy('orders.id')->select('orders.*');
