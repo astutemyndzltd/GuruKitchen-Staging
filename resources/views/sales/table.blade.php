@@ -7,8 +7,7 @@
 @push('scripts_lib')
 @include('layouts.datatables_js')
 <script>
-    let start = moment();
-    let end = moment();
+    let start, end;
 
     function onReloadDt(data) {
         //console.log(start.)
@@ -40,7 +39,7 @@
             $table.ajax.reload();
         }
 
-        onDateRangeChange(start, end);
+        onDateRangeChange(moment(), moment());
     });
 </script>
 @endpush
