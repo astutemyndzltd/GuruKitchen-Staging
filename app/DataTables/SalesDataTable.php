@@ -32,23 +32,10 @@ class SalesDataTable extends DataTable
                     })
                     ->editColumn('price', function ($order) {
                         return getPriceColumn($order->payment, 'price');
-                    })
-                    ->editColumn('com_tax', function ($order) use(&$payable) {
-                        $price = $order->payment->price;
-                        $adminCommission = $order->foods[0]->restaurant->admin_commission;
-                        $commission = $price * $adminCommission / 100;
-                        $grossCommission = $commission + ($commission * setting('default_tax', 0) / 100);
-                        $payable = $price - $grossCommission;                        
-                        return getPriceColumn(['gross' => $grossCommission], 'gross');
-                    })
-                    ->editColumn('payable', function($order) use(&$payable) {
-                        return getPriceColumn(['payable' => $payable], 'payable');
-                    })
-                    ->editColumn('paid_out', function($order) {
-                        return getBooleanColumn($order, 'paid_out');
-                    })      
+                    })     
                     ->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
+                    
         return $dataTable;
     }
     
@@ -62,31 +49,15 @@ class SalesDataTable extends DataTable
                 "title" => "Order Id"
             ],
             [
+                "data" => "price",
+                "name" => "price",
+                "title" => "Amount"
+            ],
+            [
                 "data" => "created_at",
                 "name" => "created_at",
                 "title" => "Created At"
             ],
-            [
-                "data" => "price",
-                "name" => "price",
-                "title" => "Price"
-            ],
-            [
-                "data" => "com_tax",
-                "name" => "com_tax",
-                "title" => "GuruKitchen Commission",
-                "width" => "20%"
-            ],
-            [
-                "data" => "payable",
-                "name" => "payable",
-                "title" => "Payable"
-            ],
-            [
-                "data" => "paid_out",
-                "name" => "paid_out",
-                "title" => "Paid Out"
-            ]
         ];
 
         return $columns;
@@ -99,13 +70,13 @@ class SalesDataTable extends DataTable
              
         if (auth()->user()->hasRole('manager')) {
 
-            $model = $model->newQuery()->with("user")->with("orderStatus")->with('payment')->with('foods')
+            $model = $model->newQuery()->with("user")->with("orderStatus")->with('payment')
                 ->join("food_orders", "orders.id", "=", "food_orders.order_id")
                 ->join("foods", "foods.id", "=", "food_orders.food_id")
                 ->join("user_restaurants", "user_restaurants.restaurant_id", "=", "foods.restaurant_id")
                 ->where('user_restaurants.user_id', auth()->id());
 
-            $model = $model->whereRaw('orders.order_status_id = 5')->whereRaw("date(orders.created_at) between '$start' and '$end'");    
+            $model = $model->->whereRaw("date(orders.created_at) between '$start' and '$end'");    
             $model = $model->groupBy('orders.id')->select('orders.*');
 
             return $model;
