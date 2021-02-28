@@ -29,7 +29,6 @@ class SalesDataTable extends DataTable
                     ->editColumn('created_at', function ($order) {
                         return getDateColumn($order, 'created_at');
                     })
-                    
                     ->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
         return $dataTable;
@@ -84,8 +83,6 @@ class SalesDataTable extends DataTable
 
             $model = $model->whereRaw('orders.order_status_id = 5')->whereRaw("date(orders.created_at) between '$start' and '$end'");    
             $model = $model->groupBy('orders.id')->select('orders.*');
-
-            file_put_contents('order.txt', $model->toSql());
 
             return $model;
         }
