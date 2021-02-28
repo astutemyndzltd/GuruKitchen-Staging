@@ -70,7 +70,24 @@ class SalesDataTable extends DataTable
 
     public function query(Order $model) 
     {
-        return $model->newQuery()->with("user")->with("orderStatus")->with('payment')->select('orders.*');
+        $start = $this->startDate;
+        $end = $this->endDate;
+             
+        if (auth()->user()->hasRole('manager')) {
+
+            $model = $model->newQuery()->with("user")->with("orderStatus")->with('payment')
+                ->join("food_orders", "orders.id", "=", "food_orders.order_id")
+                ->join("foods", "foods.id", "=", "food_orders.food_id")
+                ->join("user_restaurants", "user_restaurants.restaurant_id", "=", "foods.restaurant_id")
+                ->where('user_restaurants.user_id', auth()->id());
+
+            $model = $model->whereRaw('orders.order_status_id = 5')->whereRaw("date(created_at) between '$start' and '$end'");    
+            $model = $model->groupBy('orders.id')->select('orders.*');
+
+            return $model;
+        }
+        
+        return $model;
     }
 
     public function html()

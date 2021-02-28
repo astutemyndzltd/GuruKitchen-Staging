@@ -57,11 +57,11 @@
 @endsection
 
 @push('css_lib')
-<link rel="stylesheet" href="{{ asset('css/sales-datatable.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sales-datatable.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
 @endpush
 
 @push('scripts_lib')
-<script type="text/javascript" src="{{ asset('plugins/daterangepicker/moment.js') }}"></script>
-<script type="text/javascript" src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/daterangepicker/moment.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 @endpush
