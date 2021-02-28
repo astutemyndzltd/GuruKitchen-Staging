@@ -82,7 +82,7 @@ class SalesDataTable extends DataTable
                 ->where('user_restaurants.user_id', auth()->id());
 
             $model = $model->whereRaw('orders.order_status_id = 5')->whereRaw("date(orders.created_at) between '$start' and '$end'");    
-            $model = $model->groupBy('orders.id')->select('orders.*');
+            $model = $model->groupBy('orders.id')->select('orders.*, payment.price');
 
             return $model;
         }
