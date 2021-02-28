@@ -40,3 +40,7 @@
 #daterangepicker {
     width: 255px;
 }
+
+.daterangepicker.ltr.show-ranges.show-calendar {
+    font-family: 'Poppins' !important;
+}
