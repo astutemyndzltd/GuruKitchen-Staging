@@ -11,8 +11,8 @@
 
     function onReloadDt(data) {
         if (start && end) {
-            data.startDate = start.format('YYYY.MM.DD');
-            data.endDate = end.format('YYYY.MM.DD');
+            data.startDate = start.format('YYYY-MM-DD');
+            data.endDate = end.format('YYYY-MM-DD');
         }
     }
 
