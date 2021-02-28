@@ -30,10 +30,11 @@ class SalesDataTable extends DataTable
                         return getDateColumn($order, 'created_at');
                     })
                     ->editColumn('price', function ($order) {
+                        file_put_contents('order.txt', json_encode($order))
                         return getPriceColumn($order->payment, 'price');
                     })
                     ->editColumn('com_tax', function ($order) {
-                        $price = $order->payment->price;
+                        //$price = $order->payment->price;
                         $commission = $price * admin->commision
                     })    
                     ->addColumn('action', 'sales.datatables_actions')
