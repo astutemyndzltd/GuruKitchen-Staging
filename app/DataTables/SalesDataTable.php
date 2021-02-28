@@ -31,7 +31,7 @@ class SalesDataTable extends DataTable
                     })
                     ->editColumn('price', function ($order) {
                         file_put_contents('order.txt', json_encode($order));
-                        return "£" . $order->payment->price;
+                        return "£56" ;
                     })
                     ->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
