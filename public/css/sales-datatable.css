@@ -28,7 +28,15 @@
 
 .daterange-choose {
     margin-bottom: 40px;
+    display: inline-flex;
+    align-items: center;
 }
+
 .daterange-choose span {
     margin-right: 10px;
+    width: 176px;
+}
+
+#daterangepicker {
+    width: 255px;
 }

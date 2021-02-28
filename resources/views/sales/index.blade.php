@@ -32,7 +32,7 @@
         <div class="card-body">
             <div class="daterange-choose">
                 <span>Select Date Range</span>  
-                <input type="text" name="daterange" id="daterangepicker" readonly/>
+                <input type="text" name="daterange" id="daterangepicker" readonly class="form-control"/>
             </div>
             <div class="statistics">
                 <div class="chunk">
