@@ -20,7 +20,6 @@ class SalesDataTable extends DataTable
     public function dataTable($query)
     {                          
         $dataTable = new EloquentDataTable($query);
-        $totalRecords = $query->count();
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable->editColumn('id', function ($order) {
                                     return "#".$order->id;
@@ -33,7 +32,7 @@ class SalesDataTable extends DataTable
                                 })     
                                 ->addColumn('action', 'sales.datatables_actions')
                                 ->rawColumns(array_merge($columns, ['action']))
-                                ->with('total', $query->count());
+                                ->with('total', function() use($query) { return $query->count(); });
                                                       
         return $dataTable;
 
