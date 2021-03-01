@@ -12,7 +12,7 @@ namespace App\DataTables;
 use App\Models\Order;
 use Barryvdh\DomPDF\Facade as PDF;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables;
+use Yajra\DataTables\Services\DataTable;
 
 class SalesDataTable extends DataTable 
 {
@@ -20,7 +20,7 @@ class SalesDataTable extends DataTable
     public function dataTable($query)
     {                          
         //hello
-        $dataTable = DataTables::eloquent($query);
+        $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
         $result = $dataTable->editColumn('id', function ($order) {
                                     return "#".$order->id;
