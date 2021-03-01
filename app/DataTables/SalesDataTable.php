@@ -19,9 +19,6 @@ class SalesDataTable extends DataTable
     
     public function dataTable($query)
     {            
-        $totalOrders = 0;
-        $grossRevenue = 0.0;
-        
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
@@ -31,17 +28,12 @@ class SalesDataTable extends DataTable
                     ->editColumn('created_at', function ($order) {
                         return getDateColumn($order, 'created_at');
                     })
-                    ->editColumn('price', function ($order) use(&$totalOrders, &$grossRevenue) {
-                        $totalOrders++;
-                        $grossRevenue += $order->payment->price;
-                        file_put_contents('order.txt', 'anik');
+                    ->editColumn('price', function ($order) {
                         return getPriceColumn($order->payment, 'price');
                     })     
                     ->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
-
-        file_put_contents('order.txt', 'roger');            
-
+ 
         return $dataTable;
     }
     
