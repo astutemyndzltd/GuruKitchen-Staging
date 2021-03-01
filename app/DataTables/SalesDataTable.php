@@ -20,7 +20,7 @@ class SalesDataTable extends DataTable
     public function dataTable($query)
     {            
         $totalRecords = $query->count();
-        $totalPrice = $query->sum('payment.price')
+        $totalPrice = $query->sum('payment.price');
               
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
