@@ -19,6 +19,7 @@ class SalesDataTable extends DataTable
     
     public function dataTable($query)
     {                          
+        //hello
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable->editColumn('id', function ($order) {
