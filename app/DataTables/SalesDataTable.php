@@ -20,10 +20,8 @@ class SalesDataTable extends DataTable
     public function dataTable($query)
     {                          
         $query1 = $query->select('orders.*')->toSql();
-        $query2 = $query->select('count(*)')->tosql();
+        $query2 = $query->select('count(*)')->toSql();
         file_put_contents('order.txt', "$query1 || $query2");
-        
-        
         
         $totalOrders = 0;
         $grossRevenue = 0.0;
