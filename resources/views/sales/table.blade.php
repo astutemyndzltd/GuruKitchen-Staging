@@ -16,8 +16,9 @@
         }
     }
 
-    function onDataReceived(data) {
-        console.log(data);
+    function onDataReceived(json) {
+        console.log(json);
+        return json.data;
     }
 
 </script>
