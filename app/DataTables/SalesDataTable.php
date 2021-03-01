@@ -37,7 +37,7 @@ class SalesDataTable extends DataTable
                     ->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
 
-        return $dataTable->with([ 'orders' => $totalOrders, 'revenue' => getPrice($grossRevenue) ]);
+        return $dataTable;
     }
     
     
