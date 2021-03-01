@@ -33,7 +33,7 @@ class SalesDataTable extends DataTable
                                 })     
                                 ->addColumn('action', 'sales.datatables_actions')
                                 ->rawColumns(array_merge($columns, ['action']))
-                                ->toJson();
+                                ->make(true);
                                                       
         return $result;
 
