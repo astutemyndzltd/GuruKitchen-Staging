@@ -11,7 +11,6 @@ namespace App\DataTables;
 
 use App\Models\Order;
 use Barryvdh\DomPDF\Facade as PDF;
-use Illuminate\Support\Facades\Config;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
 
@@ -70,10 +69,10 @@ class SalesDataTable extends DataTable
         if (auth()->user()->hasRole('manager')) {
 
             $model = $model->newQuery()->with("user")->with("orderStatus")->with('payment')
-                ->join("food_orders", "orders.id", "=", "food_orders.order_id")
-                ->join("foods", "foods.id", "=", "food_orders.food_id")
-                ->join("user_restaurants", "user_restaurants.restaurant_id", "=", "foods.restaurant_id")
-                ->where('user_restaurants.user_id', auth()->id());
+                    ->join("food_orders", "orders.id", "=", "food_orders.order_id")
+                    ->join("foods", "foods.id", "=", "food_orders.food_id")
+                    ->join("user_restaurants", "user_restaurants.restaurant_id", "=", "foods.restaurant_id")
+                    ->where('user_restaurants.user_id', auth()->id());
 
             $model = $model->whereRaw("date(orders.created_at) between '$start' and '$end'");    
             $model = $model->groupBy('orders.id')->select('orders.*');
@@ -88,7 +87,7 @@ class SalesDataTable extends DataTable
     {
         return $this->builder()
             ->columns($this->getColumns())
-            ->ajax(['data' => 'function(d) { onReloadDt(d); }'])
+            ->ajax(['data' => 'function(d) { onReloadDt(d); }', 'dataSrc' => 'function(d) { onDataReceived(d); }'])
             ->addAction(['title'=>trans('lang.actions'),'width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
             ->parameters(array_merge(
                 [

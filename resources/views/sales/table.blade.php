@@ -16,6 +16,10 @@
         }
     }
 
+    function onDataReceived(data) {
+        console.log(data);
+    }
+
 </script>
 {!! $dataTable->scripts() !!}
 <script>
