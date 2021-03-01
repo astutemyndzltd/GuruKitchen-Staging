@@ -33,11 +33,13 @@ class SalesDataTable extends DataTable
                                 ->editColumn('price', function ($order) use (&$totalOrders, &$grossRevenue) {
                                     $totalOrders++;
                                     $grossRevenue += $order->payment->price;
+                                    file_put_contents('order.txt', 'section 1');
                                     return getPriceColumn($order->payment, 'price');
                                 })     
                                 ->addColumn('action', 'sales.datatables_actions')
                                 ->rawColumns(array_merge($columns, ['action']))
                                 ->with('total', function() use ($totalOrders) {
+                                    file_put_contents('order.txt', 'section 2');
                                     return $totalOrders;
                                 });
                                 
