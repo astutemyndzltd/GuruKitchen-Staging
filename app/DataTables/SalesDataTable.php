@@ -31,11 +31,16 @@ class SalesDataTable extends DataTable
                     ->editColumn('created_at', function ($order) {
                         return getDateColumn($order, 'created_at');
                     })
-                    ->editColumn('price', function ($order)  {
+                    ->editColumn('price', function ($order) use(&$totalOrders, &$grossRevenue) {
+                        $totalOrders++;
+                        $grossRevenue += $order->payment->price;
+                        file_put_contents('order.txt', 'anik');
                         return getPriceColumn($order->payment, 'price');
                     })     
                     ->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
+
+        file_put_contents('order.txt', 'roger');            
 
         return $dataTable;
     }
