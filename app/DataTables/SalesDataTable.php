@@ -19,31 +19,20 @@ class SalesDataTable extends DataTable
     
     public function dataTable($query)
     {                          
-        $query1 = $query->get();
-        file_put_contents('order.txt', json_encode($query1));
-        
-        $totalOrders = 0;
-        $grossRevenue = 0.0;
-
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
-        $dataTable = $dataTable->editColumn('id', function ($order) {
-                                    return "#".$order->id;
-                                })
-                                ->editColumn('created_at', function ($order) {
-                                    return getDateColumn($order, 'created_at');
-                                })
-                                ->editColumn('price', function ($order) use (&$totalOrders, &$grossRevenue) {
-                                    $totalOrders++;
-                                    $grossRevenue += $order->payment->price;
-                                    return getPriceColumn($order->payment, 'price');
-                                })     
-                                ->addColumn('action', 'sales.datatables_actions')
-                                ->rawColumns(array_merge($columns, ['action']))
-                                ->with('total', function() use ($totalOrders) {
-                                    return $totalOrders;
-                                });
-                                
+        $dataTable = $dataTable
+                    ->editColumn('id', function ($order) {
+                        return "#".$order->id;
+                    })
+                    ->editColumn('created_at', function ($order) {
+                        return getDateColumn($order, 'created_at');
+                    })
+                    ->editColumn('price', function ($order) use (&$totalOrders, &$grossRevenue) {
+                        return getPriceColumn($order->payment, 'price');
+                    })     
+                    ->addColumn('action', 'sales.datatables_actions')
+                    ->rawColumns(array_merge($columns, ['action']));          
                                                       
         return $dataTable;
 
