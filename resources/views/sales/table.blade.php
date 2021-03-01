@@ -18,7 +18,7 @@
 
     function onDataReceived(json) {
         console.log(json);
-        return json;
+        return json.data;
     }
 
 </script>
