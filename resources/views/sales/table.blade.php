@@ -19,9 +19,9 @@
 
     function onDataReceived(json) {
         $(divStatistics).slideDown();
-        $(divTotalOrders).val('25');
-        $(divGrossRevenue).val('£768.25');
-        $(divAvgOrderValue).val('£25.68');
+        $(divTotalOrders).text('25');
+        $(divGrossRevenue).text('£768.25');
+        $(divAvgOrderValue).text('£25.68');
     }
 
 </script>
