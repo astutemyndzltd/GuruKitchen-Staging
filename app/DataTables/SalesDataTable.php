@@ -34,7 +34,7 @@ class SalesDataTable extends DataTable
                     ->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
  
-        return $dataTable;
+        return $dataTable->with('gross', function() use($query) { return $query->sum('payment.price'); });
     }
     
     
