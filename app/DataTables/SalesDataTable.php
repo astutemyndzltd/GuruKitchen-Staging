@@ -32,6 +32,7 @@ class SalesDataTable extends DataTable
                         return getPriceColumn($order->payment, 'price');
                     })     
                     ->addColumn('action', 'sales.datatables_actions')
+                    ->addColumn('raw_price', function($order) { return $order->payment->price; });
                     ->rawColumns(array_merge($columns, ['action']));          
                                                       
         return $dataTable;
