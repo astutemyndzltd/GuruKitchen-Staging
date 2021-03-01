@@ -42,7 +42,7 @@ class SalesDataTable extends DataTable
                                 });
                                 
                                                       
-        return $dataTable->make(true);
+        return $dataTable;
 
     }
     
