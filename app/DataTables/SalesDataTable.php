@@ -32,7 +32,9 @@ class SalesDataTable extends DataTable
                                 })     
                                 ->addColumn('action', 'sales.datatables_actions')
                                 ->rawColumns(array_merge($columns, ['action']))
-                                ->with('total', function() use($query) { return $query->count(); });
+                                ->withQuery('count', function($filteredQuery) {
+                                    return $filteredQuery->count();
+                                })
                                                       
         return $dataTable;
 
