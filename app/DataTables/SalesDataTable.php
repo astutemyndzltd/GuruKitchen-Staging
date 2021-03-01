@@ -32,8 +32,8 @@ class SalesDataTable extends DataTable
                         return getDateColumn($order, 'created_at');
                     })
                     ->editColumn('price', function ($order) use(&$totalOrders, &$grossRevenue) {
-                        $totalOrders++;
-                        $grossRevenue = $order->payment->price;
+                        $totalOrders = $totalOrders + 1;
+                        $grossRevenue += $order->payment->price;
                         return getPriceColumn($order->payment, 'price');
                     })     
                     ->addColumn('action', 'sales.datatables_actions')
