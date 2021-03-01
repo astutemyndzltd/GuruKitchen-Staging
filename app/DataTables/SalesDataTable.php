@@ -13,21 +13,24 @@ use App\Models\Order;
 use Barryvdh\DomPDF\Facade as PDF;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\Datatables\Facades\Datatables;
-
 
 class SalesDataTable extends DataTable 
 {
     
     public function dataTable($query)
     {                          
+        $query1 = $query->select('orders.*')->toSql();
+        $query2 = $query->select('count(*)')->tosql();
+        file_put_contents('order.txt', "$query1 || $query2");
+        
+        
+        
         $totalOrders = 0;
         $grossRevenue = 0.0;
 
-        $dataTable = DataTables::eloquent($query);
-        //$dataTable = new EloquentDataTable($query);
+        $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
-        $response = $dataTable->editColumn('id', function ($order) {
+        $dataTable = $dataTable->editColumn('id', function ($order) {
                                     return "#".$order->id;
                                 })
                                 ->editColumn('created_at', function ($order) {
@@ -36,18 +39,18 @@ class SalesDataTable extends DataTable
                                 ->editColumn('price', function ($order) use (&$totalOrders, &$grossRevenue) {
                                     $totalOrders++;
                                     $grossRevenue += $order->payment->price;
-                                    file_put_contents('order.txt', 'section 1');
+                            
                                     return getPriceColumn($order->payment, 'price');
                                 })     
                                 ->addColumn('action', 'sales.datatables_actions')
                                 ->rawColumns(array_merge($columns, ['action']))
                                 ->with('total', function() use ($totalOrders) {
-                                    file_put_contents('order.txt', 'section 2');
+                                
                                     return $totalOrders;
-                                })->make(true);
+                                });
                                 
                                                       
-        return $response;
+        return $dataTable;
 
     }
     
@@ -89,7 +92,7 @@ class SalesDataTable extends DataTable
                     ->where('user_restaurants.user_id', auth()->id());
 
             $model = $model->whereRaw("date(orders.created_at) between '$start' and '$end'");    
-            $model = $model->groupBy('orders.id')->select('orders.*');
+            $model = $model->groupBy('orders.id');
 
             return $model;
         }
