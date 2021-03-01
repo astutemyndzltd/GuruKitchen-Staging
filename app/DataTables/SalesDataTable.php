@@ -34,7 +34,7 @@ class SalesDataTable extends DataTable
                                 ->rawColumns(array_merge($columns, ['action']))
                                 ->withQuery('count', function($filteredQuery) {
                                     return $filteredQuery->count();
-                                })
+                                });
                                                       
         return $dataTable;
 
