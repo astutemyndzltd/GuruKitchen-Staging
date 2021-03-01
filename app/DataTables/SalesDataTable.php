@@ -22,7 +22,7 @@ class SalesDataTable extends DataTable
         //hello
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
-        $json = $dataTable->editColumn('id', function ($order) {
+        $result = $dataTable->editColumn('id', function ($order) {
                                     return "#".$order->id;
                                 })
                                 ->editColumn('created_at', function ($order) {
@@ -35,7 +35,7 @@ class SalesDataTable extends DataTable
                                 ->rawColumns(array_merge($columns, ['action']))
                                 ->toJson();
                                                       
-        return $json;
+        return $result;
 
     }
     
