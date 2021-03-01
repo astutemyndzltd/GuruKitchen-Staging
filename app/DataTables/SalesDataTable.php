@@ -13,6 +13,8 @@ use App\Models\Order;
 use Barryvdh\DomPDF\Facade as PDF;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\Datatables\Facades\Datatables;
+
 
 class SalesDataTable extends DataTable 
 {
@@ -22,9 +24,10 @@ class SalesDataTable extends DataTable
         $totalOrders = 0;
         $grossRevenue = 0.0;
 
-        $dataTable = new EloquentDataTable($query);
+        $dataTable = DataTables::eloquent($query);
+        //$dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
-        $dataTable = $dataTable->editColumn('id', function ($order) {
+        $response = $dataTable->editColumn('id', function ($order) {
                                     return "#".$order->id;
                                 })
                                 ->editColumn('created_at', function ($order) {
@@ -41,10 +44,10 @@ class SalesDataTable extends DataTable
                                 ->with('total', function() use ($totalOrders) {
                                     file_put_contents('order.txt', 'section 2');
                                     return $totalOrders;
-                                });
+                                })->make(true);
                                 
                                                       
-        return $dataTable;
+        return $response;
 
     }
     
