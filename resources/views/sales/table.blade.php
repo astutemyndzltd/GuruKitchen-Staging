@@ -30,9 +30,9 @@
     $(window).on('load', () => {
 
         divStatistics = document.querySelector('div.statistics');
-        divTotalOrders = divTotalOrders.querySelector('div.total-orders');
-        divGrossRevenue = divTotalOrders.querySelector('div.gross-revenue');
-        divAvgOrderValue = divTotalOrders.querySelector('div.avg-order-val');
+        divTotalOrders = divStatistics.querySelector('div.total-orders');
+        divGrossRevenue = divStatistics.querySelector('div.gross-revenue');
+        divAvgOrderValue = divStatistics.querySelector('div.avg-order-val');
 
         const $table = $('#dataTableBuilder').DataTable();
 
