@@ -6,7 +6,7 @@
         <div class="row mb-2">
 
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark"> Sales<small class="ml-3 mr-3"></small></h1>
+                <h1 class="m-0 text-dark">Sales<small class="ml-3 mr-3"></small></h1>
             </div>
 
             <div class="col-sm-6">
@@ -34,18 +34,18 @@
                 <span>Select Date Range</span>  
                 <input type="text" name="daterange" id="daterangepicker" readonly class="form-control"/>
             </div>
-            <div class="statistics">
+            <div class="statistics" style="display: none;">
                 <div class="chunk">
                     <div class="capt">Total Orders</div>
-                    <div class="sub">25</div>
+                    <div class="sub total-orders"></div>
                 </div>
                 <div class="chunk">
                     <div class="capt">Gross Revenue</div>
-                    <div class="sub">£768.25</div>
+                    <div class="sub gross-revenue"></div>
                 </div>
                 <div class="chunk">
                     <div class="capt">Average Order Value</div>
-                    <div class="sub">£25.68</div>
+                    <div class="sub avg-order-val"></div>
                 </div>
             </div>
             @include('sales.table')

@@ -8,6 +8,7 @@
 @include('layouts.datatables_js')
 <script>
     let start, end;
+    let divStatistics, divTotalOrders, divGrossRevenue, divAvgOrderValue;
 
     function onReloadDt(data) {
         if (start && end) {
@@ -17,13 +18,21 @@
     }
 
     function onDataReceived(json) {
-        console.log(json);
+        $(divStatistics).slideDown();
+        $(divTotalOrders).val('25');
+        $(divGrossRevenue).val('£768.25');
+        $(divAvgOrderValue).val('£25.68');
     }
 
 </script>
 {!! $dataTable->scripts() !!}
 <script>
     $(window).on('load', () => {
+
+        divStatistics = document.querySelector('div.statistics');
+        divTotalOrders = divTotalOrders.querySelector('div.total-orders');
+        divGrossRevenue = divTotalOrders.querySelector('div.gross-revenue');
+        divAvgOrderValue = divTotalOrders.querySelector('div.avg-order-val');
 
         const $table = $('#dataTableBuilder').DataTable();
 
