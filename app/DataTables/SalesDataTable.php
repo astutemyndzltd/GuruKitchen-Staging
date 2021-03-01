@@ -19,6 +19,9 @@ class SalesDataTable extends DataTable
     
     public function dataTable($query)
     {            
+        $totalRecords = $query->count();
+        $totalPrice = $query->sum('payment.price')
+              
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
@@ -34,7 +37,7 @@ class SalesDataTable extends DataTable
                     ->addColumn('action', 'sales.datatables_actions')
                     ->rawColumns(array_merge($columns, ['action']));
  
-        return $dataTable->with('gross', function() use($query) { return $query->sum('payment.price'); });
+        return $dataTable->with(['total' => $totalRecords, 'gross' => $totalPrice ]);
     }
     
     
