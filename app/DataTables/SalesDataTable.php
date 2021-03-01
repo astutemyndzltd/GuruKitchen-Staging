@@ -35,7 +35,7 @@ class SalesDataTable extends DataTable
                                 ->rawColumns(array_merge($columns, ['action']));
                                 
                                                       
-        return $dataTable;
+        return $dataTable->make(true);
 
     }
     
