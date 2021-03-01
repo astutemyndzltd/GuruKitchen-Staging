@@ -22,20 +22,21 @@ class SalesDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
         $totalRecords = $query->count();
         $columns = array_column($this->getColumns(), 'data');
-        $dataTable = $dataTable
-                    ->editColumn('id', function ($order) {
-                        return "#".$order->id;
-                    })
-                    ->editColumn('created_at', function ($order) {
-                        return getDateColumn($order, 'created_at');
-                    })
-                    ->editColumn('price', function ($order) {
-                        return getPriceColumn($order->payment, 'price');
-                    })     
-                    ->addColumn('action', 'sales.datatables_actions')
-                    ->rawColumns(array_merge($columns, ['action']));
- 
-        return $dataTable->with(['total' => $totalRecords ]);
+        $dataTable = $dataTable->editColumn('id', function ($order) {
+                                    return "#".$order->id;
+                                })
+                                ->editColumn('created_at', function ($order) {
+                                    return getDateColumn($order, 'created_at');
+                                })
+                                ->editColumn('price', function ($order) {
+                                    return getPriceColumn($order->payment, 'price');
+                                })     
+                                ->addColumn('action', 'sales.datatables_actions')
+                                ->rawColumns(array_merge($columns, ['action']))
+                                ->with('total', $query->count());
+                                                      
+        return $dataTable;
+
     }
     
     
