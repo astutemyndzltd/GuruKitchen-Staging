@@ -39,13 +39,11 @@ class SalesDataTable extends DataTable
                                 ->editColumn('price', function ($order) use (&$totalOrders, &$grossRevenue) {
                                     $totalOrders++;
                                     $grossRevenue += $order->payment->price;
-                            
                                     return getPriceColumn($order->payment, 'price');
                                 })     
                                 ->addColumn('action', 'sales.datatables_actions')
                                 ->rawColumns(array_merge($columns, ['action']))
                                 ->with('total', function() use ($totalOrders) {
-                                
                                     return $totalOrders;
                                 });
                                 
