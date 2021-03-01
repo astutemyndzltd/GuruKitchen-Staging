@@ -19,7 +19,7 @@ class SalesDataTable extends DataTable
     
     public function dataTable($query)
     {            
-        $totalOrders = 0;
+        $totalOrders = 27;
         $grossRevenue = 0;
         
         $dataTable = new EloquentDataTable($query);
