@@ -18,6 +18,7 @@
     }
 
     function onDataReceived(json) {
+        console.log(json);
         $(divStatistics).slideDown();
         $(divTotalOrders).text('25');
         $(divGrossRevenue).text('£768.25');
