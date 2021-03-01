@@ -32,10 +32,14 @@ class SalesDataTable extends DataTable
                         return getPriceColumn($order->payment, 'price');
                     })     
                     ->addColumn('action', 'sales.datatables_actions')
-                    ->addColumn('raw_price', function($order) { return $order->payment->price; });
                     ->rawColumns(array_merge($columns, ['action']));          
                                                       
-        return $dataTable;
+        $orders = $dataTable->results();
+        $totalRecords = count($orders);
+        $grossRevenue = 0;
+        foreach($orders as $order) $grossRevenue += $order->payment->price;
+                                                                  
+        return $dataTable->with([ 'total' => $totalRecords, 'gross' => $grossRevenue ]);
 
     }
     
