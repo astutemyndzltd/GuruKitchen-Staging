@@ -291,12 +291,12 @@ class OrderController extends Controller
         $this->orderRepository->pushCriteria(new OrdersOfUserCriteria(auth()->id()));
         $oldOrder = $this->orderRepository->findWithoutFail($id);
 
-        if (!$oldOrder->active) return redirect(route('orders.index'));
-
         if (empty($oldOrder)) {
             Flash::error(__('lang.not_found', ['operator' => __('lang.order')]));
             return redirect(route('orders.index'));
         }
+
+        if (!$oldOrder->active) return redirect(route('orders.index'));
 
         $oldStatus = $oldOrder->payment->status;
         $input = $request->all();
