@@ -31,10 +31,12 @@
         </a>
         <ul class="nav nav-treeview">
             @can('restaurants.index')
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('requestedRestaurants*') ? 'active' : '' }}" href="{!! route('requestedRestaurants.index') !!}">@if($icons)
-                            <i class="nav-icon fa fa-reorder"></i>@endif<p>{{trans('lang.requested_restaurants_plural')}}</p></a>
-                </li>
+                @if(auth()->user()->hasRole('admin'))
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('requestedRestaurants*') ? 'active' : '' }}" href="{!! route('requestedRestaurants.index') !!}">@if($icons)
+                                <i class="nav-icon fa fa-reorder"></i>@endif<p>{{trans('lang.requested_restaurants_plural')}}</p></a>
+                    </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('restaurants*') ? 'active' : '' }}" href="{!! route('restaurants.index') !!}">@if($icons)
                             <i class="nav-icon fa fa-cutlery"></i>@endif<p>{{trans('lang.restaurant_plural')}}</p></a>
