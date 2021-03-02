@@ -65,7 +65,17 @@
 
     <!-- 'Boolean active Field' -->
 
-    <input type="hidden" value="{{ $order->active }}" name="active">
+    @if(auth()->user()->hasRole('admin')
+    <div class="form-group row ">
+        {!! Form::label('active', 'Uncheck to cancel', ['class' => 'col-3 control-label text-right']) !!}
+        <div class="checkbox icheck">
+            <label class="col-9 ml-2 form-check-inline">
+                {!! Form::hidden('active', 0) !!}
+                {!! Form::checkbox('active', 1, null) !!}
+            </label>
+        </div>
+    </div> 
+    @endif
 
     {{-- <div class="form-group row ">
         {!! Form::label('active', trans("lang.order_active"),['class' => 'col-3 control-label text-right']) !!}
