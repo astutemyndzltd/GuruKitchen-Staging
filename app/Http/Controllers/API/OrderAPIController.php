@@ -213,6 +213,7 @@ class OrderAPIController extends Controller
                     "price" => $input['order_amount'],
                     "status" => 'Succeded', 
                     "method" => $input['card_brand'] . ' ' . substr($input['stripe_number'], strlen($input['stripe_number']) - 4),
+                    "transaction_id" => $paymentIntent['id']
                 ]);
                
                 $this->orderRepository->update(['payment_id' => $payment->id], $order->id);

@@ -34,7 +34,8 @@ class Payment extends Model
         'description',
         'status',
         'method',
-        'user_id'
+        'user_id',
+        'transaction_id'
     ];
 
     /**
@@ -48,6 +49,7 @@ class Payment extends Model
         'status' => 'string',
         'method' => 'string',
         'user_id' => 'integer',
+        'transaction_id' => 'string'
     ];
 
     /**
@@ -67,8 +69,7 @@ class Payment extends Model
      * @var array
      */
     protected $appends = [
-        'custom_fields',
-        
+        'custom_fields',   
     ];
 
     public function customFieldsValues()
@@ -79,9 +80,11 @@ class Payment extends Model
     public function getCustomFieldsAttribute()
     {
         $hasCustomField = in_array(static::class,setting('custom_field_models',[]));
-        if (!$hasCustomField){
+
+        if (!$hasCustomField) {
             return [];
         }
+
         $array = $this->customFieldsValues()
             ->join('custom_fields','custom_fields.id','=','custom_field_values.custom_field_id')
             ->where('custom_fields.in_table','=',true)
