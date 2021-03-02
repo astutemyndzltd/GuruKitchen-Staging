@@ -1,1 +1,25 @@
-alert('welcome to the jungle');
+const txtPayoutPeriod = document.querySelector('#txtPayoutPeriod');
+const ddlRestaurants = document.querySelector('#restaurant_id');
+const txtAmount = document.querySelector('#amount');
+
+let datePickerOptions = {
+    startDate: start,
+    endDate: end,
+    locale: { format: 'DD MMM YYYY' },
+    ranges: {
+        'Today': [moment(), moment()],
+        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+    }
+};
+
+
+function onDateRangeChange(start, end) {
+
+}
+
+
+const daterangepicker = $(txtPayoutPeriod).daterangepicker(datePickerOptions, onDateRangeChange);

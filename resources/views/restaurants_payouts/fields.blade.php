@@ -18,7 +18,7 @@
   {!! Form::label('payout_period', 'Payout Period', ['class' => 'col-3 control-label text-right']) !!}
 
   <div class="col-9">
-    <input class="form-control" name="amount" type="text" id="daterangepicker" readonly> 
+    <input class="form-control" name="amount" type="text" id="txtPayoutPeriod" readonly> 
     <div class="form-text text-muted">Select Payout Period</div>
   </div>
 
@@ -38,6 +38,7 @@
 
 
 </div>
+
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
 
 <!-- Note Field -->
