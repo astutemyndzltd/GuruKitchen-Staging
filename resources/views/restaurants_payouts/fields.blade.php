@@ -61,3 +61,15 @@
   <button type="submit" class="btn btn-{{setting('theme_color')}}" ><i class="fa fa-save"></i> {{trans('lang.save')}} {{trans('lang.restaurants_payout')}}</button>
   <a href="{!! route('restaurantsPayouts.index') !!}" class="btn btn-default"><i class="fa fa-undo"></i> {{trans('lang.cancel')}}</a>
 </div>
+
+@push('css_lib')
+    <link rel="stylesheet" href="{{ asset('css/sales-datatable.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/payout.css') }}">
+@endpush
+
+@push('scripts_lib')
+    <script type="text/javascript" src="{{ asset('plugins/daterangepicker/moment.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/payout.js') }}"></script>
+@endpush
