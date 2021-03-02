@@ -2,6 +2,7 @@
 <h5 class="col-12 pb-4">{!! trans('lang.main_fields') !!}</h5>
 @endif
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
+
 <!-- Restaurant Id Field -->
 <div class="form-group row ">
   {!! Form::label('restaurant_id', 'Restaurant' ,['class' => 'col-3 control-label text-right']) !!}
@@ -12,13 +13,15 @@
 </div>
 
 
-<!-- Method Field -->
+<!-- Payout History Field -->
 <div class="form-group row ">
-  {!! Form::label('method', trans("lang.restaurants_payout_method"),['class' => 'col-3 control-label text-right']) !!}
+  {!! Form::label('payout_period', 'Payout Period', ['class' => 'col-3 control-label text-right']) !!}
+
   <div class="col-9">
-      {!! Form::select('method', ['Bank' => trans('lang.bank'),'Cash'=> trans('lang.cash')], null, ['class' => 'select2 form-control']) !!}
-    <div class="form-text text-muted">{{ trans("lang.restaurants_payout_method_help") }}</div>
+    <input class="form-control" name="amount" type="text" id="daterangepicker"> 
+    <div class="form-text text-muted">Select Payout Period</div>
   </div>
+
 </div>
 
 
@@ -26,12 +29,14 @@
 <div class="form-group row ">
   {!! Form::label('amount', trans("lang.restaurants_payout_amount"), ['class' => 'col-3 control-label text-right']) !!}
   <div class="col-9">
-      {!! Form::number('amount', null,  ['class' => 'form-control','step'=>"any",'placeholder'=>  trans("lang.restaurants_payout_amount_placeholder")]) !!}
+      {!! Form::number('amount', null,  ['class' => 'form-control', 'step'=>"any", 'placeholder'=>  trans("lang.restaurants_payout_amount_placeholder")]) !!}
     <div class="form-text text-muted">
       {{ trans("lang.restaurants_payout_amount_help") }}
     </div>
   </div>
 </div>
+
+
 </div>
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
 
@@ -39,8 +44,7 @@
 <div class="form-group row ">
   {!! Form::label('note', trans("lang.restaurants_payout_note"), ['class' => 'col-3 control-label text-right']) !!}
   <div class="col-9">
-    {!! Form::textarea('note', null, ['class' => 'form-control','placeholder'=>
-     trans("lang.restaurants_payout_note_placeholder")  ]) !!}
+    {!! Form::textarea('note', null, ['class' => 'form-control','placeholder' => trans("lang.restaurants_payout_note_placeholder")  ]) !!}
     <div class="form-text text-muted">{{ trans("lang.restaurants_payout_note_help") }}</div>
   </div>
 </div>
