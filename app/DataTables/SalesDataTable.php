@@ -32,14 +32,15 @@ class SalesDataTable extends DataTable
                                 })     
                                 ->addColumn('action', 'sales.datatables_actions')
                                 ->rawColumns(array_merge($columns, ['action']));
-                                          
+
                                                       
         $orders = $dataTable->results();
         $totalRecords = count($orders);
         $grossRevenue = 0;
         foreach($orders as $order) $grossRevenue += $order->payment->price;
+        $avgOrderValue = $grossRevenue / $totalRecords;
                                                                   
-        return $dataTable->with([ 'total' => $totalRecords, 'gross' => $grossRevenue ]);
+        return $dataTable->with([ 'totalOrders' => $totalRecords, 'grossRevenue' => getPrice($grossRevenue), 'avgOrderValue' => getPrice($avgOrderValue) ]);
 
     }
     
