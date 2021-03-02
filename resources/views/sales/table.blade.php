@@ -18,11 +18,11 @@
     }
 
     function onDataReceived(json) {
-        console.log(json);     
+        if (!divTotalOrders || !divGrossRevenue || !divGrossRevenue) return; 
         divTotalOrders.innerHTML = json.totalOrders;
         divGrossRevenue.innerHTML = json.grossRevenue;
         divAvgOrderValue.innerHTML = json.avgOrderValue;
-        $(divStatistics).slideDown();
+        $(divStatistics).show();
     }
 
 </script>
