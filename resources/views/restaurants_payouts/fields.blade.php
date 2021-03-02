@@ -18,7 +18,7 @@
   {!! Form::label('payout_period', 'Payout Period', ['class' => 'col-3 control-label text-right']) !!}
 
   <div class="col-9">
-    <input class="form-control" name="amount" type="text" id="daterangepicker"> 
+    <input class="form-control" name="amount" type="text" id="daterangepicker" readonly> 
     <div class="form-text text-muted">Select Payout Period</div>
   </div>
 
