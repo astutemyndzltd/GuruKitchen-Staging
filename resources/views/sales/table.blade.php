@@ -17,12 +17,11 @@
         }
     }
 
-    function onDataReceived(json) {
-        console.log(json);
+    function onDataReceived(json) {     
+        divTotalOrders.innerHTML = json.totalOrders;
+        divGrossRevenue.innerHTML = json.grossRevenue;
+        divAvgOrderValue.innerHTML = json.avgOrderValue;
         $(divStatistics).slideDown();
-        $(divTotalOrders).text('25');
-        $(divGrossRevenue).text('£768.25');
-        $(divAvgOrderValue).text('£25.68');
     }
 
 </script>
