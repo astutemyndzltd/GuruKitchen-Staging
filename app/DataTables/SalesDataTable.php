@@ -32,7 +32,8 @@ class SalesDataTable extends DataTable
                                     return getDateColumn($order, 'created_at');
                                 })
                                 ->editColumn('payment.price', function ($order) {
-                                    return getPriceColumn($order->payment, 'price');
+                                    $priceInfo = [ 'price' => $order->active ? $order->payment->price : 0 ];
+                                    return getPriceColumn($priceInfo, 'price');
                                 })     
                                 ->addColumn('action', 'sales.datatables_actions')
                                 ->rawColumns(array_merge($columns, ['action']));
