@@ -29,7 +29,7 @@
 <div class="form-group row ">
   {!! Form::label('amount', trans("lang.restaurants_payout_amount"), ['class' => 'col-3 control-label text-right']) !!}
   <div class="col-9">
-      {!! Form::number('amount', null,  ['class' => 'form-control', 'step'=>"any", 'placeholder'=>  trans("lang.restaurants_payout_amount_placeholder", 'readonly' => 'true' )]) !!}
+      {!! Form::number('amount', null,  ['readonly' => 'true', 'class' => 'form-control', 'step'=>"any", 'placeholder'=>  trans("lang.restaurants_payout_amount_placeholder")]) !!}
     <div class="form-text text-muted">
       {{ trans("lang.restaurants_payout_amount_help") }}
     </div>
