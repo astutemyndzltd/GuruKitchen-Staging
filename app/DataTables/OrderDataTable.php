@@ -56,18 +56,6 @@ class OrderDataTable extends DataTable
                 $color = $this->colors[$statusId];
                 return "<span style='color:$color;'><b>$status</b></span>";
             })
-           /* ->editColumn('delivery_fee', function ($order) {
-                return getPriceColumn($order, 'delivery_fee');
-            })*/
-           /* ->editColumn('tax', function ($order) {
-                return $order->tax . "%";
-            })*/
-           /* ->editColumn('payment.status', function ($order) {
-                return getPayment($order->payment,'status');
-            })*/
-            /*->editColumn('active', function ($food) {
-                return getBooleanColumn($food, 'active');
-            })*/
             ->addColumn('action', 'orders.datatables_actions')
             ->rawColumns(array_merge($columns, ['action']));
 
