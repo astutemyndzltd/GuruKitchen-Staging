@@ -121,6 +121,16 @@
 
 </div>
 
+@if(auth()->user()->hasRole('admin') && isset($order->payment->transaction_id))
+<!-- Transaction ID -->
+<div class="form-group row col-md-6 col-sm-12">
+  {!! Form::label('transaction_id', 'Transaction ID', ['class' => 'col-4 control-label']) !!}
+  <div class="col-8">
+    <p>{!! $order->payment->transaction_id !!}</p>
+  </div>
+</div>
+@endif
+
 <div class="form-group row col-md-12 col-sm12">
   {!! Form::label('note', 'Customer Note', ['class' => 'col-2 control-label']) !!}
   <div class="col-9">
@@ -138,17 +148,6 @@
 </div>
 
 @endif
-
-@if(auth()->user()->hasRole('admin') && isset($order->payment->transaction_id))
-<!-- Transaction ID -->
-<div class="form-group row col-md-8 col-sm-12">
-  {!! Form::label('transaction_id', 'Transaction ID', ['class' => 'col-2 control-label']) !!}
-  <div class="col-9">
-    <p style="text-align:justify;">{!! $order->payment->transaction_id !!}</p>
-  </div>
-</div>
-@endif
-
 
 {{--<!-- Tax Field -->--}}
 {{--<div class="form-group row col-md-6 col-sm-12">--}}
