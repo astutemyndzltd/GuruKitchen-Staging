@@ -239,7 +239,7 @@ class RestaurantsPayoutController extends Controller
     }
 
     public function getTotalOrderAmount(Request $request) {
-        file_put_contents('order.txt', json_encode($request));
+        file_put_contents('order.txt', json_encode($request->all()));
     }
 
 }
