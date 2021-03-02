@@ -22,7 +22,7 @@ class OrderDataTable extends DataTable
      * @var array
      */
     public static $customFields = [];
-    public $colors = ['', 'green', 'orange', 'orange', 'red', 'red'];
+    public $colors = ['blue', 'green', 'orange', 'orange', 'red', 'red'];
 
     /**
      * Build DataTable class.
@@ -51,8 +51,9 @@ class OrderDataTable extends DataTable
                 return getBooleanColumn(['preorder_info' => ($preorderInfo != null || $preorderInfo != '') ], 'preorder_info');
             })
             ->editColumn('order_status.status', function($order) {
-                $color = $this->colors[$order->order_status_id];
-                $status = $order->orderStatus->status;
+                $statusId = $order->active ? $order->order_status_id : 0;
+                $status = $order->active ? $order->orderStatus->status : 'Cancelled';
+                $color = $this->colors[$statusId];
                 return "<span style='color:$color;'><b>$status</b></span>";
             })
            /* ->editColumn('delivery_fee', function ($order) {
