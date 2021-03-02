@@ -71,5 +71,5 @@
 @push('scripts_lib')
     <script type="text/javascript" src="{{ asset('plugins/daterangepicker/moment.js') }}"></script>
     <script type="text/javascript" src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/payout.js') }}"></script>
+    <script type="module" src="{{ asset('js/payout.js') }}"></script>
 @endpush
