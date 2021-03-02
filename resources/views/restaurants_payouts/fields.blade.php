@@ -8,7 +8,7 @@
   {!! Form::label('restaurant_id', 'Restaurant' ,['class' => 'col-3 control-label text-right']) !!}
   <div class="col-9">
     {!! Form::select('restaurant_id', $restaurant, null, ['class' => 'select2 form-control']) !!}
-    <div class="form-text text-muted">{{ trans("lang.restaurants_payout_restaurant_id_help") }}</div>
+    <div class="form-text text-muted">Select Restaurant</div>
   </div>
 </div>
 
@@ -30,9 +30,7 @@
   {!! Form::label('amount', trans("lang.restaurants_payout_amount"), ['class' => 'col-3 control-label text-right']) !!}
   <div class="col-9">
       {!! Form::number('amount', null,  ['readonly' => 'true', 'class' => 'form-control', 'step'=>"any" ]) !!}
-    <div class="form-text text-muted">
-      {{ trans("lang.restaurants_payout_amount_help") }}
-    </div>
+    <div class="form-text text-muted"></div>
   </div>
 </div>
 
