@@ -17,7 +17,8 @@
         }
     }
 
-    function onDataReceived(json) {     
+    function onDataReceived(json) {
+        console.log(json);     
         divTotalOrders.innerHTML = json.totalOrders;
         divGrossRevenue.innerHTML = json.grossRevenue;
         divAvgOrderValue.innerHTML = json.avgOrderValue;
