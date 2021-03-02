@@ -15,3 +15,4 @@ function onDateRangeChange(start, end) {
 
 
 const daterangepicker = $(txtPayoutPeriod).daterangepicker(datePickerOptions, onDateRangeChange);
+txtPayoutPeriod.value = '';
