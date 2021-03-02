@@ -22,7 +22,8 @@ class PaymentRepository extends BaseRepository
     protected $fieldSearchable = [
         'price',
         'description',
-        'user_id'
+        'user_id',
+        'transaction_id'
     ];
 
     /**
