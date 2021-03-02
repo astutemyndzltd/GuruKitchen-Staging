@@ -22,6 +22,8 @@
 <script>
 
  $(window).on('load', () => {
+
+    console.log('welcome to the jungle');
  
     const $table = $('#dataTableBuilder').DataTable();
 
