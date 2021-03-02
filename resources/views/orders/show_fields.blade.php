@@ -131,13 +131,6 @@
 </div>
 @endif
 
-<div class="form-group row col-md-12 col-sm12">
-  {!! Form::label('note', 'Customer Note', ['class' => 'col-2 control-label']) !!}
-  <div class="col-9">
-    <p style="text-align:justify;">{!! $order->note !!}</p>
-  </div>
-</div>
-
 @if($order->preorder_info != null || $order->preorder_info != '')
 <!-- Pre-Order data -->
 <div class="form-group row col-md-8 col-sm-12">
@@ -146,8 +139,18 @@
     <p style="text-align:justify;">Expected by {!! $order->preorder_info !!}</p>
   </div>
 </div>
-
 @endif
+
+
+
+<div class="form-group row col-md-12 col-sm12">
+  {!! Form::label('note', 'Customer Note', ['class' => 'col-2 control-label']) !!}
+  <div class="col-9">
+    <p style="text-align:justify;">{!! $order->note !!}</p>
+  </div>
+</div>
+
+
 
 {{--<!-- Tax Field -->--}}
 {{--<div class="form-group row col-md-6 col-sm-12">--}}
