@@ -22,8 +22,6 @@
 <script>
 
  $(window).on('load', () => {
-
-    console.log('welcome to the jungle');
  
     const $table = $('#dataTableBuilder').DataTable();
 
@@ -37,26 +35,6 @@
     $checkbox.on('ifChecked', () => { showLiveOrders = true; $table.ajax.reload(); });
     $checkbox.on('ifUnchecked', () => { showLiveOrders = false; $table.ajax.reload(); });
 
-    /// column searching
-
-    /*$('#dataTableBuilder thead tr').clone(true).appendTo('#dataTableBuilder thead');
-
-    $('#dataTableBuilder thead tr:eq(1) th').each(function (i) {
-
-        let title = $(this).text();
-
-        if (title == 'Actions') $(this).html('');
-
-        $(this).attr('class', 'search-cell-header');
-        $(this).html( '<input type="text" class="search-cell" placeholder="Search" />' );
- 
-        $('input', this).on('keyup change', function () {
-            if (table.column(i).search() !== this.value) {
-                table.column(i).search(this.value).draw();
-            }
-        });
-
-    });*/
 
  });
 </script>
