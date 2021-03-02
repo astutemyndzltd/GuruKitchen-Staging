@@ -38,7 +38,7 @@ class SalesDataTable extends DataTable
         $totalRecords = count($orders);
         $grossRevenue = 0;
         foreach($orders as $order) $grossRevenue += $order->payment->price;
-        $avgOrderValue = $grossRevenue / $totalRecords;
+        $avgOrderValue = $totalRecords > 0 ? ($grossRevenue / $totalRecords) : 0;
                                                                   
         return $dataTable->with([ 'totalOrders' => $totalRecords, 'grossRevenue' => getPrice($grossRevenue), 'avgOrderValue' => getPrice($avgOrderValue) ]);
 
