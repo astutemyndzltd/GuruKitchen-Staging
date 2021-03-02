@@ -2,7 +2,7 @@ const txtPayoutPeriod = document.querySelector('#txtPayoutPeriod');
 const ddlRestaurants = document.querySelector('#restaurant_id');
 const txtAmount = document.querySelector('#amount');
 
-let datePickerOptions = { locale: { format: 'DD MMM YYYY' } };
+let datePickerOptions = { locale: { format: 'DD MMM YYYY', cancelLabel: 'Clear' } };
 
 
 function onDateRangeChange(start, end) {
