@@ -24,6 +24,10 @@ class SalesDataTable extends DataTable
         $dataTable = $dataTable->editColumn('id', function ($order) {
                                     return "#".$order->id;
                                 })
+                                ->editColumn('order_status.status', function ($order) {
+                                    $status = $order->active ? $order->orderStatus->status : 'Cancelled';
+                                    return $status;
+                                })
                                 ->editColumn('created_at', function ($order) {
                                     return getDateColumn($order, 'created_at');
                                 })
@@ -52,6 +56,11 @@ class SalesDataTable extends DataTable
                 "data" => "id",
                 "name" => "id",
                 "title" => "Order Id"
+            ],
+            [
+                "data" => "order_status.status",
+                "name" => "orderStatus.status",
+                "title" => "Status"
             ],
             [
                 "data" => "payment.price",
