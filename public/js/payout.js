@@ -3,8 +3,8 @@ const ddlRestaurants = document.querySelector('#restaurant_id');
 const txtAmount = document.querySelector('#amount');
 
 let datePickerOptions = {
-    startDate: start,
-    endDate: end,
+    startDate: moment(),
+    endDate: moment(),
     locale: { format: 'DD MMM YYYY' },
     ranges: {
         'Today': [moment(), moment()],
