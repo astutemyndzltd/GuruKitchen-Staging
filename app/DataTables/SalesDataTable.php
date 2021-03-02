@@ -27,7 +27,7 @@ class SalesDataTable extends DataTable
                                 ->editColumn('created_at', function ($order) {
                                     return getDateColumn($order, 'created_at');
                                 })
-                                ->editColumn('price', function ($order) {
+                                ->editColumn('payment.price', function ($order) {
                                     return getPriceColumn($order->payment, 'price');
                                 })     
                                 ->addColumn('action', 'sales.datatables_actions')
@@ -54,8 +54,8 @@ class SalesDataTable extends DataTable
                 "title" => "Order Id"
             ],
             [
-                "data" => "price",
-                "name" => "price",
+                "data" => "payment.price",
+                "name" => "payment.price",
                 "title" => "Amount"
             ],
             [
