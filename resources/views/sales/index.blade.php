@@ -36,7 +36,7 @@
             </div>
             <div class="statistics" style="display: none;">
                 <div class="chunk">
-                    <div class="capt">Total Orders</div>
+                    <div class="capt">Total Paid Orders</div>
                     <div class="sub total-orders"></div>
                 </div>
                 <div class="chunk">
