@@ -189,7 +189,11 @@
     </li>
 @endcan
 
-<li class="nav-header">{{trans('lang.app_setting')}}</li>
+
+@if(auth()->user()->hasRole('admin'))
+    <li class="nav-header">{{trans('lang.app_setting')}}</li>
+@endif
+
 @can('medias')
     <li class="nav-item">
         <a class="nav-link {{ Request::is('medias*') ? 'active' : '' }}" href="{!! url('medias') !!}">@if($icons)<i class="nav-icon fa fa-picture-o"></i>@endif
