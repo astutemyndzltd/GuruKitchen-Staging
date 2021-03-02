@@ -4,11 +4,16 @@ const txtAmount = document.querySelector('#amount');
 
 const datePickerOptions = { locale: {  format: 'DD MMM YYYY' } };
 
-function onDateRangeChange(start, end) {
-    let restaurantId = $(ddlRestaurants).val();
-    let startDate = start.format('YYYY-MM-DD');
-    let endDate = end.format('YYYY-MM-DD');
-    
+async function onDateRangeChange(start, end) {
+
+    let data = {
+        restaurantId : $(ddlRestaurants).val(),
+        startDate : start.format('YYYY-MM-DD'),
+        endDate : end.format('YYYY-MM-DD')
+    };  
+
+    let response = await fetch('/restaurantsPayouts/total-order-amount?' + new URLSearchParams(data));
+
     
 }
 

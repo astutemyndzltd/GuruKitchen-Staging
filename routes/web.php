@@ -176,6 +176,9 @@ Route::middleware('auth')->group(function () {
         'show', 'edit', 'update'
     ]);
 
+
+    Route::get('restaurantsPayouts/total-order-amount', 'RestaurantsPayoutController@getTotalOrderAmount');
+
     Route::resource('restaurantsPayouts', 'RestaurantsPayoutController')->except([
         'show', 'edit', 'update'
     ]);

@@ -64,16 +64,19 @@ class RestaurantsPayoutController extends Controller
      */
     public function create()
     {
-        if(auth()->user()->hasRole('manager')){
+        if (auth()->user()->hasRole('manager')) {
             $this->restaurantRepository->pushCriteria(new RestaurantsOfManagerCriteria(auth()->id()));
         }
+
         $restaurant = $this->restaurantRepository->pluck('name', 'id');
 
         $hasCustomField = in_array($this->restaurantsPayoutRepository->model(), setting('custom_field_models', []));
+
         if ($hasCustomField) {
             $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->restaurantsPayoutRepository->model());
             $html = generateCustomField($customFields);
         }
+
         return view('restaurants_payouts.create')->with("customFields", isset($html) ? $html : false)->with("restaurant", $restaurant);
     }
 
@@ -88,12 +91,15 @@ class RestaurantsPayoutController extends Controller
     {
         $input = $request->all();
         $earning = $this->earningRepository->findByField('restaurant_id',$input['restaurant_id'])->first();
+
         if($input['amount'] > $earning->restaurant_earning){
             Flash::error('The payout amount must be less than restaurant earning');
             return redirect(route('restaurantsPayouts.create'))->withInput($input);
         }
+
         $input['paid_date'] = Carbon::now();
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->restaurantsPayoutRepository->model());
+        
         try {
             $this->earningRepository->update(['restaurant_earning'=>$earning->restaurant_earning - $input['amount']], $earning->id);
             $restaurantsPayout = $this->restaurantsPayoutRepository->create($input);
@@ -231,4 +237,9 @@ class RestaurantsPayoutController extends Controller
             Log::error($e->getMessage());
         }
     }
+
+    public function getTotalOrderAmount(Request $request) {
+        file_put_contents('order.txt', json_encode($request));
+    }
+
 }
