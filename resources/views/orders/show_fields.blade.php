@@ -144,7 +144,7 @@
 <div class="form-group row col-md-8 col-sm-12">
   {!! Form::label('transaction_id', 'Transaction ID, ['class' => 'col-2 control-label']) !!}
   <div class="col-9">
-    <p style="text-align:justify;">Expected by {!! $order->payment->transaction_id !!}</p>
+    <p style="text-align:justify;">{!! $order->payment->transaction_id !!}</p>
   </div>
 </div>
 @endif
