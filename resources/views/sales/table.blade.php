@@ -36,6 +36,7 @@
         divAvgOrderValue = divStatistics.querySelector('div.avg-order-val');
 
         const $table = $('#dataTableBuilder').DataTable();
+        $table.page(0).draw(false);
 
         $('#daterangepicker').daterangepicker({
             startDate: start,
