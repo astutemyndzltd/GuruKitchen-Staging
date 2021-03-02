@@ -63,7 +63,6 @@
 </div>
 
 @push('css_lib')
-    <link rel="stylesheet" href="{{ asset('css/sales-datatable.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('css/payout.css') }}">
 @endpush
