@@ -249,14 +249,14 @@ class RestaurantsPayoutController extends Controller
         $restaurant = $this->restaurantRepository->find($restaurantId);
         $adminCommission = $restaurant->admin_commission;
 
-        file_put_contents('order.txt', $adminCommission);
+        $tax = setting('default_tax', 0);
 
         $amount =   $model->newQuery()->join('payments', 'orders.payment_id', '=', 'payments.id')
                     ->whereRaw("date(orders.created_at) between '$startDate' and '$endDate' 
                                 and orders.active = 1 and orders.id in (select distinct fo.order_id from 
                                 food_orders fo join foods f on fo.food_id = f.id join restaurants r 
                                 on r.id = f.restaurant_id and f.restaurant_id = $restaurantId)")
-                    ->sum('payments.price');
+                    ->sum("payments.price - ((payments.price * $adminCommission * ($tax + 100)) / 10000)");
 
         return response()->json(['amount' => number_format((float)$amount, 2, '.', ' ')]);
     }
