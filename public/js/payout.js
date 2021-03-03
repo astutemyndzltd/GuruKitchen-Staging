@@ -2,7 +2,7 @@ const txtPayoutPeriod = document.querySelector('#txtPayoutPeriod');
 const ddlRestaurants = document.querySelector('#restaurant_id');
 const txtAmount = document.querySelector('#payout_amount');
 const txtStartDate = document.querySelector('#from_date');
-const txtEndDate = document.querySelector('#endDate');
+const txtEndDate = document.querySelector('#to_date');
 const txtPayoutAmount = document.querySelector('#amount');
 const btnSavePayout = document.querySelector('button.btn.btn-primary');
 
