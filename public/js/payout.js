@@ -21,3 +21,7 @@ async function onDateRangeChange(start, end) {
 const daterangepicker = $(txtPayoutPeriod).daterangepicker(datePickerOptions, onDateRangeChange);
 txtPayoutPeriod.value = '';
 
+$(ddlRestaurants).on('select2:select', function (e) {
+    alert('hello world');
+});
+
