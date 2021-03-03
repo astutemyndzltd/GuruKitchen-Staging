@@ -89,13 +89,16 @@ class RestaurantsPayoutController extends Controller
      *
      * @return Response
      */
-    public function store(CreateRestaurantsPayoutRequest $request)
+    public function store(Order $model, CreateRestaurantsPayoutRequest $request)
     {
         $input = $request->all();
-        
+        $startDate = $input['from_date'];
+        $endDate = $input['to_date'];
+
         try 
         {
             $this->restaurantsPayoutRepository->create($input);
+            $model->whereRaw("date(created_at) between '$startDate' and '$endDate' ")->update([ 'paid_out' => 1 ]);
         } 
         catch (ValidatorException $e) 
         {
