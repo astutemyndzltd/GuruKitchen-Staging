@@ -33,12 +33,19 @@ class RestaurantsPayoutDataTable extends DataTable
             ->editColumn('gross_revenue', function ($payout) {
                 return getPriceColumn($payout, 'gross_revenue');
             })
-            ->editColumn('commision_tax', function ($payout) {
+            ->editColumn('commision', function ($payout) {
                 $taxRate = $payout->tax;
                 $comRate = $payout->admin_commission;
                 $commission = ($comRate / 100) * $payout->gross_revenue;
                 $taxTotal = ($taxRate / 100) * $commission;
-                return getPrice($commission) . " ($comRate%) + " . getPrice($taxTotal) . " ($taxRate%)";
+                return getPrice($commission) . " ($comRate%)";
+            })
+            ->editColumn('tax', function ($payout) {
+                $taxRate = $payout->tax;
+                $comRate = $payout->admin_commission;
+                $commission = ($comRate / 100) * $payout->gross_revenue;
+                $taxTotal = ($taxRate / 100) * $commission;
+                return getPrice($taxTotal) . " ($taxRate%)";
             })
             ->editColumn('amount_paid', function ($payout) {
                 return getPriceColumn($payout, 'amount');
@@ -84,9 +91,13 @@ class RestaurantsPayoutDataTable extends DataTable
 
             ],
             [
-                'data' => 'commision_tax',
-                'title' => 'Commission + Tax',
+                'data' => 'commision',
+                'title' => 'Commission',
 
+            ],
+            [
+                'data' => 'tax',
+                'title' => 'Tax',
             ],
             [
                 'data' => 'amount_paid',
