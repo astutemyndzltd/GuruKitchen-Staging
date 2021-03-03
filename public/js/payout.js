@@ -49,7 +49,8 @@ $(ddlRestaurants).on('select2:select', async function (e) {
         startDate: start,
         endDate: end,
         locale: {  format: 'DD MMM YYYY' }, 
-        minDate: moment(json.date, 'YYYY-MM-DD').add(1, 'days').toDate() 
+        minDate: moment(json.date, 'YYYY-MM-DD').add(1, 'days').toDate(),
+        maxDate: start 
     };
 
     $(txtPayoutPeriod).daterangepicker(options, onDateRangeChange);
