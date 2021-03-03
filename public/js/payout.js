@@ -26,16 +26,19 @@ $(ddlRestaurants).on('select2:select', async function (e) {
     let response = await fetch('/restaurantsPayouts/last-payout-date?' + new URLSearchParams(data));
     let json = await response.json();
 
+    let start = moment();
+    let end = moment();
+
     let options = { 
-        startDate: moment(),
-        endDate: moment(),
+        startDate: start,
+        endDate: end,
         locale: {  format: 'DD MMM YYYY' }, 
         minDate: moment(json.date, 'YYYY-MM-DD').add(1, 'days').toDate() 
     };
 
     $(txtPayoutPeriod).daterangepicker(options, onDateRangeChange);
-
-    txtAmount.value = '';
+    
+    onDateRangeChange(start, end);
 
 });
 
