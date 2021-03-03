@@ -37,6 +37,11 @@
 
 </div>
 
+<input type="hidden" id="startDate" name="startDate">
+<input type="hidden" id="endDate" name="endDate">
+<input type="hidden" id="payoutAmount" name="payoutAmount">
+
+
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
 
 <!-- Note Field -->

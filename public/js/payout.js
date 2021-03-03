@@ -1,6 +1,11 @@
 const txtPayoutPeriod = document.querySelector('#txtPayoutPeriod');
 const ddlRestaurants = document.querySelector('#restaurant_id');
 const txtAmount = document.querySelector('#amount');
+const txtStartDate = document.querySelector('#startDate');
+const txtEndDate = document.querySelector('#endDate');
+const txtPayoutAmount = document.querySelector('#payoutAmount');
+const btnSavePayout = document.querySelector('.btn.btn-primary');
+
 
 async function onDateRangeChange(start, end) {
 
