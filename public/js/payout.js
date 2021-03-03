@@ -5,6 +5,10 @@ const txtStartDate = document.querySelector('#from_date');
 const txtEndDate = document.querySelector('#to_date');
 const txtPayoutAmount = document.querySelector('#amount');
 const btnSavePayout = document.querySelector('button.btn.btn-primary');
+const txtOrders = document.querySelector('#orders');
+const txtGrossRevenue = document.querySelector('#gross_revenue');
+const txtAdminCommission = document.querySelector('#admin_commission');
+const txtTax = document.querySelector('#tax');
 
 
 async function onDateRangeChange(start, end) {

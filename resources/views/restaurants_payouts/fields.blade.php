@@ -40,6 +40,10 @@
 <input type="hidden" id="from_date" name="from_date">
 <input type="hidden" id="to_date" name="to_date">
 <input type="hidden" id="amount" name="amount">
+<input type="hidden" id="orders" name="orders">
+<input type="hidden" id="gross_revenue" name="gross_revenue">
+<input type="hidden" id="admin_commission" name="admin_commission">
+<input type="hidden" id="tax" name="tax">
 
 
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
