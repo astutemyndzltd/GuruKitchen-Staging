@@ -2,8 +2,6 @@ const txtPayoutPeriod = document.querySelector('#txtPayoutPeriod');
 const ddlRestaurants = document.querySelector('#restaurant_id');
 const txtAmount = document.querySelector('#amount');
 
-const datePickerOptions = { locale: {  format: 'DD MMM YYYY' } };
-
 async function onDateRangeChange(start, end) {
 
     let data = {
@@ -18,11 +16,26 @@ async function onDateRangeChange(start, end) {
     txtAmount.value = `£${json.amount}`;
 }
 
-const daterangepicker = $(txtPayoutPeriod).daterangepicker(datePickerOptions, onDateRangeChange);
-txtPayoutPeriod.value = '';
 
-$(ddlRestaurants).on('select2:select', function (e) {
-    txtAmount.value = '';
-    txtPayoutPeriod.value = '';
+$(ddlRestaurants).on('select2:select', async function (e) {
+    
+    txtAmount.value = txtPayoutPeriod.value = '';
+    let $dr = $(txtPayoutPeriod).data('daterangepicker');
+    if ($dr) $dr.remove();
+
+    let data = { restaurantId : $(ddlRestaurants).val() };
+    let response = await fetch('/restaurantsPayouts/last-payout-date?' + new URLSearchParams(data));
+    let json = await response.json();
+
+    let options = { 
+        locale: {  format: 'DD MMM YYYY' }, 
+        minDate: moment(json.date, 'YYYY-MM-DD').add(1, 'days').toDate() 
+    };
+
+    $(txtPayoutPeriod).daterangepicker(options, onDateRangeChange);
+
+
 });
+
+$(ddlRestaurants).trigger('select2:select');
 

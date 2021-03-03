@@ -178,6 +178,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('restaurantsPayouts/total-order-amount', 'RestaurantsPayoutController@getTotalOrderAmount');
+    Route::get('restaurantsPayouts/last-payout-date', 'RestaurantsPayoutController@getLastPayoutDate');
 
     Route::resource('restaurantsPayouts', 'RestaurantsPayoutController')->except([
         'show', 'edit', 'update'
