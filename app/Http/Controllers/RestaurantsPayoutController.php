@@ -254,9 +254,12 @@ class RestaurantsPayoutController extends Controller
         return response()->json(['amount' => number_format((float)$gross, 2, '.', ' ')]);
     }
 
-    public function getLastPayoutDate(Request $request) {
 
-        return response()->json(['date' => '2021-01-01']);
+    public function getLastPayoutDate(Request $request) 
+    {
+        $restaurantId = $request->input('restaurantId');
+        $date = $this->restaurantRepository->where('restaurant_id', $restaurantId)->orderBy('id', 'DESC')->pluck('to_date')->first();
+        return response()->json(['date' => $date]);
     }
 
 }
