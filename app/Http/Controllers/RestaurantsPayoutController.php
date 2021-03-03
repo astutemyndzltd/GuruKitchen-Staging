@@ -254,7 +254,7 @@ class RestaurantsPayoutController extends Controller
                     ->sum('payments.price');
 
 
-        file_put_contents('order.txt', $amount);
+        return $amount;
     }
 
 }
