@@ -49,7 +49,7 @@
 @push('css_lib')
 <style>
   #dataTableBuilder {
-    font-size: 13px;
+    font-size: 14px;
   }
 </style>
 @endpush
