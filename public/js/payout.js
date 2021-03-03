@@ -19,7 +19,6 @@ async function onDateRangeChange(start, end) {
 
 $(ddlRestaurants).on('select2:select', async function (e) {
     
-    txtAmount.value;
     let $dr = $(txtPayoutPeriod).data('daterangepicker');
     if ($dr) $dr.remove();
 
@@ -34,7 +33,6 @@ $(ddlRestaurants).on('select2:select', async function (e) {
 
     $(txtPayoutPeriod).daterangepicker(options, onDateRangeChange);
 
-    txtPayoutPeriod.value = '';
 
 });
 
