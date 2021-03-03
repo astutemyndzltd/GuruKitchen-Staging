@@ -259,7 +259,7 @@ class RestaurantsPayoutController extends Controller
     {
         $restaurantId = $request->input('restaurantId');
         $date = $this->restaurantsPayoutRepository->where('restaurant_id', $restaurantId)->orderBy('id', 'DESC')->pluck('to_date')->first();
-        return response()->json(['date' => $date]);
+        return response()->json(['date' => date('Y-m-d', strtotime($date))]);
     }
 
 }
