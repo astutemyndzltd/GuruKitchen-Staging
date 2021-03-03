@@ -61,13 +61,7 @@ class RestaurantsPayoutDataTable extends DataTable
                 'data' => 'restaurant.name',
                 'title' => 'Restaurant',
 
-            ],
-            [
-                'data' => 'payout_period',
-                'title' => 'Payout Period',
-
-            ],
-            
+            ]
         ];
 
 
