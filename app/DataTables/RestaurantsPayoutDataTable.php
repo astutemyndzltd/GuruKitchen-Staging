@@ -28,7 +28,7 @@ class RestaurantsPayoutDataTable extends DataTable
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
             ->editColumn('payout_period', function ($payout) {
-                return date('d M Y', strtotime($payout->from_date)) . ' - ' . date('d M Y', strtotime($date)); 
+                return date('d M Y', strtotime($payout->from_date)) . ' - ' . date('d M Y', strtotime($payout->to_date)); 
             })
             ->editColumn('gross_revenue', function ($payout) {
                 return getPriceColumn($payout, 'gross_revenue');
@@ -92,7 +92,7 @@ class RestaurantsPayoutDataTable extends DataTable
             ]
         ];
 
-        
+
         $hasCustomField = in_array(RestaurantsPayout::class, setting('custom_field_models', []));
         if ($hasCustomField) {
             $customFieldsCollection = CustomField::where('custom_field_model', RestaurantsPayout::class)->where('in_table', '=', true)->get();
