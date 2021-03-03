@@ -35,6 +35,7 @@ $(ddlRestaurants).on('select2:select', async function (e) {
 
     $(txtPayoutPeriod).daterangepicker(options, onDateRangeChange);
 
+    txtAmount.value = txtPayoutPeriod.value = '';
 
 });
 
