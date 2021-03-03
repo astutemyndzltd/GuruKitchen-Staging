@@ -247,11 +247,11 @@ class RestaurantsPayoutController extends Controller
         $endDate = $request->input('endDate');
 
         $amount =   $model->newQuery()->join('payments', 'orders.payment_id', '=', 'payments.id')
-                    ->whereRaw("date(o.created_at) between '$startDate' and '$endDate' 
-                                and o.active = 1 and o.id in (select distinct fo.order_id from 
+                    ->whereRaw("date(orders.created_at) between '$startDate' and '$endDate' 
+                                and orders.active = 1 and orders.id in (select distinct fo.order_id from 
                                 food_orders fo join foods f on fo.food_id = f.id join restaurants r 
                                 on r.id = f.restaurant_id and f.restaurant_id = $restaurantId)")
-                    ->select('sum(payments.price)')->toSql();
+                    ->select("sum(payments.price)")->toSql();
 
 
         file_put_contents('order.txt', $amount);
