@@ -40,6 +40,7 @@
 <input type="hidden" id="from_date" name="from_date">
 <input type="hidden" id="to_date" name="to_date">
 <input type="hidden" id="amount" name="amount">
+
 <input type="hidden" id="orders" name="orders">
 <input type="hidden" id="gross_revenue" name="gross_revenue">
 <input type="hidden" id="admin_commission" name="admin_commission">
