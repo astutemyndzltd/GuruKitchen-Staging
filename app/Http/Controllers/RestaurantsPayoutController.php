@@ -242,19 +242,27 @@ class RestaurantsPayoutController extends Controller
 
         $tax = setting('default_tax', 0);
 
-        $totalOrderValue =  $model->newQuery()->join('payments', 'orders.payment_id', '=', 'payments.id')
+        $data =  $model->newQuery()->join('payments', 'orders.payment_id', '=', 'payments.id')
                             ->whereRaw("date(orders.created_at) between '$startDate' and '$endDate' 
                                         and orders.active = 1 and orders.id in (select distinct fo.order_id from 
                                         food_orders fo join foods f on fo.food_id = f.id join restaurants r 
                                         on r.id = f.restaurant_id and f.restaurant_id = $restaurantId)")
                             ->selectRaw('sum(payments.price) total, count(*) orders')->get();
 
-        file_put_contents('order.txt', json_encode($totalOrderValue[0]['total']));
-        return;                    
 
-        $gross = $totalOrderValue - (($totalOrderValue * $adminCommission * ($tax + 100)) / 10000);
+        $totalOrderValue = $data[0]['total'];
+        $orders = $data[0]['orders'];
+        $net = $totalOrderValue - (($totalOrderValue * $adminCommission * ($tax + 100)) / 10000);
 
-        return response()->json(['amount' => number_format((float)$gross, 2, '.', ' ')]);
+        $responseData = [
+            'amount' => number_format((float)$net, 2, '.', ' '),
+            'orders' => $orders,
+            'gross_revenue' => number_format((float)$totalOrderValue, 2, '.', ' '),
+            'admin_commission' => number_format((float)$adminCommission, 2, '.', ' '),
+            'tax' => number_format((float)$tax, 2, '.', ' ')
+        ];
+
+        return response()->json($responseData);
     }
 
 
