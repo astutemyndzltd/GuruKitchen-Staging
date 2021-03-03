@@ -258,7 +258,7 @@ class RestaurantsPayoutController extends Controller
     public function getLastPayoutDate(Request $request) 
     {
         $restaurantId = $request->input('restaurantId');
-        $date = $this->restaurantRepository->where('restaurant_id', $restaurantId)->orderBy('id', 'DESC')->pluck('to_date')->first();
+        $date = $this->restaurantsPayoutRepository->where('restaurant_id', $restaurantId)->orderBy('id', 'DESC')->pluck('to_date')->first();
         return response()->json(['date' => $date]);
     }
 
