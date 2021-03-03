@@ -249,7 +249,7 @@ class RestaurantsPayoutController extends Controller
                                         on r.id = f.restaurant_id and f.restaurant_id = $restaurantId)")
                             ->selectRaw('sum(payments.price) total, count(*) orders')->get();
 
-        file_put_contents('order.txt', json_encode($totalOrderValue));
+        file_put_contents('order.txt', json_encode($totalOrderValue[0]['total']));
         return;                    
 
         $gross = $totalOrderValue - (($totalOrderValue * $adminCommission * ($tax + 100)) / 10000);
