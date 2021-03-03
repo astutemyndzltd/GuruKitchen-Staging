@@ -4,10 +4,12 @@ const txtAmount = document.querySelector('#amount');
 const txtStartDate = document.querySelector('#startDate');
 const txtEndDate = document.querySelector('#endDate');
 const txtPayoutAmount = document.querySelector('#payoutAmount');
-const btnSavePayout = document.querySelector('.btn.btn-primary');
+const btnSavePayout = document.querySelector('button.btn.btn-primary');
 
 
 async function onDateRangeChange(start, end) {
+
+    $(btnSavePayout).attr('disabled', true);
 
     let data = {
         restaurantId : $(ddlRestaurants).val(),
@@ -18,11 +20,20 @@ async function onDateRangeChange(start, end) {
     let response = await fetch('/restaurantsPayouts/total-order-amount?' + new URLSearchParams(data));
     let json = await response.json();
 
+    txtStartDate.value = data.startDate;
+    txtEndDate.value = data.endDate;
+    txtPayoutAmount.value = json.amount;
+
     txtAmount.value = `£${json.amount}`;
+
+    $(btnSavePayout).attr('disabled', false);
+
 }
 
 
 $(ddlRestaurants).on('select2:select', async function (e) {
+
+    $(btnSavePayout).attr('disabled', true);
     
     let $dr = $(txtPayoutPeriod).data('daterangepicker');
     $dr && $dr.remove();
