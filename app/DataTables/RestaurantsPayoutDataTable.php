@@ -43,12 +43,12 @@ class RestaurantsPayoutDataTable extends DataTable
             ->editColumn('amount_paid', function ($payout) {
                 return getPriceColumn($payout, 'amount');
             })
-            ->editColumn('orders', function ($payout) {
+           /* ->editColumn('orders', function ($payout) {
                 return $payout->orders;
             })
             ->editColumn('note', function ($payout) {
                 return $payout->note;
-            })
+            })*/
             //->addColumn('action', 'restaurants_payouts.datatables_actions')
             ->rawColumns(array_merge($columns));
 
@@ -74,7 +74,7 @@ class RestaurantsPayoutDataTable extends DataTable
 
             ],
             [
-                'data' => 'Orders',
+                'data' => 'orders',
                 'title' => 'Orders',
 
             ],
