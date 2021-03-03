@@ -92,20 +92,11 @@ class RestaurantsPayoutController extends Controller
     public function store(CreateRestaurantsPayoutRequest $request)
     {
         $input = $request->all();
-        $earning = $this->earningRepository->findByField('restaurant_id',$input['restaurant_id'])->first();
+        
 
-        if($input['amount'] > $earning->restaurant_earning){
-            Flash::error('The payout amount must be less than restaurant earning');
-            return redirect(route('restaurantsPayouts.create'))->withInput($input);
-        }
-
-        $input['paid_date'] = Carbon::now();
-        $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->restaurantsPayoutRepository->model());
         
         try {
-            $this->earningRepository->update(['restaurant_earning'=>$earning->restaurant_earning - $input['amount']], $earning->id);
-            $restaurantsPayout = $this->restaurantsPayoutRepository->create($input);
-            $restaurantsPayout->customFieldsValues()->createMany(getCustomFieldsValues($customFields, $request));
+            
 
         } catch (ValidatorException $e) {
             Flash::error($e->getMessage());

@@ -27,9 +27,9 @@
 
 <!-- Amount Field -->
 <div class="form-group row ">
-  {!! Form::label('amount', trans("lang.restaurants_payout_amount"), ['class' => 'col-3 control-label text-right']) !!}
+  {!! Form::label('payout_amount', trans("lang.restaurants_payout_amount"), ['class' => 'col-3 control-label text-right']) !!}
   <div class="col-9">
-      {!! Form::text('amount', null,  ['readonly' => 'true', 'class' => 'form-control', 'step'=>"any" ]) !!}
+      {!! Form::text('payout_amount', null,  ['readonly' => 'true', 'class' => 'form-control', 'step' => "any" ]) !!}
     <div class="form-text text-muted"></div>
   </div>
 </div>
@@ -37,9 +37,9 @@
 
 </div>
 
-<input type="hidden" id="startDate" name="startDate">
-<input type="hidden" id="endDate" name="endDate">
-<input type="hidden" id="payoutAmount" name="payoutAmount">
+<input type="hidden" id="from_date" name="from_date">
+<input type="hidden" id="from_date" name="endDate">
+<input type="hidden" id="amount" name="amount">
 
 
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">

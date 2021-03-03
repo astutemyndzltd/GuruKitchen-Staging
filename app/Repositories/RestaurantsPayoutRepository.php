@@ -21,9 +21,9 @@ class RestaurantsPayoutRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'restaurant_id',
-        'method',
+        'from_date',
+        'to_date',
         'amount',
-        'paid_date',
         'note'
     ];
 

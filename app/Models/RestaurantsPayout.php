@@ -28,13 +28,11 @@ class RestaurantsPayout extends Model
 
     public $table = 'restaurants_payouts';
     
-
-
     public $fillable = [
         'restaurant_id',
-        'method',
+        'from_date',
+        'to_date',
         'amount',
-        'paid_date',
         'note'
     ];
 
@@ -45,9 +43,9 @@ class RestaurantsPayout extends Model
      */
     protected $casts = [
         'restaurant_id' => 'integer',
-        'method' => 'string',
+        'from_date' => 'date',
+        'to_date' => 'date',
         'amount' => 'double',
-        'paid_date' => 'datetime',
         'note' => 'string'
     ];
 
@@ -58,7 +56,8 @@ class RestaurantsPayout extends Model
      */
     public static $rules = [
         'restaurant_id' => 'required|exists:restaurants,id',
-        'method' => 'required',
+        'from_date' => 'required',
+        'to_date' => 'required',
         'note' => 'required',
         'amount' => 'required|min:0.01',
     ];
@@ -69,8 +68,7 @@ class RestaurantsPayout extends Model
      * @var array
      */
     protected $appends = [
-        'custom_fields',
-        
+        'custom_fields',  
     ];
 
     public function customFieldsValues()
