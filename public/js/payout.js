@@ -4,6 +4,8 @@ const txtAmount = document.querySelector('#amount');
 
 async function onDateRangeChange(start, end) {
 
+    console.log('date value changed');
+
     let data = {
         restaurantId : $(ddlRestaurants).val(),
         startDate : start.format('YYYY-MM-DD'),
