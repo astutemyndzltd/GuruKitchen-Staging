@@ -40,7 +40,7 @@ class RestaurantsPayoutDataTable extends DataTable
                 $taxTotal = ($taxRate / 100) * $commission;
                 return getPrice($commission) . " ($comRate%) / " . getPrice($taxTotal) . " ($taxRate%)";
             })
-            ->editColumn('amount_paid', function ($payout) {
+            ->editColumn('amount', function ($payout) {
                 return getPriceColumn($payout, 'amount');
             })
             ->rawColumns(array_merge($columns));
@@ -87,7 +87,7 @@ class RestaurantsPayoutDataTable extends DataTable
 
             ],
             [
-                'data' => 'amount_paid',
+                'data' => 'amount',
                 'title' => 'Amount Paid',
                 'orderable' => false
             ],
