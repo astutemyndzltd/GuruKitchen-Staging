@@ -253,7 +253,7 @@ class RestaurantsPayoutController extends Controller
                                 on r.id = f.restaurant_id and f.restaurant_id = $restaurantId)")
                     ->sum('payments.price');
 
-        return response()->json(number_format((float)$amount, 2, '.', ' '));
+        return response()->json(['amount' => number_format((float)$amount, 2, '.', ' ')]);
     }
 
 }

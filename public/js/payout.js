@@ -13,9 +13,9 @@ async function onDateRangeChange(start, end) {
     };  
 
     let response = await fetch('/restaurantsPayouts/total-order-amount?' + new URLSearchParams(data));
-    let amount = await response.text();
+    let json = await response.json();
 
-    console.log(amount);
+    console.log(json.amount);
 
     txtAmount.value = `£${amount}`;
 }
