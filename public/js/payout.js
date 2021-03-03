@@ -22,6 +22,7 @@ const daterangepicker = $(txtPayoutPeriod).daterangepicker(datePickerOptions, on
 txtPayoutPeriod.value = '';
 
 $(ddlRestaurants).on('select2:select', function (e) {
-    alert('hello world');
+    txtAmount.value = '';
+    txtPayoutPeriod.value = '';
 });
 
