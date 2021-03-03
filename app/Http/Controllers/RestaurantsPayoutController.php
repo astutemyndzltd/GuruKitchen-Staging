@@ -254,7 +254,7 @@ class RestaurantsPayoutController extends Controller
                     ->sum('payments.price');
 
 
-        return $amount;
+        return response($amount);
     }
 
 }
