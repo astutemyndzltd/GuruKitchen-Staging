@@ -13,8 +13,9 @@ async function onDateRangeChange(start, end) {
     };  
 
     let response = await fetch('/restaurantsPayouts/total-order-amount?' + new URLSearchParams(data));
+    let amount = await response.text();
 
-    console.log(await response.text());    
+    txtAmount.value = `£${amount}`;
 }
 
 const daterangepicker = $(txtPayoutPeriod).daterangepicker(datePickerOptions, onDateRangeChange);
