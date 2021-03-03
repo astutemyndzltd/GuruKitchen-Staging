@@ -46,3 +46,11 @@
 </div>
 @endsection
 
+@push('css_lib')
+<style>
+  #dataTableBuilder {
+    font-size: 13px;
+  }
+</style>
+@endpush
+
