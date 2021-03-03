@@ -58,7 +58,6 @@ class RestaurantsPayout extends Model
         'restaurant_id' => 'required|exists:restaurants,id',
         'from_date' => 'required',
         'to_date' => 'required',
-        'note' => 'required',
         'amount' => 'required|min:0.01',
     ];
 
