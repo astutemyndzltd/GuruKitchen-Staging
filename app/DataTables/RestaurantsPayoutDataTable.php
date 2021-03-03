@@ -60,6 +60,7 @@ class RestaurantsPayoutDataTable extends DataTable
                 'data' => 'restaurant.name',
                 'title' => 'Restaurant',
                 'orderable' => false,
+                'searchable' => true
 
             ],
             [
