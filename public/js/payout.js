@@ -20,7 +20,7 @@ async function onDateRangeChange(start, end) {
 $(ddlRestaurants).on('select2:select', async function (e) {
     
     let $dr = $(txtPayoutPeriod).data('daterangepicker');
-    if ($dr) $dr.remove();
+    $dr && $dr.remove();
 
     let data = { restaurantId : $(ddlRestaurants).val() };
     let response = await fetch('/restaurantsPayouts/last-payout-date?' + new URLSearchParams(data));
