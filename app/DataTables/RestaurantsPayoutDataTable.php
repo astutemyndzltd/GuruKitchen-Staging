@@ -61,11 +61,38 @@ class RestaurantsPayoutDataTable extends DataTable
                 'data' => 'restaurant.name',
                 'title' => 'Restaurant',
 
+            ],
+            [
+                'data' => 'payout_period',
+                'title' => 'Payout Period',
+
+            ],
+            [
+                'data' => 'Orders',
+                'title' => 'Orders',
+
+            ],
+            [
+                'data' => 'gross_revenue',
+                'title' => 'Gross Revenue',
+
+            ],
+            [
+                'data' => 'commision_tax',
+                'title' => 'Commission / Tax',
+
+            ],
+            [
+                'data' => 'amount_paid',
+                'title' => 'Amount Paid',
+            ],
+            [
+                'data' => 'note',
+                'title' => 'Note',
             ]
         ];
 
-
-
+        
         $hasCustomField = in_array(RestaurantsPayout::class, setting('custom_field_models', []));
         if ($hasCustomField) {
             $customFieldsCollection = CustomField::where('custom_field_model', RestaurantsPayout::class)->where('in_table', '=', true)->get();
