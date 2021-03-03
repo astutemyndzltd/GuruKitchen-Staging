@@ -27,11 +27,21 @@ class RestaurantsPayoutDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
-            ->editColumn('updated_at', function ($restaurants_payout) {
-                return getDateColumn($restaurants_payout, 'updated_at');
+            ->editColumn('payout_period', function ($payout) {
+                return date('d M Y', strtotime($payout->from_date)) . ' - ' . date('d M Y', strtotime($date)); 
             })
-            ->editColumn('amount', function ($restaurants_payout) {
-                return getPriceColumn($restaurants_payout, 'amount');
+            ->editColumn('gross_revenue', function ($payout) {
+                return getPriceColumn($payout, 'gross_revenue');
+            })
+            ->editColumn('commision_tax', function ($payout) {
+                $taxRate = $payout->tax;
+                $comRate = $payout->admin_commission;
+                $commission = ($comRate / 100) * $payout->gross_revenue;
+                $taxTotal = ($taxRate / 100) * $commission;
+                return getPrice($commission) . " (@ $comRate%) / " . getPrice($taxTotal) . " (@ $taxRate%)";
+            })
+            ->editColumn('amount_paid', function ($payout) {
+                return getPriceColumn($payout, 'amount');
             })
             //->addColumn('action', 'restaurants_payouts.datatables_actions')
             ->rawColumns(array_merge($columns));
@@ -49,35 +59,40 @@ class RestaurantsPayoutDataTable extends DataTable
         $columns = [
             [
                 'data' => 'restaurant.name',
-                'title' => trans('lang.restaurants_payout_restaurant_id'),
+                'title' => 'Restaurant',
 
             ],
             [
-                'data' => 'method',
-                'title' => trans('lang.restaurants_payout_method'),
+                'data' => 'payout_period',
+                'title' => 'Payout Period',
 
             ],
             [
-                'data' => 'amount',
-                'title' => trans('lang.restaurants_payout_amount'),
+                'data' => 'Orders',
+                'title' => 'Orders',
 
             ],
             [
-                'data' => 'paid_date',
-                'title' => trans('lang.restaurants_payout_paid_date'),
+                'data' => 'gross_revenue',
+                'title' => 'Gross Revenue',
 
+            ],
+            [
+                'data' => 'commision_tax',
+                'title' => 'Commission / Tax',
+
+            ],
+            [
+                'data' => 'amount_paid',
+                'title' => 'Amount Paid',
             ],
             [
                 'data' => 'note',
-                'title' => trans('lang.restaurants_payout_note'),
-
-            ],
-            [
-                'data' => 'updated_at',
-                'title' => trans('lang.restaurants_payout_updated_at'),
-                'searchable' => false,
+                'title' => 'Note',
             ]
         ];
+
+
 
         $hasCustomField = in_array(RestaurantsPayout::class, setting('custom_field_models', []));
         if ($hasCustomField) {
