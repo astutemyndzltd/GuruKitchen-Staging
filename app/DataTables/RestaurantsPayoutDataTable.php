@@ -67,29 +67,7 @@ class RestaurantsPayoutDataTable extends DataTable
                 'title' => 'Payout Period',
 
             ],
-            [
-                'data' => 'Orders',
-                'title' => 'Orders',
-
-            ],
-            [
-                'data' => 'gross_revenue',
-                'title' => 'Gross Revenue',
-
-            ],
-            [
-                'data' => 'commision_tax',
-                'title' => 'Commission / Tax',
-
-            ],
-            [
-                'data' => 'amount_paid',
-                'title' => 'Amount Paid',
-            ],
-            [
-                'data' => 'note',
-                'title' => 'Note',
-            ]
+            
         ];
 
 
