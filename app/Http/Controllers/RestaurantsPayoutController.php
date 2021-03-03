@@ -246,6 +246,9 @@ class RestaurantsPayoutController extends Controller
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
 
+        $restautant = $this->restaurantRepository->find($restaurantId);
+        $adminCommission = $restaurant->admin_commission;
+
         $amount =   $model->newQuery()->join('payments', 'orders.payment_id', '=', 'payments.id')
                     ->whereRaw("date(orders.created_at) between '$startDate' and '$endDate' 
                                 and orders.active = 1 and orders.id in (select distinct fo.order_id from 
