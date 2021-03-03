@@ -9,6 +9,7 @@ use App\Http\Requests\CreateRestaurantsPayoutRequest;
 use App\Http\Requests\UpdateRestaurantsPayoutRequest;
 use App\Repositories\CustomFieldRepository;
 use App\Repositories\EarningRepository;
+use App\Repositories\OrderRepository;
 use App\Repositories\RestaurantRepository;
 use App\Repositories\RestaurantsPayoutRepository;
 use Carbon\Carbon;
@@ -37,9 +38,12 @@ class RestaurantsPayoutController extends Controller
      */
     private $earningRepository;
 
-    public function __construct(RestaurantsPayoutRepository $restaurantsPayoutRepo, CustomFieldRepository $customFieldRepo, RestaurantRepository $restaurantRepo, EarningRepository $earningRepository)
+    private $orderRepository;
+
+    public function __construct(OrderRepository $orderRepository, RestaurantsPayoutRepository $restaurantsPayoutRepo, CustomFieldRepository $customFieldRepo, RestaurantRepository $restaurantRepo, EarningRepository $earningRepository)
     {
         parent::__construct();
+        $this->orderRepository = $orderRepository;
         $this->restaurantsPayoutRepository = $restaurantsPayoutRepo;
         $this->customFieldRepository = $customFieldRepo;
         $this->restaurantRepository = $restaurantRepo;
@@ -239,11 +243,21 @@ class RestaurantsPayoutController extends Controller
     }
 
     public function getTotalOrderAmount(Request $request) {
+
         $restaurantId = $request->input('restaurantId');
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
 
-        file_put_contents('order.txt', $startDate);
+        $amount =   $this->orderRepository->model()->newQuery()
+                    ->join('payments', 'orders.payment_id', '=', 'payments.id')
+                    ->whereRaw("date(o.created_at) between '$startDate' and '$endDate' 
+                                and o.active = 1 and o.id in (select distinct fo.order_id from 
+                                food_orders fo join foods f on fo.food_id = f.id join restaurants r 
+                                on r.id = f.restaurant_id and f.restaurant_id = $restaurantId)")
+                    ->select('sum(payments.price)');
+
+
+        file_put_contents('order.txt', $amount);
     }
 
 }
