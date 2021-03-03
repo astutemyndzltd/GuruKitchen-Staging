@@ -32,6 +32,10 @@ class RestaurantsPayout extends Model
         'restaurant_id',
         'from_date',
         'to_date',
+        'orders',
+        'gross_revenue',
+        'admin_commission',
+        'tax',
         'amount',
         'note'
     ];
@@ -45,6 +49,10 @@ class RestaurantsPayout extends Model
         'restaurant_id' => 'integer',
         'from_date' => 'date',
         'to_date' => 'date',
+        'orders' => 'integer',
+        'gross_revenue' => 'double',
+        'admin_commission' => 'double',
+        'tax' => 'double',
         'amount' => 'double',
         'note' => 'string'
     ];

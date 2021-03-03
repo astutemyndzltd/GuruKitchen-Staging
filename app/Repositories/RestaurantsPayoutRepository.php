@@ -23,6 +23,10 @@ class RestaurantsPayoutRepository extends BaseRepository
         'restaurant_id',
         'from_date',
         'to_date',
+        'orders',
+        'gross_revenue',
+        'admin_commission',
+        'tax',
         'amount',
         'note'
     ];
