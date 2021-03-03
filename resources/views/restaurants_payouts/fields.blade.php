@@ -38,7 +38,7 @@
 </div>
 
 <input type="hidden" id="from_date" name="from_date">
-<input type="hidden" id="from_date" name="endDate">
+<input type="hidden" id="to_date" name="to_date">
 <input type="hidden" id="amount" name="amount">
 
 
