@@ -27,6 +27,8 @@ $(ddlRestaurants).on('select2:select', async function (e) {
     let json = await response.json();
 
     let options = { 
+        startDate: moment(),
+        endDate: moment(),
         locale: {  format: 'DD MMM YYYY' }, 
         minDate: moment(json.date, 'YYYY-MM-DD').add(1, 'days').toDate() 
     };
