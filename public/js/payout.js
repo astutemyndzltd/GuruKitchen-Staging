@@ -27,6 +27,10 @@ async function onDateRangeChange(start, end) {
     txtStartDate.value = data.startDate;
     txtEndDate.value = data.endDate;
     txtPayoutAmount.value = json.amount;
+    txtOrders.value = json.orders;
+    txtGrossRevenue.value = json.gross_revenue;
+    txtAdminCommission.value = json.admin_commission;
+    txtTax.value = json.tax;
 
     txtAmount.value = `£${json.amount}`;
 
