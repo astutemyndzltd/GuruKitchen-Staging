@@ -256,7 +256,7 @@ class RestaurantsPayoutController extends Controller
                                 and orders.active = 1 and orders.id in (select distinct fo.order_id from 
                                 food_orders fo join foods f on fo.food_id = f.id join restaurants r 
                                 on r.id = f.restaurant_id and f.restaurant_id = $restaurantId)")
-                    ->selectRaw("payments.price - ((payments.price * $adminCommission * ($tax + 100)) / 10000)")->get();
+                    ->selectRaw("payments.price - ((payments.price * $adminCommission * ($tax + 100)) / 10000)")->toSql();
 
         file_put_contents('order.txt', json_encode($amount));            
 
