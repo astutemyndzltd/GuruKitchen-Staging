@@ -248,7 +248,7 @@ class RestaurantsPayoutController extends Controller
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
 
-        $amount =   $this->orderRepository->model()->newQuery()
+        $amount =   $this->orderRepository->model()
                     ->join('payments', 'orders.payment_id', '=', 'payments.id')
                     ->whereRaw("date(o.created_at) between '$startDate' and '$endDate' 
                                 and o.active = 1 and o.id in (select distinct fo.order_id from 
