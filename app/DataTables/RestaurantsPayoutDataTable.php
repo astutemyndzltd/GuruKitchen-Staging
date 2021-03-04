@@ -43,6 +43,9 @@ class RestaurantsPayoutDataTable extends DataTable
             ->editColumn('amount', function ($payout) {
                 return getPriceColumn($payout, 'amount');
             })
+            ->editColumn('created_at', function ($payout) {
+                return getDateColumn($payout, 'created_at');
+            })
             ->rawColumns(array_merge($columns));
 
         return $dataTable;
@@ -89,6 +92,11 @@ class RestaurantsPayoutDataTable extends DataTable
             [
                 'data' => 'amount',
                 'title' => 'Amount Paid',
+                'orderable' => false
+            ],
+            [
+                'data' => 'created_at',
+                'title' => 'Created At',
                 'orderable' => false
             ],
             [
