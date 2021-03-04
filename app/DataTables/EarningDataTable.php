@@ -6,7 +6,7 @@ use App\Models\CustomField;
 use App\Models\Earning;
 use App\Models\Order;
 use Barryvdh\DomPDF\Facade as PDF;
-use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\CollectionDataTable;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Facades\DB;
 
@@ -26,7 +26,7 @@ class EarningDataTable extends DataTable
      */
     public function dataTable($collection)
     {
-        $dataTable = new EloquentDataTable(collect($collection));
+        $dataTable = new CollectionDataTable($collection);
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
             ->editColumn('restaurant.name', function ($earning) {
