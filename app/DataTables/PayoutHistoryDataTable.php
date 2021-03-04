@@ -32,7 +32,7 @@ class PayoutHistoryDataTable extends DataTable
                 return getPriceColumn($payout, 'amount');
             })
             ->editColumn('created_at', function ($payout) {
-                return getPriceColumn($payout, 'amount');
+                return getDateColumn($payout, 'created_at');
             })
             ->rawColumns(array_merge($columns));
 
