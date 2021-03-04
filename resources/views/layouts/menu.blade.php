@@ -220,17 +220,12 @@
         </a>
         <ul class="nav nav-treeview">
 
-            @can('payments.index')
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('payments*') ? 'active' : '' }}" href="{!! route('payments.index') !!}">@if($icons)
-                            <i class="nav-icon fa fa-money"></i>@endif<p>{{trans('lang.payment_plural')}}</p></a>
-                </li>
-            @endcan
+            
 
             @can('earnings.index')
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('earnings*') ? 'active' : '' }}" href="{!! route('earnings.index') !!}">@if($icons)
-                            <i class="nav-icon fa fa-money"></i>@endif<p>{{trans('lang.earning_plural')}} <span class="right badge badge-danger">New</span></p>
+                            <i class="nav-icon fa fa-money"></i>@endif<p>{{trans('lang.earning_plural')}}</p>
                     </a>
                 </li>
             @endcan
