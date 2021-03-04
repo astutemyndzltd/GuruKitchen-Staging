@@ -51,8 +51,7 @@ class EarningDataTable extends DataTable
                 $gross = $result->gross;
                 $net = $gross - (($gross * $comRate * ($taxRate + 100)) / 10000);
                 return getPrice($net);
-            })
-            ->rawColumns(array_merge($columns, ['action']));
+            });
 
         return $dataTable;
     }
