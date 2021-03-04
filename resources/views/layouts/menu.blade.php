@@ -159,6 +159,14 @@
     </li>
 @endcan
 
+@if(auth()->user()->hasRole('manager'))
+<li class="nav-item">
+    <a class="nav-link {{ Request::is('payout-history*') ? 'active' : '' }}" href="/payout-history">
+        <i class="nav-icon fa fa-book"></i><p>Payout History</p>
+    </a>
+</li>
+@endif
+
 @can('drivers.index')
     <li class="nav-item">
         <a class="nav-link {{ Request::is('drivers*') ? 'active' : '' }}" href="{!! route('drivers.index') !!}">@if($icons)<i class="nav-icon fa fa-car"></i>@endif<p>{{trans('lang.driver_plural')}} </p></a>
