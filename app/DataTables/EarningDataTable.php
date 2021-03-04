@@ -8,6 +8,7 @@ use App\Models\Order;
 use Barryvdh\DomPDF\Facade as PDF;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Support\Facades\DB;
 
 class EarningDataTable extends DataTable
 {
@@ -141,7 +142,7 @@ class EarningDataTable extends DataTable
 
             file_put_contents('order.txt', json_encode($response));
 
-            
+
         }
     }
 
