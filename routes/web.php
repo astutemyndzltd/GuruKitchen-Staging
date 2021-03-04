@@ -35,6 +35,8 @@ Route::get('payments/paypal', 'PayPalController@index')->name('paypal.index');
 
 Route::get('/sw-js', 'AppSettingController@initFirebase');
 
+Route::get('/payout-history', 'PayoutHistoryController@index');
+
 
 Route::get('storage/app/public/{id}/{conversion}/{filename?}', 'UploadController@storage');
 
