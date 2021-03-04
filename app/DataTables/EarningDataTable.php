@@ -128,7 +128,7 @@ class EarningDataTable extends DataTable
      * @param \App\Models\Post $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query()
+    public function query(Order $model)
     {
         if (auth()->user()->hasRole('admin')) 
         {
@@ -138,10 +138,7 @@ class EarningDataTable extends DataTable
             join (select fo.order_id, f.restaurant_id res_id from food_orders fo join foods f on fo.food_id = f.id group by fo.order_id) ro
             on o.id = ro.order_id) d group by res_id) d2 right join restaurants r on r.id = d2.res_id";
 
-            $response = DB::select( DB::raw($statement) );
-
-            file_put_contents('order.txt', json_encode($response));
-
+            return $model->select(DB::raw($statement));
 
         }
     }
