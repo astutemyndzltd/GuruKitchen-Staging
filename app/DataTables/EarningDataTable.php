@@ -52,8 +52,7 @@ class EarningDataTable extends DataTable
                 $net = $gross - (($gross * $comRate * ($taxRate + 100)) / 10000);
                 return getPrice($net);
             })
-            ->rawColumns($columns)
-            ->removeColumn('action');
+            ->rawColumns($columns);
 
         return $dataTable;
     }
@@ -136,7 +135,6 @@ class EarningDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['title'=>trans('lang.actions'),'width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
             ->parameters(array_merge(
                 config('datatables-buttons.parameters'), [
                     'language' => json_decode(
