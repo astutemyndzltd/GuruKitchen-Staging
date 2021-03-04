@@ -66,59 +66,39 @@ class EarningDataTable extends DataTable
     {
         $columns = [
             [
-                'data' => 'restaurant.name',
-                'title' => trans('lang.earning_restaurant_id'),
+                'data' => 'rest_name',
+                'title' => 'Restaurant',
+                'orderable' => false
 
             ],
             [
-                'data' => 'total_orders',
-                'title' => trans('lang.earning_total_orders'),
+                'data' => 'total',
+                'title' => 'Orders',
+                'orderable' => false,
+                'searchable' => false
 
             ],
             [
-                'data' => 'total_earning',
-                'title' => trans('lang.earning_total_earning'),
+                'data' => 'gross',
+                'title' => 'Gross Revenue',
+                'orderable' => false,
+                'searchable' => false
 
             ],
             [
-                'data' => 'admin_earning',
-                'title' => trans('lang.earning_admin_earning'),
+                'data' => 'commission_tax',
+                'title' => 'Commission / Tax',
+                'orderable' => false,
+                'searchable' => false
 
             ],
             [
-                'data' => 'restaurant_earning',
-                'title' => trans('lang.earning_restaurant_earning'),
+                'data' => 'earning',
+                'title' => 'Earning',
 
-            ],
-            [
-                'data' => 'delivery_fee',
-                'title' => trans('lang.earning_delivery_fee'),
-
-            ],
-            [
-                'data' => 'tax',
-                'title' => trans('lang.earning_tax'),
-
-            ],
-            [
-                'data' => 'updated_at',
-                'title' => trans('lang.earning_updated_at'),
-                'searchable' => false,
             ]
         ];
 
-        $hasCustomField = in_array(Earning::class, setting('custom_field_models', []));
-        if ($hasCustomField) {
-            $customFieldsCollection = CustomField::where('custom_field_model', Earning::class)->where('in_table', '=', true)->get();
-            foreach ($customFieldsCollection as $key => $field) {
-                array_splice($columns, $field->order - 1, 0, [[
-                    'data' => 'custom_fields.' . $field->name . '.view',
-                    'title' => trans('lang.earning_' . $field->name),
-                    'orderable' => false,
-                    'searchable' => false,
-                ]]);
-            }
-        }
         return $columns;
     }
 
