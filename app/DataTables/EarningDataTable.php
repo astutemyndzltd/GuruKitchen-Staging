@@ -29,29 +29,29 @@ class EarningDataTable extends DataTable
         $dataTable = new CollectionDataTable(collect($collection));
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
-            ->editColumn('restaurant.name', function ($earning) {
-                return getLinksColumnByRouteName([$earning->restaurant], "restaurants.edit",'id','name');
+            ->editColumn('rest_name', function ($result) {
+                return $result['rest_name'];
             })
-
-            ->editColumn('updated_at', function ($earning) {
-                return getDateColumn($earning, 'updated_at');
+            ->editColumn('total', function ($result) {
+                return $result['total'];
             })
-            ->editColumn('total_earning', function ($earning) {
-                return getPriceColumn($earning,'total_earning');
+            ->editColumn('gross', function ($result) {
+                return getPrice($result['gross']);
             })
-            ->editColumn('admin_earning', function ($earning) {
-                return getPriceColumn($earning,'admin_earning');
+            ->editColumn('commission_tax', function ($result) {
+                $taxRate = setting('default_tax', 0);
+                $comRate = $result['commission'];
+                $commission = ($comRate / 100) * $result['gross'];
+                $taxTotal = ($taxRate / 100) * $commission;
+                return getPrice($commission) . " ($comRate%) / " . getPrice($taxTotal) . " ($taxRate%)";
             })
-            ->editColumn('restaurant_earning', function ($earning) {
-                return getPriceColumn($earning,'restaurant_earning');
+            ->editColumn('earning', function ($result) {
+                $taxRate = setting('default_tax', 0);
+                $comRate = $result['commission'];
+                $gross = $result['gross'];
+                $net = $gross - (($gross * $comRate * ($taxRate + 100)) / 10000);
+                return getPrice($net);
             })
-            ->editColumn('delivery_fee', function ($earning) {
-                return getPriceColumn($earning,'delivery_fee');
-            })
-            ->editColumn('tax', function ($earning) {
-                return getPriceColumn($earning,'tax');
-            })
-            ->addColumn('action', 'earnings.datatables_actions')
             ->rawColumns(array_merge($columns, ['action']));
 
         return $dataTable;
@@ -95,7 +95,8 @@ class EarningDataTable extends DataTable
             [
                 'data' => 'earning',
                 'title' => 'Earning',
-
+                'orderable' => false,
+                'searchable' => false
             ]
         ];
 
