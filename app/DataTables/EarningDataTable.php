@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\CustomField;
 use App\Models\Earning;
+use App\Models\Order;
 use Barryvdh\DomPDF\Facade as PDF;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
@@ -126,14 +127,21 @@ class EarningDataTable extends DataTable
      * @param \App\Models\Post $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Earning $model)
+    public function query()
     {
-        if (auth()->user()->hasRole('admin')) {
-            return $model->newQuery()->with("restaurant")->select('earnings.*');
-        }else if((auth()->user()->hasRole('manager'))){
-            return $model->newQuery()->with("restaurant")
-                ->join("user_restaurants", "user_restaurants.restaurant_id", "=", "earnings.restaurant_id")
-                ->where('user_restaurants.user_id', auth()->id())->select('earnings.*');
+        if (auth()->user()->hasRole('admin')) 
+        {
+            $statement = "select coalesce(d2.total, 0) total, coalesce(d2.gross, 0) gross, r.id rest_id, r.name rest_name, r.admin_commission commission 
+            from (select count(*) total, sum(price) gross, res_id from (select o.id id, p.price, ro.res_id from orders o
+            join payments p on o.payment_id = p. id and o.paid_out = 0 and o.active = 1
+            join (select fo.order_id, f.restaurant_id res_id from food_orders fo join foods f on fo.food_id = f.id group by fo.order_id) ro
+            on o.id = ro.order_id) d group by res_id) d2 right join restaurants r on r.id = d2.res_id";
+
+            $response = DB::select( DB::raw($statement) );
+
+            file_put_contents('order.txt', json_encode($response));
+
+            
         }
     }
 
