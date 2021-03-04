@@ -30,25 +30,25 @@ class EarningDataTable extends DataTable
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
             ->editColumn('rest_name', function ($result) {
-                return $result['rest_name'];
+                return $result->rest_name;
             })
             ->editColumn('total', function ($result) {
-                return $result['total'];
+                return $result->total;
             })
             ->editColumn('gross', function ($result) {
-                return getPrice($result['gross']);
+                return getPrice($result->gross);
             })
             ->editColumn('commission_tax', function ($result) {
                 $taxRate = setting('default_tax', 0);
-                $comRate = $result['commission'];
-                $commission = ($comRate / 100) * $result['gross'];
+                $comRate = $result->commission;
+                $commission = ($comRate / 100) * $result->gross;
                 $taxTotal = ($taxRate / 100) * $commission;
                 return getPrice($commission) . " ($comRate%) / " . getPrice($taxTotal) . " ($taxRate%)";
             })
             ->editColumn('earning', function ($result) {
                 $taxRate = setting('default_tax', 0);
-                $comRate = $result['commission'];
-                $gross = $result['gross'];
+                $comRate = $result->commission;
+                $gross = $result->gross;
                 $net = $gross - (($gross * $comRate * ($taxRate + 100)) / 10000);
                 return getPrice($net);
             })
