@@ -65,7 +65,7 @@ function getPriceColumn($modelObject, $attributeName = 'price')
 {
 
     if ($modelObject[$attributeName] != null && strlen($modelObject[$attributeName]) > 0) {
-        $modelObject[$attributeName] = number_format((float)$modelObject[$attributeName], 2, '.', '');
+        $modelObject[$attributeName] = number_format((float)$modelObject[$attributeName], 2, '.', ',');
         if (setting('currency_right', false) != false) {
             return $modelObject[$attributeName] . "<span>" . setting('default_currency') . "</span>";
         } else {
@@ -80,7 +80,7 @@ function getPrice($price = 0)
     if (setting('currency_right', false) != false) {
         return number_format((float)$price, 2, '.', '') . "<span>" . setting('default_currency') . "</span>";
     } else {
-        return "<span>" . setting('default_currency') . "</span>" . number_format((float)$price, 2, '.', ' ');
+        return "<span>" . setting('default_currency') . "</span>" . number_format((float)$price, 2, '.', ',');
     }
 }
 
@@ -89,7 +89,7 @@ function getPriceOnly($price = 0)
 	if (setting('currency_right', false) != false) {
         return number_format((float)$price, 2, '.', '') . setting('default_currency');
     } else {
-        return setting('default_currency') . number_format((float)$price, 2, '.', ' ');
+        return setting('default_currency') . number_format((float)$price, 2, '.', ',');
     }
 }
 
