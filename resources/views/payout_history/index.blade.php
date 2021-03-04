@@ -10,10 +10,15 @@
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="{{url('/dashboard')}}"><i class="fa fa-dashboard"></i> {{trans('lang.dashboard')}}</a></li>
-          <li class="breadcrumb-item"><a href="{!! route('restaurantsPayouts.index') !!}">{{trans('lang.restaurants_payout_plural')}}</a>
-          </li>
-          <li class="breadcrumb-item active">Payouts List</li>
+            <li class="breadcrumb-item">
+                <a href="{{url('/dashboard')}}">
+                    <i class="fa fa-dashboard"></i> 
+                    {{trans('lang.dashboard')}}
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="{!! route('restaurantsPayouts.index') !!}">Payout History</a>
+            </li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
