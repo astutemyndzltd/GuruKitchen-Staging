@@ -26,7 +26,7 @@ class EarningDataTable extends DataTable
      */
     public function dataTable($collection)
     {
-        $dataTable = new CollectionDataTable($collection);
+        $dataTable = new CollectionDataTable(collect($collection));
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
             ->editColumn('restaurant.name', function ($earning) {
