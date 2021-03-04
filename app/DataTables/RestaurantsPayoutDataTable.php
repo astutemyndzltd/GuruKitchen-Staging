@@ -153,7 +153,8 @@ class RestaurantsPayoutDataTable extends DataTable
                 config('datatables-buttons.parameters'), [
                     'language' => json_decode(
                         file_get_contents(base_path('resources/lang/' . app()->getLocale() . '/datatable.json')
-                        ), true)
+                        ), true),
+                    'scrollX' => true    
                 ]
             ));
     }
