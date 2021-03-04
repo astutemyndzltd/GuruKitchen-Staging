@@ -43,7 +43,7 @@ class EarningDataTable extends DataTable
                 $comRate = $result->commission;
                 $commission = ($comRate / 100) * $result->gross;
                 $taxTotal = ($taxRate / 100) * $commission;
-                return getPrice($commission) . " ($comRate%) / " . getPrice($taxTotal) . " ($taxRate%)";
+                return getPrice($commission) . " / " . "($taxRate%)";
             })
             ->editColumn('earning', function ($result) {
                 $taxRate = setting('default_tax', 0);
