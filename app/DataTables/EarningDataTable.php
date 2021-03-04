@@ -24,9 +24,9 @@ class EarningDataTable extends DataTable
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function dataTable($query)
+    public function dataTable($collection)
     {
-        $dataTable = new EloquentDataTable($query);
+        $dataTable = new EloquentDataTable(collect($collection));
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
             ->editColumn('restaurant.name', function ($earning) {
