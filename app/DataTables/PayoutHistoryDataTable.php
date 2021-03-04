@@ -78,11 +78,6 @@ class PayoutHistoryDataTable extends DataTable
                 'data' => 'amount',
                 'title' => 'Amount Paid',
                 'orderable' => false
-            ],
-            [
-                'data' => 'note',
-                'title' => 'Note',
-                'orderable' => false
             ]
         ];
 
