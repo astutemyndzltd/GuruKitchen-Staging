@@ -31,6 +31,9 @@ class PayoutHistoryDataTable extends DataTable
             ->editColumn('amount', function ($payout) {
                 return getPriceColumn($payout, 'amount');
             })
+            ->editColumn('created_at', function ($payout) {
+                return getDateColumn($payout, 'created_at');
+            })
             ->rawColumns(array_merge($columns));
 
         return $dataTable;
@@ -78,6 +81,10 @@ class PayoutHistoryDataTable extends DataTable
                 'data' => 'amount',
                 'title' => 'Amount Paid',
                 'orderable' => false
+            ],
+            [
+                'data' => 'created_at',
+                'title' => 'Paid On'
             ]
         ];
 
@@ -86,9 +93,7 @@ class PayoutHistoryDataTable extends DataTable
 
     public function query(RestaurantsPayout $model)
     {
-        if(auth()->user()->hasRole('admin')){
-            return $model->newQuery()->with("restaurant")->select('restaurants_payouts.*');
-        }elseif (auth()->user()->hasRole('manager')){
+        if (auth()->user()->hasRole('manager')) {
             return $model->newQuery()->with("restaurant")->join('user_restaurants','user_restaurants.restaurant_id','=','restaurants_payouts.restaurant_id')
                 ->where('user_restaurants.user_id',auth()->id())->select('restaurants_payouts.*');
         }
