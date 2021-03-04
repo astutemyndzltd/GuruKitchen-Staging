@@ -99,11 +99,11 @@ class RestaurantsPayoutController extends Controller
         try 
         {
             $this->restaurantsPayoutRepository->create($input);
-            $model->whereRaw("select distinct o.id from orders o 
+            $model->whereRaw("orders.id in (select distinct o.id from orders o 
                             join food_orders fo on o.id = fo.order_id 
                             join foods f on f.id = fo.food_id
-                            where f.restaurant_id = 11 and 
-                            date(o.created_at) between '$startDate' and '$endDate'")
+                            where f.restaurant_id = $restaurantId and 
+                            date(o.created_at) between '$startDate' and '$endDate')")
                     ->update([ 'paid_out' => 1 ]);
         } 
         catch (ValidatorException $e) 
