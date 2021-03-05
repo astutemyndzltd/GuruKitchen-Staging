@@ -51,8 +51,7 @@ $(ddlRestaurants).on('select2:select', async function (e) {
     let json = await response.json();
 
     let start = moment(json.startdate, 'YYYY-MM-DD');
-    let end = moment(json.enddate, 'YYYY-MM-DD');412543
-    let end = moment(json.enddate, 'YYYY-MM-DD');412
+    let end = moment(json.enddate, 'YYYY-MM-DD');
 
     let options = { 
         startDate: start,
@@ -74,4 +73,3 @@ $(ddlRestaurants).on('select2:select', async function (e) {
 });
 
 $(ddlRestaurants).trigger('select2:select');
-
