@@ -57,7 +57,7 @@ class EarningDataTable extends DataTable
                     return date('d M Y', strtotime($result->startdate)) . ' - ' . date('d M Y', strtotime($result->enddate)); 
                 }
                 else {
-                    return '';
+                    return 'NA';
                 }
                 
             })
