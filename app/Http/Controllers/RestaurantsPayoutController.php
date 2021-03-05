@@ -254,9 +254,10 @@ class RestaurantsPayoutController extends Controller
 
         $data =  $model->newQuery()->join('payments', 'orders.payment_id', '=', 'payments.id')
                             ->whereRaw("date(orders.created_at) between '$startDate' and '$endDate' 
-                                        and orders.active = 1 and orders.id in (select distinct fo.order_id from 
-                                        food_orders fo join foods f on fo.food_id = f.id join restaurants r 
-                                        on r.id = f.restaurant_id and f.restaurant_id = $restaurantId)")
+                                        and orders.active = 1 and orders.paid_out = 0 and orders.id in (select 
+                                        distinct fo.order_id from food_orders fo join foods f on 
+                                        fo.food_id = f.id join restaurants r on r.id = f.restaurant_id 
+                                        and f.restaurant_id = $restaurantId)")
                             ->selectRaw('sum(payments.price) total, count(*) orders')->get();
 
 
