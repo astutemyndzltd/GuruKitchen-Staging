@@ -50,15 +50,15 @@ $(ddlRestaurants).on('select2:select', async function (e) {
     let response = await fetch('/restaurantsPayouts/last-payout-date?' + new URLSearchParams(data));
     let json = await response.json();
 
-    let start = moment();
+    let start = moment(json.date, 'YYYY-MM-DD');
     let end = moment();
 
     let options = { 
         startDate: start,
         endDate: end,
         locale: {  format: 'DD MMM YYYY' }, 
-        minDate: moment(json.date, 'YYYY-MM-DD').add(1, 'days'),
-        maxDate: start 
+        minDate: start,
+        maxDate: end 
     };
 
     if(options.minDate.isAfter(options.maxDate)) return;
