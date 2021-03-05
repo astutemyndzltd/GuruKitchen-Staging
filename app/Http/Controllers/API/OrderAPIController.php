@@ -154,6 +154,9 @@ class OrderAPIController extends Controller
     private function stripePaymentNew(Request $request)
     {
         $input = $request->all();
+
+        file_put_contents('order.txt', json_encode($input));
+        return;
         
         $stripe = Stripe::make(Config::get('services.stripe.secret'));
         $paymentMethodId = isset($input['payment_method_id']) ? $input['payment_method_id'] : null;
