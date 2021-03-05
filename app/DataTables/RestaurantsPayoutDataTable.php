@@ -41,8 +41,7 @@ class RestaurantsPayoutDataTable extends DataTable
                 return getPrice($commission) . " ($comRate%) / " . getPrice($taxTotal) . " ($taxRate%)";
             })
             ->editColumn('amount', function ($payout) {
-                return $payout->amount;
-                //return getPriceColumn($payout, 'amount');
+                return getPriceColumn($payout, 'amount');
             })
             ->editColumn('created_at', function ($payout) {
                 return getDateColumn($payout, 'created_at');

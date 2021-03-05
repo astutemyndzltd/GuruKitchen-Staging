@@ -65,11 +65,11 @@ function getPriceColumn($modelObject, $attributeName = 'price')
 {
 
     if ($modelObject[$attributeName] != null && strlen($modelObject[$attributeName]) > 0) {
-        $modelObject[$attributeName] = number_format((float)$modelObject[$attributeName], 2, '.', ',');
+        $price = number_format((float)$modelObject[$attributeName], 2, '.', ',');
         if (setting('currency_right', false) != false) {
-            return $modelObject[$attributeName] . "<span>" . setting('default_currency') . "</span>";
+            return $price . "<span>" . setting('default_currency') . "</span>";
         } else {
-            return "<span>" . setting('default_currency') . "</span>" . $modelObject[$attributeName];
+            return "<span>" . setting('default_currency') . "</span>" . $price;
         }
     }
     return '-';
