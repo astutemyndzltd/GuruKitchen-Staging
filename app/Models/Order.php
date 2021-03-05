@@ -47,10 +47,7 @@ class Order extends Model
         'order_type',
         'note',
         'preorder_info',
-        'paid_out',
-        'restaurant_id',
-        'admin_commission',
-        'vat'
+        'paid_out'
     ];
 
     /**
@@ -72,10 +69,7 @@ class Order extends Model
         'order_type' => 'string',
         'note' => 'string',
         'preorder_info' => 'string',
-        'paid_out' => 'boolean',
-        'restaurant_id' => 'integer',
-        'admin_commission' => 'double',
-        'vat' => 'double'
+        'paid_out' => 'boolean'
     ];
 
     /**

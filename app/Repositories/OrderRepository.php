@@ -31,10 +31,7 @@ class OrderRepository extends BaseRepository
         'order_type',
         'note',
         'preorder_info',
-        'paid_out',
-        'restaurant_id',
-        'admin_commission',
-        'vat'
+        'paid_out'
     ];
 
     /**
