@@ -20,6 +20,7 @@ use App\Notifications\NewOrder;
 use App\Notifications\StatusChangedOrder;
 use App\Repositories\CartRepository;
 use App\Repositories\FoodOrderRepository;
+use App\Repositories\FoodRepository;
 use App\Repositories\NotificationRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\PaymentRepository;
