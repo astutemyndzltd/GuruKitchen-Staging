@@ -64,6 +64,8 @@ $(ddlRestaurants).on('select2:select', async function (e) {
     if(options.minDate.isAfter(options.maxDate)) return;
 
     $(txtPayoutPeriod).daterangepicker(options, onDateRangeChange);
+
+    $(txtPayoutPeriod).on('click.daterangepicker', function() { console.log('welcome to the jungle'); });
     
     onDateRangeChange(start, end);
 
