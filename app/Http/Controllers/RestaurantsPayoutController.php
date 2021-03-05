@@ -43,6 +43,7 @@ class RestaurantsPayoutController extends Controller
     public function __construct(RestaurantsPayoutRepository $restaurantsPayoutRepo, CustomFieldRepository $customFieldRepo, RestaurantRepository $restaurantRepo, EarningRepository $earningRepository)
     {
         parent::__construct();
+        date_default_timezone_set('Europe/London');
         $this->restaurantsPayoutRepository = $restaurantsPayoutRepo;
         $this->customFieldRepository = $customFieldRepo;
         $this->restaurantRepository = $restaurantRepo;
