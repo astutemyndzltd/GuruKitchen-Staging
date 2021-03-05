@@ -62,7 +62,7 @@ $(ddlRestaurants).on('select2:select', async function (e) {
         pickStartDate : false 
     };
 
-    if(options.minDate.isAfter(options.maxDate)) return;
+    if (options.minDate.isAfter(options.maxDate)) return;
 
     $(txtPayoutPeriod).daterangepicker(options, onDateRangeChange);
 
