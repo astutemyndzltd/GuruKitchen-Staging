@@ -32,6 +32,7 @@
     var DateRangePicker = function(element, options, cb) {
 
         //default settings for options
+        this.pickStartDate = true;
         this.parentEl = 'body';
         this.element = $(element);
         this.startDate = moment().startOf('day');
@@ -185,6 +186,9 @@
 
         if (typeof options.maxDate === 'object')
             this.maxDate = moment(options.maxDate);
+
+        if (typeof options.pickStartDate === 'boolean')
+            this.pickStartDate = options.pickStartDate;    
 
         // sanity check for bad options
         if (this.minDate && this.startDate.isBefore(this.minDate))
@@ -1305,7 +1309,7 @@
             // * if one of the inputs above the calendars was focused, cancel that manual input
             //
 
-            if (false && this.endDate || date.isBefore(this.startDate, 'day')) { //picking start
+            if (this.pickStartDate && this.endDate || date.isBefore(this.startDate, 'day')) { //picking start
                 if (this.timePicker) {
                     var hour = parseInt(this.container.find('.left .hourselect').val(), 10);
                     if (!this.timePicker24Hour) {

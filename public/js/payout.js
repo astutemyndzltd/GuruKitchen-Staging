@@ -58,7 +58,8 @@ $(ddlRestaurants).on('select2:select', async function (e) {
         endDate: end,
         locale: {  format: 'DD MMM YYYY' }, 
         minDate: start,
-        maxDate: end 
+        maxDate: end,
+        pickStartDate : false 
     };
 
     if(options.minDate.isAfter(options.maxDate)) return;
