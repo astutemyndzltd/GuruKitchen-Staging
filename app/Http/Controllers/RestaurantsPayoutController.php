@@ -283,10 +283,10 @@ class RestaurantsPayoutController extends Controller
         $statement = "select date(created_at) order_date from orders o join 
         (select fo.order_id, f.restaurant_id from food_orders fo join foods f 
         on fo.food_id = f.id group by fo.order_id) fr on o.id = fr.order_id 
-        where paid_out = 0 and active = 1 and restaurant_id = $restaurantId limit 1";
+        where paid_out = 0 and restaurant_id = $restaurantId limit 1";
 
         $result = DB::select(DB::raw($statement));
-        return response()->json(['date' => date('Y-m-d', strtotime($result[0]->order_date))]);
+        return response()->json(['date' => isset($result[0]->order_date) ? date('Y-m-d', strtotime($result[0]->order_date)) : '' ]);
     }
 
 }
