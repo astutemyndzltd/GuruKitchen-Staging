@@ -286,7 +286,7 @@ class RestaurantsPayoutController extends Controller
         where paid_out = 0 and restaurant_id = $restaurantId limit 1";
 
         $result = DB::select(DB::raw($statement));
-        return response()->json(['date' => isset($result[0]->order_date) ? date('Y-m-d', strtotime($result[0]->order_date)) : '' ]);
+        return response()->json(['date' => isset($result[0]->order_date) ? date('Y-m-d', strtotime($result[0]->order_date)) : date('Y-m-d', time()) ]);
     }
 
 }
