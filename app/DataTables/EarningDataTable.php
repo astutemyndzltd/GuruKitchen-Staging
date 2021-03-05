@@ -53,7 +53,13 @@ class EarningDataTable extends DataTable
                 return getPrice($net);
             })
             ->editColumn('period', function ($result) {
-                return date('d M Y', strtotime($result->startdate)) . ' - ' . date('d M Y', strtotime($result->enddate)); 
+                if (isset($result->startdate) && isset($result->enddate)) {
+                    return date('d M Y', strtotime($result->startdate)) . ' - ' . date('d M Y', strtotime($result->enddate)); 
+                }
+                else {
+                    return '';
+                }
+                
             })
             ->rawColumns($columns);
 
