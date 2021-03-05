@@ -50,8 +50,8 @@ $(ddlRestaurants).on('select2:select', async function (e) {
     let response = await fetch('/restaurantsPayouts/last-payout-date?' + new URLSearchParams(data));
     let json = await response.json();
 
-    let start = moment(json.date, 'YYYY-MM-DD');
-    let end = moment();
+    let start = moment(json.startdate, 'YYYY-MM-DD');
+    let end = moment(json.enddate, 'YYYY-MM-DD');
 
     let options = { 
         startDate: start,
