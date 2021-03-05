@@ -264,11 +264,11 @@ class RestaurantsPayoutController extends Controller
         $net = $totalOrderValue - (($totalOrderValue * $adminCommission * ($tax + 100)) / 10000);
 
         $responseData = [
-            'amount' => number_format((float)$net, 2, '.', ' '),
+            'amount' => number_format((float)$net, 2, '.', ','),
             'orders' => $orders,
-            'gross_revenue' => number_format((float)$totalOrderValue, 2, '.', ' '),
-            'admin_commission' => number_format((float)$adminCommission, 2, '.', ' '),
-            'tax' => number_format((float)$tax, 2, '.', ' ')
+            'gross_revenue' => number_format((float)$totalOrderValue, 2, '.', ','),
+            'admin_commission' => number_format((float)$adminCommission, 2, '.', ','),
+            'tax' => number_format((float)$tax, 2, '.', ',')
         ];
 
         return response()->json($responseData);
