@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Illuminate\Support\Facades\DB;
 
 class RestaurantsPayoutController extends Controller
 {
@@ -278,8 +279,14 @@ class RestaurantsPayoutController extends Controller
     public function getLastPayoutDate(Request $request) 
     {
         $restaurantId = $request->input('restaurantId');
-        $date = $this->restaurantsPayoutRepository->where('restaurant_id', $restaurantId)->orderBy('id', 'DESC')->pluck('to_date')->first();
-        return response()->json(['date' => date('Y-m-d', strtotime($date))]);
+
+        $statement = "select date(created_at) order_date from orders o join 
+        (select fo.order_id, f.restaurant_id from food_orders fo join foods f 
+        on fo.food_id = f.id group by fo.order_id) fr on o.id = fr.order_id 
+        where paid_out = 0 and restaurant_id = $restaurantId limit 1";
+
+        $result = DB::select(DB::raw($statement));
+        return response()->json(['date' => date('Y-m-d', strtotime($result[0]['order_date']))]);
     }
 
 }
