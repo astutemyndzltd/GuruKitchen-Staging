@@ -54,6 +54,8 @@ class OrderAPIController extends Controller
     /** @var  NotificationRepository */
     private $notificationRepository;
 
+    private $foodRepository;
+
     /**
      * OrderAPIController constructor.
      * @param OrderRepository $orderRepo
@@ -63,7 +65,7 @@ class OrderAPIController extends Controller
      * @param NotificationRepository $notificationRepo
      * @param UserRepository $userRepository
      */
-    public function __construct(OrderRepository $orderRepo, FoodOrderRepository $foodOrderRepository, CartRepository $cartRepo, PaymentRepository $paymentRepo, NotificationRepository $notificationRepo, UserRepository $userRepository)
+    public function __construct(FoodRepository $foodRepository, OrderRepository $orderRepo, FoodOrderRepository $foodOrderRepository, CartRepository $cartRepo, PaymentRepository $paymentRepo, NotificationRepository $notificationRepo, UserRepository $userRepository)
     {
         $this->orderRepository = $orderRepo;
         $this->foodOrderRepository = $foodOrderRepository;
@@ -71,6 +73,7 @@ class OrderAPIController extends Controller
         $this->userRepository = $userRepository;
         $this->paymentRepository = $paymentRepo;
         $this->notificationRepository = $notificationRepo;
+        $this->foodRepository = $foodRepository;
     }
 
     /**
@@ -155,9 +158,6 @@ class OrderAPIController extends Controller
     {
         $input = $request->all();
 
-        file_put_contents('order.txt', json_encode($input));
-        return;
-        
         $stripe = Stripe::make(Config::get('services.stripe.secret'));
         $paymentMethodId = isset($input['payment_method_id']) ? $input['payment_method_id'] : null;
         $paymentIntentId = isset($input['payment_intent_id']) ? $input['payment_intent_id'] : null;
@@ -188,13 +188,21 @@ class OrderAPIController extends Controller
 
                 $order = null;
 
+                //adding new fields
+                $firstFoodId = $input['foods'][0]['food_id'];
+                $food = $this->foodRepository->find($firstFoodId);
+                $restaurant = $food->restaurant;
+                $tax = setting('default_tax', 0);
+
+                $request->merge(['restaurant_id' => $restaurant->id, 'admin_commission' => $restaurant->admin_commission, 'vat' => $tax ]);
+
                 if (empty($input['delivery_address_id'])) {
                     $order = $this->orderRepository->create(
-                        $request->only('user_id', 'order_status_id', 'tax', 'hint', 'order_type', 'note', 'preorder_info')
+                        $request->only('user_id', 'order_status_id', 'tax', 'hint', 'order_type', 'note', 'preorder_info', 'restaurant_id', 'admin_commission', 'vat')
                     );
                 } else {
                     $order = $this->orderRepository->create(
-                        $request->only('user_id', 'order_status_id', 'tax', 'delivery_address_id', 'delivery_fee', 'hint', 'order_type', 'note', 'preorder_info')
+                        $request->only('user_id', 'order_status_id', 'tax', 'delivery_address_id', 'delivery_fee', 'hint', 'order_type', 'note', 'preorder_info', 'restaurant_id', 'admin_commission', 'vat')
                     );
                 }
 
