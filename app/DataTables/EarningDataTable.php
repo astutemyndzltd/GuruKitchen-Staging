@@ -52,6 +52,9 @@ class EarningDataTable extends DataTable
                 $net = $gross - (($gross * $comRate * ($taxRate + 100)) / 10000);
                 return getPrice($net);
             })
+            ->editColumn('period', function ($result) {
+                return date('d M Y', strtotime($result->startdate)) . ' - ' . date('d M Y', strtotime($result->enddate)); 
+            })
             ->rawColumns($columns);
 
         return $dataTable;
@@ -97,6 +100,12 @@ class EarningDataTable extends DataTable
                 'title' => 'Earning',
                 'orderable' => false,
                 'searchable' => false
+            ],
+            [
+                'data' => 'period',
+                'title' => 'Period',
+                'orderable' => false,
+                'searchable' => false
             ]
         ];
 
@@ -113,8 +122,10 @@ class EarningDataTable extends DataTable
     {
         if (auth()->user()->hasRole('admin')) 
         {
-            $statement = "select coalesce(d2.total, 0) total, coalesce(d2.gross, 0) gross, r.id rest_id, r.name rest_name, r.admin_commission commission 
-            from (select count(*) total, sum(price) gross, res_id from (select o.id id, p.price, ro.res_id from orders o
+            $statement = "select coalesce(d2.total, 0) total, coalesce(d2.gross, 0) gross, r.id rest_id, 
+            r.name rest_name, r.admin_commission commission, date(d2.mindate) startdate, date(d2.maxdate) enddate
+            from (select count(*) total, sum(price) gross, res_id, min(created_at) mindate, max(created_at) maxdate 
+            from (select o.id id, p.price, ro.res_id, o.created_at from orders o
             join payments p on o.payment_id = p. id and o.paid_out = 0 and o.active = 1
             join (select fo.order_id, f.restaurant_id res_id from food_orders fo join foods f on fo.food_id = f.id group by fo.order_id) ro
             on o.id = ro.order_id) d group by res_id) d2 right join restaurants r on r.id = d2.res_id";
