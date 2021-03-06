@@ -124,8 +124,8 @@
 
 @if(auth()->user()->hasRole('admin') && isset($order->payment->transaction_id))
 <!-- Transaction ID -->
-<div class="form-group row col-md-6 col-sm-12">
-  {!! Form::label('transaction_id', 'Transaction ID', ['class' => 'col-4 control-label']) !!}
+<div class="form-group row col-md-8 col-sm-12">
+  {!! Form::label('transaction_id', 'Transaction ID', ['class' => 'col-3 control-label']) !!}
   <div class="col-8">
     <p>{!! $order->payment->transaction_id !!}</p>
   </div>
