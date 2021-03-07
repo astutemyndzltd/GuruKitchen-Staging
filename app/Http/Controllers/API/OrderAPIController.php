@@ -20,6 +20,7 @@ use App\Notifications\NewOrder;
 use App\Notifications\StatusChangedOrder;
 use App\Repositories\CartRepository;
 use App\Repositories\FoodOrderRepository;
+use App\Repositories\FoodRepository;
 use App\Repositories\NotificationRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\PaymentRepository;
@@ -53,6 +54,7 @@ class OrderAPIController extends Controller
     private $paymentRepository;
     /** @var  NotificationRepository */
     private $notificationRepository;
+    private $foodRepository;
 
     /**
      * OrderAPIController constructor.
@@ -63,7 +65,7 @@ class OrderAPIController extends Controller
      * @param NotificationRepository $notificationRepo
      * @param UserRepository $userRepository
      */
-    public function __construct(OrderRepository $orderRepo, FoodOrderRepository $foodOrderRepository, CartRepository $cartRepo, PaymentRepository $paymentRepo, NotificationRepository $notificationRepo, UserRepository $userRepository)
+    public function __construct(FoodRepository $foodRepository, OrderRepository $orderRepo, FoodOrderRepository $foodOrderRepository, CartRepository $cartRepo, PaymentRepository $paymentRepo, NotificationRepository $notificationRepo, UserRepository $userRepository)
     {
         date_default_timezone_set('Europe/London');
         $this->orderRepository = $orderRepo;
@@ -72,6 +74,7 @@ class OrderAPIController extends Controller
         $this->userRepository = $userRepository;
         $this->paymentRepository = $paymentRepo;
         $this->notificationRepository = $notificationRepo;
+        $this->foodRepository = $foodRepository;
     }
 
     /**
