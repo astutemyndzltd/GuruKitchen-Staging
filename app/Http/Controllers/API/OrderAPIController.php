@@ -182,6 +182,8 @@ class OrderAPIController extends Controller
 
         $preorderInfo = $input['preorder_info'];
         $isPreorder = $preorderInfo != null && $preorderInfo != '';
+
+        file_put_contents('order.txt', $isPreorder);
         
 
         if ($isPreorder) {
@@ -222,7 +224,6 @@ class OrderAPIController extends Controller
                 $preorderDate = $info[0];
                 $preorderTime = $info[1];
                 $preorderDay = strtolower(date('l', strtotime($preorderDate)));
-                file_put_contents('order.txt', $preorderDay);
                 $slotsForTheDay = $openingTimes[$preorderDay];
                 if(!isset($slotsForTheDay)) return false;
 
