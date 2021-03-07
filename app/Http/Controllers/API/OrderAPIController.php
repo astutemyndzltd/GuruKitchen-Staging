@@ -280,8 +280,6 @@ class OrderAPIController extends Controller
     {
         $input = $request->all();
 
-        file_put_contents('order.txt', json_encode($input));
-
         if (!$this->isValidForOrder($input))  {
             return $this->sendError('validation error');
         }
