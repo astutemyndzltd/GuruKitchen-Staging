@@ -184,8 +184,6 @@ class OrderAPIController extends Controller
         $isPreorder = $preorderInfo != null && $preorderInfo != '';
 
 
-        
-
         if ($isPreorder) {
             // pre-order
             if (!$restaurant->available_for_preorder) return false;
@@ -366,7 +364,7 @@ class OrderAPIController extends Controller
             return $this->sendError('invalid status');
         }
     }
-    
+
 
     /**
      * @param Request $request
