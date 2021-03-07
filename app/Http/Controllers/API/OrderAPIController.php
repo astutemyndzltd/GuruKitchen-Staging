@@ -139,8 +139,6 @@ class OrderAPIController extends Controller
     {
         $requestData = $request->all();
 
-        file_put_contents('order.txt', json_encode($requestData));
-
         if ($requestData['note'] == null) {
             $request->merge(['note' => '']);
         }
@@ -224,6 +222,7 @@ class OrderAPIController extends Controller
                 $preorderDate = $info[0];
                 $preorderTime = $info[1];
                 $preorderDay = strtolower(date('l', strtotime($preorderDate)));
+                file_put_contents('order.txt', $preorderDay);
                 $slotsForTheDay = $openingTimes[$preorderDay];
                 if(!isset($slotsForTheDay)) return false;
 
