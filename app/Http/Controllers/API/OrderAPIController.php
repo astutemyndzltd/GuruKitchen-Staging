@@ -20,7 +20,6 @@ use App\Notifications\NewOrder;
 use App\Notifications\StatusChangedOrder;
 use App\Repositories\CartRepository;
 use App\Repositories\FoodOrderRepository;
-use App\Repositories\FoodRepository;
 use App\Repositories\NotificationRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\PaymentRepository;
@@ -54,7 +53,6 @@ class OrderAPIController extends Controller
     private $paymentRepository;
     /** @var  NotificationRepository */
     private $notificationRepository;
-    private $foodRepository;
 
     /**
      * OrderAPIController constructor.
@@ -65,16 +63,14 @@ class OrderAPIController extends Controller
      * @param NotificationRepository $notificationRepo
      * @param UserRepository $userRepository
      */
-    public function __construct(FoodRepository $foodRepository, OrderRepository $orderRepo, FoodOrderRepository $foodOrderRepository, CartRepository $cartRepo, PaymentRepository $paymentRepo, NotificationRepository $notificationRepo, UserRepository $userRepository)
+    public function __construct(OrderRepository $orderRepo, FoodOrderRepository $foodOrderRepository, CartRepository $cartRepo, PaymentRepository $paymentRepo, NotificationRepository $notificationRepo, UserRepository $userRepository)
     {
-        date_default_timezone_set('Europe/London');
         $this->orderRepository = $orderRepo;
         $this->foodOrderRepository = $foodOrderRepository;
         $this->cartRepository = $cartRepo;
         $this->userRepository = $userRepository;
         $this->paymentRepository = $paymentRepo;
         $this->notificationRepository = $notificationRepo;
-        $this->foodRepository = $foodRepository;
     }
 
     /**
@@ -154,136 +150,10 @@ class OrderAPIController extends Controller
         }
     }
 
-    private function isValidForOrder($input) 
-    {
-        $foodOrders = $input['foods'];
-        $foodIds = array_map(function($fo) { return $fo['food_id']; }, $foodOrders);
-        $foods = $this->foodRepository->findMany($foodIds);
-        $restaurant = $foods[0]->restaurant;
-
-        // stock validation 
-
-        foreach($foods as $food) {
-            if ($food->out_of_stock) {
-                return false;
-            }
-        }
-
-        // restaurant validation
-
-        $orderType = $input['order_type'];
- 
-        if($orderType == 'Delivery') {
-            if(!$restaurant->available_for_delivery) {
-                return false;
-            }
-        }
-
-
-        $preorderInfo = $input['preorder_info'];
-        $isPreorder = $preorderInfo != null && $preorderInfo != '';
-
-
-        
-
-        if ($isPreorder) {
-            // pre-order
-            if (!$restaurant->available_for_preorder) return false;
-            $forToday = !(strpos($preorderInfo, ',') !== false);
-            $openingTimes = $restaurant->opening_times;
-            if (!isset($openingTimes)) return false;
-            
-            if ($forToday) {
-
-                if ($restaurant->closed) return false;
-                $today = strtolower(date('l'));
-                $slotsForToday = $openingTimes[$today];
-                if (!isset($slotsForToday)) return false;
-
-                $time = strtotime($preorderInfo);
-                $fallsInAny = false;
-
-
-                foreach ($slotsForToday as $slot) {
-                    $opensAt = strtotime($slot['opens_at']);
-                    $closesAt = strtotime($slot['closes_at']);
-
-                    if ($time >= $opensAt && $time <= $closesAt) {
-                        $fallsInAny = true;
-                        break;
-                    }
-                }
-
-                if (!$fallsInAny) return false;
-
-            }
-            else {
-
-                $info = explode(", ", $preorderInfo);
-                $preorderDate = $info[0];
-                $preorderTime = $info[1];
-                $preorderDay = strtolower(date('l', strtotime($preorderDate)));
-                $slotsForTheDay = $openingTimes[$preorderDay];
-                if(!isset($slotsForTheDay)) return false;
-
-                $time = strtotime($preorderTime);
-                $fallsInAny = false;
-                
-                foreach ($slotsForTheDay as $slot) {
-                    $opensAt = strtotime($slot['opens_at']);
-                    $closesAt = strtotime($slot['closes_at']);
-    
-                    if ($time >= $opensAt && $time <= $closesAt) {
-                        $fallsInAny = true;
-                        break;
-                    }
-                }
-    
-                if (!$fallsInAny) return false;
-
-            }
-            
-        }
-        else {
-            // instant order
-            if ($restaurant->closed) return false;
-            $openingTimes = $restaurant->opening_times;
-            if (!isset($openingTimes)) return false;
-            $today = strtolower(date('l'));
-            $slotsForToday = $openingTimes[$today];
-            if(!isset($slotsForToday)) return false;
-
-            $time = strtotime(date('h:i A'));
-            $fallsInAny = false;
-
-
-            foreach ($slotsForToday as $slot) {
-                $opensAt = strtotime($slot['opens_at']);
-                $closesAt = strtotime($slot['closes_at']);
-
-                if ($time >= $opensAt && $time <= $closesAt) {
-                    $fallsInAny = true;
-                    break;
-                }
-            }
-
-            if (!$fallsInAny) return false;
-
-        }
-
-        return true;
-
-    }
-
-
 
     private function stripePaymentNew(Request $request)
     {
         $input = $request->all();
-
-        if (!$this->isValidForOrder($input))  {
-            return $this->sendError('validation error');
-        }
         
         $stripe = Stripe::make(Config::get('services.stripe.secret'));
         $paymentMethodId = isset($input['payment_method_id']) ? $input['payment_method_id'] : null;
