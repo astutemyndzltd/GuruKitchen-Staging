@@ -26,6 +26,9 @@ class EarningDataTable extends DataTable
      */
     public function dataTable($collection)
     {
+        $commission = 0;
+        $taxTotal = 0;
+        
         $dataTable = new CollectionDataTable(collect($collection));
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
@@ -38,18 +41,16 @@ class EarningDataTable extends DataTable
             ->editColumn('gross', function ($result) {
                 return getPrice($result->gross);
             })
-            ->editColumn('commission_tax', function ($result) {
+            ->editColumn('commission_tax', function ($result) use(&$commission, &$taxTotal) {
                 $taxRate = setting('default_tax', 0);
                 $comRate = $result->commission;
-                $commission = ($comRate / 100) * $result->gross;
-                $taxTotal = ($taxRate / 100) * $commission;
-                return getPrice($commission) . " / " . getPrice($taxTotal) ;
+                $commission = round(($comRate / 100) * $result->gross, 2);
+                $taxTotal = round(($taxRate / 100) * $commission, 2);
+                return getPrice($commission) . " / " . getPrice($taxTotal);
             })
-            ->editColumn('earning', function ($result) {
-                $taxRate = setting('default_tax', 0);
-                $comRate = $result->commission;
+            ->editColumn('earning', function ($result) use($commission, $taxTotal) {
                 $gross = $result->gross;
-                $net = $gross - (($gross * $comRate * ($taxRate + 100)) / 10000);
+                $net = $gross - ($commission + $taxTotal);
                 return getPrice($net);
             })
             ->editColumn('period', function ($result) {
@@ -58,8 +59,7 @@ class EarningDataTable extends DataTable
                 }
                 else {
                     return 'NA';
-                }
-                
+                }       
             })
             ->rawColumns($columns);
 
