@@ -264,8 +264,10 @@ class RestaurantsPayoutController extends Controller
 
         $totalOrderValue = $data[0]['total'];
         $orders = $data[0]['orders'];
-        $net = $totalOrderValue - (($totalOrderValue * $adminCommission * ($tax + 100)) / 10000);
-
+        $commission = $totalOrderValue * ($commission / 100);
+        $taxAmount = $commission * ($tax / 100);
+        $net = $totalOrderValue - round($commission + $taxAmount, 2);
+        
         $responseData = [
             'amount' => number_format((float)$net, 2, '.', ''),
             'orders' => $orders,
