@@ -36,7 +36,7 @@ class PayoutHistoryDataTable extends DataTable
             })
             ->addColumn('action', function($payout) {
                 $id = $payout->id; 
-                return "<a href='$id'></a>";
+                return "<a href='/invoice/$id'></a>";
             })
             ->rawColumns(array_merge($columns, ['action']));
 
