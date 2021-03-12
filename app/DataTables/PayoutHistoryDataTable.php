@@ -36,8 +36,8 @@ class PayoutHistoryDataTable extends DataTable
             })
             ->addColumn('action', function($payout) {
                 $id = $payout->id;
-                 
-                return "<a href='/payout-history/invoice/$id' style='margin-left: 15px;'>
+
+                return "<a href='/payout-history/invoice/$id' style='margin-left: 15px;' download='invoice.pdf'>
                             <i class='fa fa-download' aria-hidden='true'></i>
                         </a>";
             })
