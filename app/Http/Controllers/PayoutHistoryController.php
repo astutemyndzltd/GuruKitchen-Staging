@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\PayoutHistoryDataTable;
 use Illuminate\Http\Request;
 use App\DataTables\SalesDataTable;
+use Barryvdh\DomPDF\Facade as PDF;
 
 
 class PayoutHistoryController extends Controller

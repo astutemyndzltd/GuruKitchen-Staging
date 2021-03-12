@@ -37,6 +37,8 @@ Route::get('/sw-js', 'AppSettingController@initFirebase');
 
 Route::get('/payout-history', 'PayoutHistoryController@index');
 
+Route::get('/payout-history/invoice/{id}', 'PayoutHistoryController@getInvoice');
+
 
 Route::get('storage/app/public/{id}/{conversion}/{filename?}', 'UploadController@storage');
 
