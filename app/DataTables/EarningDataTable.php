@@ -61,7 +61,8 @@ class EarningDataTable extends DataTable
                     return 'NA';
                 }       
             })
-            ->rawColumns($columns);
+            ->addColumn('action', 'earnings.datatables_actions')
+            ->rawColumns(array_merge($columns, ['action']));
 
         return $dataTable;
     }
