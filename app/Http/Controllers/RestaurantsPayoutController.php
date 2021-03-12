@@ -296,9 +296,6 @@ class RestaurantsPayoutController extends Controller
         ]);
     }
 
-    public function getInvoice($id) 
-    {
-        
-    }
+    
 
 }

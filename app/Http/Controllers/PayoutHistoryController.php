@@ -20,4 +20,9 @@ class PayoutHistoryController extends Controller
         return $dataTable->render('payout_history.index');
     }
 
+    public function getInvoice($id) 
+    {
+        
+    }
+
 }
