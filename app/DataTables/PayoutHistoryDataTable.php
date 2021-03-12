@@ -35,7 +35,7 @@ class PayoutHistoryDataTable extends DataTable
                 return getDateColumn($payout, 'created_at');
             })
             ->addColumn('action', function($payout) { 
-                return "<button>Hello</button>";
+                return "<a href="/$payout->id"></a>";
             })
             ->rawColumns(array_merge($columns, ['action']));
 
