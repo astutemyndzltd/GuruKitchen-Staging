@@ -151,11 +151,6 @@
         text-align: right  !important;
       }
       
-      
-      
-      table .qty {
-      }
-      
       table .total {
         background: #0087C3;
         color: #FFFFFF;
