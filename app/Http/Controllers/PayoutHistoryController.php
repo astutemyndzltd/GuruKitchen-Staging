@@ -23,7 +23,8 @@ class PayoutHistoryController extends Controller
 
     public function getInvoice($id) 
     {
-        
+        $pdf = PDF::loadView('payout_history.invoice', null);
+        return $pdf->download('invoice.pdf');
     }
 
 }
