@@ -220,7 +220,7 @@
   <body>
     <header class="clearfix">
       <div id="logo">
-        <img src="/storage/app/public/logos/logo2.png">
+        <img src="{{ url('/storage/app/public/logos/logo2.png') }}">
       </div>
       <div id="company">
         <h2 class="name">Guru Kitchen Ltd</h2>
