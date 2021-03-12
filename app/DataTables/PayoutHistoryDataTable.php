@@ -34,7 +34,9 @@ class PayoutHistoryDataTable extends DataTable
             ->editColumn('created_at', function ($payout) {
                 return getDateColumn($payout, 'created_at');
             })
-            ->addColumn('action', 'payout_history.datatables_action')
+            ->addColumn('action', function($payout) { 
+                return "<button>Hello</button>";
+            })
             ->rawColumns(array_merge($columns, ['action']));
 
         return $dataTable;
