@@ -23,7 +23,7 @@ class PayoutHistoryController extends Controller
 
     public function getInvoice($id) 
     {
-        PDF::setOptions(['dpi' => 150, 'isHtml5ParserEnabled' => true ]);
+        PDF::setOptions([]);
         $pdf = PDF::loadView('payout_history.invoice', []);
         return $pdf->download('invoice.pdf');
     }
