@@ -8,10 +8,10 @@
   <title>Invoice</title>
 
   <style>
-    @font-face {
+    /*@font-face {
       font-family: SourceSansPro;
       src: url(SourceSansPro-Regular.ttf);
-    }
+    }*/
 
     .clearfix:after {
       content: "";
@@ -28,7 +28,6 @@
       position: relative;
       width: 21cm;
       height: 29.7cm;
-      margin: 0 auto;
       color: #555555;
       background: #FFFFFF;
       font-family: Arial, sans-serif;
@@ -250,7 +249,7 @@
       </div>
     </div>
     <h2 class="heading">GuruKitchen Commission</h2>
-    
+
     <table cellspacing="0" cellpadding="0">
       <thead>
         <tr>
