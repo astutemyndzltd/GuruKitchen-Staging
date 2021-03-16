@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Invoice</title>
     <style>
-      
+
       @font-face {
         font-family: SourceSansPro;
         src: url(SourceSansPro-Regular.ttf);
@@ -157,11 +157,6 @@
 
       table .total {
         text-align: right  !important;
-      }
-
-
-
-      table .qty {
       }
 
       table .total {
