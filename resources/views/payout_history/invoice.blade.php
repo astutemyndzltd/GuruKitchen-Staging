@@ -63,7 +63,7 @@
       #details {
         margin-bottom: 50px;
         width: 100%;
-        display: table;
+        display: inline-block;
       }
 
       #client {
