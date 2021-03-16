@@ -8,7 +8,7 @@
   <title>Invoice</title>
 
   <style>
-    
+
     @font-face {
       font-family: SourceSansPro;
       src: url(SourceSansPro-Regular.ttf);
@@ -27,8 +27,6 @@
 
     body {
       position: relative;
-      width: 21cm;
-      height: 29.7cm;
       color: #555555;
       background: #FFFFFF;
       font-family: Arial, sans-serif;
