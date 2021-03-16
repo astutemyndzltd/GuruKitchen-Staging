@@ -8,10 +8,11 @@
   <title>Invoice</title>
 
   <style>
-    /*@font-face {
+    
+    @font-face {
       font-family: SourceSansPro;
       src: url(SourceSansPro-Regular.ttf);
-    }*/
+    }
 
     .clearfix:after {
       content: "";
