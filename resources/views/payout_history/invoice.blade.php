@@ -63,8 +63,7 @@
       #details {
         margin-bottom: 50px;
         width: 100%;
-        overflow: auto;
-        min-height: 10px;
+        display: table;
       }
 
       #client {
