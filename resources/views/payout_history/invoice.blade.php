@@ -62,8 +62,8 @@
 
       #details {
         margin-bottom: 50px;
-        display: table;
         width: 100%;
+        overflow: auto;
       }
 
       #client {
