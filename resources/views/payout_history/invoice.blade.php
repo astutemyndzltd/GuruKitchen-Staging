@@ -70,7 +70,6 @@
         padding-left: 6px;
         border-left: 6px solid #0087C3;
         float: left;
-        display: table-row;
       }
 
       #client .to {
@@ -101,7 +100,6 @@
       #invoice {
         float: right;
         text-align: right;
-        display: table-row;
       }
 
       #invoice h1 {
