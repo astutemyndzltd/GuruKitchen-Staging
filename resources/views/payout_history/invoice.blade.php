@@ -64,6 +64,7 @@
         margin-bottom: 50px;
         width: 100%;
         overflow: auto;
+        height: 100px;
       }
 
       #client {
