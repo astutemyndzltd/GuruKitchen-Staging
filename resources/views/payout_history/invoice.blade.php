@@ -30,7 +30,7 @@
       color: #555555;
       background: #FFFFFF;
       font-size: 10px;
-      font-family: Helvetica;
+      font-family: 'SourceSansPro';
     }
 
     div#header {
