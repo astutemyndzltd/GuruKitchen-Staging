@@ -25,7 +25,7 @@ class PayoutHistoryController extends Controller
     {
         $pdf = PDF::loadView('payout_history.invoice', []);
         $pdf->setPaper('A4', 'portrait');
-        return $pdf->download('invoice.pdf');
+        return $pdf->stream();
     }
 
 }
