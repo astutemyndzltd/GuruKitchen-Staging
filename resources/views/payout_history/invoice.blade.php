@@ -29,7 +29,7 @@
       position: relative;
       color: #555555;
       background: #FFFFFF;
-      font-size: 14px;
+      font-size: 10px;
       font-family: Helvetica;
     }
 
