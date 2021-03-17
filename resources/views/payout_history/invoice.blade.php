@@ -9,7 +9,7 @@
 
     @font-face {
       font-family: SourceSansPro;
-      src: url({{ url('/storage/fonts/SourceSansPro-Regular.ttf') }})
+      src: url('https://gurukitchen.foodonlinedelivery.co.uk/fonts/SourceSansPro-Regular.ttf')
     }
 
     .clearfix:after {
