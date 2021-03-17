@@ -9,7 +9,7 @@
 
     @font-face {
       font-family: SourceSansPro;
-      src: url('/storage/fonts/SourceSansPro-Regular.ttf') format('truetype');
+      src: url({{ url('/storage/fonts/SourceSansPro-Regular.ttf') }})
     }
 
     .clearfix:after {
