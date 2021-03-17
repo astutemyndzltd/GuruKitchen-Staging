@@ -9,7 +9,7 @@
 
     @font-face {
       font-family: SourceSansPro;
-      src: url(/fonts/SourceSansPro-Regular.ttf);
+      src: url('storage/fonts/SourceSansPro-Regular.ttf') format('truetype');
     }
 
     .clearfix:after {
