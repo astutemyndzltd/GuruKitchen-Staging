@@ -1,9 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<!-- <!DOCTYPE html> -->
 <html lang="en">
 
 <head>
-  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
   <meta charset="utf-8">
   <title>Invoice</title>
 
@@ -220,6 +218,7 @@
       text-align: center;
     }
   </style>
+
 </head>
 
 <body>
