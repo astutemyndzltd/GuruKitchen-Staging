@@ -23,7 +23,7 @@ class PayoutHistoryController extends Controller
 
     public function getInvoice($id) 
     {
-        PDF::setOptions(['defaultFont' => 'sans-serif']);
+        PDF::setOptions(['default_font' => 'sans-serif']);
         $pdf = PDF::loadView('payout_history.invoice', []);
         return $pdf->stream();
     }
