@@ -9,7 +9,7 @@
 
     @font-face {
       font-family: SourceSansPro;
-      src: url(SourceSansPro-Regular.ttf);
+      src: url(/fonts/SourceSansPro-Regular.ttf);
     }
 
     .clearfix:after {
@@ -27,7 +27,6 @@
       position: relative;
       color: #555555;
       background: #FFFFFF;
-      font-family: Arial, sans-serif;
       font-size: 14px;
       font-family: SourceSansPro;
     }
