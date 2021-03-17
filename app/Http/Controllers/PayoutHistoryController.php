@@ -23,7 +23,7 @@ class PayoutHistoryController extends Controller
 
     public function getInvoice($id) 
     {
-        PDF::setOptions(['isFontSubsettingEnabled' => true]);
+        PDF::setOptions(['isFontSubsettingEnabled' => true, 'debugCss' => true, 'debugLayout' => true]);
         $pdf = PDF::loadView('payout_history.invoice', []);
         return $pdf->stream();
     }
