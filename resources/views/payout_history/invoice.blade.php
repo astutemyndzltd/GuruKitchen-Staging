@@ -28,7 +28,7 @@
       color: #555555;
       background: #FFFFFF;
       font-size: 14px;
-      font-family: SourceSansPro;
+      font-family: Arial;
     }
 
     div#header {
