@@ -9,7 +9,7 @@
 
     @font-face {
       font-family: 'SourceSansPro';
-      src: url('storage/fonts/SourceSansPro-Regular.ttf') format('truetype');
+      src: local('SourceSansPro-Regular.ttf') format('truetype');
       font-weight: 400; 
       font-style: normal;
     }
