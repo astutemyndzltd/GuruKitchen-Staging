@@ -9,7 +9,7 @@
 
     @font-face {
       font-family: 'SourceSansPro';
-      src: url({{ storage_path('fonts/SourceSansPro-Regular.ttf') }}) format('truetype');
+      src: url({{ storage_path('fonts/SourceSansPro-Regula.ttf') }}) format('truetype');
       font-weight: 400; 
       font-style: normal;
     }
