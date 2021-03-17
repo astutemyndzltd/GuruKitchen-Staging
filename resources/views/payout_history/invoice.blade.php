@@ -8,8 +8,10 @@
   <style>
 
     @font-face {
-      font-family: SourceSansPro;
-      src: url('https://gurukitchen.foodonlinedelivery.co.uk/fonts/SourceSansPro-Regular.ttf')
+      font-family: 'SourceSansPro';
+      src: url({{ storage_path('fonts/SourceSansPro-Regular.ttf') }}) format('truetype');
+      font-weight: 400; 
+      font-style: normal;
     }
 
     .clearfix:after {
