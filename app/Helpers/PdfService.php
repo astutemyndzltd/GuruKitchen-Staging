@@ -1,6 +1,6 @@
 <?php
 
-namespace Helpers;
+namespace App\Helpers;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
@@ -10,8 +10,13 @@ use Symfony\Component\Process\Process;
 
 class PdfService 
 {
-    protected $command = '%s --headless --disable-gpu --print-to-pdf=%s %s 2>&1';
-    protected $binary = '/usr/bin/google-chrome';
+    private $command = '%s --headless --disable-gpu --print-to-pdf=%s %s 2>&1';
+    private $binary = '/usr/bin/google-chrome';
+
+    public function __construct() 
+    {
+        
+    }
 
     public function render($viewName, $data)
     {

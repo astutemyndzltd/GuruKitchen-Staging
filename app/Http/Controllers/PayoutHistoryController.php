@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\PayoutHistoryDataTable;
-use Helpers\PdfService;
+use App\Helpers\PdfService;
 
 class PayoutHistoryController extends Controller
 {
