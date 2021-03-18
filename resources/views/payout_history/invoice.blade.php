@@ -8,6 +8,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
   <style>
     
+    @page { size: A4 }
+
     .clearfix:after {
       content: "";
       display: table;
