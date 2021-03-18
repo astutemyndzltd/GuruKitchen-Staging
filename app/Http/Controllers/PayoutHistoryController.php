@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\PayoutHistoryDataTable;
-use Barryvdh\DomPDF\Facade as PDF;
 use PdfService;
 
 class PayoutHistoryController extends Controller
