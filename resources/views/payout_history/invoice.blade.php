@@ -8,6 +8,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
   <style>
 
+    @media print {
+      @page { margin: 0; }
+      body { margin: 1.6cm; }
+    }
+
     .clearfix:after {
       content: "";
       display: table;
@@ -155,11 +160,6 @@
       text-align: right  !important;
     }
 
-
-
-    table .qty {
-    }
-
     table .total {
       background: #0087C3;
       color: #FFFFFF;
@@ -232,7 +232,7 @@
   <div class="clearfix" id="header">
 
     <div id="logo">
-      <img src="logo2.png">
+      <img src="{{ url('images/logo2.png') }}">
     </div>
 
     <div id="company">
