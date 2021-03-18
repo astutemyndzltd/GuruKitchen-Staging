@@ -10,12 +10,12 @@ use Symfony\Component\Process\Process;
 
 class PdfService 
 {
-    private $command = '%s --headless --disable-gpu --run-all-compositor-stages-before-draw --print-to-pdf-no-header --print-to-pdf=%s %s 2>&1';
+    private $command = '%s --headless --disable-gpu --run-all-compositor-stages-before-draw --virtual-time-budget=10000 --print-to-pdf-no-header --print-to-pdf=%s %s 2>&1';
     private $binary = '/usr/bin/google-chrome';
 
     public function __construct() 
     {
-        
+
     }
 
     public function render($viewName, $data)
