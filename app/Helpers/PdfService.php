@@ -25,7 +25,8 @@ class PdfService
         try {
             $process->mustRun();
             return File::get($path);
-        } catch (ProcessFailedException $exception) {
+        } 
+        catch (ProcessFailedException $exception) {
             //
         }
     }
