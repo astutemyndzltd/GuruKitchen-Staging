@@ -1,18 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <title>Invoice</title>
-
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
   <style>
-
-    @font-face {
-      font-family: 'SourceSansPro';
-      src: url('SourceSansPro-Regular.ttf') format('truetype');
-      font-weight: 400; 
-      font-style: normal;
-    }
 
     .clearfix:after {
       content: "";
@@ -27,10 +21,13 @@
 
     body {
       position: relative;
+      width: 21cm;  
+      height: 29.7cm; 
+      margin: 0 auto; 
       color: #555555;
-      background: #FFFFFF;
-      font-size: 10px;
-      font-family: 'SourceSansPro';
+      background: #FFFFFF; 
+      font-size: 14px; 
+      font-family: 'Source Sans Pro', sans-serif;
     }
 
     div#header {
@@ -62,7 +59,9 @@
     #details {
       margin-bottom: 50px;
       width: 100%;
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     #client {
@@ -92,7 +91,7 @@
       margin-top: 3px;
     }
 
-    #company>div {
+    #company > div {
       margin-top: 3px;
     }
 
@@ -105,7 +104,7 @@
       color: #0087C3;
       font-size: 2.4em;
       line-height: 1em;
-      margin: 0 0 10px 0;
+      margin: 0  0 10px 0;
     }
 
     #invoice .date {
@@ -131,7 +130,7 @@
 
 
 
-    table td h3 {
+    table td h3{
       color: #0087C3;
       font-size: 1.2em;
       font-weight: normal;
@@ -153,7 +152,12 @@
     }
 
     table .total {
-      text-align: right !important;
+      text-align: right  !important;
+    }
+
+
+
+    table .qty {
     }
 
     table .total {
@@ -175,17 +179,17 @@
       background: #FFFFFF;
       border-bottom: none;
       font-size: 1.2em;
-      border-top: 1px solid #AAAAAA;
+      border-top: 1px solid #AAAAAA; 
     }
 
     table tfoot tr:first-child td {
-      border-top: none;
+      border-top: none; 
     }
 
     table tfoot tr:last-child td {
       color: #57B223;
       font-size: 1.4em;
-      border-top: 1px solid #57B223;
+      border-top: 1px solid #57B223; 
 
     }
 
@@ -193,15 +197,15 @@
       border: none;
     }
 
-    .thanks {
+    .thanks{
       margin-bottom: 50px;
       margin-top: 50px;
       color: #9e9e9e;
     }
 
-    #notices {
+    #notices{
       padding-left: 6px;
-      border-left: 6px solid #0087C3;
+      border-left: 6px solid #0087C3;  
     }
 
     #notices .notice {
@@ -218,35 +222,43 @@
       padding: 8px 0;
       text-align: center;
     }
-  </style>
 
+
+  </style>
 </head>
 
 <body>
+
   <div class="clearfix" id="header">
+
     <div id="logo">
-      <img src="{{ url('/storage/app/public/logos/logo2.png') }}" alt="logo">
+      <img src="logo2.png">
     </div>
+
     <div id="company">
       <h2 class="name">Guru Kitchen Ltd</h2>
       <div class="address">Unit 7 Cooper Way, Parkhouse, Carlisle, Cumbria, United Kingdom, CA3 0JG</div>
       <div>accounts@gurukitchen.co.uk</div>
       <div>VAT: 373 5643 78</div>
     </div>
+
   </div>
+
   <div id="main">
+
     <div id="details">
       <div id="client">
         <div class="to">INVOICE TO:</div>
         <h2 class="name">Quarter Lounge</h2>
-        <div class="address">Unit 7 Cooper Way, Parkhouse, Carlisle, Cumbria, United Kingdom, CA3 0JG Unit 7 Cooper Way, Parkhouse, Carlisle, Cumbria, United Kingdom, CA3 0JG</div>
+        <div class="address">Unit 7 Cooper Way, Parkhouse, Carlisle, Cumbria, United Kingdom</div>
       </div>
       <div id="invoice">
         <h1>TAX INVOICE #3256</h1>
-        <div class="date"><strong>Issue Date:</strong> 22 Feb 2021</div>
-        <div class="date"><strong>Period Covered:</strong> 15 Feb 2021 - 22 Feb 2021</div>
+        <div class="date"><b>Issue Date:</b> 22 Feb 2021</div>
+        <div class="date"><b>Period Covered:</b> 15 Feb 2021 - 22 Feb 2021</div>
       </div>
     </div>
+
     <h2 class="heading">GuruKitchen Commission</h2>
 
     <table cellspacing="0" cellpadding="0">
@@ -269,6 +281,7 @@
         </tr>
       </tbody>
     </table>
+
     <h2 class="heading">Invoice Total</h2>
     <table cellspacing="0" cellpadding="0">
       <thead>
@@ -290,10 +303,20 @@
         </tr>
       </tbody>
     </table>
+
+
     <h2 class="heading thanks">No balance due</h2>
-    <div class="notice" id="notices">Invoice for service rendered: food and beverage marketplace platform and delivery.</div>
+
+    <div id="notices">
+      <div class="notice">Invoice for service rendered: food and beverage marketplace platform and delivery.</div>
+    </div>
+
   </div>
-  <div id="footer">Invoice was created on a computer and is valid without the signature and seal.</div>
+
+  <div id="footer">
+    Invoice was created on a computer and is valid without the signature and seal.
+  </div>
+
 </body>
 
 </html>

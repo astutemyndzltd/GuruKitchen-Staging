@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\PayoutHistoryDataTable;
-use Illuminate\Http\Request;
-use App\DataTables\SalesDataTable;
 use Barryvdh\DomPDF\Facade as PDF;
-
+use PdfService;
 
 class PayoutHistoryController extends Controller
 {
@@ -23,9 +21,8 @@ class PayoutHistoryController extends Controller
 
     public function getInvoice($id) 
     {
-        PDF::setOptions(['default_font' => 'sans-serif']);
-        $pdf = PDF::loadView('payout_history.invoice', []);
-        return $pdf->stream();
+        $pdfService = new PdfService();
+        return $pdfService->render('payout_history.invoice', []);
     }
 
 }
