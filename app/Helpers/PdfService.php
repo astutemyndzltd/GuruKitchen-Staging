@@ -1,5 +1,7 @@
 <?php
 
+namespace Helpers;
+
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
