@@ -296,11 +296,11 @@
       </thead>
       <tbody>
         <tr>
-          <td class="no">£420.91</td>
-          <td class="desc">£84.25</td>
-          <td class="unit">£505.16</td>
-          <td class="qty">£2,501.54</td>
-          <td class="total">27 Feb 2021</td>
+          <td class="no">£{{ number_format($adminCommission, 2) }}</td>
+          <td class="desc">£{{ number_format($tax, 2) }}</td>
+          <td class="unit">£{{ number_format($grossCommission, 2) }}</td>
+          <td class="qty">£{{ number_format($payout->amount, 2) }}</td>
+          <td class="total">{{ date('d M Y', strtotime($payout->created_at. ' + 7 days')) }}</td>
         </tr>
       </tbody>
     </table>
