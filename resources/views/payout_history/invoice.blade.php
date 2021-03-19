@@ -271,9 +271,14 @@
         <tr>
           <td class="no">{{ $payout->orders }}</td>
           <td class="desc">£{{ number_format($payout->gross_revenue, 2) }}</td>
-          <td class="unit">£420.91 at 14.00%</td>
-          <td class="qty">£84.25 at 20.00%</td>
-          <td class="total">£505.16</td>
+          <?php
+            $adminCommission = $payout->gross_revenue * $payout->admin_commission / 100;
+            $tax = $adminCommission * $payout->tax / 100;
+            $grossCommission = $adminCommission + $tax;   
+          ?>
+          <td class="unit">£{{ number_format($adminCommission, 2) }} at {{ $payout->admin_commission }}%</td>
+          <td class="qty">£{{ number_format($tax, 2) }} at {{ $payout->tax }}%</td>
+          <td class="total">£{{ number_format($grossCommission, 2) }}</td>
         </tr>
       </tbody>
     </table>
