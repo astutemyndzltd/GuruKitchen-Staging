@@ -75,8 +75,14 @@ class RestaurantsPayout extends Model
      * @var array
      */
     protected $appends = [
-        'custom_fields',  
+        'custom_fields',
+        'restaurant'  
     ];
+
+    public function getRestaurantAttribute()
+    {
+        return $this->restaurant()->first(['id', 'name', 'address', 'phone']);
+    }
 
     public function customFieldsValues()
     {

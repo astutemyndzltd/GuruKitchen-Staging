@@ -25,7 +25,6 @@ class PayoutHistoryController extends Controller
     public function getInvoice($id) 
     {
         $payout = $this->payoutRepository->find($id);
-        file_put_contents('order.txt', json_encode($payout));     
         $pdfService = new PdfService();
         return $pdfService->render('payout_history.invoice', ['payout' => $payout]);
     }
