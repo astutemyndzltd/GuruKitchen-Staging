@@ -249,7 +249,7 @@
         <div class="address">{{ $payout->restaurant->address }}</div>
       </div>
       <div id="invoice">
-        <h1>TAX INVOICE #3256</h1>
+        <h1>TAX INVOICE #{{ sprintf('%05d', $payout->id) }}</h1>
         <div class="date"><b>Issue Date: </b>22 Feb 2021</div>
         <div class="date"><b>Period Covered: </b>15 Feb 2021 - 22 Feb 2021</div>
       </div>
