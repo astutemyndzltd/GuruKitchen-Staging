@@ -272,8 +272,8 @@
           <td class="no">{{ $payout->orders }}</td>
           <td class="desc">£{{ number_format($payout->gross_revenue, 2) }}</td>
           <?php
-            $adminCommission = $payout->gross_revenue * $payout->admin_commission / 100;
-            $tax = $adminCommission * $payout->tax / 100;
+            $adminCommission = round($payout->gross_revenue * $payout->admin_commission / 100, 2);
+            $tax = round($adminCommission * $payout->tax / 100, 2);
             $grossCommission = $adminCommission + $tax;   
           ?>
           <td class="unit">£{{ number_format($adminCommission, 2) }} at {{ $payout->admin_commission }}%</td>
