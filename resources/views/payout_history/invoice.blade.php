@@ -245,7 +245,7 @@
     <div id="details">
       <div id="client">
         <div class="to">INVOICE TO:</div>
-        <h2 class="name">{{ $payout->retaurant->name }}</h2>
+        <h2 class="name">{{ $payout->restaurant->name }}</h2>
         <div class="address">{{ $payout->restaurant->address }}</div>
       </div>
       <div id="invoice">
