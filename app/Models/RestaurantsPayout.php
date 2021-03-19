@@ -37,7 +37,8 @@ class RestaurantsPayout extends Model
         'admin_commission',
         'tax',
         'amount',
-        'note'
+        'note',
+        'created_at'
     ];
 
     /**
@@ -54,7 +55,8 @@ class RestaurantsPayout extends Model
         'admin_commission' => 'double',
         'tax' => 'double',
         'amount' => 'double',
-        'note' => 'string'
+        'note' => 'string',
+        'created_at' => 'date'
     ];
 
     /**
