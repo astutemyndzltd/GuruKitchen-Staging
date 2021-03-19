@@ -269,8 +269,8 @@
       </thead>
       <tbody>
         <tr>
-          <td class="no">95</td>
-          <td class="desc">£3,006.70</td>
+          <td class="no">{{ $payout->orders }}</td>
+          <td class="desc">£{{ number_format($payout->gross_revenue, 2) }}</td>
           <td class="unit">£420.91 at 14.00%</td>
           <td class="qty">£84.25 at 20.00%</td>
           <td class="total">£505.16</td>
