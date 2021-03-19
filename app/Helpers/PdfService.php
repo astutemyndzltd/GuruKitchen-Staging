@@ -13,14 +13,11 @@ class PdfService
     private $command = '%s --headless --disable-gpu --run-all-compositor-stages-before-draw --virtual-time-budget=10000 --print-to-pdf-no-header --print-to-pdf=%s %s 2>&1';
     private $binary = '/usr/bin/google-chrome';
 
-    public function __construct() 
-    {
-
-    }
+    public function __construct() {}
 
     public function render($viewName, $data)
     {
-        $view = View::make($viewName, ['data' => $data])->render();
+        $view = View::make($viewName, $data)->render();
 
         $process = new Process(sprintf(
             $this->command,
