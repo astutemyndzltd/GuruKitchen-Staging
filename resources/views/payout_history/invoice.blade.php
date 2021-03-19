@@ -251,7 +251,7 @@
       <div id="invoice">
         <h1>TAX INVOICE #{{ sprintf('%05d', $payout->id) }}</h1>
         <div class="date"><b>Issue Date: </b>{{ date('d M Y', strtotime($payout->created_at)) }}</div>
-        <div class="date"><b>Period Covered: </b>15 Feb 2021 - 22 Feb 2021</div>
+        <div class="date"><b>Period Covered: </b>{{ date('d M Y', strtotime($payout->from_date)) }} - {{ date('d M Y', strtotime($payout->to_date)) }}</div>
       </div>
     </div>
 
