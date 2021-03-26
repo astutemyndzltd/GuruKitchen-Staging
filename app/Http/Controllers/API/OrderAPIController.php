@@ -173,8 +173,14 @@ class OrderAPIController extends Controller
 
         $orderType = $input['order_type'];
  
-        if($orderType == 'Delivery') {
+        if ($orderType == 'Delivery') {
             if(!$restaurant->available_for_delivery) {
+                return false;
+            }
+        }
+
+        if ($orderType == 'Pickup') {
+            if(!$restaurant->available_for_pickup) {
                 return false;
             }
         }
