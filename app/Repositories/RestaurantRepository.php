@@ -40,6 +40,7 @@ class RestaurantRepository extends BaseRepository implements CacheableInterface
         'admin_commission',
         'min_order_amount',
         'available_for_preorder',
+        'available_for_pickup',
         'opening_times'
     ];
 
@@ -53,7 +54,7 @@ class RestaurantRepository extends BaseRepository implements CacheableInterface
 
     /**
      * get my restaurants
-     */
+    */
 
     public function myRestaurants()
     {

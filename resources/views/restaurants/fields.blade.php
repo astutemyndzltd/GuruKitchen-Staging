@@ -166,8 +166,17 @@
             </div>
         </div>
 
+        <div class="available_for">
+            {!! Form::label('available_for_pickup', 'Available for pickup', ['class' => 'col-7 control-label text-right']) !!}
+            <div class="checkbox icheck">
+                <label class="col-9 ml-2 form-check-inline">
+                    {!! Form::hidden('available_for_pickup', 0) !!}
+                    {!! Form::checkbox('available_for_pickup', 1, null) !!}
+                </label>
+            </div>
+        </div>
+        
     </div>
-
 </div>
 
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">

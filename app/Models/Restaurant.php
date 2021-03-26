@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File name: Restaurant.php
  * Last modified: 2020.04.30 at 08:21:09
@@ -51,7 +52,7 @@ class Restaurant extends Model implements HasMedia
     }
 
     public $table = 'restaurants';
-    
+
     public $fillable = [
         'name',
         'description',
@@ -70,6 +71,7 @@ class Restaurant extends Model implements HasMedia
         'active',
         'min_order_amount',
         'available_for_preorder',
+        'available_for_pickup',
         'opening_times'
     ];
 
@@ -87,16 +89,17 @@ class Restaurant extends Model implements HasMedia
         'longitude' => 'string',
         'phone' => 'string',
         'mobile' => 'string',
-        'admin_commission' =>'double',
-        'delivery_fee'=>'double',
-        'default_tax'=>'double',
-        'delivery_range'=>'double',
-        'available_for_delivery'=>'boolean',
-        'closed'=>'boolean',
+        'admin_commission' => 'double',
+        'delivery_fee' => 'double',
+        'default_tax' => 'double',
+        'delivery_range' => 'double',
+        'available_for_delivery' => 'boolean',
+        'closed' => 'boolean',
         'information' => 'string',
-        'active' =>'boolean',
+        'active' => 'boolean',
         'min_order_amount' => 'double',
         'available_for_preorder' => 'boolean',
+        'available_for_pickup' => 'boolean',
         'opening_times' => 'array'
     ];
 
@@ -141,7 +144,7 @@ class Restaurant extends Model implements HasMedia
     protected $appends = [
         'custom_fields',
         'has_media',
-        'rate'      
+        'rate'
     ];
 
     /**
@@ -170,30 +173,30 @@ class Restaurant extends Model implements HasMedia
      * @param string $conversion
      * @return string url
      */
-    public function getFirstMediaUrl($collectionName = 'default',$conversion = '')
+    public function getFirstMediaUrl($collectionName = 'default', $conversion = '')
     {
         $url = $this->getFirstMediaUrlTrait($collectionName);
         $array = explode('.', $url);
         $extension = strtolower(end($array));
-        if (in_array($extension,config('medialibrary.extensions_has_thumb'))) {
-            return asset($this->getFirstMediaUrlTrait($collectionName,$conversion));
-        }else{
-            return asset(config('medialibrary.icons_folder').'/'.$extension.'.png');
+        if (in_array($extension, config('medialibrary.extensions_has_thumb'))) {
+            return asset($this->getFirstMediaUrlTrait($collectionName, $conversion));
+        } else {
+            return asset(config('medialibrary.icons_folder') . '/' . $extension . '.png');
         }
     }
 
     public function getCustomFieldsAttribute()
     {
-        $hasCustomField = in_array(static::class,setting('custom_field_models',[]));
-        if (!$hasCustomField){
+        $hasCustomField = in_array(static::class, setting('custom_field_models', []));
+        if (!$hasCustomField) {
             return [];
         }
         $array = $this->customFieldsValues()
-            ->join('custom_fields','custom_fields.id','=','custom_field_values.custom_field_id')
-            ->where('custom_fields.in_table','=',true)
+            ->join('custom_fields', 'custom_fields.id', '=', 'custom_field_values.custom_field_id')
+            ->where('custom_fields.in_table', '=', true)
             ->get()->toArray();
 
-        return convertToAssoc($array,'name');
+        return convertToAssoc($array, 'name');
     }
 
     /**
@@ -266,6 +269,4 @@ class Restaurant extends Model implements HasMedia
     {
         return $this->morphMany('App\Models\Discountable', 'discountable');
     }
-
-
 }
