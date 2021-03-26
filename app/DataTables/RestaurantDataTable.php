@@ -49,6 +49,9 @@ class RestaurantDataTable extends DataTable
             ->editColumn('available_for_preorder', function ($food) {
                 return getBooleanColumn($food, 'available_for_preorder');
             })
+            ->editColumn('available_for_pickup', function ($food) {
+                return getBooleanColumn($food, 'available_for_pickup');
+            })
             ->editColumn('active', function ($restaurant) {
                 return getBooleanColumn($restaurant, 'active');
             })
@@ -136,7 +139,7 @@ class RestaurantDataTable extends DataTable
                 'title' => trans('lang.restaurant_address'),
 
             ],
-            [
+            /*[
                 'data' => 'phone',
                 'title' => trans('lang.restaurant_phone'),
 
@@ -145,11 +148,15 @@ class RestaurantDataTable extends DataTable
                 'data' => 'mobile',
                 'title' => trans('lang.restaurant_mobile'),
 
-            ],
+            ],*/
             [
                 'data' => 'available_for_delivery',
                 'title' => trans('lang.restaurant_available_for_delivery'),
 
+            ],
+            [
+                'data' => 'available_for_pickup',
+                'title' => 'Available for pickup',
             ],
             [
                 'data' => 'available_for_preorder',
