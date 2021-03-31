@@ -11,7 +11,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                @include('layouts.menu',['icons'=>true])
+                @include('layouts.menu', [ 'icons' => true ])
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
