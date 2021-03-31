@@ -39,6 +39,25 @@
 {{-- <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600" rel="stylesheet"> --}}
 <link rel="stylesheet" href="{{asset('css/custom.css')}}">
 <link rel="stylesheet" href="{{asset('css/'.setting("theme_color","primary").'.css')}}">
+<style>
+
+    a.brand-link {
+        height: 60px;
+        width: 100%;
+        padding: 0px 2px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    img.image-brand {
+        height: auto;
+        width: 87%;
+        padding: 0px;
+        margin: 0px;
+    }
+
+</style>
 @yield('css_custom')
 @stack('styles')		
 	
