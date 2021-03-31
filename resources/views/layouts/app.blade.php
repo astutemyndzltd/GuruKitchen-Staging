@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>{{setting('app_name')}} | {{setting('app_short_description')}}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <link rel="icon" type="image/png" href="{{$app_logo}}"/>
+    <link rel="icon" type="image/png" href="{{ url('images/icon.png') }}" />
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
