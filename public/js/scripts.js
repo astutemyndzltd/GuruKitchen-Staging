@@ -18,14 +18,7 @@ $(document).ready(function () {
     }
     if ($('textarea').length > 0) {
         $('textarea').summernote({
-            height: 200,
-            callbacks: {
-                onPaste: function (e) {
-                    var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-                    e.preventDefault();
-                    document.execCommand('insertText', false, bufferText);
-                }
-            }
+            height: 200
             // adding here
         });
     }
