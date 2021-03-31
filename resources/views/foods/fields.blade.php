@@ -207,7 +207,6 @@
 @push('scripts_lib')
 <script>
     $('#txtFoodDesc').on('summernote.paste', function(w, e) {
-        console.log(e);
         let bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
         e.preventDefault();
         document.execCommand('insertText', false, bufferText);
