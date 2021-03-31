@@ -17,7 +17,7 @@
     }
 
     a {
-      color: #0087C3;
+      color: #2f294f;
       text-decoration: none;
     }
 
@@ -68,7 +68,7 @@
 
     #client {
       padding-left: 6px;
-      border-left: 6px solid #0087C3;
+      border-left: 6px solid #2f294f;
       float: left;
     }
 
@@ -103,7 +103,7 @@
     }
 
     #invoice h1 {
-      color: #0087C3;
+      color: #26dabf;
       font-size: 2.4em;
       line-height: 1em;
       margin: 0  0 10px 0;
@@ -133,7 +133,7 @@
 
 
     table td h3{
-      color: #0087C3;
+      color: #2f294f;
       font-size: 1.2em;
       font-weight: normal;
       margin: 0 0 0.2em 0;
@@ -141,7 +141,7 @@
 
     table .no {
       color: #FFFFFF;
-      background: #0087C3;
+      background: #2f294f;
     }
 
     table .desc {
@@ -158,7 +158,7 @@
     }
 
     table .total {
-      background: #0087C3;
+      background: #2f294f;
       color: #FFFFFF;
     }
 
@@ -202,7 +202,7 @@
 
     #notices{
       padding-left: 6px;
-      border-left: 6px solid #0087C3;  
+      border-left: 6px solid #2f294f;  
     }
 
     #notices .notice {
