@@ -228,7 +228,7 @@
   <div class="clearfix" id="header">
 
     <div id="logo">
-      <img src="{{ url('images/logo2.png') }}">
+      <img src="{{ url('images/logo3.png') }}">
     </div>
 
     <div id="company">
