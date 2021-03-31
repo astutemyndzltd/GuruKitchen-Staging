@@ -44,7 +44,7 @@
     }
 
     #logo img {
-      height: 70px;
+      height: 75px;
     }
 
     #main {
