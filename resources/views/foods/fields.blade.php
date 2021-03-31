@@ -103,6 +103,7 @@
         </div>
     </div>
 </div>
+
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
 
     <!-- Ingredients Field -->
@@ -201,3 +202,14 @@
     <button type="submit" class="btn btn-{{setting('theme_color')}}"><i class="fa fa-save"></i> {{trans('lang.save')}} {{trans('lang.food')}}</button>
     <a href="{!! route('foods.index') !!}" class="btn btn-default"><i class="fa fa-undo"></i> {{trans('lang.cancel')}}</a>
 </div>
+
+
+@push('scripts_lib')
+<script>
+    $('#txtFoodDesc').on('summernote.paste', function(e) {
+        let bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+        e.preventDefault();
+        document.execCommand('insertText', false, bufferText);
+    });
+</script>
+@endpush
