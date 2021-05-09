@@ -52,13 +52,23 @@ class DriversPayoutDataTable extends DataTable
             [
                 'data' => 'user.name',
                 'title' => 'Driver',
+                'orderable' => false
 
             ],
             [
                 'data' => 'payout_period',
                 'title' => 'Payout Period',
+                'orderable' => false,
+                'searchable' => false
 
             ],
+            [
+                'data' => 'orders',
+                'title' => 'Orders',
+                'orderable' => false
+
+            ],
+        
             /*[
                 'data' => 'amount',
                 'title' => trans('lang.drivers_payout_amount'),
