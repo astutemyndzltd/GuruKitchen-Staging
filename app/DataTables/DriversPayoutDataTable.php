@@ -27,6 +27,9 @@ class DriversPayoutDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
+            ->editColumn('payout_period', function ($payout) {
+                return date('d M Y', strtotime($payout->from_date)) . ' - ' . date('d M Y', strtotime($payout->to_date)); 
+            })
             ->editColumn('updated_at', function ($drivers_payout) {
                 return getDateColumn($drivers_payout, 'updated_at');
             })
@@ -50,13 +53,13 @@ class DriversPayoutDataTable extends DataTable
                 'data' => 'user.name',
                 'title' => 'Driver',
 
-            ]
-            /*[
-                'data' => 'method',
-                'title' => trans('lang.drivers_payout_method'),
-
             ],
             [
+                'data' => 'payout_period',
+                'title' => 'Payout Period',
+
+            ],
+            /*[
                 'data' => 'amount',
                 'title' => trans('lang.drivers_payout_amount'),
 
