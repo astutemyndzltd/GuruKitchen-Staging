@@ -12,6 +12,7 @@ use App\Events\UserRoleChangedEvent;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Repositories\CustomFieldRepository;
+use App\Repositories\DriverRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UploadRepository;
 use App\Repositories\UserRepository;
@@ -19,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Illuminate\Support\Facades\DB;
 
 class UserAPIController extends Controller
 {
@@ -32,27 +34,34 @@ class UserAPIController extends Controller
      *
      * @return void
      */
-    public function __construct(UserRepository $userRepository, UploadRepository $uploadRepository, RoleRepository $roleRepository, CustomFieldRepository $customFieldRepo)
+    public function __construct(DriverRepository $driverRepository, UserRepository $userRepository, UploadRepository $uploadRepository, RoleRepository $roleRepository, CustomFieldRepository $customFieldRepo)
     {
         $this->userRepository = $userRepository;
         $this->uploadRepository = $uploadRepository;
         $this->roleRepository = $roleRepository;
+        $this->driverRepository = $driverRepository;
         $this->customFieldRepository = $customFieldRepo;
     }
 
     function login(Request $request)
     {
         try {
+            
             $this->validate($request, [
                 'email' => 'required|email',
                 'password' => 'required',
             ]);
+
             if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
                 // Authentication passed...
                 $user = auth()->user();
-                $user->hasRole('driver');
                 $user->device_token = $request->input('device_token', '');
                 $user->save();
+
+                if ($user->hasRole('driver')) {
+                    $user->info = $this->driverRepository->where('user_id', '=', $user->id)->first();
+                }
+
                 return $this->sendResponse($user, 'User retrieved successfully');
             }
         } catch (\Exception $e) {
@@ -120,6 +129,7 @@ class UserAPIController extends Controller
         return $this->sendResponse($user, 'User retrieved successfully');
     }
 
+
     function settings(Request $request)
     {
         $settings = setting()->all();
@@ -155,7 +165,7 @@ class UserAPIController extends Controller
             return $this->sendError('Settings not found', 401);
         }
 
-        return $this->sendResponse('hello', 'Settings retrieved successfully');
+        return $this->sendResponse($settings, 'Settings retrieved successfully');
     }
 
     /**
@@ -167,33 +177,42 @@ class UserAPIController extends Controller
      */
     public function update($id, Request $request)
     {
+        
+        
         $user = $this->userRepository->findWithoutFail($id);
 
         if (empty($user)) {
-            return $this->sendResponse([
-                'error' => true,
-                'code' => 404,
-            ], 'User not found');
+            return $this->sendResponse(['error' => true, 'code' => 404, ], 'User not found');
         }
+
         $input = $request->except(['password', 'api_token']);
+
         try {
+
             if ($request->has('device_token')) {
                 $user = $this->userRepository->update($request->only('device_token'), $id);
-            } else {
+            } 
+            else {
                 $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->userRepository->model());
                 $user = $this->userRepository->update($input, $id);
 
                 foreach (getCustomFieldsValues($customFields, $request) as $value) {
-                    $user->customFieldsValues()
-                        ->updateOrCreate(['custom_field_id' => $value['custom_field_id']], $value);
+                    $user->customFieldsValues()->updateOrCreate(['custom_field_id' => $value['custom_field_id']], $value);
                 }
             }
-        } catch (ValidatorException $e) {
+
+            if ($user->hasRole('driver')) {
+                $user->info = $this->driverRepository->where('user_id', '=', $user->id)->first();
+            }
+
+        } 
+        catch (ValidatorException $e) {
             return $this->sendError($e->getMessage(), 401);
         }
 
         return $this->sendResponse($user, __('lang.updated_successfully', ['operator' => __('lang.user')]));
     }
+
 
     function sendResetLinkEmail(Request $request)
     {
@@ -205,7 +224,8 @@ class UserAPIController extends Controller
 
         if ($response == Password::RESET_LINK_SENT) {
             return $this->sendResponse(true, 'Reset link was sent successfully');
-        } else {
+        } 
+        else {
             return $this->sendError([
                 'error' => 'Reset link not sent',
                 'code' => 401,
@@ -213,4 +233,36 @@ class UserAPIController extends Controller
         }
 
     }
+
+    function setAvailable($id, Request $request) 
+    {
+        try {
+            $user = $this->userRepository->findWithoutFail($id);
+            $info = $this->driverRepository->where('user_id', '=', $id)->first();
+            $info->available = $request->input('value');
+            $info->save();
+            $user->info = $info;
+            return $this->sendResponse($user, __('lang.updated_successfully', ['operator' => __('lang.user')]));
+        }
+        catch(Exception $e) {
+            return $this->sendError('Settings not found', 401);
+        }
+    }
+
+    function getAvailability($id) {
+
+        try {     
+            $driverInfo = $this->driverRepository->where('user_id', '=', $id)->first();
+            return $this->sendResponse($driverInfo, __('lang.updated_successfully', ['operator' => __('lang.user')]));
+        }
+        catch(Excepion $e) {
+            return $this->sendError('Not found', 401);
+        }
+
+    }
+
+    function resetAvailability() {
+        DB::table('drivers')->update(['available' => false]);
+    }
+
 }

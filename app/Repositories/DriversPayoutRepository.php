@@ -20,10 +20,14 @@ class DriversPayoutRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'user_id',
-        'method',
+        'driver_id',
+        'from_date',
+        'to_date',
+        'orders',
+        'subtotal',
+        'delivery_fee',
+        'driver_commission',
         'amount',
-        'paid_date',
         'note'
     ];
 

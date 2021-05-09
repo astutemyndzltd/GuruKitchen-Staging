@@ -13,7 +13,7 @@
 </div>
 
 
-<!-- Payout History Field -->
+<!-- Payout Period Field -->
 <div class="form-group row ">
   {!! Form::label('payout_period', 'Payout Period', ['class' => 'col-3 control-label text-right']) !!}
 

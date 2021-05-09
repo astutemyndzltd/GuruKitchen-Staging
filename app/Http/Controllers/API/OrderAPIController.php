@@ -9,7 +9,7 @@
 
 namespace App\Http\Controllers\API;
 
-
+use App\Criteria\Orders\OrderRequestOfDriverCriteria;
 use App\Criteria\Orders\OrdersOfStatusesCriteria;
 use App\Criteria\Orders\OrdersOfUserCriteria;
 use App\Events\OrderChangedEvent;
@@ -17,6 +17,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Notifications\AssignedOrder;
 use App\Notifications\NewOrder;
+use App\Notifications\OrderAccepted;
 use App\Notifications\StatusChangedOrder;
 use App\Repositories\CartRepository;
 use App\Repositories\FoodOrderRepository;
@@ -34,6 +35,10 @@ use Prettus\Repository\Exceptions\RepositoryException;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Config;
 use Cartalyst\Stripe\Stripe;
+use Exception;
+use Illuminate\Support\Facades\DB;
+
+
 //use Stripe\Token;
 
 /**
@@ -65,9 +70,10 @@ class OrderAPIController extends Controller
      * @param NotificationRepository $notificationRepo
      * @param UserRepository $userRepository
      */
+    
     public function __construct(FoodRepository $foodRepository, OrderRepository $orderRepo, FoodOrderRepository $foodOrderRepository, CartRepository $cartRepo, PaymentRepository $paymentRepo, NotificationRepository $notificationRepo, UserRepository $userRepository)
     {
-        date_default_timezone_set('Europe/London');
+        //date_default_timezone_set('Europe/London');
         $this->orderRepository = $orderRepo;
         $this->foodOrderRepository = $foodOrderRepository;
         $this->cartRepository = $cartRepo;
@@ -86,12 +92,14 @@ class OrderAPIController extends Controller
      */
     public function index(Request $request)
     {
+        
         try {
             $this->orderRepository->pushCriteria(new RequestCriteria($request));
             $this->orderRepository->pushCriteria(new LimitOffsetCriteria($request));
             $this->orderRepository->pushCriteria(new OrdersOfStatusesCriteria($request));
             $this->orderRepository->pushCriteria(new OrdersOfUserCriteria(auth()->id()));
-        } catch (RepositoryException $e) {
+        } 
+        catch (RepositoryException $e) {
             return $this->sendError($e->getMessage());
         }
 
@@ -99,6 +107,47 @@ class OrderAPIController extends Controller
 
         return $this->sendResponse($orders->toArray(), 'Orders retrieved successfully');
     }
+
+    public function acceptOrder($id, Request $request) 
+    {
+        try {
+
+            $driverId = $request->input('driver_id');
+            $count = DB::table('driver_order_requests')->where('order_id', $id)->count();
+
+            if ($count > 0) {
+                $order = $this->orderRepository->update(['driver_id' => $driverId], $id);
+                DB::table('driver_order_requests')->where('order_id', $id)->delete();
+                $order = $order->fresh();
+                $details = $this->userRepository->find($driverId);
+                Notification::send($order->foodOrders[0]->food->restaurant->users, new OrderAccepted($order, $details->name));
+                return $this->sendResponse([], 'Order accepted');
+            }
+            else {
+                return $this->sendError('Order already accepted');
+            }
+        }
+        catch(Exception $e) {
+            return $this->sendError($e->getMessage());
+        }
+    }
+
+    public function getOrderRequests(Request $request) 
+    {
+        $inputs = $request->all();
+        
+        try {
+            $driverId = $inputs['driver_id'];
+            $this->orderRepository->pushCriteria(new RequestCriteria($request));
+            $this->orderRepository->pushCriteria(new OrderRequestOfDriverCriteria($driverId));
+            $orders = $this->orderRepository->all();
+            return $this->sendResponse($orders->toArray(), 'Orders retrieved successfully');
+        }
+        catch(RepositoryException $e) {
+            return $this->sendError($e->getMessage());
+        }
+    }
+
 
     /**
      * Display the specified Order.
@@ -475,6 +524,29 @@ class OrderAPIController extends Controller
         return $this->sendResponse($order->toArray(), __('lang.saved_successfully', ['operator' => __('lang.order')]));
     }
 
+
+    public function changeOrderStatus($id, Request $request) 
+    {        
+        
+        $order = $this->orderRepository->findWithoutFail($id);
+
+        if (empty($order)) {
+            return $this->sendError('Order not found');
+        }
+
+        $input = $request->all();
+
+        try {
+            $order = $this->orderRepository->update(['order_status_id' => $input['order_status_id']], $order->id);
+            return $this->sendResponse($order->toArray(), __('lang.saved_successfully', ['operator' => __('lang.order')]));
+        } 
+        catch (ValidatorException $e) {
+            return $this->sendError($e->getMessage());
+        }
+
+    }
+
+
     /**
      * Update the specified Order in storage.
      *
@@ -484,15 +556,19 @@ class OrderAPIController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function update($id, Request $request)
-    {
+    {        
+        
         $oldOrder = $this->orderRepository->findWithoutFail($id);
+
         if (empty($oldOrder)) {
             return $this->sendError('Order not found');
         }
+
         $oldStatus = $oldOrder->payment->status;
         $input = $request->all();
 
         try {
+
             $order = $this->orderRepository->update($input, $id);
 
             if (isset($input['order_status_id']) && $input['order_status_id'] == 5 && !empty($order)) {
@@ -502,6 +578,7 @@ class OrderAPIController extends Controller
             event(new OrderChangedEvent($oldStatus, $order));
 
             if (setting('enable_notifications', false)) {
+                
                 if (isset($input['order_status_id']) && $input['order_status_id'] != $oldOrder->order_status_id) {
                     Notification::send([$order->user], new StatusChangedOrder($order));
                 }

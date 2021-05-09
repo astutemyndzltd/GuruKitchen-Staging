@@ -48,10 +48,10 @@ class DriversPayoutDataTable extends DataTable
         $columns = [
             [
                 'data' => 'user.name',
-                'title' => trans('lang.drivers_payout_user_id'),
+                'title' => 'Driver',
 
-            ],
-            [
+            ]
+            /*[
                 'data' => 'method',
                 'title' => trans('lang.drivers_payout_method'),
 
@@ -75,7 +75,7 @@ class DriversPayoutDataTable extends DataTable
                 'data' => 'updated_at',
                 'title' => trans('lang.drivers_payout_updated_at'),
                 'searchable' => false,
-            ]
+            ]*/
         ];
 
         $hasCustomField = in_array(DriversPayout::class, setting('custom_field_models', []));
@@ -122,7 +122,7 @@ class DriversPayoutDataTable extends DataTable
                 config('datatables-buttons.parameters'), [
                     'language' => json_decode(
                         file_get_contents(base_path('resources/lang/' . app()->getLocale() . '/datatable.json')
-                        ), true)
+                    ), true)
                 ]
             ));
     }

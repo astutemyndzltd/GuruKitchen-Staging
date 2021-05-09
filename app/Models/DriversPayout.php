@@ -28,13 +28,15 @@ class DriversPayout extends Model
 
     public $table = 'drivers_payouts';
     
-
-
     public $fillable = [
-        'user_id',
-        'method',
+        'driver_id',
+        'from_date',
+        'to_date',
+        'orders',
+        'subtotal',
+        'delivery_fee',
+        'driver_commission',
         'amount',
-        'paid_date',
         'note'
     ];
 
@@ -44,10 +46,14 @@ class DriversPayout extends Model
      * @var array
      */
     protected $casts = [
-        'user_id' => 'integer',
-        'method' => 'string',
+        'driver_id' => 'integer',
+        'from_date' => 'datetime',
+        'to_date' => 'datetime',
+        'orders' => 'integer',
+        'subtotal' => 'double',
+        'delivery_fee' => 'double',
+        'driver_commission' => 'double',
         'amount' => 'double',
-        'paid_date' => 'datetime',
         'note' => 'string'
     ];
 
@@ -57,9 +63,7 @@ class DriversPayout extends Model
      * @var array
      */
     public static $rules = [
-        'user_id' => 'required|exists:users,id',
-        'method' => 'required',
-        'note' => 'required',
+        'driver_id' => 'required|exists:users,id',
         'amount' => 'required|min:0.01',
     ];
 
@@ -69,8 +73,7 @@ class DriversPayout extends Model
      * @var array
      */
     protected $appends = [
-        'custom_fields',
-        
+        'custom_fields',    
     ];
 
     public function customFieldsValues()
@@ -97,7 +100,7 @@ class DriversPayout extends Model
      **/
     public function user()
     {
-        return $this->belongsTo(\App\Models\User::class, 'user_id', 'id');
+        return $this->belongsTo(\App\Models\User::class, 'driver_id', 'id');
     }
 
     /**

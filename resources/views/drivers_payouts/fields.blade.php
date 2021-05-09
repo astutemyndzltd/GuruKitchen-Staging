@@ -2,37 +2,51 @@
 <h5 class="col-12 pb-4">{!! trans('lang.main_fields') !!}</h5>
 @endif
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
-<!-- User Id Field -->
+
+<!-- Driver Id Field -->
 <div class="form-group row ">
-  {!! Form::label('user_id', trans("lang.drivers_payout_user_id"),['class' => 'col-3 control-label text-right']) !!}
+  {!! Form::label('user_id', 'Driver', ['class' => 'col-3 control-label text-right']) !!}
   <div class="col-9">
     {!! Form::select('user_id', $user, null, ['class' => 'select2 form-control']) !!}
-    <div class="form-text text-muted">{{ trans("lang.drivers_payout_user_id_help") }}</div>
+    <div class="form-text text-muted">Select Driver</div>
   </div>
 </div>
 
 
-<!-- Method Field -->
+<!-- Payout Period Field -->
 <div class="form-group row ">
-  {!! Form::label('method', trans("lang.drivers_payout_method"),['class' => 'col-3 control-label text-right']) !!}
+
+  {!! Form::label('payout_period', 'Payout Period', ['class' => 'col-3 control-label text-right']) !!}
+
   <div class="col-9">
-    {!! Form::select('method', ['bank' => 'Bank'], null, ['class' => 'select2 form-control']) !!}
-    <div class="form-text text-muted">{{ trans("lang.drivers_payout_method_help") }}</div>
+    <input class="form-control" name="amount" type="text" id="txtPayoutPeriod" readonly> 
+    <div class="form-text text-muted">Select Payout Period</div>
   </div>
+
 </div>
 
 
 <!-- Amount Field -->
 <div class="form-group row ">
-  {!! Form::label('amount', trans("lang.drivers_payout_amount"), ['class' => 'col-3 control-label text-right']) !!}
+  {!! Form::label('payout_amount', trans("lang.restaurants_payout_amount"), ['class' => 'col-3 control-label text-right']) !!}
   <div class="col-9">
-    {!! Form::number('amount', null,  ['class' => 'form-control','placeholder'=>  trans("lang.drivers_payout_amount_placeholder")]) !!}
-    <div class="form-text text-muted">
-      {{ trans("lang.drivers_payout_amount_help") }}
-    </div>
+      {!! Form::text('payout_amount', null,  ['readonly' => 'true', 'class' => 'form-control', 'step' => "any" ]) !!}
+    <div class="form-text text-muted"></div>
   </div>
 </div>
+
 </div>
+
+<input type="hidden" id="from_date" name="from_date">
+<input type="hidden" id="to_date" name="to_date">
+<input type="hidden" id="amount" name="amount">
+
+<input type="hidden" id="orders" name="orders">
+<input type="hidden" id="subtotal" name="subtotal">
+<input type="hidden" id="delivery_fee" name="delivery_fee">
+<input type="hidden" id="driver_id" name="driver_id">
+
+
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
 
 <!-- Note Field -->
@@ -52,8 +66,21 @@
   {!! $customFields !!}
 </div>
 @endif
+
 <!-- Submit Field -->
 <div class="form-group col-12 text-right">
   <button type="submit" class="btn btn-{{setting('theme_color')}}" ><i class="fa fa-save"></i> {{trans('lang.save')}} {{trans('lang.drivers_payout')}}</button>
   <a href="{!! route('driversPayouts.index') !!}" class="btn btn-default"><i class="fa fa-undo"></i> {{trans('lang.cancel')}}</a>
 </div>
+
+@push('css_lib')
+    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/payout.css') }}">
+@endpush
+
+
+@push('scripts_lib')
+    <script type="text/javascript" src="{{ asset('plugins/daterangepicker/moment.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <script type="module" src="{{ asset('js/driver-payout.js') }}"></script>
+@endpush

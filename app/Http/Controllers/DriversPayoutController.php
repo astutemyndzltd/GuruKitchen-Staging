@@ -9,6 +9,7 @@ use App\DataTables\DriversPayoutDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateDriversPayoutRequest;
 use App\Http\Requests\UpdateDriversPayoutRequest;
+use App\Models\Order;
 use App\Repositories\DriverRepository;
 use App\Repositories\DriversPayoutRepository;
 use App\Repositories\CustomFieldRepository;
@@ -19,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Illuminate\Support\Facades\DB;
 
 class DriversPayoutController extends Controller
 {
@@ -84,24 +86,25 @@ private $userRepository;
      *
      * @return Response
      */
-    public function store(CreateDriversPayoutRequest $request)
+    public function store(Order $model, Request $request)
     {
         $input = $request->all();
-        $input['paid_date'] = Carbon::now();
-        $this->driverRepository->pushCriteria(new FilterByUserCriteria($input['user_id']));
-        $driverEarning = $this->driverRepository->first();
+        $driverId = $input['driver_id'];
+        $startDate = $input['from_date'];
+        $endDate = $input['to_date'];
+        $input['driver_commission'] = setting('driver_commission', 0);
 
-        if($input['amount'] > $driverEarning->earning){
-            Flash::error('The payout amount must be less than driver earning');
-            return redirect()->back()->withInput($input);
+        try 
+        {
+            $statement = "active = 1 and driver_id = $driverId and driver_paid_out = 0
+                          and date(created_at) between '$startDate' and '$endDate'";
+                          
+            $this->driversPayoutRepository->create($input);
+            $model->whereRaw($statement)->update([ 'driver_paid_out' => 1 ]);
+
         }
-        $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->driversPayoutRepository->model());
-        try {
-            $this->driverRepository->update(['earning'=>$driverEarning->earning - $input['amount']], $driverEarning->id);
-            $driversPayout = $this->driversPayoutRepository->create($input);
-            $driversPayout->customFieldsValues()->createMany(getCustomFieldsValues($customFields,$request));
-            
-        } catch (ValidatorException $e) {
+        catch (ValidatorException $e) 
+        {
             Flash::error($e->getMessage());
         }
 
@@ -232,5 +235,49 @@ private $userRepository;
         } catch (\Exception $e) {
             Log::error($e->getMessage());
         }
+    }
+
+    public function getLastPaymentPeriod(Request $request) 
+    {
+        $driverId = $request->input('driverId');
+
+        $statement = "select date(min(created_at)) startdate, date(max(created_at)) enddate from orders 
+                      where driver_id = $driverId and active = 1 and driver_paid_out = 0;";
+
+        $result = DB::select(DB::raw($statement));
+        
+        return response()->json([
+            'startdate' => isset($result[0]->startdate) ? date('Y-m-d', strtotime($result[0]->startdate)) : date('Y-m-d', time()), 
+            'enddate' => isset($result[0]->enddate) ? date('Y-m-d', strtotime($result[0]->enddate)) : date('Y-m-d', time()), 
+        ]);
+    }
+
+    public function getPayoutAmount(Request $request) 
+    {
+        $driverId = $request->input('driverId');
+        $startDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+
+        $statement = "select count(*) total, sum(p.price - o.delivery_fee) subtotal, sum(o.delivery_fee) delivery_fee
+                      from orders o join payments p on o.payment_id = p.id where o.active = 1 and o.driver_id = $driverId and 
+                      o.driver_paid_out = 0 and date(o.created_at) between '$startDate' and '$endDate'";
+
+        $result = DB::select(DB::raw($statement));
+        
+        $totalOrders = $result[0]->total;
+        $subTotal = $result[0]->subtotal;
+        $deliveryFee = $result[0]->delivery_fee;
+        $driverCommission = setting('driver_commission', 0);
+        $payoutAmount = $deliveryFee + round(($driverCommission / 100) * $subTotal);
+
+        $responseData = [
+            'payout_amount' => number_format((float)$payoutAmount, 2, '.', ''),
+            'orders' => $totalOrders,
+            'delivery_fee' => number_format((float)$deliveryFee, 2, '.', ''),
+            'orders_subtotal' => number_format((float)$subTotal, 2, '.', ''),
+        ];
+
+        return response()->json($responseData);
+
     }
 }

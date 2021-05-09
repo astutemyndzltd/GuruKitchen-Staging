@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Response;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    
     public function __construct(){
         // config(['app.timezone' => setting('timezone')]);
     }

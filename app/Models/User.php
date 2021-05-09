@@ -47,7 +47,9 @@ class User extends Authenticatable implements HasMedia
         'email' => 'required|string|email|max:255|unique:users',
         // 'password' => 'required',
     ];
+
     public $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -60,6 +62,7 @@ class User extends Authenticatable implements HasMedia
         'api_token',
         'device_token',
     ];
+
     /**
      * The attributes that should be casted to native types.
      *
@@ -73,6 +76,7 @@ class User extends Authenticatable implements HasMedia
         'device_token' => 'string',
         'remember_token' => 'string'
     ];
+    
     /**
      * New Attributes
      *
@@ -142,9 +146,11 @@ class User extends Authenticatable implements HasMedia
     public function getCustomFieldsAttribute()
     {
         $hasCustomField = in_array(static::class,setting('custom_field_models',[]));
-        if (!$hasCustomField){
+
+        if (!$hasCustomField) {
             return [];
         }
+
         $array = $this->customFieldsValues()
             ->join('custom_fields', 'custom_fields.id', '=', 'custom_field_values.custom_field_id')
 //            ->where('custom_fields.in_table', '=', true)

@@ -17,10 +17,13 @@ use App\DataTables\FoodOrderDataTable;
 use App\Events\OrderChangedEvent;
 use App\Http\Requests\CreateOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Models\Notification as ModelsNotification;
 use App\Notifications\AssignedOrder;
+use App\Notifications\OrderServeRequest;
 use App\Notifications\StatusChangedOrder;
 use App\Notifications\StatusChangedOrderDriver;
 use App\Repositories\CustomFieldRepository;
+use App\Repositories\DriverRepository;
 use App\Repositories\NotificationRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\OrderStatusRepository;
@@ -31,6 +34,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\DB;
 use Prettus\Validator\Exceptions\ValidatorException;
 use stdClass;
 
@@ -56,11 +60,13 @@ class OrderController extends Controller
     private $notificationRepository;
     /** @var  PaymentRepository */
     private $paymentRepository;
+    private $driverRepository;
 
-    public function __construct(OrderRepository $orderRepo, CustomFieldRepository $customFieldRepo, UserRepository $userRepo
+    public function __construct(DriverRepository $driverRepository, OrderRepository $orderRepo, CustomFieldRepository $customFieldRepo, UserRepository $userRepo
         , OrderStatusRepository $orderStatusRepo, NotificationRepository $notificationRepo, PaymentRepository $paymentRepo)
     {
         parent::__construct();
+        $this->driverRepository = $driverRepository;
         $this->orderRepository = $orderRepo;
         $this->customFieldRepository = $customFieldRepo;
         $this->userRepository = $userRepo;
@@ -287,7 +293,8 @@ class OrderController extends Controller
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function update($id, UpdateOrderRequest $request)
-    {
+    {        
+        
         $this->orderRepository->pushCriteria(new OrdersOfUserCriteria(auth()->id()));
         $oldOrder = $this->orderRepository->findWithoutFail($id);
 
@@ -302,6 +309,8 @@ class OrderController extends Controller
         $input = $request->all();
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->orderRepository->model());
 
+        if ($oldOrder['use_app_drivers'] == true && $input['use_app_drivers'] == false) $input['use_app_drivers'] = true;
+
         try {
 
             $order = $this->orderRepository->update($input, $id);
@@ -310,18 +319,34 @@ class OrderController extends Controller
 
                 $order = $order->fresh();
 
+                // sending notifications to customer
                 if (isset($input['order_status_id']) && $input['order_status_id'] != $oldOrder->order_status_id) {
                     Notification::send([$order->user], new StatusChangedOrder($order));
                 }
 
-                if (isset($input['driver_id']) && ($input['driver_id'] != $oldOrder['driver_id'])) {
-                    $driver = $this->userRepository->findWithoutFail($input['driver_id']);
-                    
-                    if (!empty($driver)) {
-                        Notification::send([$driver], new AssignedOrder($order));
+                // if we're using app drivers
+                if ($oldOrder['use_app_drivers'] == false && $order['use_app_drivers'] == true) 
+                {
+                    $drivers = $order->foodOrders[0]->food->restaurant->drivers;
+                    $driverIds = array_map(function($d) { return $d['id']; }, $drivers->toArray());
+                    $driversDetails = $this->driverRepository->whereIn('user_id', $driverIds)->get();
+ 
+                    foreach($drivers as $driver) {
+
+                        $details = $driversDetails->firstWhere('user_id', $driver->id);
+
+                        if ($details->available) {
+                            // store booking request
+                            DB::table('driver_order_requests')->insert(['order_id' => $order->id, 'driver_id' => $driver->id]);
+                            
+                            // send notifications
+                            Notification::send([$driver], new OrderServeRequest($order));
+
+                        }
                     }
                 }
 
+                //  sending notifications to driver
                 if ($order['order_type'] == 'Delivery' && $order['driver_id'] == $oldOrder['driver_id'] && $order['order_status_id'] != $oldOrder['order_status_id'] && isset($order['driver_id'])) {
                     
                     $driver = $this->userRepository->findWithoutFail($input['driver_id']);
@@ -332,17 +357,15 @@ class OrderController extends Controller
                 }
             }
 
-
-
             $this->paymentRepository->update(["status" => $input['status']], $order['payment_id']);
             //dd($input['status']);
 
             event(new OrderChangedEvent($oldStatus, $order));
 
             foreach (getCustomFieldsValues($customFields, $request) as $value) {
-                $order->customFieldsValues()
-                    ->updateOrCreate(['custom_field_id' => $value['custom_field_id']], $value);
+                $order->customFieldsValues()->updateOrCreate(['custom_field_id' => $value['custom_field_id']], $value);
             }
+
         } catch (ValidatorException $e) {
             Flash::error($e->getMessage());
         }
@@ -380,6 +403,7 @@ class OrderController extends Controller
         } else {
             Flash::warning('This is only demo app you can\'t change this section ');
         }
+
         return redirect(route('orders.index'));
     }
 

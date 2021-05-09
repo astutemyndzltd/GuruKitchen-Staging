@@ -41,7 +41,8 @@ class RestaurantRepository extends BaseRepository implements CacheableInterface
         'min_order_amount',
         'available_for_preorder',
         'available_for_pickup',
-        'opening_times'
+        'opening_times',
+        'use_app_drivers'
     ];
 
     /**

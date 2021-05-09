@@ -290,6 +290,7 @@ class RestaurantsPayoutController extends Controller
         where paid_out = 0 and active = 1 and restaurant_id = $restaurantId";
 
         $result = DB::select(DB::raw($statement));
+        
         return response()->json([
             'startdate' => isset($result[0]->startdate) ? date('Y-m-d', strtotime($result[0]->startdate)) : date('Y-m-d', time()), 
             'enddate' => isset($result[0]->enddate) ? date('Y-m-d', strtotime($result[0]->enddate)) : date('Y-m-d', time()), 

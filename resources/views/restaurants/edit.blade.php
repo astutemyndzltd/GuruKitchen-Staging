@@ -82,10 +82,10 @@
 <script src="{{asset('plugins/dropzone/dropzone.js')}}"></script>
 <script type="text/javascript">
     Dropzone.autoDiscover = false;
-    var dropzoneFields = [];
+    let dropzoneFields = [];
 </script>
 {{--timepicker--}}
-<script src="{{asset('plugins/timepicker-jquery/mdtimepicker.min.js')}}"></script>
+<script src="{{ asset('plugins/timepicker-jquery/mdtimepicker.min.js') }}"></script>
 {{--preorder--}}
-<script src="{{asset('js/preorder.js')}}"></script>
+<script src="{{ asset('js/preorder.js') }}"></script>
 @endpush

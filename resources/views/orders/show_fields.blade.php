@@ -122,6 +122,22 @@
 
 </div>
 
+<?php 
+  $useAppDrivers = $order->foodOrders[0]->food->restaurant->use_app_drivers;
+  $usingGkDriverForOrder = $order->use_app_drivers; 
+?>
+
+@if($useAppDrivers)
+  <!-- Using App Drivers -->
+  <div class="form-group row col-md-8 col-sm-12">
+    {!! Form::label('use_app_driver', 'Used GuruKitchen Driver', ['class' => 'col-4 control-label']) !!}
+    <div class="col-8">
+      <p>{!! $usingGkDriverForOrder ? 'Yes' : 'No' !!}</p>
+    </div>
+  </div>
+@endif
+
+
 @if(auth()->user()->hasRole('admin') && isset($order->payment->transaction_id))
 <!-- Transaction ID -->
 <div class="form-group row col-md-8 col-sm-12">
@@ -131,6 +147,7 @@
   </div>
 </div>
 @endif
+
 
 @if($order->preorder_info != null || $order->preorder_info != '')
 <!-- Pre-Order data -->

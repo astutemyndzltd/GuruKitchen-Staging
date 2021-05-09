@@ -72,9 +72,11 @@ class Restaurant extends Model implements HasMedia
         'min_order_amount',
         'available_for_preorder',
         'available_for_pickup',
-        'opening_times'
+        'opening_times',
+        'use_app_drivers'
     ];
 
+    
     /**
      * The attributes that should be casted to native types.
      *
@@ -100,8 +102,10 @@ class Restaurant extends Model implements HasMedia
         'min_order_amount' => 'double',
         'available_for_preorder' => 'boolean',
         'available_for_pickup' => 'boolean',
-        'opening_times' => 'array'
+        'opening_times' => 'array',
+        'use_app_drivers' => 'boolean'
     ];
+
 
     /**
      * Validation rules
@@ -144,7 +148,8 @@ class Restaurant extends Model implements HasMedia
     protected $appends = [
         'custom_fields',
         'has_media',
-        'rate'
+        'rate',
+        'global_delivery_fee'
     ];
 
     /**
@@ -165,6 +170,12 @@ class Restaurant extends Model implements HasMedia
     public function customFieldsValues()
     {
         return $this->morphMany('App\Models\CustomFieldValue', 'customizable');
+    }
+
+
+    public function getGlobalDeliveryFeeAttribute() 
+    {
+        return (double) setting('delivery_fee');
     }
 
     /**

@@ -31,7 +31,9 @@ class OrderRepository extends BaseRepository
         'order_type',
         'note',
         'preorder_info',
-        'paid_out'
+        'paid_out',
+        'use_app_drivers',
+        'driver_paid_out'
     ];
 
     /**

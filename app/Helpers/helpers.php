@@ -52,9 +52,11 @@ function getDateColumn($modelObject, $attributeName = 'updated_at')
     } else {
         $html = '<p data-toggle="tooltip" data-placement="bottom" title="${dateHuman}">${date}</p>';
     }
+
     if (!isset($modelObject[$attributeName])) {
         return '';
     }
+    
     $dateObj = new Carbon\Carbon($modelObject[$attributeName]);
     $replace = preg_replace('/\$\{date\}/', $dateObj->format(setting('date_format', 'l jS F Y (h:i:s)')), $html);
     $replace = preg_replace('/\$\{dateHuman\}/', $dateObj->diffForHumans(), $replace);

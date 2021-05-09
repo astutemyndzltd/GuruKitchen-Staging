@@ -47,7 +47,9 @@ class Order extends Model
         'order_type',
         'note',
         'preorder_info',
-        'paid_out'
+        'paid_out',
+        'use_app_drivers',
+        'driver_paid_out'
     ];
 
     /**
@@ -69,7 +71,9 @@ class Order extends Model
         'order_type' => 'string',
         'note' => 'string',
         'preorder_info' => 'string',
-        'paid_out' => 'boolean'
+        'paid_out' => 'boolean',
+        'use_app_drivers' => 'boolean',
+        'driver_paid_out' => 'boolean'
     ];
 
     /**
@@ -89,10 +93,7 @@ class Order extends Model
      *
      * @var array
      */
-    protected $appends = [
-        'custom_fields',
-        
-    ];
+    protected $appends = [ 'custom_fields' ];
 
     public function customFieldsValues()
     {

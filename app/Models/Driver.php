@@ -26,9 +26,6 @@ class Driver extends Model
 
     public $fillable = [
         'user_id',
-        'delivery_fee',
-        'total_orders',
-        'earning',
         'available'
     ];
 
@@ -39,20 +36,7 @@ class Driver extends Model
      */
     protected $casts = [
         'user_id' => 'integer',
-        'delivery_fee' => 'double',
-        'total_orders' => 'integer',
-        'earning' => 'double',
         'available' => 'boolean'
-    ];
-
-    /**
-     * Validation rules
-     *
-     * @var array
-     */
-    public static $rules = [
-        'delivery_fee' => 'required'
-        //'user_id' => 'required|exists:users,id'
     ];
 
     /**

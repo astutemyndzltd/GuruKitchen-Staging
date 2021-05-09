@@ -45,6 +45,7 @@
         <div class="card-body">
             {!! Form::open(['url' => ['settings/update'], 'method' => 'patch']) !!}
             <div class="row">
+
                 <h5 class="col-12 pb-4"><i class="mr-3 fa fa-money"></i>{!! trans('lang.app_setting_default_tax') !!}</h5>
                 <!-- default_tax Field -->
                 <div class="form-group row col-6">
@@ -57,14 +58,35 @@
                     </div>
                 </div>
 
+                <h5 class="col-12 pb-4 custom-field-container"><i class="mr-3 fa fa-money"></i>Delivery Driver Payment</h5>
+                
+                <!-- delivery_fee Field -->
+                <div class="form-group row col-6">
+                    {!! Form::label('delivery_fee', 'Delivery Fee', ['class' => 'col-4 control-label text-right']) !!}
+                    <div class="col-8">
+                        {!! Form::text('delivery_fee', setting('delivery_fee'),  ['class' => 'form-control','placeholder'=>  trans('lang.app_setting_default_tax_placeholder')]) !!}
+                        <div class="form-text text-muted">Insert Delivery Fee</div>
+                    </div>
+                </div>
+
+
+                <!-- driver_commission Field -->
+                <div class="form-group row col-6">
+                    {!! Form::label('driver_commission', 'Driver Commission', ['class' => 'col-4 control-label text-right']) !!}
+                    <div class="col-8">
+                        {!! Form::text('driver_commission', setting('driver_commission'),  ['class' => 'form-control','placeholder'=>  trans('lang.app_setting_default_tax_placeholder')]) !!}
+                        <div class="form-text text-muted">Ex: 20 for (20%)</div>
+                    </div>
+                </div>
+
+
                 <h5 class="col-12 pb-4 custom-field-container"><i class="mr-3 fa fa-money"></i>{!! trans('lang.app_setting_default_currency') !!}</h5>
+                
                 <!-- default_currency Field -->
                 <div class="form-group row col-6">
                     {!! Form::label('default_currency', trans('lang.app_setting_default_currency'), ['class' => 'col-4 control-label text-right']) !!}
                     <div class="col-8">
-                        {!! Form::select('default_currency',
-                        $currencies
-                        , setting('default_currency_id',1), ['class' => 'select2 form-control']) !!}
+                        {!! Form::select('default_currency', $currencies, setting('default_currency_id',1), ['class' => 'select2 form-control']) !!}
                         <div class="form-text text-muted">{{ trans("lang.app_setting_default_currency_help") }}</div>
                     </div>
                 </div>

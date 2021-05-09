@@ -25,17 +25,7 @@
         </div>
     </div> --}}
 
-    @if($order->order_type !== 'Pickup')
-        <!-- Driver Id Field -->
-        <div class="form-group row ">
-            {!! Form::label('driver_id', 'Delivery Driver',['class' => 'col-3 control-label text-right']) !!}
-            <div class="col-9">
-                {!! Form::select('driver_id', $driver, null, ['data-empty'=> 'Select Driver','class' => 'select2 not-required form-control']) !!}
-                <div class="form-text text-muted">{{ 'Select Delivery Driver' }}</div>
-            </div>
-        </div>
-    @endif
-
+    
     <!-- Order Status Id Field -->
     <div class="form-group row ">
         {!! Form::label('order_status_id', trans("lang.order_order_status_id"),['class' => 'col-3 control-label text-right']) !!}
@@ -50,35 +40,64 @@
     <input type="hidden" name="status" value="{{ $order->payment->status }}">
 
     {{-- <div class="form-group row ">
-        {!! Form::label('status', trans("lang.payment_status"),['class' => 'col-3 control-label text-right']) !!}
+        {!! Form::label('status', trans("lang.payment_status"), ['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
             {!! Form::select('status',
             [
-            'Waiting for Client' => trans('lang.order_pending'),
-            'Not Paid' => trans('lang.order_not_paid'),
-            'Paid' => trans('lang.order_paid'),
+                'Waiting for Client' => trans('lang.order_pending'),
+                'Not Paid' => trans('lang.order_not_paid'),
+                'Paid' => trans('lang.order_paid'),
             ]
             , isset($order->payment) ? $order->payment->status : '', ['class' => 'select2 form-control']) !!}
             <div class="form-text text-muted">{{ trans("lang.payment_status_help") }}</div>
         </div>
     </div> --}}
 
-    <!-- 'Boolean active Field' -->
+    <div class="form-group row" style="display:flex;justify-content:center;">
 
-    @if(auth()->user()->hasRole('admin'))
-    <div class="form-group row ">
-        {!! Form::label('active', 'Uncheck to cancel', ['class' => 'col-3 control-label text-right']) !!}
-        <div class="checkbox icheck">
-            <label class="col-9 ml-2 form-check-inline">
-                {!! Form::hidden('active', 0) !!}
-                {!! Form::checkbox('active', 1, null) !!}
-            </label>
-        </div>
-    </div> 
-    @endif
+        <!-- 'Boolean active Field' -->
+        @if(auth()->user()->hasRole('admin'))
+            <div class="form-group row">
+                {!! Form::label('active', 'Uncheck to cancel', ['class' => 'col-6 control-label text-right']) !!}
+                <div class="checkbox icheck">
+                    <label class="col-9 ml-2 form-check-inline">
+                        {!! Form::hidden('active', 0) !!}
+                        {!! Form::checkbox('active', 1, null) !!}
+                    </label>
+                </div>
+            </div> 
+        @endif
 
-    {{-- <div class="form-group row ">
-        {!! Form::label('active', trans("lang.order_active"),['class' => 'col-3 control-label text-right']) !!}
+        <!-- Use App Drivers -->
+        
+        @if($order->order_type == 'Delivery')
+
+        <?php 
+            $useAppDrivers = $order->foodOrders[0]->food->restaurant->use_app_drivers;
+            $enabled = $order->order_status_id <= 3 && !$order->use_app_drivers; 
+        ?>  
+            @if($useAppDrivers)
+                <div class="form-group row">
+                    {!! Form::label('use_app_drivers', 'Use GuruKitchen Driver', ['class' => 'col-8 control-label text-right']) !!}
+                    <div class="checkbox icheck">
+                        <label class="col-9 ml-2 form-check-inline">
+                            {!! Form::hidden('use_app_drivers', 0) !!}
+                            {!! Form::checkbox('use_app_drivers', 1, null, [ 'disabled' => !$enabled ]) !!}
+                        </label>
+                    </div>
+                </div>
+            @else
+                <div style="width:245px;"></div>
+            @endif
+
+        @else
+            <div style="width:245px;"></div>
+        @endif    
+
+    </div>
+
+    {{-- <div class="form-group row">
+        {!! Form::label('active', trans("lang.order_active"), ['class' => 'col-3 control-label text-right']) !!}
         <div class="checkbox icheck">
             <label class="col-9 ml-2 form-check-inline">
                 {!! Form::hidden('active', 0) !!}

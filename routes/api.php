@@ -24,6 +24,10 @@ Route::prefix('driver')->group(function () {
     Route::get('user', 'API\Driver\UserAPIController@user');
     Route::get('logout', 'API\Driver\UserAPIController@logout');
     Route::get('settings', 'API\Driver\UserAPIController@settings');
+    Route::get('users/reset-availability', 'API\Driver\UserAPIController@resetAvailability');
+    //Route::get('orders/requests', 'API\OrderAPIController@getOrderRequests');
+    //Route::post('users/{id}/set-available', 'API\Driver\UserAPIController@setAvailable');
+    //Route::get('orders/{id}/accept', 'API\OrderAPIController@acceptOrder');
 });
 
 Route::prefix('manager')->group(function () {
@@ -59,13 +63,17 @@ Route::resource('extra_groups', 'API\ExtraGroupAPIController');
 Route::resource('faqs', 'API\FaqAPIController');
 Route::resource('restaurant_reviews', 'API\RestaurantReviewAPIController');
 Route::resource('currencies', 'API\CurrencyAPIController');
-Route::resource('slides', 'API\SlideAPIController')->except([
-    'show'
-]);
+Route::resource('slides', 'API\SlideAPIController')->except(['show']);
 
 Route::middleware('auth:api')->group(function () {
+
     Route::group(['middleware' => ['role:driver']], function () {
         Route::prefix('driver')->group(function () {
+            Route::get('orders/{id}/accept', 'API\OrderAPIController@acceptOrder');
+            Route::get('orders/requests', 'API\OrderAPIController@getOrderRequests');
+            Route::post('users/{id}/set-available', 'API\Driver\UserAPIController@setAvailable');
+            Route::get('users/{id}/availability', 'API\Driver\UserAPIController@getAvailability');
+            Route::put('orders/{id}/change-status', 'API\OrderAPIController@changeOrderStatus');
             Route::resource('orders', 'API\OrderAPIController');
             Route::resource('notifications', 'API\NotificationAPIController');
             Route::post('users/{id}', 'API\UserAPIController@update');
@@ -73,6 +81,7 @@ Route::middleware('auth:api')->group(function () {
             Route::resource('faqs', 'API\FaqAPIController');
         });
     });
+
     Route::group(['middleware' => ['role:manager']], function () {
         Route::prefix('manager')->group(function () {
             Route::post('users/{id}', 'API\UserAPIController@update');
@@ -83,14 +92,17 @@ Route::middleware('auth:api')->group(function () {
             Route::resource('faqs', 'API\FaqAPIController');
         });
     });
+
     Route::post('users/{id}', 'API\UserAPIController@update');
 
     Route::resource('order_statuses', 'API\OrderStatusAPIController');
 
     Route::get('payments/byMonth', 'API\PaymentAPIController@byMonth')->name('payments.byMonth');
+
     Route::resource('payments', 'API\PaymentAPIController');
 
     Route::get('favorites/exist', 'API\FavoriteAPIController@exist');
+
     Route::resource('favorites', 'API\FavoriteAPIController');
 
     Route::resource('orders', 'API\OrderAPIController');
@@ -100,6 +112,7 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('notifications', 'API\NotificationAPIController');
 
     Route::get('carts/count', 'API\CartAPIController@count')->name('carts.count');
+
     Route::resource('carts', 'API\CartAPIController');
 
     Route::resource('delivery_addresses', 'API\DeliveryAddressAPIController');
@@ -112,7 +125,6 @@ Route::middleware('auth:api')->group(function () {
 
     Route::resource('restaurantsPayouts', 'API\RestaurantsPayoutAPIController');
 
-    Route::resource('coupons', 'API\CouponAPIController')->except([
-        'show'
-    ]);
+    Route::resource('coupons', 'API\CouponAPIController')->except(['show']);
+
 });

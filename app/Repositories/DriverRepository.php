@@ -21,9 +21,6 @@ class DriverRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'user_id',
-        'delivery_fee',
-        'total_orders',
-        'earning',
         'available'
     ];
 

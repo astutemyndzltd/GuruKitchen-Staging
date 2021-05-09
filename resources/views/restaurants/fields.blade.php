@@ -21,14 +21,7 @@
         </div>
     </div>
     @hasanyrole('admin|manager')
-    <!-- Users Field -->
-    <div class="form-group row ">
-        {!! Form::label('drivers[]', 'Delivery Drivers',['class' => 'col-3 control-label text-right']) !!}
-        <div class="col-9">
-            {!! Form::select('drivers[]', $drivers, $driversSelected, ['class' => 'select2 form-control' , 'multiple'=>'multiple']) !!}
-            <div class="form-text text-muted">Select delivery drivers for this restaurant</div>
-        </div>
-    </div>
+    
 
     <!-- min_order_amount Field -->
     <div class="form-group row ">
@@ -324,6 +317,7 @@
 @hasrole('admin')
 <div class="col-12 custom-field-container">
     <h5 class="col-12 pb-4">{!! trans('lang.admin_area') !!}</h5>
+
     <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
         <!-- Users Field -->
         <div class="form-group row ">
@@ -334,7 +328,18 @@
             </div>
         </div>
 
+        <!-- Drivers Field -->
+        <div class="form-group row ">
+            {!! Form::label('drivers[]', 'Delivery Drivers',['class' => 'col-3 control-label text-right']) !!}
+            <div class="col-9">
+                {!! Form::select('drivers[]', $drivers, $driversSelected, ['class' => 'select2 form-control' , 'multiple'=>'multiple']) !!}
+                <div class="form-text text-muted">Select delivery drivers for this restaurant</div>
+            </div>
+        </div>
+
     </div>
+
+
     <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
         <!-- admin_commission Field -->
         <div class="form-group row ">
@@ -346,15 +351,31 @@
                 </div>
             </div>
         </div>
-        <div class="form-group row ">
-            {!! Form::label('active', trans("lang.restaurant_active"),['class' => 'col-3 control-label text-right']) !!}
-            <div class="checkbox icheck">
-                <label class="col-9 ml-2 form-check-inline">
-                    {!! Form::hidden('active', 0) !!}
-                    {!! Form::checkbox('active', 1, null) !!}
-                </label>
+
+        <div class="form-group row" style="padding-top:14px;">
+
+            <div class="form-group row col-6">  
+                {!! Form::label('active', trans("lang.restaurant_active"), ['class' => 'col-8 control-label text-right']) !!}
+                <div class="checkbox icheck">
+                    <label class="col-9 ml-2 form-check-inline">
+                        {!! Form::hidden('active', 0) !!}
+                        {!! Form::checkbox('active', 1, null) !!}
+                    </label>
+                </div>
             </div>
+
+            <div class="form-group row col-6">
+                {!! Form::label('use_app_drivers', 'Enable GK Drivers', ['class' => 'col-8 control-label text-right']) !!}
+                <div class="checkbox icheck">
+                    <label class="col-9 ml-2 form-check-inline">
+                        {!! Form::hidden('use_app_drivers', 0) !!}
+                        {!! Form::checkbox('use_app_drivers', 1, null) !!}
+                    </label>
+                </div>
+            </div>
+
         </div>
+
     </div>
 </div>
 @endhasrole
