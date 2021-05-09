@@ -33,6 +33,9 @@ class DriversPayoutDataTable extends DataTable
             ->editColumn('updated_at', function ($drivers_payout) {
                 return getDateColumn($drivers_payout, 'updated_at');
             })
+            ->editColumn('subtotal', function ($drivers_payout) {
+                return getPriceColumn($drivers_payout, 'subtototal');
+            })
             ->editColumn('amount', function ($drivers_payout) {
                 return getPriceColumn($drivers_payout, 'amount');
             })
@@ -68,7 +71,12 @@ class DriversPayoutDataTable extends DataTable
                 'orderable' => false
 
             ],
-        
+            [
+                'data' => 'subtotal',
+                'title' => 'Order Subtotal',
+                'orderable' => false,
+                'searchable' => false
+            ]
             /*[
                 'data' => 'amount',
                 'title' => trans('lang.drivers_payout_amount'),
