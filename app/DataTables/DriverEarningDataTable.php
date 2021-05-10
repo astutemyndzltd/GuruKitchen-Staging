@@ -30,7 +30,7 @@ class DriverEarningDataTable extends DataTable
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
             ->editColumn('delivery_fee', function ($result) {
-                return getPrice($result->delivery_fee);
+                return getPriceColumn($result, 'delivery_fee');
             });
             /*->editColumn('rest_name', function ($result) {
                 return $result->rest_name;
