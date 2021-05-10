@@ -31,7 +31,7 @@
           <a class="nav-link active" href="{!! url()->current() !!}"><i class="fa fa-list mr-2"></i>Restaurant Earnings</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{!! url()->current() . '/drivers' !!}"><i class="fa fa-list mr-2"></i>Drivers Earnings</a>
+          <a class="nav-link" href="{!! url()->current() . '/drivers' !!}"><i class="fa fa-list mr-2"></i>Driver Earnings</a>
         </li>
         @can('earnings.create')
         <li class="nav-item">
