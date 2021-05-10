@@ -29,7 +29,7 @@ class DriverEarningDataTable extends DataTable
         $dataTable = new CollectionDataTable(collect($collection));
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
-            ->editColumn('rest_name', function ($result) {
+            /*->editColumn('rest_name', function ($result) {
                 return $result->rest_name;
             })
             ->editColumn('total', function ($result) {
@@ -61,7 +61,7 @@ class DriverEarningDataTable extends DataTable
                     return 'NA';
                 }       
             })
-            ->rawColumns($columns);
+            ->rawColumns($columns);*/
 
         return $dataTable;
     }
@@ -75,12 +75,12 @@ class DriverEarningDataTable extends DataTable
     {
         $columns = [
             [
-                'data' => 'rest_name',
-                'title' => 'Restaurant',
+                'data' => 'name',
+                'title' => 'Driver',
                 'orderable' => false
 
             ],
-            [
+            /*[
                 'data' => 'total',
                 'title' => 'Orders',
                 'orderable' => false,
@@ -112,7 +112,7 @@ class DriverEarningDataTable extends DataTable
                 'title' => 'Period',
                 'orderable' => false,
                 'searchable' => false
-            ]
+            ]*/
         ];
 
         return $columns;
@@ -128,13 +128,16 @@ class DriverEarningDataTable extends DataTable
     {
         if (auth()->user()->hasRole('admin')) 
         {
-            $statement = "select coalesce(d2.total, 0) total, coalesce(d2.gross, 0) gross, r.id rest_id, 
-            r.name rest_name, r.admin_commission commission, date(d2.mindate) startdate, date(d2.maxdate) enddate
-            from (select count(*) total, sum(price) gross, res_id, min(created_at) mindate, max(created_at) maxdate 
-            from (select o.id id, p.price, ro.res_id, o.created_at from orders o
-            join payments p on o.payment_id = p. id and o.paid_out = 0 and o.active = 1
-            join (select fo.order_id, f.restaurant_id res_id from food_orders fo join foods f on fo.food_id = f.id group by fo.order_id) ro
-            on o.id = ro.order_id) d group by res_id) d2 right join restaurants r on r.id = d2.res_id";
+            $statement = "select u.id, u.name, coalesce(ds.orders, 0) orders, 
+            date(ds.from_date) from_date, date(ds.to_date) to_date,
+            coalesce(ds.delivery_fee, 0) delivery_fee, coalesce(ds.total, 0) total
+            from users u join drivers d on u.id = d.user_id
+            left outer join (select o.driver_id, count(*) orders, min(o.created_at) from_date, max(o.created_at) to_date,
+            sum(o.delivery_fee) delivery_fee, sum(p.price) total
+            from orders o join payments p on o.payment_id = p.id
+            where o.active = 1 and o.driver_id is not null 
+            and o.order_status_id = 5 and o.driver_paid_out = 0
+            group by o.driver_id) ds on d.user_id = ds.driver_id";
 
             $results = DB::select(DB::raw($statement));
 
