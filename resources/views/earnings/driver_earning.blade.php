@@ -28,10 +28,10 @@
     <div class="card-header">
       <ul class="nav nav-tabs align-items-end card-header-tabs w-100">
         <li class="nav-item">
-          <a class="nav-link" href="{!! url()->current() !!}"><i class="fa fa-list mr-2"></i>Restaurant Earnings</a>
+          <a class="nav-link" href="{!! url('/earnings') !!}"><i class="fa fa-list mr-2"></i>Restaurant Earnings</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="{!! url()->current() . '/drivers' !!}"><i class="fa fa-list mr-2"></i>Driver Earnings</a>
+          <a class="nav-link active" href="{!! url()->current() !!}"><i class="fa fa-list mr-2"></i>Driver Earnings</a>
         </li>
         @can('earnings.create')
         <li class="nav-item">
