@@ -32,6 +32,9 @@ class DriverEarningDataTable extends DataTable
             ->editColumn('delivery_fee', function ($result) {
                 return getPrice($result->delivery_fee);
             })
+            ->editColumn('subtotal', function ($result) {
+                return getPrice($result->subtotal);
+            })
             /*->editColumn('rest_name', function ($result) {
                 return $result->rest_name;
             })
@@ -90,11 +93,17 @@ class DriverEarningDataTable extends DataTable
                 'searchable' => false
             ],
             [
+                'data' => 'total',
+                'title' => 'Order Total',
+                'orderable' => false,
+                'searchable' => false
+            ],
+            [
                 'data' => 'delivery_fee',
                 'title' => 'Delivery Fee',
                 'orderable' => false,
                 'searchable' => false
-            ]
+            ],
             /*[
                 'data' => 'total',
                 'title' => 'Orders',
