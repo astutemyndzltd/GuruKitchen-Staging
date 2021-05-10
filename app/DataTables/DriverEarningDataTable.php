@@ -28,7 +28,7 @@ class DriverEarningDataTable extends DataTable
     {        
         $dataTable = new CollectionDataTable(collect($collection));
         $columns = array_column($this->getColumns(), 'data');
-        $dataTable = $dataTable
+        $dataTable = $dataTable;
             /*->editColumn('rest_name', function ($result) {
                 return $result->rest_name;
             })
