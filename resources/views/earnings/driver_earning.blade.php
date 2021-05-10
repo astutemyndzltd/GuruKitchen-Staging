@@ -2,7 +2,6 @@
 
 @section('content')
 <!-- Content Header (Page header) -->
-<h1>my name is anik banerjee</h1>
 <div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
