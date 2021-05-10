@@ -31,7 +31,7 @@ class DriverEarningDataTable extends DataTable
         $dataTable = $dataTable
             ->editColumn('delivery_fee', function ($result) {
                 return getPrice($result->delivery_fee);
-            });
+            })
             /*->editColumn('rest_name', function ($result) {
                 return $result->rest_name;
             })
@@ -63,8 +63,8 @@ class DriverEarningDataTable extends DataTable
                 else {
                     return 'NA';
                 }       
-            })
-            ->rawColumns($columns);*/
+            })*/
+            ->rawColumns($columns);
 
         return $dataTable;
     }
