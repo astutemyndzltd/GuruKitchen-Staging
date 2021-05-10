@@ -43,8 +43,8 @@ class DriversPayoutDataTable extends DataTable
                 return getPriceColumn($drivers_payout, 'amount');
             })
             ->editColumn('driver_commission', function ($drivers_payout) {
-                $commission = $drivers_payout->subtotal * ($drivers_payout->commission / 100);
-                return '£' . number_format((float)$commission, 2, '.', ',') . " (" . $drivers_payout->commission . "%)"; 
+                $commission = $drivers_payout->subtotal * ($drivers_payout->driver_commission / 100);
+                return '£' . number_format((float)$commission, 2, '.', ',') . " (" . $drivers_payout->driver_commission . "%)"; 
             })
             ->rawColumns(array_merge($columns, ['action']));
 
