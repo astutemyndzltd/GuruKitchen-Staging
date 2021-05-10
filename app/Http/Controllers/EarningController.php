@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\DriverEarningDataTable;
 use App\DataTables\EarningDataTable;
 use App\Http\Requests\CreateEarningRequest;
 use App\Http\Requests\UpdateEarningRequest;
@@ -52,6 +53,12 @@ private $restaurantRepository;
     public function index(EarningDataTable $earningDataTable)
     {
         return $earningDataTable->render('earnings.index');
+    }
+
+
+    public function getDriverEarning(DriverEarningDataTable $driverEarningDataTable) 
+    {
+        return $driverEarningDataTable->render('earnings.driver_earning');
     }
 
     /**

@@ -172,14 +172,13 @@ Route::middleware('auth')->group(function () {
         'show'
     ]);
 
-    Route::resource('earnings', 'EarningController')->except([
-        'show', 'edit', 'update'
-    ]);
+    Route::get('earnings/drivers', 'EarningController@getDriverEarning');
+    Route::resource('earnings', 'EarningController')->except(['show', 'edit', 'update']);
 
 
     Route::get('driversPayouts/payment-period', 'DriversPayoutController@getLastPaymentPeriod');
     Route::get('driversPayouts/payout-amount', 'DriversPayoutController@getPayoutAmount');
-
+    
     Route::resource('driversPayouts', 'DriversPayoutController')->except(['show', 'edit', 'update']);
 
     Route::get('restaurantsPayouts/total-order-amount', 'RestaurantsPayoutController@getTotalOrderAmount');
