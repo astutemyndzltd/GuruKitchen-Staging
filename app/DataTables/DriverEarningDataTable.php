@@ -50,6 +50,14 @@ class DriverEarningDataTable extends DataTable
             ->editColumn('earning', function ($result) {
                 return getPriceOnly($this->commission + $result->delivery_fee);
             })
+            ->editColumn('payout_period', function ($result) {
+                if (isset($result->from_date) && isset($result->to_date)) {
+                    return date('d M Y', strtotime($result->from_date)) . ' - ' . date('d M Y', strtotime($result->to_date)); 
+                }
+                else {
+                    return 'NA';
+                } 
+            })
             /*->editColumn('rest_name', function ($result) {
                 return $result->rest_name;
             })
@@ -130,40 +138,13 @@ class DriverEarningDataTable extends DataTable
                 'title' => 'Earning',
                 'orderable' => false,
                 'searchable' => false
+            ],
+            [
+                'data' => 'payout_period',
+                'title' => 'Payout Period',
+                'orderable' => false,
+                'searchable' => false
             ]
-            /*[
-                'data' => 'total',
-                'title' => 'Orders',
-                'orderable' => false,
-                'searchable' => false
-
-            ],
-            [
-                'data' => 'gross',
-                'title' => 'Gross Revenue',
-                'orderable' => false,
-                'searchable' => false
-
-            ],
-            [
-                'data' => 'commission_tax',
-                'title' => 'Commission / Tax',
-                'orderable' => false,
-                'searchable' => false
-
-            ],
-            [
-                'data' => 'earning',
-                'title' => 'Earning',
-                'orderable' => false,
-                'searchable' => false
-            ],
-            [
-                'data' => 'period',
-                'title' => 'Period',
-                'orderable' => false,
-                'searchable' => false
-            ]*/
         ];
 
         return $columns;
