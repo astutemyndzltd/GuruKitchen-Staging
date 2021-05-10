@@ -81,8 +81,8 @@ class DriverEarningDataTable extends DataTable
 
             ],
             [
-                'data' => 'name',
-                'title' => 'Driver',
+                'data' => 'orders',
+                'title' => 'Orders',
                 'orderable' => false,
                 'searchable' => false
             ]
