@@ -95,6 +95,12 @@ class DriversPayoutDataTable extends DataTable
                 'title' => 'Commission',
                 'orderable' => false,
                 'searchable' => false
+            ],
+            [
+                'data' => 'amount',
+                'title' => 'Payout Amount',
+                'orderable' => false,
+                'searchable' => false
             ]
             /*[
                 'data' => 'amount',
