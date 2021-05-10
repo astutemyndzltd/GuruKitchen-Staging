@@ -32,8 +32,8 @@ class DriverEarningDataTable extends DataTable
             ->editColumn('delivery_fee', function ($result) {
                 return getPrice($result->delivery_fee);
             })
-            ->editColumn('subtotal', function ($result) {
-                return getPrice($result->subtotal);
+            ->editColumn('total', function ($result) {
+                return getPrice($result->total);
             })
             /*->editColumn('rest_name', function ($result) {
                 return $result->rest_name;
