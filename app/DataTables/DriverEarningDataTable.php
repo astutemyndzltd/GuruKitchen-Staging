@@ -18,6 +18,8 @@ class DriverEarningDataTable extends DataTable
      */
     public static $customFields = [];
 
+    private $commission = 0;
+
     /**
      * Build DataTable class.
      *
@@ -42,8 +44,11 @@ class DriverEarningDataTable extends DataTable
             })
             ->editColumn('commission', function ($result) {
                 $dc = setting('driver_commission', 0);
-                $commission = ($result->total - $result->delivery_fee) * ($dc / 100);
-                return getPriceOnly($commission) . " ($dc%)";
+                $this->commission = ($result->total - $result->delivery_fee) * ($dc / 100);
+                return getPriceOnly($this->commission) . " ($dc%)";
+            })
+            ->editColumn('earning', function ($result) {
+                return getPriceOnly($this->commission + $result->delivery_fee);
             })
             /*->editColumn('rest_name', function ($result) {
                 return $result->rest_name;
