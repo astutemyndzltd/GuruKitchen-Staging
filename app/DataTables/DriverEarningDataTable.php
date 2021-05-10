@@ -58,38 +58,6 @@ class DriverEarningDataTable extends DataTable
                     return 'NA';
                 } 
             })
-            /*->editColumn('rest_name', function ($result) {
-                return $result->rest_name;
-            })
-            ->editColumn('total', function ($result) {
-                return $result->total;
-            })
-            ->editColumn('gross', function ($result) {
-                return getPrice($result->gross);
-            })
-            ->editColumn('commission_tax', function ($result) {
-                $taxRate = setting('default_tax', 0);
-                $comRate = $result->commission;
-                $commission = round(($comRate / 100) * $result->gross, 2);
-                $taxTotal = round(($taxRate / 100) * $commission, 2);
-                return getPrice($commission) . " / " . getPrice($taxTotal);
-            })
-            ->editColumn('earning', function ($result) {
-                $taxRate = setting('default_tax', 0);
-                $comRate = $result->commission;
-                $commission = round(($comRate / 100) * $result->gross, 2);
-                $taxTotal = round(($taxRate / 100) * $commission, 2);
-                $net = $result->gross - ($commission + $taxTotal);
-                return getPrice($net);
-            })
-            ->editColumn('period', function ($result) {
-                if (isset($result->startdate) && isset($result->enddate)) {
-                    return date('d M Y', strtotime($result->startdate)) . ' - ' . date('d M Y', strtotime($result->enddate)); 
-                }
-                else {
-                    return 'NA';
-                }       
-            })*/
             ->rawColumns($columns);
 
         return $dataTable;
