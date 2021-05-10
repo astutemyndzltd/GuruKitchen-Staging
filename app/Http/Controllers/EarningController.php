@@ -58,7 +58,7 @@ private $restaurantRepository;
 
     public function getDriverEarning(DriverEarningDataTable $driverEarningDataTable) 
     {
-        return $driverEarningDataTable->render('earnings.index');
+        return $driverEarningDataTable->render('earnings.driver.driver_earning');
     }
 
     /**
