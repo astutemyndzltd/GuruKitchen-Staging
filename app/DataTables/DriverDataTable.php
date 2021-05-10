@@ -58,22 +58,7 @@ class DriverDataTable extends DataTable
         $columns = [
             [
                 'data' => 'user.name',
-                'title' => trans('lang.driver_user_id'),
-
-            ],
-            [
-                'data' => 'delivery_fee',
-                'title' => trans('lang.driver_delivery_fee'),
-
-            ],
-            [
-                'data' => 'total_orders',
-                'title' => trans('lang.driver_total_orders'),
-
-            ],
-            [
-                'data' => 'earning',
-                'title' => trans('lang.driver_earning'),
+                'title' => 'Driver',
 
             ],
             [
