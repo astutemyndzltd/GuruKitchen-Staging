@@ -280,12 +280,12 @@ class UserAPIController extends Controller
             $result = DB::select(DB::raw($statement));
 
             $dc = setting('driver_commission', 0);
-            $commission = ($result->total - $result->delivery_fee) * ($dc / 100);
-            $earning = $commission + $result->delivery_fee;
+            $commission = ($result[0]->total - $result[0]->delivery_fee) * ($dc / 100);
+            $earning = $commission + $result[0]->delivery_fee;
 
             $payouts = $this->driversPayoutRepository->find($id);
             
-            return $this->sendResponse([ 'orders' => $result->orders, 'earning' => getPriceOnly($earning), 'payout' => $payouts->toArray() ], 'Retrieved successfully');
+            return $this->sendResponse([ 'orders' => $result[0]->orders, 'earning' => getPriceOnly($earning), 'payout' => $payouts->toArray() ], 'Retrieved successfully');
         }
         catch(RepositoryException $e) {
             return $this->sendError($e->getMessage());
