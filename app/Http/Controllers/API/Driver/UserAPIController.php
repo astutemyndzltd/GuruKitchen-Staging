@@ -285,7 +285,7 @@ class UserAPIController extends Controller
 
             //$payouts = []$this->driversPayoutRepository->find($id);
             
-            return $this->sendResponse([ 'orders' => $result->orders, 'earning' => getPriceOnly($earning), 'payout' => [] ], 'Retrieved successfully');
+            return $this->sendResponse([ 'orders' => $result[0]->orders, 'earning' => getPriceOnly($earning), 'payout' => [] ], 'Retrieved successfully');
         }
         catch(RepositoryException $e) {
             return $this->sendError($e->getMessage());
