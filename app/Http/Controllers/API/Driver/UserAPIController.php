@@ -283,9 +283,9 @@ class UserAPIController extends Controller
             $commission = ($result[0]->total - $result[0]->delivery_fee) * ($dc / 100);
             $earning = $commission + $result[0]->delivery_fee;
 
-            $payouts = $this->driversPayoutRepository->find($id);
+            //$payouts = []$this->driversPayoutRepository->find($id);
             
-            return $this->sendResponse([ 'orders' => $result->orders, 'earning' => getPriceOnly($earning), 'payout' => $payouts->toArray() ], 'Retrieved successfully');
+            return $this->sendResponse([ 'orders' => $result->orders, 'earning' => getPriceOnly($earning), 'payout' => [] ], 'Retrieved successfully');
         }
         catch(RepositoryException $e) {
             return $this->sendError($e->getMessage());
