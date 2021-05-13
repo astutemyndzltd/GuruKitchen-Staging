@@ -280,7 +280,7 @@ class UserAPIController extends Controller
             $result = DB::select(DB::raw($statement));
 
             $dc = setting('driver_commission', 0);
-            $commission = ($result->total - $result->delivery_fee) * ($dc / 100);
+            $commission = ($result[0]->total - $result->delivery_fee) * ($dc / 100);
             $earning = $commission + $result->delivery_fee;
 
             $payouts = $this->driversPayoutRepository->find($id);
