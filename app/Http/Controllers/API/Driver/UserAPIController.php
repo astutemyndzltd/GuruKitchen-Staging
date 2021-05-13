@@ -281,7 +281,7 @@ class UserAPIController extends Controller
 
             $dc = setting('driver_commission', 0);
             $commission = ($result[0]->total - $result[0]->delivery_fee) * ($dc / 100);
-            $earning = $commission + $result->delivery_fee;
+            $earning = $commission + $result[0]->delivery_fee;
 
             $payouts = $this->driversPayoutRepository->find($id);
             
