@@ -25,7 +25,7 @@ Route::prefix('driver')->group(function () {
     Route::get('logout', 'API\Driver\UserAPIController@logout');
     Route::get('settings', 'API\Driver\UserAPIController@settings');
     Route::get('users/reset-availability', 'API\Driver\UserAPIController@resetAvailability');
-    Route::get('users/{id}/earning-payouts', 'API\Driver\UserAPIController@getEarningAndPayout');
+    Route::get('{id}/earning-payouts', 'API\Driver\UserAPIController@getEarningAndPayout');
     //Route::get('orders/requests', 'API\OrderAPIController@getOrderRequests');
     //Route::post('users/{id}/set-available', 'API\Driver\UserAPIController@setAvailable');
     //Route::get('orders/{id}/accept', 'API\OrderAPIController@acceptOrder');
