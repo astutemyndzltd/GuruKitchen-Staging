@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Repositories\CustomFieldRepository;
 use App\Repositories\DriverRepository;
+use App\Repositories\DriversPayoutRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UploadRepository;
 use App\Repositories\UserRepository;
@@ -28,19 +29,23 @@ class UserAPIController extends Controller
     private $uploadRepository;
     private $roleRepository;
     private $customFieldRepository;
+    private $driversPayoutRepository;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(DriverRepository $driverRepository, UserRepository $userRepository, UploadRepository $uploadRepository, RoleRepository $roleRepository, CustomFieldRepository $customFieldRepo)
+    public function __construct(DriverRepository $driverRepository, UserRepository $userRepository, 
+    UploadRepository $uploadRepository, RoleRepository $roleRepository, 
+    CustomFieldRepository $customFieldRepo, DriversPayoutRepository $driversPayoutRepository)
     {
         $this->userRepository = $userRepository;
         $this->uploadRepository = $uploadRepository;
         $this->roleRepository = $roleRepository;
         $this->driverRepository = $driverRepository;
         $this->customFieldRepository = $customFieldRepo;
+        $this->driversPayoutRepository = $driversPayoutRepository;
     }
 
     function login(Request $request)
@@ -263,6 +268,28 @@ class UserAPIController extends Controller
 
     function resetAvailability() {
         DB::table('drivers')->update(['available' => false]);
+    }
+
+    public function getEarningAndPayout($id) 
+    {
+        try {
+            $statement = "select count(*) orders, sum(p.price) total, sum(o.delivery_fee) delivery_fee 
+            from orders o join payments p on o.payment_Id = p.id where o.active = 1 and o.order_status_id = 5 
+            and driver_paid_out = 0 and o.driver_id = $id";
+
+            $result = DB::select(DB::raw($statement));
+
+            $dc = setting('driver_commission', 0);
+            $commission = ($result->total - $result->delivery_fee) * ($dc / 100);
+            $earning = $commission + $result->delivery_fee;
+
+            $payouts = $this->driversPayoutRepository->find($id);
+            
+            return $this->sendResponse([ 'orders' => $result->orders, 'earning' => getPriceOnly($earning), 'payout' => $payouts->toArray() ], 'Retrieved successfully');
+        }
+        catch(RepositoryException $e) {
+            return $this->sendError($e->getMessage());
+        }
     }
 
 }
