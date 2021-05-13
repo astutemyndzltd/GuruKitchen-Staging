@@ -7,6 +7,7 @@ use App\Models\Driver;
 use App\Repositories\DriverRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\DriversPayoutRepository;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Illuminate\Support\Facades\Response;
@@ -22,10 +23,12 @@ class DriverAPIController extends Controller
 {
     /** @var  DriverRepository */
     private $driverRepository;
+    private $driversPayoutRepository;
 
-    public function __construct(DriverRepository $driverRepo)
+    public function __construct(DriverRepository $driverRepo, DriversPayoutRepository $driversPayoutRepository)
     {
         $this->driverRepository = $driverRepo;
+        $this->driversPayoutRepository = $driversPayoutRepository;
     }
 
     /**
@@ -68,5 +71,27 @@ class DriverAPIController extends Controller
         }
 
         return $this->sendResponse($driver->toArray(), 'Driver retrieved successfully');
+    }
+
+    public function getEarningAndPayout($id) 
+    {
+        try {
+            $statement = "select count(*) orders, sum(p.price) total, sum(o.delivery_fee) delivery_fee 
+            from orders o join payments p on o.payment_Id = p.id where o.active = 1 and o.order_status_id = 5 
+            and driver_paid_out = 0 and o.driver_id = $id";
+
+            $result = DB::select(DB::raw($statement));
+
+            $dc = setting('driver_commission', 0);
+            $commission = ($result->total - $result->delivery_fee) * ($dc / 100);
+            $earning = $commission + $result->delivery_fee;
+
+            $payouts = $this->driversPayoutRepository->find($id);
+            
+            return $this->sendResponse([ 'orders' => $result->orders, 'earning' => getPriceOnly($earning), 'payout' => $payouts->toArray() ], 'Retrieved successfully');
+        }
+        catch(RepositoryException $e) {
+            return $this->sendError($e->getMessage());
+        }
     }
 }

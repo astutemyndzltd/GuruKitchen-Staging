@@ -39,11 +39,6 @@ class DriverEarningDataTable extends DataTable
             })
             ->editColumn('commission', function ($result) {
                 $dc = setting('driver_commission', 0);
-                $commission = ($result->total - $result->delivery_fee) * ($dc / 100);
-                return getPriceOnly($commission) . " ($dc%)";
-            })
-            ->editColumn('commission', function ($result) {
-                $dc = setting('driver_commission', 0);
                 $this->commission = ($result->total - $result->delivery_fee) * ($dc / 100);
                 return getPriceOnly($this->commission) . " ($dc%)";
             })
