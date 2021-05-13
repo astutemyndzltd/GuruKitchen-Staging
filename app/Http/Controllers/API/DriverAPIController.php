@@ -23,7 +23,7 @@ class DriverAPIController extends Controller
 {
     /** @var  DriverRepository */
     private $driverRepository;
-    private $driversPayoutRepository;
+
 
     public function __construct(DriverRepository $driverRepo)
     {
