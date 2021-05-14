@@ -147,8 +147,6 @@ class User extends Authenticatable implements HasMedia
     {
         $hasCustomField = in_array(static::class,setting('custom_field_models',[]));
 
-        file_put_contents('order.txt', json_encode(setting('custom_field_models',[])));
-
         if (!$hasCustomField) {
             return [];
         }
