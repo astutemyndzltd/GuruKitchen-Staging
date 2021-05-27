@@ -112,7 +112,7 @@
     let passprnt_uri = "starpassprnt://v1/print/nopreview?";
     let receipt_html = `<html><head>${receiptHeadHtml}</head><body>${receiptBodyHtml}</body></html>`;
 
-    console.log(receipt_html);
+    //console.log(receipt_html);
 
     passprnt_uri = passprnt_uri + "back=" + encodeURIComponent(window.location.href);
     passprnt_uri = passprnt_uri + "&html=" + encodeURIComponent(receipt_html);
