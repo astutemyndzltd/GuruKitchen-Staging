@@ -34,6 +34,9 @@
           <li class="nav-item">
             <a class="nav-link pt-1" id="printOrder" href="#"><i class="fa fa-print"></i> {{trans('lang.print')}}</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link pt-1" id="printOrder" href="#"><i class="fa fa-print"></i> Print with STAR Printer }}</a>
+          </li>
         </div>
       </ul>
     </div>
@@ -94,6 +97,6 @@
 @endpush
 
 @push('styles')
-<link rel="stylesheet" href="{{asset('css/all.css')}}">
-<link rel="stylesheet" href="{{asset('css/receipt.css')}}">
+<link rel="stylesheet" href="{{ asset('css/all.css') }}">
+<link rel="stylesheet" href="{{ asset('css/receipt.css') }}">
 @endpush
