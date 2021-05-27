@@ -83,6 +83,16 @@
       <div class="clearfix"></div>
     </div>
     <a href="#" id="print" style="display:none;"></a>
+    <div id="receipt-head">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/all.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/receipt.css') }}">
+    </div>
+    <div id="receipt-body">
+        @include('orders.receipt')
+    </div>
   </div>
 </div>
 @endsection
@@ -94,13 +104,15 @@
 @push('scripts')
 <script type="text/javascript">
 
-  window.receipt_html = `{{ $receipt_html }}`;
-
   $(window).on('load', () => {
     let target = document.getElementById("print");
+    let receiptHeadHtml = document.getElementById('receipt-head').innerHTML;
+    let receiptBodyHtml = document.getElementById('receipt-body').innerHTML;
 
     let passprnt_uri = "starpassprnt://v1/print/nopreview?";
-    //let receipt_html = `{{ $receipt_html }}`;
+    let receipt_html = `<html><head>${receiptHeadHtml}</head><body>${receiptBodyHtml}</body></html>`;
+
+    console.log(receipt_html);
 
     passprnt_uri = passprnt_uri + "back=" + encodeURIComponent(window.location.href);
     passprnt_uri = passprnt_uri + "&html=" + encodeURIComponent(receipt_html);
