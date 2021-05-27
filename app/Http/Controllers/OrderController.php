@@ -215,13 +215,7 @@ class OrderController extends Controller
 		
 		$orderDetails['food_categories'] = array_values($foodCategories);
 
-        $data = ["order" => $order, "total" => $total, "subtotal" => $subtotal,"taxAmount" => $taxAmount, "orderDetails" => $orderDetails];
-
-        $receipt_html = view('orders.receipt-star', $data)->render();
-
-        $data['receipt_html'] = $receipt_html;
-
-        return $foodOrderDataTable->render('orders.show', $data);
+        return $foodOrderDataTable->render('orders.show', ["order" => $order, "total" => $total, "subtotal" => $subtotal,"taxAmount" => $taxAmount, "orderDetails" => $orderDetails]);
     }
 
     /**
