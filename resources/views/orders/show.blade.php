@@ -82,7 +82,7 @@
       </div>
       <div class="clearfix"></div>
     </div>
-    <a href="{{ $receipt_html }}"></a>
+    <a href="{{ $receipt_html }}" id="test-test"></a>
   </div>
 </div>
 @endsection
