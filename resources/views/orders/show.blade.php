@@ -94,7 +94,7 @@
 @push('scripts')
 <script type="text/javascript">
 
-  let receipt_html = `{{ $receipt_html }}`;
+  window.receipt_html = `{{ $receipt_html }}`;
 
   $(window).on('load', () => {
     let target = document.getElementById("print");
