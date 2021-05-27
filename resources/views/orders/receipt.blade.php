@@ -73,7 +73,6 @@
     </div>
 	@endif
 
-    
     <div class="marker"></div>
 
     <div id="foods">

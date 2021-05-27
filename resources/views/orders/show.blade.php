@@ -90,9 +90,7 @@
         <link rel="stylesheet" href="{{ asset('css/all.css') }}">
         <link rel="stylesheet" href="{{ asset('css/receipt.css') }}">
     </div>
-    <div id="receipt-body" style="display:none;">
-        @include('orders.receipt')
-    </div>
+
   </div>
 </div>
 @endsection
@@ -107,7 +105,7 @@
   $(window).on('load', () => {
     let target = document.getElementById("printOrderWithStar");
     let receiptHeadHtml = document.getElementById('receipt-head').innerHTML;
-    let receiptBodyHtml = document.getElementById('receipt-body').innerHTML;
+    let receiptBodyHtml = document.getElementById('receipt').innerHTML;
 
     let passprnt_uri = "starpassprnt://v1/print/nopreview?";
     let receipt_html = `<html><head>${receiptHeadHtml}</head><body>${receiptBodyHtml}</body></html>`;
@@ -120,7 +118,7 @@
   });
 
   $("#printOrder").on("click", () => {
-      
+
   });
 
 </script>
