@@ -90,7 +90,7 @@
         <link rel="stylesheet" href="{{ asset('css/all.css') }}">
         <link rel="stylesheet" href="{{ asset('css/receipt.css') }}">
     </div>
-    <div id="receipt-body" style="display:none;">
+    <div id="receipt-body" style="">
         @include('orders.receipt')
     </div>
   </div>
