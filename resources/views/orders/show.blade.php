@@ -83,6 +83,9 @@
       <div class="clearfix"></div>
     </div>
     <a href="#" id="print" style="display:none;"></a>
+    <div id="candy" style="display:none;">
+      @include('orders.receipt-star')
+    </div>
   </div>
 </div>
 @endsection
