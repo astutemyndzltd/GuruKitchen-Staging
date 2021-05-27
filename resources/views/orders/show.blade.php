@@ -82,7 +82,7 @@
       </div>
       <div class="clearfix"></div>
     </div>
-    <a href="#" id="print" style="display:none;"></a>
+
     <div id="receipt-head" style="display:none;">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
@@ -105,7 +105,7 @@
 <script type="text/javascript">
 
   $(window).on('load', () => {
-    let target = document.getElementById("print");
+    let target = document.getElementById("printOrderWithStar");
     let receiptHeadHtml = document.getElementById('receipt-head').innerHTML;
     let receiptBodyHtml = document.getElementById('receipt-body').innerHTML;
 
@@ -123,10 +123,6 @@
 
   $("#printOrder").on("click", () => window.print());
 
-  $('#printOrderWithStar').on('click', () => {
-      let target = document.getElementById("print");
-      target.click();
-  });
 </script>
 @endpush
 
