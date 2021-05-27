@@ -82,7 +82,7 @@
       </div>
       <div class="clearfix"></div>
     </div>
-    <a href="{{ $receipt_html }}" id="test-test"></a>
+    <a href="#" id="print" style="display:none;"></a>
   </div>
 </div>
 @endsection
@@ -94,10 +94,22 @@
 @push('scripts')
 <script type="text/javascript">
 
+  $(window).on('load', () => {
+    let target = document.getElementById("print");
+
+    let passprnt_uri = "starpassprnt://v1/print/nopreview?";
+    passprnt_uri = passprnt_uri + "back=" + encodeURIComponent(window.location.href);
+    passprnt_uri = passprnt_uri + "&html=" + encodeURIComponent(`{{ $receipt_html }}`);
+
+    target.href = passprnt_uri;
+
+  });
+
   $("#printOrder").on("click", () => window.print());
 
   $('#printOrderWithStar').on('click', () => {
-    // yet to be added
+      let target = document.getElementById("print");
+      target.click();
   });
 </script>
 @endpush
