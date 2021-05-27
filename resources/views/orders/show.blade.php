@@ -97,9 +97,7 @@
 </div>
 @endsection
 
-@section('receipt')
-@include('orders.receipt')
-@endsection
+
 
 @push('scripts')
 <script type="text/javascript">
