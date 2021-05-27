@@ -1,5 +1,5 @@
 <div id="receipt">
-    <img src="/storage/app/public/logos/logo.png" alt="brand-logo" id="logo">
+    <img src="{{ url('storage/app/public/logos/logo.png') }}" alt="brand-logo" id="logo">
 	
     <h2 id="order-id">#{{ $orderDetails['id'] }}</h2>
 	
