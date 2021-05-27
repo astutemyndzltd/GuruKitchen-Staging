@@ -105,10 +105,12 @@
   $(window).on('load', () => {
     let target = document.getElementById("printOrderWithStar");
     let receiptHeadHtml = document.getElementById('receipt-head').innerHTML;
-    let receiptBodyHtml = document.getElementById('receipt').innerHTML;
+    let receiptBodyHtml = document.getElementById('receipt').outerHTML;
 
     let passprnt_uri = "starpassprnt://v1/print/nopreview?";
     let receipt_html = `<html><head>${receiptHeadHtml}</head><body>${receiptBodyHtml}</body></html>`;
+
+    console.log(receipt_html);
 
     passprnt_uri = passprnt_uri + "back=" + encodeURIComponent(window.location.href);
     passprnt_uri = passprnt_uri + "&html=" + encodeURIComponent(receipt_html);
@@ -117,9 +119,7 @@
 
   });
 
-  $("#printOrder").on("click", () => {
-
-  });
+  $("#printOrder").on("click", () => window.print());
 
 </script>
 @endpush
