@@ -90,14 +90,16 @@
         <link rel="stylesheet" href="{{ asset('css/all.css') }}">
         <link rel="stylesheet" href="{{ asset('css/receipt.css') }}">
     </div>
-    <div id="receipt-body" style="">
+    <div id="receipt-body" style="display:none;">
         @include('orders.receipt')
     </div>
   </div>
 </div>
 @endsection
 
-
+@section('receipt')
+@include('orders.receipt')
+@endsection
 
 @push('scripts')
 <script type="text/javascript">
