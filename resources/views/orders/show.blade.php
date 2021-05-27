@@ -98,7 +98,7 @@
     let target = document.getElementById("print");
 
     let passprnt_uri = "starpassprnt://v1/print/nopreview?";
-    let receipt_html = `{{ $receipt_html }}`;
+    let receipt_html = `{{ htmlspecialchars_decode($receipt_html) }}`;
 
     passprnt_uri = passprnt_uri + "back=" + encodeURIComponent(window.location.href);
     passprnt_uri = passprnt_uri + "&html=" + encodeURIComponent(receipt_html);
