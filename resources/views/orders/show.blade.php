@@ -109,7 +109,7 @@
 
     let passprnt_uri = "starpassprnt://v1/print/nopreview?";
     //let receipt_html = `<html><head>${receiptHeadHtml}</head><body>${receiptBodyHtml}</body></html>`;
-    let receipt_html = `<html><head></head><body><h1>Hello World</h1></body></html>`;
+    let receipt_html = `<html><head></head><body>${receiptBodyHtml}</body></html>`;
 
     console.log(receipt_html);
 
