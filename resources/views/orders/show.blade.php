@@ -49,7 +49,7 @@
         <div class="col-5 offset-7">
           <div class="table-responsive table-light">
             <table class="table">
-            
+
               <tbody>
                 <tr>
                   <th class="text-right">{{trans('lang.order_subtotal')}}</th>
@@ -61,7 +61,7 @@
                 </tr>
                 {{-- <tr>
                   <th class="text-right">{{trans('lang.order_tax')}} ({!!$order->tax!!}%) </th>
-                  <td>{!! getPrice($taxAmount)!!}</td>
+                <td>{!! getPrice($taxAmount)!!}</td>
                 </tr> --}}
 
                 <tr>
@@ -84,11 +84,170 @@
     </div>
 
     <div id="receipt-head" style="display:none;">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
+      <!--<link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/all.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/receipt.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/receipt.css') }}">-->
+      <style>
+        @media print and (min-width: 5cm) {
+          #receipt {
+            transform: scale(1.38) !important;
+            transform-origin: 0 0 !important;
+          }
+        }
+
+
+        @media print {
+
+          @page {
+            margin: 0;
+          }
+
+
+          html,
+          body {
+            margin: 0;
+            /*all: unset;*/
+          }
+
+          body * {
+            visibility: hidden;
+          }
+
+          #receipt,
+          #receipt * {
+            visibility: visible;
+          }
+
+          #receipt {
+            transform: scale(1);
+            display: block !important;
+            -webkit-print-color-adjust: exact !important;
+            /*position: absolute;
+    	left: 0;
+    	top: 0;*/
+          }
+        }
+
+        #receipt {
+          font-family: 'Poppins', sans-serif;
+          width: 58mm;
+          padding-bottom: 50px;
+          line-height: normal;
+          color: black;
+          /* these 3 were in print section */
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: -100000000;
+        }
+
+
+
+        #receipt #logo {
+          width: 50mm;
+          height: 50mm;
+          display: block;
+          margin: 0px auto;
+        }
+
+        #receipt #order-id {
+          text-align: center;
+          margin-top: 0px;
+          margin-bottom: 15px;
+        }
+
+        #receipt .intro-row {
+          padding: 0px 14px;
+          display: flex;
+          align-items: center;
+          min-height: 27px;
+          margin-bottom: 5px;
+        }
+
+        #receipt .intro-row>i {
+          width: 16px;
+          height: 16px;
+          flex-grow: 0;
+          flex-shrink: 0;
+        }
+
+        #receipt .intro-row>span {
+          font-size: 12px;
+          text-align: left;
+          margin-left: 10px;
+        }
+
+        #receipt .outro-row {
+          padding: 0px 14px;
+          display: flex;
+          align-items: center;
+          min-height: 22px;
+          margin-bottom: 0px;
+          justify-content: space-between;
+        }
+
+        #receipt .outro-row>span {
+          font-size: 12px;
+        }
+
+        #receipt #foods {
+          padding: 0 14px;
+        }
+
+        #receipt h4.category-name {
+          margin-bottom: 5px;
+        }
+
+        #receipt .food {
+          margin-bottom: 10px;
+        }
+
+        #receipt .food-row,
+        #receipt .extra-row {
+          display: flex;
+          align-items: center;
+        }
+
+        #receipt span.food-quantity,
+        #receipt span.extra-quantity {
+          flex: 0 0 auto;
+          width: 11%;
+          /* background: red;*/
+        }
+
+        #receipt span.food-name,
+        #receipt span.extra-name {
+          flex: 0 0 auto;
+          width: 65%;
+          box-sizing: border-box;
+          /*background:green;*/
+          padding-left: 2px;
+        }
+
+        #receipt span.food-price,
+        #receipt span.extra-price {
+          flex: 0 0 auto;
+          text-align: right;
+          width: 24%;
+          /*background: blue;*/
+        }
+
+        #receipt .food-row>span,
+        #receipt .extra-row>span {
+          font-size: 12px;
+        }
+
+        #receipt div.marker {
+          border-top: 1px solid black;
+          margin: 15px 14px;
+        }
+
+        #receipt #total {
+          height: 10px;
+        }
+      </style>
     </div>
 
   </div>
@@ -101,15 +260,14 @@
 
 @push('scripts')
 <script type="text/javascript">
-
   $(window).on('load', () => {
     let target = document.getElementById("printOrderWithStar");
     let receiptHeadHtml = document.getElementById('receipt-head').innerHTML;
     let receiptBodyHtml = document.getElementById('receipt').outerHTML;
 
     let passprnt_uri = "starpassprnt://v1/print/nopreview?";
-    //let receipt_html = `<html><head>${receiptHeadHtml}</head><body>${receiptBodyHtml}</body></html>`;
-    let receipt_html = `<html><head></head><body>${receiptBodyHtml}</body></html>`;
+    let receipt_html = `<html><head>${receiptHeadHtml}</head><body>${receiptBodyHtml}</body></html>`;
+    //let receipt_html = `<html><head></head><body>${receiptBodyHtml}</body></html>`;
 
     console.log(receipt_html);
 
@@ -121,11 +279,10 @@
   });
 
   $("#printOrder").on("click", () => window.print());
-
 </script>
 @endpush
 
 @push('styles')
-  <link rel="stylesheet" href="{{ asset('css/all.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/receipt.css') }}">
+<link rel="stylesheet" href="{{ asset('css/all.css') }}">
+<link rel="stylesheet" href="{{ asset('css/receipt.css') }}">
 @endpush
