@@ -252,6 +252,103 @@
       </style>
     </div>
 
+    <div id="receipt-body" style="display:none">
+      <div id="receipt" style="visibility: visible;transform: scale(1);font-family: 'Poppins', sans-serif;width: 58mm;padding-bottom: 50px;line-height: normal;color: black;position: absolute;left: 0;top: 0;z-index: -100000000;display: block !important;-webkit-print-color-adjust: exact !important;">
+
+          <img src="https://gurukitchen.foodonlinedelivery.co.uk/storage/app/public/logos/logo.png" alt="brand-logo" id="logo" style="visibility: visible;width: 50mm;height: 50mm;display: block;margin: 0px auto;">
+
+          <h2 id="order-id" style="visibility: visible;text-align: center;margin-top: 0px;margin-bottom: 15px;">#528</h2>
+
+          <div id="customer-name" class="intro-row" style="visibility: visible;padding: 0px 14px;display: flex;align-items: center;min-height: 27px;margin-bottom: 5px;">
+              <i class="fal fa-user" style="visibility: visible;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-weight: 300;font-family: &quot;Font Awesome 5 Pro&quot;;width: 16px;height: 16px;flex-grow: 0;flex-shrink: 0;"></i>
+              <span style="visibility: visible;font-size: 12px;text-align: left;margin-left: 10px;">John Doe</span>
+          </div>
+
+          <div id="customer-phone" class="intro-row" style="visibility: visible;padding: 0px 14px;display: flex;align-items: center;min-height: 27px;margin-bottom: 5px;">
+              <i class="fal fa-phone" style="visibility: visible;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-weight: 300;font-family: &quot;Font Awesome 5 Pro&quot;;width: 16px;height: 16px;flex-grow: 0;flex-shrink: 0;"></i>
+              <span style="visibility: visible;font-size: 12px;text-align: left;margin-left: 10px;">9051134662</span>
+          </div>
+
+          <div id="delivery-address" class="intro-row" style="visibility: visible;padding: 0px 14px;display: flex;align-items: center;min-height: 27px;margin-bottom: 5px;">
+              <i class="fal fa-map-marker-alt" style="visibility: visible;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-weight: 300;font-family: &quot;Font Awesome 5 Pro&quot;;width: 16px;height: 16px;flex-grow: 0;flex-shrink: 0;"></i>
+              <span style="visibility: visible;font-size: 12px;text-align: left;margin-left: 10px;">341 Warwick Rd, Carlisle CA1 2BS, UK</span>
+          </div>
+
+          <div id="delivery-address" class="intro-row" style="visibility: visible;padding: 0px 14px;display: flex;align-items: center;min-height: 27px;margin-bottom: 5px;">
+              <i class="fal fa-truck-couch" style="visibility: visible;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-weight: 300;font-family: &quot;Font Awesome 5 Pro&quot;;width: 16px;height: 16px;flex-grow: 0;flex-shrink: 0;"></i>
+              <span style="visibility: visible;font-size: 12px;text-align: left;margin-left: 10px;">Delivery</span>
+          </div>
+
+
+          <div id="delivery-address" class="intro-row" style="visibility: visible;padding: 0px 14px;display: flex;align-items: center;min-height: 27px;margin-bottom: 5px;">
+              <i class="fal fa-credit-card" style="visibility: visible;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-weight: 300;font-family: &quot;Font Awesome 5 Pro&quot;;width: 16px;height: 16px;flex-grow: 0;flex-shrink: 0;"></i>
+              <span style="visibility: visible;font-size: 12px;text-align: left;margin-left: 10px;">Visa 4242</span>
+          </div>
+
+          <div id="restaurant-name" class="intro-row" style="visibility: visible;padding: 0px 14px;display: flex;align-items: center;min-height: 27px;margin-bottom: 5px;">
+              <i class="fal fa-utensils" style="visibility: visible;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;display: inline-block;font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;font-weight: 300;font-family: &quot;Font Awesome 5 Pro&quot;;width: 16px;height: 16px;flex-grow: 0;flex-shrink: 0;"></i>
+              <span style="visibility: visible;font-size: 12px;text-align: left;margin-left: 10px;">Quarter Lounge</span>
+          </div>
+
+
+
+
+          <div class="marker" style="visibility: visible;border-top: 1px solid black;margin: 15px 14px;"></div>
+
+          <div id="foods" style="visibility: visible;padding: 0 14px;">
+
+              <div class="food-category" style="visibility: visible;">
+                  <h4 class="category-name" style="visibility: visible;margin-bottom: 5px;">Starters</h4>
+
+                  <div class="food" style="visibility: visible;margin-bottom: 10px;">
+                      <div class="food-row" style="visibility: visible;display: flex;align-items: center;">
+                          <span class="food-quantity" style="visibility: visible;flex: 0 0 auto;width: 11%;font-size: 12px;">5x</span>
+                          <span class="food-name" style="visibility: visible;flex: 0 0 auto;width: 65%;box-sizing: border-box;padding-left: 2px;font-size: 12px;">Chipotle Chicken Strips</span>
+                          <span class="food-price" style="visibility: visible;flex: 0 0 auto;text-align: right;width: 24%;font-size: 12px;">£6.95</span>
+                      </div>
+
+
+                  </div>
+
+              </div>
+              <div class="food-category" style="visibility: visible;">
+                  <h4 class="category-name" style="visibility: visible;margin-bottom: 5px;">Chicken and Wings</h4>
+
+                  <div class="food" style="visibility: visible;margin-bottom: 10px;">
+                      <div class="food-row" style="visibility: visible;display: flex;align-items: center;">
+                          <span class="food-quantity" style="visibility: visible;flex: 0 0 auto;width: 11%;font-size: 12px;">2x</span>
+                          <span class="food-name" style="visibility: visible;flex: 0 0 auto;width: 65%;box-sizing: border-box;padding-left: 2px;font-size: 12px;">Sharing wings x 12 wings</span>
+                          <span class="food-price" style="visibility: visible;flex: 0 0 auto;text-align: right;width: 24%;font-size: 12px;">£15.00</span>
+                      </div>
+
+
+                  </div>
+
+              </div>
+
+          </div>
+
+          <div class="marker" style="visibility: visible;border-top: 1px solid black;margin: 15px 14px;"></div>
+
+          <div id="subtotal" class="outro-row" style="visibility: visible;padding: 0px 14px;display: flex;align-items: center;min-height: 22px;margin-bottom: 0px;justify-content: space-between;">
+              <span style="visibility: visible;font-size: 12px;">Subtotal</span>
+              <span style="visibility: visible;font-size: 12px;">£64.75</span>
+          </div>
+
+          <div id="delivery-fee" class="outro-row" style="visibility: visible;padding: 0px 14px;display: flex;align-items: center;min-height: 22px;margin-bottom: 0px;justify-content: space-between;">
+              <span style="visibility: visible;font-size: 12px;">Delivery Fee</span>
+              <span style="visibility: visible;font-size: 12px;">£25.00</span>
+          </div>
+
+          <div class="marker" style="visibility: visible;border-top: 1px solid black;margin: 15px 14px;"></div>
+
+          <div id="total" class="outro-row" style="visibility: visible;padding: 0px 14px;display: flex;align-items: center;min-height: 22px;margin-bottom: 0px;justify-content: space-between;height: 10px;">
+              <h4 style="visibility: visible;">Total</h4>
+              <h4 style="visibility: visible;">£89.75</h4>
+          </div>
+      </div>
+    </div>
+
   </div>
 </div>
 @endsection
@@ -265,11 +362,12 @@
   $(window).on('load', () => {
     let target = document.getElementById("printOrderWithStar");
     let receiptHeadHtml = document.getElementById('receipt-head').innerHTML;
-    let receiptBodyHtml = document.getElementById('receipt').outerHTML;
+    let receiptBodyHtml = document.getElementById('receipt-body').innerHTML;
+    //let receiptBodyHtml = document.getElementById('receipt').outerHTML;
 
     let passprnt_uri = "starpassprnt://v1/print/nopreview?";
-    let receipt_html = `<html><head>${receiptHeadHtml}</head><body>${receiptBodyHtml}</body></html>`;
-    //let receipt_html = `<html><head></head><body>${receiptBodyHtml}</body></html>`;
+    //let receipt_html = `<html><head>${receiptHeadHtml}</head><body>${receiptBodyHtml}</body></html>`;
+    let receipt_html = `<html><head></head><body>${receiptBodyHtml}</body></html>`;
 
     console.log(receipt_html);
 
