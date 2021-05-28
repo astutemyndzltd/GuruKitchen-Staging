@@ -95,23 +95,16 @@
 @push('scripts')
 <script type="text/javascript">
   $(window).on('load', () => {
-    let target = document.getElementById("printOrderWithStar");
 
-    let headHtml = `<link rel="preconnect" href="https://fonts.gstatic.com">
-                    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-                    <link rel="stylesheet" href="{{ asset('css/receipt-star.css') }}">
-                    <link rel="stylesheet" href="{{ asset('plugins/font-awesome-5/css/all.css') }}">`;
-
-    let receiptBodyHtml = document.getElementById('receipt').outerHTML;
-
-    let passprnt_uri = "starpassprnt://v1/print/nopreview?";
-    let receipt_html = `<html><head>${headHtml}</head><body>${receiptBodyHtml}</body></html>`;
+    let receipt_html = `<html><head>@yield('receipt-scripts')</head><body>@include('orders.receipt')</body></html>`;
 
     console.log(receipt_html);
 
+    let passprnt_uri = "starpassprnt://v1/print/nopreview?";
     passprnt_uri = passprnt_uri + "back=" + encodeURIComponent(window.location.href);
     passprnt_uri = passprnt_uri + "&html=" + encodeURIComponent(receipt_html);
 
+    let target = document.getElementById("printOrderWithStar");
     target.href = passprnt_uri;
 
   });
