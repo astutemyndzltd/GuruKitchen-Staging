@@ -89,20 +89,24 @@
         <link rel="stylesheet" href="{{ asset('css/all.css') }}">
         <link rel="stylesheet" href="{{ asset('css/receipt.css') }}">-->
 
-    <!-- hello -->    
+    <!-- hello -->
 
     <div id="receipt-head" style="display:none;">
 
       <style>
         #receipt {
+          font-family: 'Poppins', sans-serif;
           width: 58mm;
           padding-bottom: 50px;
           line-height: normal;
           color: black;
-          position: absolute;
+          /* these 3 were in print section */
+         /* position: absolute;
           left: 0;
-          top: 0;
+          top: 0;*/
+          z-index: -100000000;
         }
+
 
 
         #receipt #logo {
@@ -112,6 +116,101 @@
           margin: 0px auto;
         }
 
+        #receipt #order-id {
+          text-align: center;
+          margin-top: 0px;
+          margin-bottom: 15px;
+        }
+
+        #receipt .intro-row {
+          padding: 0px 14px;
+          display: flex;
+          align-items: center;
+          min-height: 27px;
+          margin-bottom: 5px;
+        }
+
+        #receipt .intro-row>i {
+          width: 16px;
+          height: 16px;
+          flex-grow: 0;
+          flex-shrink: 0;
+        }
+
+        #receipt .intro-row>span {
+          font-size: 12px;
+          text-align: left;
+          margin-left: 10px;
+        }
+
+        #receipt .outro-row {
+          padding: 0px 14px;
+          display: flex;
+          align-items: center;
+          min-height: 22px;
+          margin-bottom: 0px;
+          justify-content: space-between;
+        }
+
+        #receipt .outro-row>span {
+          font-size: 12px;
+        }
+
+        #receipt #foods {
+          padding: 0 14px;
+        }
+
+        #receipt h4.category-name {
+          margin-bottom: 5px;
+        }
+
+        #receipt .food {
+          margin-bottom: 10px;
+        }
+
+        #receipt .food-row,
+        #receipt .extra-row {
+          display: flex;
+          align-items: center;
+        }
+
+        #receipt span.food-quantity,
+        #receipt span.extra-quantity {
+          flex: 0 0 auto;
+          width: 11%;
+          /* background: red;*/
+        }
+
+        #receipt span.food-name,
+        #receipt span.extra-name {
+          flex: 0 0 auto;
+          width: 65%;
+          box-sizing: border-box;
+          /*background:green;*/
+          padding-left: 2px;
+        }
+
+        #receipt span.food-price,
+        #receipt span.extra-price {
+          flex: 0 0 auto;
+          text-align: right;
+          width: 24%;
+          /*background: blue;*/
+        }
+
+        #receipt .food-row>span,
+        #receipt .extra-row>span {
+          font-size: 12px;
+        }
+
+        #receipt div.marker {
+          border-top: 1px solid black;
+          margin: 15px 14px;
+        }
+
+        #receipt #total {
+          height: 10px;
+        }
       </style>
 
     </div>
