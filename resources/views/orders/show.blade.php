@@ -83,12 +83,14 @@
       <div class="clearfix"></div>
     </div>
 
-    <div id="receipt-head" style="display:none;">
-      <!--<link rel="preconnect" href="https://fonts.gstatic.com">
+    <!--<link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/all.css') }}">
         <link rel="stylesheet" href="{{ asset('css/receipt.css') }}">-->
+
+    <div id="receipt-head" style="display:none;">
+      
       <style>
         @media print and (min-width: 5cm) {
           #receipt {
