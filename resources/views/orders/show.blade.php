@@ -83,13 +83,6 @@
       <div class="clearfix"></div>
     </div>
 
-    <div id="receipt-head" style="display:none;">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/receipt.css') }}">
-    </div>
-
   </div>
 </div>
 @endsection
@@ -97,6 +90,13 @@
 @section('receipt')
 @include('orders.receipt')
 @endsection
+
+<div id="receipt-head" style="display:none;">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/receipt-star.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/font-awesome-5/css/all.css') }}">
+</div>
 
 @push('scripts')
 <script type="text/javascript">
