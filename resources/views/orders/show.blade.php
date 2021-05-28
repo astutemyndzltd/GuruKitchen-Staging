@@ -89,6 +89,8 @@
         <link rel="stylesheet" href="{{ asset('css/all.css') }}">
         <link rel="stylesheet" href="{{ asset('css/receipt.css') }}">-->
 
+    <!-- hello -->    
+
     <div id="receipt-head" style="display:none;">
 
       <style>
