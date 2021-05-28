@@ -32,7 +32,7 @@
     @endif
     
     @if($orderDetails['order_type'] != null)
-	<div id="delivery-address" class="intro-row">
+	<div id="order-type" class="intro-row">
         <i class="fal fa-truck-couch"></i>
         <span>{{ $orderDetails['order_type'] }}</span>
     </div>
@@ -46,7 +46,7 @@
 	@endif
 	
 	@if($orderDetails['payment_method'] != null)
-	<div id="delivery-address" class="intro-row">
+	<div id="payment-method" class="intro-row">
         <i class="fal fa-credit-card"></i>
         <span>{{ $orderDetails['payment_method'] }}</span>
     </div>
