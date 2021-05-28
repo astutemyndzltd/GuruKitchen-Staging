@@ -100,10 +100,6 @@
           padding-bottom: 50px;
           line-height: normal;
           color: black;
-          /* these 3 were in print section */
-         /* position: absolute;
-          left: 0;
-          top: 0;*/
           z-index: -100000000;
         }
 
