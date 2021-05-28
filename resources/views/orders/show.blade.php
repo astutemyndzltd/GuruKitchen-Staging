@@ -91,22 +91,21 @@
 @include('orders.receipt')
 @endsection
 
-<div id="receipt-head" style="display:none;">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ asset('css/receipt-star.css') }}">
-  <link rel="stylesheet" href="{{ asset('plugins/font-awesome-5/css/all.css') }}">
-</div>
 
 @push('scripts')
 <script type="text/javascript">
   $(window).on('load', () => {
     let target = document.getElementById("printOrderWithStar");
-    let receiptHeadHtml = document.getElementById('receipt-head').innerHTML;
+
+    let headHtml = `<link rel="preconnect" href="https://fonts.gstatic.com">
+                    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+                    <link rel="stylesheet" href="{{ asset('css/receipt-star.css') }}">
+                    <link rel="stylesheet" href="{{ asset('plugins/font-awesome-5/css/all.css') }}">`;
+
     let receiptBodyHtml = document.getElementById('receipt').outerHTML;
 
     let passprnt_uri = "starpassprnt://v1/print/nopreview?";
-    let receipt_html = `<html><head>${receiptHeadHtml}</head><body>${receiptBodyHtml}</body></html>`;
+    let receipt_html = `<html><head>${headHtml}</head><body>${receiptBodyHtml}</body></html>`;
 
     console.log(receipt_html);
 
