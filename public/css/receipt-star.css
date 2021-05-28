@@ -1,55 +1,11 @@
-@media print and (min-width: 5cm)  {
-	#receipt {
-		transform: scale(1.38) !important;
-    	transform-origin: 0 0 !important;
-	}
-}
-
-
-@media print {
-	
-	@page {
-		margin: 0;
-	}
-	
-	
-    html, body {
-        margin: 0;
-		/*all: unset;*/
-    }
-			
-	body * {
-    	visibility: hidden;	
-  	}
-	
-  	#receipt, #receipt * {
-    	visibility: visible;
-  	}
-	
-  	#receipt {
-		transform: scale(1);
-		display: block !important;
-		-webkit-print-color-adjust: exact !important;
-    	position: absolute;
-    	left: 0;
-    	top: 0;
-  	}
-}
-
 #receipt {
     font-family: 'Poppins', sans-serif;
     width: 58mm;
     padding-bottom: 50px;
 	line-height: normal;
 	color: black;
-	/* these 3 were in print section */
-	/*position: absolute;
-	left: 0;
-  	top: 0;*/
     z-index: -100000000;
 }
-
-
 
 #receipt #logo {
     width: 50mm;
@@ -147,4 +103,8 @@
 
 #receipt #total {
     height: 10px;
+}
+
+i {
+    font-family: "Font Awesome 5 Pro";
 }
