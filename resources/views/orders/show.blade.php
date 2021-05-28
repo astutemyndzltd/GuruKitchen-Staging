@@ -112,65 +112,6 @@
           margin: 0px auto;
         }
 
-        #receipt #order-id {
-          text-align: center;
-          margin-top: 0px;
-          margin-bottom: 15px;
-        }
-
-        #receipt .intro-row {
-          padding: 0px 14px;
-          min-height: 27px;
-          margin-bottom: 5px;
-        }
-
-        #receipt .intro-row>i {
-          width: 16px;
-          height: 16px;
-        }
-
-        #receipt .intro-row>span {
-          font-size: 12px;
-          text-align: left;
-          margin-left: 10px;
-        }
-
-        #receipt .outro-row {
-          padding: 0px 14px;
-          min-height: 22px;
-          margin-bottom: 0px;
-          justify-content: space-between;
-        }
-
-        #receipt .outro-row>span {
-          font-size: 12px;
-        }
-
-        #receipt #foods {
-          padding: 0 14px;
-        }
-
-        #receipt h4.category-name {
-          margin-bottom: 5px;
-        }
-
-        #receipt .food {
-          margin-bottom: 10px;
-        }
-
-        #receipt .food-row>span,
-        #receipt .extra-row>span {
-          font-size: 12px;
-        }
-
-        #receipt div.marker {
-          border-top: 1px solid black;
-          margin: 15px 14px;
-        }
-
-        #receipt #total {
-          height: 10px;
-        }
       </style>
 
     </div>
