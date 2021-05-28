@@ -8,6 +8,12 @@
     RewriteRule ^(.*)$ /public/$1 [NC,L]
 </IfModule>
 
+<IfModule mod_headers.c>
+  <FilesMatch "\.(ttf|ttc|otf|eot|woff|font.css|css|woff2)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>
+
 <IfModule mod_expires.c>
   Header set cache-control: public
   ExpiresActive on
