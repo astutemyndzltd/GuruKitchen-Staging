@@ -6,6 +6,7 @@
 	color: black;
     z-index: -100000000;
     transform: scale(1.37931034483);
+    transform-origin: top left;
 }
 
 #receipt #logo {
