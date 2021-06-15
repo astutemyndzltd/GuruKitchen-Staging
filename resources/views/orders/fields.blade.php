@@ -53,7 +53,7 @@
         </div>
     </div> --}}
 
-    {{-- <div class="form-group row" style="display:flex;justify-content:center;"> --}}
+    <div class="form-group row" style="display:flex;justify-content:center;"> 
 
         <!-- 'Boolean active Field' -->
         @if(auth()->user()->hasRole('admin'))
@@ -94,7 +94,7 @@
             <div style="width:245px;"></div>
         @endif    
 
-    {{-- </div> --}}
+    </div>
 
     {{-- <div class="form-group row">
         {!! Form::label('active', trans("lang.order_active"), ['class' => 'col-3 control-label text-right']) !!}
