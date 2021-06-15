@@ -346,7 +346,7 @@ class OrderController extends Controller
                 //  sending notifications to driver
                 if (isset($order['driver_id']) && $order['order_status_id'] != $oldOrder['order_status_id']) {
                     
-                    $driver = $this->userRepository->findWithoutFail($input['driver_id']);
+                    $driver = $this->userRepository->findWithoutFail($order['driver_id']);
 
                     if (!empty($driver)) {
                         Notification::send([$driver], new StatusChangedOrderDriver($order));
