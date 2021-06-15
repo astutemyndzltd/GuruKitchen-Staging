@@ -56,7 +56,7 @@
     <!-- 'Boolean active Field' -->
     @if(auth()->user()->hasRole('admin'))   
         <div class="form-group row">
-            {!! Form::label('active', 'Uncheck to cancel', ['class' => 'col-6 control-label text-right']) !!}
+            {!! Form::label('active', 'Uncheck to cancel', ['class' => 'col-3 control-label text-right']) !!}
             <div class="checkbox icheck">
                 <label class="col-9 ml-2 form-check-inline">
                     {!! Form::hidden('active', 0) !!}
