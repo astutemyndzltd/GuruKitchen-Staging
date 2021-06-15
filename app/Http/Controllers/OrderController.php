@@ -316,11 +316,10 @@ class OrderController extends Controller
                 $order = $order->fresh();
 
                 // sending notifications to customer
-                if (isset($input['order_status_id']) && $input['order_status_id'] != $oldOrder->order_status_id) {
+                if ($order['order_status_id'] != $oldOrder['order_status_id']) {
                     Notification::send([$order->user], new StatusChangedOrder($order));
                 }
 
-                file_put_contents('order.txt',  'id -> ' . $order['id'] . ' | old -> ' . $oldOrder['use_app_drivers'] . ' | new -> ' . $order['use_app_drivers']);
                 
                 // if we're using app drivers
                 if ($oldOrder['use_app_drivers'] == false && $order['use_app_drivers'] == true) 
@@ -345,7 +344,7 @@ class OrderController extends Controller
                 }
 
                 //  sending notifications to driver
-                if ($order['order_type'] == 'Delivery' && $order['driver_id'] == $oldOrder['driver_id'] && $order['order_status_id'] != $oldOrder['order_status_id'] && isset($order['driver_id'])) {
+                if (isset($order['driver_id']) && $order['order_status_id'] != $oldOrder['order_status_id']) {
                     
                     $driver = $this->userRepository->findWithoutFail($input['driver_id']);
 
