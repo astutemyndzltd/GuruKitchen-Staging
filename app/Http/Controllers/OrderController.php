@@ -299,13 +299,20 @@ class OrderController extends Controller
             return redirect(route('orders.index'));
         }
 
-        if (!$oldOrder->active) return redirect(route('orders.index'));
+        if (!$oldOrder->active) {
+            return redirect(route('orders.index'));
+        }
 
         $oldStatus = $oldOrder->payment->status;
         $input = $request->all();
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->orderRepository->model());
 
         if ($oldOrder['use_app_drivers'] == true && $input['use_app_drivers'] == false) $input['use_app_drivers'] = true;
+
+        if ($oldOrder['use_app_drivers'] == true && $oldOrder['order_status_id'] != $input['order_status_id'] && $input['order_status_id'] > 3) {
+            Flash::error('No driver has accepted the order yet');
+            return redirect(route('orders.index'));
+        }
 
         try {
 
