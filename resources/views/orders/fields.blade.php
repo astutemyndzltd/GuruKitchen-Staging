@@ -53,52 +53,38 @@
         </div>
     </div> --}}
 
-    <div class="form-group row" style="display:flex;justify-content:center;">
+    <!-- 'Boolean active Field' -->
+    @if(auth()->user()->hasRole('admin'))   
+        <div class="form-group row">
+            {!! Form::label('active', 'Uncheck to cancel', ['class' => 'col-6 control-label text-right']) !!}
+            <div class="checkbox icheck">
+                <label class="col-9 ml-2 form-check-inline">
+                    {!! Form::hidden('active', 0) !!}
+                    {!! Form::checkbox('active', 1, null) !!}
+                </label>
+            </div>
+        </div> 
+    @endif
 
-        <?php $count = 0 ?>
-
-        <!-- 'Boolean active Field' -->
-        @if(auth()->user()->hasRole('admin'))   
-            <?php $count++ ?>
-            <div class="form-group row">
-                {!! Form::label('active', 'Uncheck to cancel', ['class' => 'col-6 control-label text-right']) !!}
-                <div class="checkbox icheck">
-                    <label class="col-9 ml-2 form-check-inline">
-                        {!! Form::hidden('active', 0) !!}
-                        {!! Form::checkbox('active', 1, null) !!}
-                    </label>
-                </div>
-            </div> 
-        @endif
-
-        <!-- Use App Drivers -->
-        
-        @if($order->order_type == 'Delivery')
-
+    <!-- Use App Drivers -->
+    @if($order->order_type == 'Delivery')
         <?php 
             $useAppDrivers = $order->foodOrders[0]->food->restaurant->use_app_drivers;
             $enabled = $order->order_status_id <= 3 && !$order->use_app_drivers; 
         ?>  
-            @if($useAppDrivers)
-                <?php $count++ ?>
-                <div class="form-group row">
-                    {!! Form::label('use_app_drivers', 'Use GuruKitchen Driver', ['class' => 'col-8 control-label text-right']) !!}
-                    <div class="checkbox icheck">
-                        <label class="col-9 ml-2 form-check-inline">
-                            {!! Form::hidden('use_app_drivers', 0) !!}
-                            {!! Form::checkbox('use_app_drivers', 1, null, [ 'disabled' => !$enabled ]) !!}
-                        </label>
-                    </div>
+        @if($useAppDrivers)
+            <div class="form-group row">
+                {!! Form::label('use_app_drivers', 'Use GuruKitchen Driver', ['class' => 'col-8 control-label text-right']) !!}
+                <div class="checkbox icheck">
+                    <label class="col-9 ml-2 form-check-inline">
+                        {!! Form::hidden('use_app_drivers', 0) !!}
+                        {!! Form::checkbox('use_app_drivers', 1, null, [ 'disabled' => !$enabled ]) !!}
+                    </label>
                 </div>
-            @endif
+            </div>
+        @endif           
+    @endif
 
-        @endif
-
-        @if($count < 2)
-            <div style="width:245px;"></div>    
-        @endif
-
-    </div>
 
     {{-- <div class="form-group row">
         {!! Form::label('active', trans("lang.order_active"), ['class' => 'col-3 control-label text-right']) !!}
