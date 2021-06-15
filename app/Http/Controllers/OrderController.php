@@ -309,7 +309,7 @@ class OrderController extends Controller
 
         if ($oldOrder['use_app_drivers'] == true && $input['use_app_drivers'] == false) $input['use_app_drivers'] = true;
 
-        if ($oldOrder['use_app_drivers'] == true && $oldOrder['order_status_id'] != $input['order_status_id'] && $input['order_status_id'] > 3 && !isset($oldOrder['driver_id'])) {
+        if ($oldOrder['use_app_drivers'] == true && !isset($oldOrder['driver_id']) && $oldOrder['order_status_id'] != $input['order_status_id'] && $input['order_status_id'] > 3) {
             Flash::error('No driver has accepted the order yet');
             return redirect(route('orders.index'));
         }
