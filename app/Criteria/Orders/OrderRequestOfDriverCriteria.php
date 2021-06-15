@@ -19,6 +19,9 @@ class OrderRequestOfDriverCriteria implements CriteriaInterface
         return $model->join('driver_order_requests', 'orders.id', '=', 'driver_order_requests.order_id')
                      ->where('driver_order_requests.driver_id', $this->driverId)
                      ->where('orders.active', 1)
+                     ->where('orders.order_status_id', '<', 5)
+                     ->where('orders.use_app_drivers', 1)
+                     ->where('orders')
                      ->groupBy('orders.id')
                      ->select('orders.*');
     }
