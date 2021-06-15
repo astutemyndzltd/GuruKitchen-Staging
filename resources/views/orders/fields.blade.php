@@ -53,10 +53,13 @@
         </div>
     </div> --}}
 
-    <div class="form-group row" style="display:flex;justify-content:center;"> 
+    <div class="form-group row" style="display:flex;justify-content:center;">
+
+        <?php $count = 0 ?>
 
         <!-- 'Boolean active Field' -->
-        @if(auth()->user()->hasRole('admin'))
+        @if(auth()->user()->hasRole('admin'))   
+            <?php $count++ ?>
             <div class="form-group row">
                 {!! Form::label('active', 'Uncheck to cancel', ['class' => 'col-6 control-label text-right']) !!}
                 <div class="checkbox icheck">
@@ -77,6 +80,7 @@
             $enabled = $order->order_status_id <= 3 && !$order->use_app_drivers; 
         ?>  
             @if($useAppDrivers)
+                <?php $count++ ?>
                 <div class="form-group row">
                     {!! Form::label('use_app_drivers', 'Use GuruKitchen Driver', ['class' => 'col-8 control-label text-right']) !!}
                     <div class="checkbox icheck">
@@ -86,13 +90,13 @@
                         </label>
                     </div>
                 </div>
-            @else
-                <div style="width:245px;"></div>
             @endif
 
-        @else
-            <div style="width:245px;"></div>
-        @endif    
+        @endif
+
+        @if($count < 2)
+            <div style="width:245px;"></div>    
+        @endif
 
     </div>
 
