@@ -74,7 +74,7 @@
         ?>  
         @if($useAppDrivers)
             <div class="form-group row">
-                {!! Form::label('use_app_drivers', 'Use GuruKitchen Driver', ['class' => 'col-8 control-label text-right']) !!}
+                {!! Form::label('use_app_drivers', 'GuruKitchen Driver', ['class' => 'col-3 control-label text-right']) !!}
                 <div class="checkbox icheck">
                     <label class="col-9 ml-2 form-check-inline">
                         {!! Form::hidden('use_app_drivers', 0) !!}
