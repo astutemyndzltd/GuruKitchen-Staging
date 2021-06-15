@@ -320,6 +320,8 @@ class OrderController extends Controller
                     Notification::send([$order->user], new StatusChangedOrder($order));
                 }
 
+                file_put_contents('order.txt',  'id -> ' . $order['id'] . 'old -> ' . $oldOrder['use_app_drivers'] . ' | new -> ' . $order['use_app_drivers']);
+                
                 // if we're using app drivers
                 if ($oldOrder['use_app_drivers'] == false && $order['use_app_drivers'] == true) 
                 {
