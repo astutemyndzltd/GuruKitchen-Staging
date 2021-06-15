@@ -21,7 +21,6 @@ class OrderRequestOfDriverCriteria implements CriteriaInterface
                      ->where('orders.active', 1)
                      ->where('orders.order_status_id', '<', 5)
                      ->where('orders.use_app_drivers', 1)
-                     ->where('orders')
                      ->groupBy('orders.id')
                      ->select('orders.*');
     }
