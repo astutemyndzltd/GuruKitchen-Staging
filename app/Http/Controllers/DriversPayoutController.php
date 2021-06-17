@@ -269,7 +269,7 @@ private $userRepository;
         file_put_contents('order.txt', $subTotal);
         $deliveryFee = $result[0]->delivery_fee;
         $driverCommission = setting('driver_commission', 0);
-        $payoutAmount = $deliveryFee + round(($driverCommission / 100) * $subTotal);
+        $payoutAmount = $deliveryFee + (($driverCommission / 100) * $subTotal);
 
         $responseData = [
             'payout_amount' => number_format((float)$payoutAmount, 2, '.', ''),
