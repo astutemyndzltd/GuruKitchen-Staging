@@ -69,7 +69,8 @@ class OrderServeRequest extends Notification
             'sound' => 'default',
             'id' => '1',
             'status' => 'done',
-            'message' => $notification
+            'message' => $notification,
+            'type' => 'order-request'
         ];
 
         $message->content($notification)->data($data)->priority(FcmMessage::PRIORITY_HIGH);

@@ -70,7 +70,8 @@ class StatusChangedOrderDriver extends Notification
             'sound' => 'default',
             'id' => '1',
             'status' => 'done',
-            'message' => $notification
+            'message' => $notification,
+            'type' => 'status-change'
         ];
 
         $message->content($notification)->data($data)->priority(FcmMessage::PRIORITY_HIGH);
