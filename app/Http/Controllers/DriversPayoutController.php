@@ -266,6 +266,7 @@ private $userRepository;
         
         $totalOrders = $result[0]->total;
         $subTotal = $result[0]->subtotal;
+        file_put_contents('order.txt', $subTotal);
         $deliveryFee = $result[0]->delivery_fee;
         $driverCommission = setting('driver_commission', 0);
         $payoutAmount = $deliveryFee + round(($driverCommission / 100) * $subTotal);
