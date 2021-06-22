@@ -33,8 +33,8 @@ async function onDateRangeChange(start, end) {
     txtGrossRevenue.value = json.gross_revenue;
     txtAdminCommission.value = json.admin_commission;
     txtTax.value = json.tax;
-    txtDeliveryFee = json.delivery_fee;
-    txtDriverCommission = json.driver_commission;
+    txtDeliveryFee.value = json.delivery_fee;
+    txtDriverCommission.value = json.driver_commission;
 
     txtAmount.value = `£${json.amount}`;
 
