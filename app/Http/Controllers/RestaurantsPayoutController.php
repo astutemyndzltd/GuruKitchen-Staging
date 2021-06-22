@@ -253,20 +253,26 @@ class RestaurantsPayoutController extends Controller
 
         $tax = setting('default_tax', 0);
 
+        $driverComRate = setting('driver_commission', 0);
+
         $data =  $model->newQuery()->join('payments', 'orders.payment_id', '=', 'payments.id')
                             ->whereRaw("date(orders.created_at) between '$startDate' and '$endDate' 
-                                        and orders.active = 1 and orders.paid_out = 0 and orders.id in (select 
-                                        distinct fo.order_id from food_orders fo join foods f on 
+                                        and orders.active = 1 and orders.paid_out = 0 and orders.order_status_id = 5 
+                                        and orders.id in (select distinct fo.order_id from food_orders fo join foods f on 
                                         fo.food_id = f.id join restaurants r on r.id = f.restaurant_id 
                                         and f.restaurant_id = $restaurantId)")
-                            ->selectRaw('sum(payments.price) total, count(*) orders')->get();
+                            ->selectRaw("sum(payments.price) total, count(*) orders,
+                                        if(orders.use_app_drivers = 1, orders.delivery_fee, 0) delivery_fee,
+                                        (if(orders.use_app_drivers = 1, $driverComRate, 0) / 100 * (payments.price - orders.delivery_fee)) driver_commission")->get();
 
 
         $totalOrderValue = $data[0]['total'];
+        $deliveryFee = $data[0]['delivery_fee'];
+        $driverCommission = $data[0]['driver_commission'];
         $orders = $data[0]['orders'];
         $commission = round($totalOrderValue * ($adminCommission / 100), 2);
         $taxAmount = round($commission * ($tax / 100), 2);
-        $net = $totalOrderValue - ($commission + $taxAmount);
+        $net = $totalOrderValue - ($commission + $taxAmount + $deliveryFee + $driverCommission);
         
         $responseData = [
             'amount' => number_format((float)$net, 2, '.', ''),
