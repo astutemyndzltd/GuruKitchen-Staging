@@ -53,7 +53,9 @@ class EarningDataTable extends DataTable
                 $comRate = $result->commission;
                 $commission = round(($comRate / 100) * $result->gross, 2);
                 $taxTotal = round(($taxRate / 100) * $commission, 2);
-                $net = $result->gross - ($commission + $taxTotal);
+                $driverCommission = round($result->driver_commission, 2);
+                $driverFees = round($result->driver_fee, 2);
+                $net = $result->gross - ($commission + $taxTotal + $driverCommission + $driverFees);
                 return getPrice($net);
             })
             ->editColumn('period', function ($result) {
@@ -97,13 +99,13 @@ class EarningDataTable extends DataTable
                 'searchable' => false
 
             ],
-            [
+            /*[
                 'data' => 'gross',
                 'title' => 'Gross Revenue',
                 'orderable' => false,
                 'searchable' => false
 
-            ],
+            ],*/
             [
                 'data' => 'commission_tax',
                 'title' => 'Commission / Tax',
