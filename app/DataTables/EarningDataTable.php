@@ -99,20 +99,20 @@ class EarningDataTable extends DataTable
                 'searchable' => false
 
             ],
-            /*[
+            [
                 'data' => 'gross',
                 'title' => 'Gross Revenue',
                 'orderable' => false,
                 'searchable' => false
 
-            ],*/
-            [
+            ],
+            /*[
                 'data' => 'commission_tax',
                 'title' => 'Commission / Tax',
                 'orderable' => false,
                 'searchable' => false
 
-            ],
+            ],*/
             [
                 'data' => 'earning',
                 'title' => 'Earning',
