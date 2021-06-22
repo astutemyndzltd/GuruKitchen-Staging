@@ -35,6 +35,8 @@ class RestaurantsPayout extends Model
         'orders',
         'gross_revenue',
         'admin_commission',
+        'delivery_fee',
+        'driver_commission',
         'tax',
         'amount',
         'note',

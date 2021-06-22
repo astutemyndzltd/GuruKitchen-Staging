@@ -26,6 +26,8 @@ class RestaurantsPayoutRepository extends BaseRepository
         'orders',
         'gross_revenue',
         'admin_commission',
+        'delivery_fee',
+        'driver_commission',
         'tax',
         'amount',
         'note'
