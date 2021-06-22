@@ -45,6 +45,8 @@
 <input type="hidden" id="gross_revenue" name="gross_revenue">
 <input type="hidden" id="admin_commission" name="admin_commission">
 <input type="hidden" id="tax" name="tax">
+<input type="hidden" id="driver_commission" name="driver_commission">
+<input type="hidden" id="delivery_fee" name="delivery_fee">
 
 
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">

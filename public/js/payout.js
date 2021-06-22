@@ -9,6 +9,8 @@ const txtOrders = document.querySelector('#orders');
 const txtGrossRevenue = document.querySelector('#gross_revenue');
 const txtAdminCommission = document.querySelector('#admin_commission');
 const txtTax = document.querySelector('#tax');
+const txtDriverCommission = document.querySelector('#driver_commission');
+const txtDeliveryFee = document.querySelector('#delivery_fee');
 
 
 async function onDateRangeChange(start, end) {
@@ -31,6 +33,8 @@ async function onDateRangeChange(start, end) {
     txtGrossRevenue.value = json.gross_revenue;
     txtAdminCommission.value = json.admin_commission;
     txtTax.value = json.tax;
+    txtDeliveryFee = json.delivery_fee;
+    txtDriverCommission = json.driver_commission;
 
     txtAmount.value = `£${json.amount}`;
 
