@@ -36,6 +36,9 @@ async function onDateRangeChange(start, end) {
     txtDeliveryFee.value = json.delivery_fee;
     txtDriverCommission.value = json.driver_commission;
 
+    console.log(txtDeliveryFee.value);
+    console.log(txtDriverCommission.value);
+
     txtAmount.value = `£${json.amount}`;
 
     $(btnSavePayout).attr('disabled', false);
