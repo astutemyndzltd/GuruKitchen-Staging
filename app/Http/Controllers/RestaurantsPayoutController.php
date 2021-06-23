@@ -263,7 +263,7 @@ class RestaurantsPayoutController extends Controller
                                         and f.restaurant_id = $restaurantId)")
                             ->selectRaw("sum(payments.price) total, count(*) orders,
                                         sum(if(orders.use_app_drivers = 1, orders.delivery_fee, 0)) delivery_fee,
-                                        sum(if(orders.use_app_drivers = 1, $driverComRate, 0) / 100 * (payments.price - orders.delivery_fee))) driver_commission")->get();
+                                        sum((if(orders.use_app_drivers = 1, $driverComRate, 0) / 100 * (payments.price - orders.delivery_fee))) driver_commission")->get();
 
 
         $totalOrderValue = $data[0]['total'];
