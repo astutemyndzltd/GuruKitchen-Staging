@@ -268,7 +268,7 @@ class RestaurantsPayoutController extends Controller
 
         $totalOrderValue = $data[0]['total'];
         $deliveryFee = $data[0]['delivery_fee'];
-        $driverCommission = $data[0]['driver_commission'];
+        $driverCommission = round($data[0]['driver_commission'], 2);
         $orders = $data[0]['orders'];
         $commission = round($totalOrderValue * ($adminCommission / 100), 2);
         $taxAmount = round($commission * ($tax / 100), 2);
