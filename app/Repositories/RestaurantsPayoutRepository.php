@@ -28,6 +28,7 @@ class RestaurantsPayoutRepository extends BaseRepository
         'admin_commission',
         'delivery_fee',
         'driver_commission',
+        'driver_commission_rate',
         'tax',
         'amount',
         'note'

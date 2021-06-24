@@ -11,6 +11,7 @@ const txtAdminCommission = document.querySelector('#admin_commission');
 const txtTax = document.querySelector('#tax');
 const txtDriverCommission = document.querySelector('#driver_commission');
 const txtDeliveryFee = document.querySelector('#delivery_fee');
+const txtDriverCommissionRate = document.querySelector('#driver_commision_rate');
 
 
 async function onDateRangeChange(start, end) {
@@ -35,9 +36,10 @@ async function onDateRangeChange(start, end) {
     txtTax.value = json.tax;
     txtDeliveryFee.value = json.delivery_fee;
     txtDriverCommission.value = json.driver_commission;
+    txtDriverCommissionRate.value = json.driver_commission_rate;
 
     txtAmount.value = `£${json.amount}`;
-
+    
     $(btnSavePayout).attr('disabled', false);
 
 }

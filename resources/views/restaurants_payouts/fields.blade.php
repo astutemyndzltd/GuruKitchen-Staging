@@ -46,6 +46,7 @@
 <input type="hidden" id="admin_commission" name="admin_commission">
 <input type="hidden" id="tax" name="tax">
 <input type="hidden" id="driver_commission" name="driver_commission">
+<input type="hidden" id="driver_commision_rate" name="driver_commission_rate">
 <input type="hidden" id="delivery_fee" name="delivery_fee">
 
 

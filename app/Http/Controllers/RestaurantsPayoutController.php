@@ -280,6 +280,7 @@ class RestaurantsPayoutController extends Controller
             'gross_revenue' => number_format((float)$totalOrderValue, 2, '.', ''),
             'admin_commission' => number_format((float)$adminCommission, 2, '.', ''),
             'driver_commission' => number_format((float)$driverCommission, 2, '.', ''),
+            'driver_commission_rate' => $driverComRate,
             'delivery_fee' => number_format((float)$deliveryFee, 2, '.', ''),
             'tax' => number_format((float)$tax, 2, '.', '')
         ];
