@@ -52,8 +52,8 @@ class EarningDataTable extends DataTable
                 $taxRate = setting('default_tax', 0);
                 $comRate = $result->commission;
                 $commission = round(($comRate / 100) * $result->gross, 2);
-                $taxTotal = round(($taxRate / 100) * $commission, 2);
                 $driverCommission = round($result->driver_commission, 2);
+                $taxTotal = round(($taxRate / 100) * ($commission + $driverCommission), 2);
                 $driverFees = $result->driver_fee;
                 $net = $result->gross - ($commission + $taxTotal + $driverCommission + $driverFees);
                 return getPrice($net);
