@@ -7,8 +7,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
   <style>
-    
-    @page { size: A4 }
+    @page {
+      size: A4
+    }
 
     .clearfix:after {
       content: "";
@@ -23,12 +24,12 @@
 
     body {
       position: relative;
-      width: 21cm;  
-      height: 29.7cm; 
-      margin: 0 auto; 
+      width: 21cm;
+      height: 29.7cm;
+      margin: 0 auto;
       color: #555555;
-      background: #FFFFFF; 
-      font-size: 14px; 
+      background: #FFFFFF;
+      font-size: 14px;
       font-family: 'Source Sans Pro', sans-serif;
     }
 
@@ -93,7 +94,7 @@
       margin-top: 3px;
     }
 
-    #company > div {
+    #company>div {
       margin-top: 3px;
     }
 
@@ -106,7 +107,7 @@
       color: #26dabf;
       font-size: 2.4em;
       line-height: 1em;
-      margin: 0  0 10px 0;
+      margin: 0 0 10px 0;
     }
 
     #invoice .date {
@@ -132,7 +133,7 @@
 
 
 
-    table td h3{
+    table td h3 {
       color: #2f294f;
       font-size: 1.2em;
       font-weight: normal;
@@ -154,7 +155,7 @@
     }
 
     table .total {
-      text-align: right  !important;
+      text-align: right !important;
     }
 
     table .total {
@@ -176,17 +177,17 @@
       background: #FFFFFF;
       border-bottom: none;
       font-size: 1.2em;
-      border-top: 1px solid #AAAAAA; 
+      border-top: 1px solid #AAAAAA;
     }
 
     table tfoot tr:first-child td {
-      border-top: none; 
+      border-top: none;
     }
 
     table tfoot tr:last-child td {
       color: #57B223;
       font-size: 1.4em;
-      border-top: 1px solid #57B223; 
+      border-top: 1px solid #57B223;
 
     }
 
@@ -194,15 +195,15 @@
       border: none;
     }
 
-    .thanks{
+    .thanks {
       margin-bottom: 50px;
       margin-top: 50px;
       color: #9e9e9e;
     }
 
-    #notices{
+    #notices {
       padding-left: 6px;
-      border-left: 6px solid #2f294f;  
+      border-left: 6px solid #2f294f;
     }
 
     #notices .notice {
@@ -220,10 +221,17 @@
       text-align: center;
     }
   </style>
-  
+
 </head>
 
 <body>
+
+  <?php
+    $adminCommission = round($payout->gross_revenue * $payout->admin_commission / 100, 2);
+    $driverCommission = round($payout->driver_commission, 2);
+    $tax = round(($adminCommission + $driverCommission) * $payout->tax / 100, 2);
+    $grossCommission = $adminCommission + $tax + $driverCommission;
+  ?>
 
   <div class="clearfix" id="header">
 
@@ -243,11 +251,13 @@
   <div id="main">
 
     <div id="details">
+    
       <div id="client">
         <div class="to">INVOICE TO:</div>
         <h2 class="name">{{ $payout->restaurant->name }}</h2>
         <div class="address">{{ $payout->restaurant->address }}</div>
       </div>
+
       <div id="invoice">
         <h1>TAX INVOICE #{{ sprintf('%05d', $payout->id) }}</h1>
         <div class="date"><b>Issue Date: </b>{{ date('d M Y', strtotime($payout->created_at)) }}</div>
@@ -271,12 +281,6 @@
         <tr>
           <td class="no">{{ $payout->orders }}</td>
           <td class="desc">£{{ number_format($payout->gross_revenue, 2) }}</td>
-          <?php
-            $adminCommission = round($payout->gross_revenue * $payout->admin_commission / 100, 2);
-            $driverCommission = round($payout->driver_commission, 2);
-            $tax = round(($adminCommission + $driverCommission) * $payout->tax / 100, 2);
-            $grossCommission = $adminCommission + $tax + $driverCommission;
-          ?>
           <td class="unit">£{{ number_format($adminCommission, 2) }} at {{ $payout->admin_commission }}%</td>
           <td class="qty">£{{ number_format($tax, 2) }} at {{ $payout->tax }}%</td>
           <td class="total">£{{ number_format($grossCommission, 2) }}</td>
