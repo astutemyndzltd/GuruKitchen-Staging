@@ -255,16 +255,16 @@
       </div>
     </div>
 
-    <h2 class="heading">GuruKitchen Commission + Delivery Charges</h2>
+    <h2 class="heading">GuruKitchen Commission</h2>
 
     <table cellspacing="0" cellpadding="0">
       <thead>
         <tr>
           <th class="no">Orders</th>
           <th class="desc">Total Order Value</th>
-          <th class="unit">Commission and VAT</th>
-          <th class="qty">Delivery Charges</th>
-          <th class="total">Total</th>
+          <th class="unit">GuruKitchen Commission</th>
+          <th class="qty">VAT</th>
+          <th class="total">Gross Commission</th>
         </tr>
       </thead>
       <tbody>
@@ -273,17 +273,13 @@
           <td class="desc">£{{ number_format($payout->gross_revenue, 2) }}</td>
           <?php
             $adminCommission = round($payout->gross_revenue * $payout->admin_commission / 100, 2);
-            $tax = round($adminCommission * $payout->tax / 100, 2);
-            $driverCommission = round($payout->driver_commission, 2); 
-            $total= $adminCommission + $tax + $driverCommission + $payout->delivery_fee;
+            $driverCommission = round($payout->driver_commission, 2);
+            $tax = round(($adminCommission + $driverCommission) * $payout->tax / 100, 2);
+            $grossCommission = $adminCommission + $tax + $driverCommission;
           ?>
-          <td class="unit">
-            GK Commission - £{{ number_format($adminCommission, 2) }} at {{ $payout->admin_commission }}%<br>
-            Driver Commission - £{{ number_format($driverCommission, 2) }} at {{ $payout->driver_commission_rate }}%<br>
-            VAT - £{{ number_format($tax, 2) }} ({{ $payout->tax }}% of £{{ $adminCommission }})
-          </td>
-          <td class="qty">£{{ number_format($payout->delivery_fee, 2) }}</td>
-          <td class="total">£{{ number_format($total,2) }}</td>
+          <td class="unit">£{{ number_format($adminCommission, 2) }} at {{ $payout->admin_commission }}%</td>
+          <td class="qty">£{{ number_format($tax, 2) }} at {{ $payout->tax }}%</td>
+          <td class="total">£{{ number_format($grossCommission, 2) }}</td>
         </tr>
       </tbody>
     </table>
@@ -292,17 +288,19 @@
     <table cellspacing="0" cellpadding="0">
       <thead>
         <tr>
-          <th class="no">Gross Revenue</th>
-          <th class="desc">Commission + VAT + Delivery Charges</th>
-          <th class="unit">Restaurant Payout</th>
+          <th class="no">Net</th>
+          <th class="desc">VAT Amount</th>
+          <th class="unit">Total</th>
+          <th class="qty">Restaurant Payout</th>
           <th class="total">Scheduled Payment Date</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="no">£{{ number_format($payout->gross_revenue, 2) }}</td>
-          <td class="desc">£{{ number_format($total, 2) }}</td>
-          <td class="unit">£{{ number_format($payout->amount, 2) }}</td>
+          <td class="no">£{{ number_format($adminCommission, 2) }}</td>
+          <td class="desc">£{{ number_format($tax, 2) }}</td>
+          <td class="unit">£{{ number_format($grossCommission, 2) }}</td>
+          <td class="qty">£{{ number_format($payout->amount, 2) }}</td>
           <td class="total">{{ date('d M Y', strtotime($payout->created_at. ' + 7 days')) }}</td>
         </tr>
       </tbody>
