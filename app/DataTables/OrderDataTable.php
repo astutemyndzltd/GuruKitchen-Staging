@@ -179,7 +179,7 @@ class OrderDataTable extends DataTable
                 ->join("user_restaurants", "user_restaurants.restaurant_id", "=", "foods.restaurant_id")
                 ->where('user_restaurants.user_id', auth()->id());
 
-            if ($this->showLiveOrders == 'true') $model = $model->whereRaw('orders.order_status_id < 5');    
+            if ($this->showLiveOrders == 'true') $model = $model->whereRaw('orders.order_status_id < 5 and orders.active = 1');    
             $model = $model->groupBy('orders.id')->select('orders.*');
 
             return $model;
