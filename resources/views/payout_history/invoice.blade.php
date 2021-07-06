@@ -231,7 +231,6 @@
     $driverCommission = round($payout->driver_commission, 2);
     $tax = round(($adminCommission + $driverCommission) * $payout->tax / 100, 2);
     $grossCommission = $adminCommission + $tax + $driverCommission;
-    $
   ?>
 
   <div class="clearfix" id="header">
