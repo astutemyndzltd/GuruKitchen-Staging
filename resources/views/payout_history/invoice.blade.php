@@ -231,6 +231,7 @@
     $driverCommission = round($payout->driver_commission, 2);
     $tax = round(($adminCommission + $driverCommission) * $payout->tax / 100, 2);
     $grossCommission = $adminCommission + $tax + $driverCommission;
+    $num = 0;
   ?>
 
   <div class="clearfix" id="header">
@@ -263,28 +264,33 @@
         <div class="date"><b>Issue Date: </b>{{ date('d M Y', strtotime($payout->created_at)) }}</div>
         <div class="date"><b>Period Covered: </b>{{ date('d M Y', strtotime($payout->from_date)) }} - {{ date('d M Y', strtotime($payout->to_date)) }}</div>
       </div>
+
     </div>
 
     <h2 class="heading">Commission</h2>
 
     <table cellspacing="0" cellpadding="0">
+      <?php $num = 0 ?>
       <thead>
         <tr>
           <th class="no">Orders</th>
-          <th class="desc">Total Order Value</th>
-          <th class="unit">GuruKitchen Commission</th>
-          <th class="unit">Driver Commission</th>
-          <th class="qty">VAT</th>
+          <th class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">Total Order Value</th>
+          <th class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">GuruKitchen Commission</th>
+          <th class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">Driver Commission</th>
+          <th class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">VAT</th>
           <th class="total">Gross Commission</th>
         </tr>
       </thead>
+      <?php $num = 0 ?>
       <tbody>
         <tr>
           <td class="no">{{ $payout->orders }}</td>
-          <td class="desc">£{{ number_format($payout->gross_revenue, 2) }}</td>
-          <td class="unit">£{{ number_format($adminCommission, 2) }} at {{ $payout->admin_commission }}%</td>
-          <td class="unit">£{{ number_format($driverCommission, 2) }} at {{ $payout->driver_commission_rate }}%</td>
-          <td class="qty">£{{ number_format($tax, 2) }} at {{ $payout->tax }}%</td>
+          <td class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">£{{ number_format($payout->gross_revenue, 2) }}</td>
+          <td class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">£{{ number_format($adminCommission, 2) }} at {{ $payout->admin_commission }}%</td>
+          @if($driverCommission > 0)
+            <td class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">£{{ number_format($driverCommission, 2) }} at {{ $payout->driver_commission_rate }}%</td>
+          @endif
+          <td class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">£{{ number_format($tax, 2) }} at {{ $payout->tax }}%</td>
           <td class="total">£{{ number_format($grossCommission, 2) }}</td>
         </tr>
       </tbody>
@@ -292,27 +298,29 @@
 
     <h2 class="heading">Invoice Total</h2>
     <table cellspacing="0" cellpadding="0">
+      <?php $num = 0 ?>
       <thead>
         <tr>
           <th class="no">Net</th>
-          <th class="desc">VAT Amount</th>
-          <th class="unit">Total</th>
+          <th class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">VAT Amount</th>
+          <th class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">Total</th>
           @if($payout->delivery_fee > 0)
-            <th class="desc">Delivery Fee</th>
+            <th class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">Delivery Fee</th>
           @endif
-          <th class="qty">Restaurant Payout</th>
+          <th class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">Restaurant Payout</th>
           <th class="total">Scheduled Payment Date</th>
         </tr>
       </thead>
+      <?php $num = 0 ?>
       <tbody>
         <tr>
           <td class="no">£{{ number_format($adminCommission, 2) }}</td>
-          <td class="desc">£{{ number_format($tax, 2) }}</td>
-          <td class="unit">£{{ number_format($grossCommission, 2) }}</td>
+          <td class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">£{{ number_format($tax, 2) }}</td>
+          <td class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">£{{ number_format($grossCommission, 2) }}</td>
           @if($payout->delivery_fee > 0)
-            <th class="desc">£{{ number_format($payout->delivery_fee, 2) }}</th>
+            <th class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">£{{ number_format($payout->delivery_fee, 2) }}</th>
           @endif
-          <td class="qty">£{{ number_format($payout->amount, 2) }}</td>
+          <td class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">£{{ number_format($payout->amount, 2) }}</td>
           <td class="total">{{ date('d M Y', strtotime($payout->created_at. ' + 7 days')) }}</td>
         </tr>
       </tbody>
