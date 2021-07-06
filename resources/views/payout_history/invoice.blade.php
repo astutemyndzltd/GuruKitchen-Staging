@@ -314,7 +314,7 @@
       <?php $num = 0 ?>
       <tbody>
         <tr>
-          <td class="no">£{{ number_format($adminCommission, 2) }}</td>
+          <td class="no">£{{ number_format($adminCommission + $driverCommission, 2) }}</td>
           <td class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">£{{ number_format($tax, 2) }}</td>
           <td class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">£{{ number_format($grossCommission, 2) }}</td>
           @if($payout->delivery_fee > 0)
