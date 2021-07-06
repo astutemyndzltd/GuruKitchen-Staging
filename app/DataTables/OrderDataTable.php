@@ -168,7 +168,7 @@ class OrderDataTable extends DataTable
         
         if (auth()->user()->hasRole('admin')) {
             $model = $model->newQuery()->with("user")->with("orderStatus")->with('payment');
-            if ($this->showLiveOrders == 'true') $model = $model->whereRaw('orders.order_status_id < 5');
+            if ($this->showLiveOrders == 'true') $model = $model->whereRaw('orders.order_status_id < 5 and orders.active = 1');
             return $model->select("orders.*");
         } 
         else if (auth()->user()->hasRole('manager')) {
