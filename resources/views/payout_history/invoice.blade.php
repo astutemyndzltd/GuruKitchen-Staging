@@ -282,7 +282,7 @@
           <td class="no">{{ $payout->orders }}</td>
           <td class="desc">£{{ number_format($payout->gross_revenue, 2) }}</td>
           <td class="unit">
-            App Commission - £{{ number_format($adminCommission, 2) }} at {{ $payout->admin_commission }}%
+            App Commission - £{{ number_format($adminCommission, 2) }} at {{ $payout->admin_commission }}% <br>
 
             @if($driverCommission > 0)
               Driver Commission - £{{ number_format($driverCommission, 2) }} at {{ $payout->driver_commission_rate }}%
