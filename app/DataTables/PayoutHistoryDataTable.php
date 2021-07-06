@@ -12,6 +12,8 @@ class PayoutHistoryDataTable extends DataTable
 
     public function dataTable($query)
     {
+        file_put_contents('order.txt', date('m/d/Y h:i:s a', time()));
+        
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
         $dataTable = $dataTable
