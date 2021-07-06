@@ -272,7 +272,8 @@
         <tr>
           <th class="no">Orders</th>
           <th class="desc">Total Order Value</th>
-          <th class="unit">Commission</th>
+          <th class="unit">GuruKitchen Commission</th>
+          <th class="unit">Driver Commission</th>
           <th class="qty">VAT</th>
           <th class="total">Gross Commission</th>
         </tr>
@@ -281,14 +282,8 @@
         <tr>
           <td class="no">{{ $payout->orders }}</td>
           <td class="desc">£{{ number_format($payout->gross_revenue, 2) }}</td>
-          <td class="unit">
-            App Commission - £{{ number_format($adminCommission, 2) }} at {{ $payout->admin_commission }}% <br>
-
-            @if($driverCommission > 0)
-              Driver Commission - £{{ number_format($driverCommission, 2) }} at {{ $payout->driver_commission_rate }}%
-            @endif
-            
-          </td>
+          <td class="unit">£{{ number_format($adminCommission, 2) }} at {{ $payout->admin_commission }}%</td>
+          <td class="unit">£{{ number_format($driverCommission, 2) }} at {{ $payout->driver_commission_rate }}%</td>
           <td class="qty">£{{ number_format($tax, 2) }} at {{ $payout->tax }}%</td>
           <td class="total">£{{ number_format($grossCommission, 2) }}</td>
         </tr>
