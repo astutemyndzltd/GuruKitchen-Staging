@@ -276,7 +276,9 @@
           <th class="no">Orders</th>
           <th class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">Total Order Value</th>
           <th class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">GuruKitchen Commission</th>
-          <th class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">Driver Commission</th>
+          @if($driverCommission > 0)
+            <th class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">Driver Commission</th>
+          @endif
           <th class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">VAT</th>
           <th class="total">Gross Commission</th>
         </tr>
