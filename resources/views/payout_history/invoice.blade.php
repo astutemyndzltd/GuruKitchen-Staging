@@ -318,7 +318,7 @@
           <td class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">£{{ number_format($tax, 2) }}</td>
           <td class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">£{{ number_format($grossCommission, 2) }}</td>
           @if($payout->delivery_fee > 0)
-            <th class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">£{{ number_format($payout->delivery_fee, 2) }}</th>
+            <td class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">£{{ number_format($payout->delivery_fee, 2) }}</td>
           @endif
           <td class="{{ $num++ % 2 == 0 ? 'desc' : 'unit' }}">£{{ number_format($payout->amount, 2) }}</td>
           <td class="total">{{ date('d M Y', strtotime($payout->created_at. ' + 7 days')) }}</td>
