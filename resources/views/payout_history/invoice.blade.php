@@ -265,7 +265,7 @@
       </div>
     </div>
 
-    <h2 class="heading">GuruKitchen Commission</h2>
+    <h2 class="heading">Commission</h2>
 
     <table cellspacing="0" cellpadding="0">
       <thead>
