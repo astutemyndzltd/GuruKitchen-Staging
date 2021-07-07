@@ -40,6 +40,14 @@ class RestaurantsPayoutDataTable extends DataTable
                 $taxRate = $payout->tax;
                 $comRate = $payout->admin_commission;
                 $commission = ($comRate / 100) * $payout->gross_revenue;
+                $driverCommission = $payout->driver_commission;
+                $driverComRate = $payout->driver_commission_rate;
+                return 'Admin : ' . getPrice($commission) . " ($comRate%) <br> Driver : " . getPrice($driverCommission) . " ($driverComRate%)";
+            })
+            ->editColumn('commision_tax', function ($payout) {
+                $taxRate = $payout->tax;
+                $comRate = $payout->admin_commission;
+                $commission = ($comRate / 100) * $payout->gross_revenue;
                 $taxTotal = ($taxRate / 100) * $commission;
                 return getPrice($commission) . " ($comRate%) / " . getPrice($taxTotal) . " ($taxRate%)";
             })
