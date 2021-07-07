@@ -60,6 +60,7 @@ class OrdersOfUserCriteria implements CriteriaInterface
         } else if (auth()->user()->hasRole('driver')) {
 
             return $model->newQuery()->where('orders.driver_id', $this->userId)
+                ->where('orders.active', 1)
                 ->groupBy('orders.id');
         } else {
             return $model;
