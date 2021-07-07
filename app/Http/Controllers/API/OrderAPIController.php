@@ -103,7 +103,7 @@ class OrderAPIController extends Controller
             return $this->sendError($e->getMessage());
         }
 
-        $orders = $this->orderRepository->where('active', 1)->all();
+        $orders = $this->orderRepository->where('orders.active', 1)->all();
 
         return $this->sendResponse($orders->toArray(), 'Orders retrieved successfully');
     }
