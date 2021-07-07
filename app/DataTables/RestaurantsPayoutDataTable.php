@@ -36,7 +36,7 @@ class RestaurantsPayoutDataTable extends DataTable
             ->editColumn('delivery_fee', function ($payout) {
                 return getPriceColumn($payout, 'delivery_fee');
             })
-            ->editColumn('commision', function ($payout) {
+            ->editColumn('commission', function ($payout) {
                 $taxRate = $payout->tax;
                 $comRate = $payout->admin_commission;
                 $commission = ($comRate / 100) * $payout->gross_revenue;
