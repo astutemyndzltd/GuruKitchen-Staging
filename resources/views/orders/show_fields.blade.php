@@ -1,5 +1,6 @@
 <!-- Id Field -->
 <div class="form-group row col-md-4 col-sm-12">
+
   {!! Form::label('id', trans('lang.order_id'), ['class' => 'col-4 control-label']) !!}
   <div class="col-8">
     <p>#{!! $order->id !!}</p>
@@ -15,16 +16,19 @@
     <p>{!! isset($order->user->custom_fields['phone']) ? $order->user->custom_fields['phone']['view'] : "" !!}</p>
   </div>
 
-  {!! Form::label('delivery_address', trans('lang.delivery_address'), ['class' => 'col-4 control-label']) !!}
-  <div class="col-8">
-    <p>{!! $order->deliveryAddress ? $order->deliveryAddress->address : '' !!}</p>
-  </div>
+
+  @if($order->order_type == 'Delivery')
+    {!! Form::label('delivery_address', trans('lang.delivery_address'), ['class' => 'col-4 control-label']) !!}
+    <div class="col-8">
+      <p>{!! $order->deliveryAddress ? $order->deliveryAddress->address : '' !!}</p>
+    </div>
+  @endif
+
 
   {!! Form::label('order_date', trans('lang.order_date'), ['class' => 'col-4 control-label']) !!}
   <div class="col-8">
     <p>{!! $order->created_at !!}</p>
   </div>
-
 
 </div>
 
@@ -127,7 +131,7 @@
   $usingGkDriverForOrder = $order->use_app_drivers; 
 ?>
 
-@if($useAppDrivers)
+@if($useAppDrivers && $usingGkDriverForOrder)
   <!-- Using App Drivers -->
   <div class="form-group row col-md-8 col-sm-12">
     {!! Form::label('use_app_driver', 'Used GuruKitchen Driver', ['class' => 'col-4 control-label']) !!}

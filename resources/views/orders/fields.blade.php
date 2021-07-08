@@ -97,6 +97,7 @@
     </div> --}}
 
 </div>
+
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
 
     <!-- Tax Field -->
@@ -137,6 +138,7 @@
     </div>
 
 </div>
+
 @if($customFields)
     <div class="clearfix"></div>
     <div class="col-12 custom-field-container">
@@ -144,6 +146,7 @@
         {!! $customFields !!}
     </div>
 @endif
+
 <!-- Submit Field -->
 <div class="form-group col-12 text-right">
     <button type="submit" class="btn btn-{{setting('theme_color')}}"><i class="fa fa-save"></i> {{trans('lang.save')}} {{trans('lang.order')}}</button>
