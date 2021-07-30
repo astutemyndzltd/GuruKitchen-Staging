@@ -13,7 +13,7 @@
 	@if($orderDetails['customer_name'] != null)
 	<div id="customer-name" class="intro-row">
    		<i class="fal fa-user"></i>
-   		<span>{{ $orderDetails['customer_name'] }}</span
+   		<span>{{ $orderDetails['customer_name'] }}</span>
     </div>
 	@endif
 	
